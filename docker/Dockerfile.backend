@@ -1,0 +1,62 @@
+# ==========================================
+# 1. Builder Stage
+# ==========================================
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+# Copy root monorepo files
+COPY package.json ./
+COPY packages/shared/package.json ./packages/shared/
+COPY apps/backend/package.json ./apps/backend/
+
+# Install dependencies
+RUN npm install
+
+# Copy source files
+COPY packages/shared ./packages/shared
+COPY apps/backend ./apps/backend
+
+# Build shared package
+RUN npm run build --workspace=packages/shared
+
+# Ensure PostgreSQL schema is used for production
+WORKDIR /app/apps/backend
+RUN cp prisma/schema.postgres.prisma prisma/schema.prisma
+RUN npx prisma generate
+RUN npm run build
+
+# ==========================================
+# 2. Production Runner Stage
+# ==========================================
+FROM node:20-alpine AS runner
+
+WORKDIR /app/apps/backend
+
+ENV NODE_ENV=production
+ENV PORT=4000
+
+# Install OpenSSL for Prisma
+RUN apk add --no-cache openssl libc6-compat
+
+# Copy package files & install production deps only
+COPY package.json /app/
+COPY packages/shared/package.json /app/packages/shared/
+COPY packages/shared/dist /app/packages/shared/dist
+COPY apps/backend/package.json /app/apps/backend/
+
+WORKDIR /app
+RUN npm install --omit=dev
+
+WORKDIR /app/apps/backend
+COPY --from=builder /app/apps/backend/dist ./dist
+COPY --from=builder /app/apps/backend/prisma ./prisma
+COPY --from=builder /app/node_modules/.prisma /app/node_modules/.prisma
+COPY --from=builder /app/node_modules/@prisma /app/node_modules/@prisma
+COPY apps/backend/docker-entrypoint.sh ./docker-entrypoint.sh
+
+RUN chmod +x ./docker-entrypoint.sh
+
+EXPOSE 4000
+
+ENTRYPOINT ["./docker-entrypoint.sh"]

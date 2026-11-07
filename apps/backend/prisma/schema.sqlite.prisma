@@ -1,0 +1,138 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String       @id @default(uuid())
+  email        String       @unique
+  passwordHash String
+  fullName     String
+  role         String       @default("VENUE_ADMIN")
+  venues       VenueUser[]
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+}
+
+model Venue {
+  id           String        @id @default(uuid())
+  name         String
+  slug         String        @unique
+  address      String?
+  phone        String?
+  logoUrl      String?
+  brandColor   String?       @default("#2563eb")
+  users        VenueUser[]
+  devices      Device[]
+  campaigns    Campaign[]
+  guestVisits  GuestVisit[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model VenueUser {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  venueId   String
+  venue     Venue    @relation(fields: [venueId], references: [id], onDelete: Cascade)
+  role      String   @default("VENUE_ADMIN")
+  createdAt DateTime @default(now())
+
+  @@unique([userId, venueId])
+}
+
+model Device {
+  id           String       @id @default(uuid())
+  venueId      String
+  venue        Venue        @relation(fields: [venueId], references: [id], onDelete: Cascade)
+  vendor       String       @default("MOCK") // MIKROTIK, UNIFI, RUIJIE, MOCK
+  name         String
+  ipAddress    String?
+  macAddress   String?      @unique
+  apiPort      Int?         @default(8728)
+  apiUsername  String?
+  apiPassword  String?
+  secretKey    String?
+  siteId       String?      @default("default")
+  isActive     Boolean      @default(true)
+  lastSeenAt   DateTime?
+  metadata     String?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+}
+
+model Campaign {
+  id             String          @id @default(uuid())
+  venueId        String
+  venue          Venue           @relation(fields: [venueId], references: [id], onDelete: Cascade)
+  title          String
+  type           String          @default("LEAD_FORM") // BANNER_COUNTDOWN, VIDEO_WATCH, LEAD_FORM...
+  contentConfig  String          // Lưu chuỗi JSON cấu hình banner, câu hỏi survey...
+  sessionMinutes Int             @default(60)
+  downloadSpeed  Int?            // Kbps
+  uploadSpeed    Int?            // Kbps
+  redirectUrl    String?         // URL nhãn hàng sau khi kết nối thành công
+  priority       Int             @default(1)
+  isActive       Boolean         @default(true)
+  startDate      DateTime?
+  endDate        DateTime?
+  timeSchedules  String?
+  events         CampaignEvent[]
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+}
+
+model Guest {
+  id            String          @id @default(uuid())
+  macAddress    String          @unique
+  fullName      String?
+  phone         String?
+  email         String?
+  gender        String?
+  ageRange      String?
+  deviceInfo    String?
+  visits        GuestVisit[]
+  surveyAnswers SurveyAnswer[]
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+}
+
+model GuestVisit {
+  id              String       @id @default(uuid())
+  guestId         String
+  guest           Guest        @relation(fields: [guestId], references: [id], onDelete: Cascade)
+  venueId         String
+  venue           Venue        @relation(fields: [venueId], references: [id], onDelete: Cascade)
+  campaignId      String?
+  clientIp        String?
+  apMac           String?
+  sessionMinutes  Int          @default(60)
+  loginAt         DateTime     @default(now())
+  expiresAt       DateTime?
+}
+
+model CampaignEvent {
+  id         String       @id @default(uuid())
+  campaignId String
+  campaign   Campaign     @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  guestMac   String
+  eventType  String       // IMPRESSION, CLICK, COMPLETE, SUBMIT
+  metadata   String?
+  createdAt  DateTime     @default(now())
+}
+
+model SurveyAnswer {
+  id          String   @id @default(uuid())
+  guestId     String
+  guest       Guest    @relation(fields: [guestId], references: [id], onDelete: Cascade)
+  campaignId  String
+  question    String
+  answer      String
+  ratingScore Int?     // 1-5 sao
+  createdAt   DateTime @default(now())
+}

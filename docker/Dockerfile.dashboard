@@ -1,0 +1,51 @@
+# ==========================================
+# 1. Builder Stage
+# ==========================================
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+# Copy root monorepo files
+COPY package.json ./
+COPY packages/shared/package.json ./packages/shared/
+COPY apps/dashboard/package.json ./apps/dashboard/
+
+# Install dependencies
+RUN npm install
+
+# Copy source files
+COPY packages/shared ./packages/shared
+COPY apps/dashboard ./apps/dashboard
+
+# Build shared package
+RUN npm run build --workspace=packages/shared
+
+# Build Next.js Dashboard in standalone mode
+WORKDIR /app/apps/dashboard
+ENV NEXT_TELEMETRY_DISABLED=1
+RUN npm run build
+
+# ==========================================
+# 2. Production Runner Stage (Minimal Size ~60MB)
+# ==========================================
+FROM node:20-alpine AS runner
+
+WORKDIR /app
+
+ENV NODE_ENV=production
+ENV PORT=3001
+ENV NEXT_TELEMETRY_DISABLED=1
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+# Copy standalone output and static assets
+COPY --from=builder /app/apps/dashboard/public ./apps/dashboard/public
+COPY --from=builder --chown=nextjs:nodejs /app/apps/dashboard/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/apps/dashboard/.next/static ./apps/dashboard/.next/static
+
+USER nextjs
+
+EXPOSE 3001
+
+CMD ["node", "apps/dashboard/server.js"]

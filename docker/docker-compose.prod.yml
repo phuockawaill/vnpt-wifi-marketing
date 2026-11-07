@@ -1,0 +1,149 @@
+version: '3.8'
+
+services:
+  # ==========================================
+  # 1. Cơ sở dữ liệu PostgreSQL
+  # ==========================================
+  postgres:
+    image: postgres:15-alpine
+    container_name: vnpt_wifi_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-vnpt_admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-VnptDakLak2026SecurePass}
+      POSTGRES_DB: ${POSTGRES_DB:-vnpt_wifi_marketing}
+    volumes:
+      - postgres_prod_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-vnpt_admin}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - vnpt_network
+
+  # ==========================================
+  # 2. Redis Caching & Quota Session
+  # ==========================================
+  redis:
+    image: redis:7-alpine
+    container_name: vnpt_wifi_redis
+    restart: always
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_prod_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - vnpt_network
+
+  # ==========================================
+  # 3. Backend Core API (NestJS + Prisma)
+  # ==========================================
+  backend:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.backend
+    container_name: vnpt_wifi_backend
+    restart: always
+    environment:
+      PORT: 4000
+      NODE_ENV: production
+      DATABASE_URL: postgresql://${POSTGRES_USER:-vnpt_admin}:${POSTGRES_PASSWORD:-VnptDakLak2026SecurePass}@postgres:5432/${POSTGRES_DB:-vnpt_wifi_marketing}?schema=public
+      REDIS_ENABLED: "true"
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      MOCK_GATEWAY_ENABLED: ${MOCK_GATEWAY_ENABLED:-false}
+      JWT_SECRET: ${JWT_SECRET:-vnpt-daklak-super-secure-production-key-2026}
+      JWT_EXPIRES_IN: "7d"
+      PORTAL_PUBLIC_URL: ${PORTAL_PUBLIC_URL:-https://portal.daklak.vnpt.vn}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - vnpt_network
+
+  # ==========================================
+  # 4. Captive Portal Frontend (Next.js Standalone)
+  # ==========================================
+  portal:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.portal
+    container_name: vnpt_wifi_portal
+    restart: always
+    environment:
+      PORT: 3000
+      NODE_ENV: production
+      NEXT_PUBLIC_API_URL: ${API_PUBLIC_URL:-https://portal.daklak.vnpt.vn/api}
+    depends_on:
+      - backend
+    networks:
+      - vnpt_network
+
+  # ==========================================
+  # 5. Admin CMS Dashboard (Next.js Standalone)
+  # ==========================================
+  dashboard:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.dashboard
+    container_name: vnpt_wifi_dashboard
+    restart: always
+    environment:
+      PORT: 3001
+      NODE_ENV: production
+      NEXT_PUBLIC_API_URL: ${API_PUBLIC_URL:-https://portal.daklak.vnpt.vn/api}
+    depends_on:
+      - backend
+    networks:
+      - vnpt_network
+
+  # ==========================================
+  # 6. Nginx Reverse Proxy (SSL / HTTPS & Walled Garden)
+  # ==========================================
+  nginx:
+    image: nginx:alpine
+    container_name: vnpt_wifi_nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./certbot/conf:/etc/letsencrypt:ro
+      - ./certbot/www:/var/www/certbot:ro
+    depends_on:
+      - portal
+      - dashboard
+      - backend
+    networks:
+      - vnpt_network
+
+  # ==========================================
+  # 7. Let's Encrypt Certbot (Auto SSL Renewal)
+  # ==========================================
+  certbot:
+    image: certbot/certbot:latest
+    container_name: vnpt_wifi_certbot
+    restart: unless-stopped
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    networks:
+      - vnpt_network
+
+networks:
+  vnpt_network:
+    driver: bridge
+
+volumes:
+  postgres_prod_data:
+  redis_prod_data:

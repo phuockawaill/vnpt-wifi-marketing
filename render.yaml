@@ -1,0 +1,74 @@
+# ========================================================
+# Render.com Blueprint Infrastructure as Code
+# He Thong WiFi Marketing Chuyen Doi So VNPT Dak Lak
+# ========================================================
+
+databases:
+  - name: vnpt-wifi-postgres
+    plan: free
+    region: singapore
+    databaseName: vnpt_wifi_marketing
+    user: vnpt_admin
+
+services:
+  # ------------------------------------------------------
+  # 1. Backend Core API (NestJS + Prisma + Gateway Engine)
+  # ------------------------------------------------------
+  - type: web
+    name: vnpt-wifi-backend
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: npm install && npm run build --workspace=packages/shared && cd apps/backend && npx prisma generate --schema=prisma/schema.postgres.prisma && npm run build
+    startCommand: cd apps/backend && npx prisma db push --schema=prisma/schema.postgres.prisma --accept-data-loss && node dist/main.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: vnpt-wifi-postgres
+          property: connectionString
+      - key: REDIS_ENABLED
+        value: "false"
+      - key: MOCK_GATEWAY_ENABLED
+        value: "false"
+      - key: JWT_SECRET
+        generateValue: true
+
+  # ------------------------------------------------------
+  # 2. Captive Portal (Next.js - Mobile First VNPT AI)
+  # ------------------------------------------------------
+  - type: web
+    name: vnpt-wifi-portal
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: npm install && npm run build --workspace=packages/shared && cd apps/portal && npm run build
+    startCommand: cd apps/portal && npx next start -p $PORT
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: BACKEND_URL
+        fromService:
+          type: web
+          name: vnpt-wifi-backend
+          property: host
+
+  # ------------------------------------------------------
+  # 3. CMS Admin Dashboard (Next.js - AI Footfall Analytics)
+  # ------------------------------------------------------
+  - type: web
+    name: vnpt-wifi-dashboard
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: npm install && npm run build --workspace=packages/shared && cd apps/dashboard && npm run build
+    startCommand: cd apps/dashboard && npx next start -p $PORT
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: BACKEND_URL
+        fromService:
+          type: web
+          name: vnpt-wifi-backend
+          property: host

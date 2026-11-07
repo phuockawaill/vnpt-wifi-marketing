@@ -1,0 +1,25 @@
+{
+  "name": "wifi-marketing-platform",
+  "version": "1.0.0",
+  "description": "Enterprise Multi-Vendor WiFi Marketing System (MikroTik, UniFi, Ruijie)",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "use:sqlite": "node scripts/switch-database.js sqlite",
+    "use:postgres": "node scripts/switch-database.js postgres",
+    "build": "npm run build --workspaces",
+    "dev:backend": "npm run dev --workspace=apps/backend",
+    "dev:portal": "npm run dev --workspace=apps/portal",
+    "dev:dashboard": "npm run dev --workspace=apps/dashboard",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:portal\" \"npm run dev:dashboard\"",
+    "db:push": "npm run db:push --workspace=apps/backend",
+    "db:seed": "npm run db:seed --workspace=apps/backend"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "typescript": "^5.4.5"
+  }
+}
