@@ -19,7 +19,7 @@ services:
     runtime: node
     plan: free
     region: singapore
-    buildCommand: npm install && DATABASE_URL="postgresql://vnpt_admin:mock@localhost:5432/vnpt_wifi_marketing" npx prisma generate --schema=apps/backend/prisma/schema.postgres.prisma && npm run build --workspace=apps/backend
+    buildCommand: npm install --include=dev && DATABASE_URL="postgresql://vnpt_admin:mock@localhost:5432/vnpt_wifi_marketing" npx prisma generate --schema=apps/backend/prisma/schema.postgres.prisma && npm run build --workspace=apps/backend
     startCommand: cd apps/backend && npx prisma db push --schema=prisma/schema.postgres.prisma --accept-data-loss && node dist/main.js
     envVars:
       - key: NODE_VERSION
@@ -45,13 +45,15 @@ services:
     runtime: node
     plan: free
     region: singapore
-    buildCommand: npm install && npm run build --workspace=apps/portal
+    buildCommand: npm install --include=dev && npm run build --workspace=apps/portal
     startCommand: cd apps/portal && npx next start -p $PORT
     envVars:
       - key: NODE_VERSION
         value: 20.18.0
       - key: NODE_OPTIONS
         value: "--max-old-space-size=450"
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"
       - key: NODE_ENV
         value: production
       - key: BACKEND_URL
@@ -68,13 +70,15 @@ services:
     runtime: node
     plan: free
     region: singapore
-    buildCommand: npm install && npm run build --workspace=apps/dashboard
+    buildCommand: npm install --include=dev && npm run build --workspace=apps/dashboard
     startCommand: cd apps/dashboard && npx next start -p $PORT
     envVars:
       - key: NODE_VERSION
         value: 20.18.0
       - key: NODE_OPTIONS
         value: "--max-old-space-size=450"
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"
       - key: NODE_ENV
         value: production
       - key: BACKEND_URL

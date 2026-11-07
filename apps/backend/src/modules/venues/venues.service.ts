@@ -51,7 +51,7 @@ export class VenuesService {
     return this.prisma.device.create({
       data: {
         venueId,
-        vendor: data.vendor,
+        vendor: data.vendor as any,
         name: data.name,
         ipAddress: data.ipAddress,
         macAddress: data.macAddress || `AA:BB:CC:${Math.floor(Math.random() * 89 + 10)}:${Math.floor(Math.random() * 89 + 10)}:${Math.floor(Math.random() * 89 + 10)}`,
