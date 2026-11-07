@@ -1,13 +1,12 @@
 # Dependencies
 node_modules/
-package-lock.json
 
 # Next.js Build Outputs
 .next/
 out/
 
-# NestJS Build Outputs
-dist/
+# Backend Build Outputs (only backend, keep shared/dist)
+apps/backend/dist/
 
 # Local Tools & Executables
 .tools/
