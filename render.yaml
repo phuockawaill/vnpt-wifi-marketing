@@ -19,9 +19,11 @@ services:
     runtime: node
     plan: free
     region: singapore
-    buildCommand: npm install && npm run build:backend
+    buildCommand: npm install && npm run build --workspace=packages/shared && cd apps/backend && DATABASE_URL="postgresql://vnpt_admin:mock@localhost:5432/vnpt_wifi_marketing" npx prisma generate --schema=prisma/schema.postgres.prisma && npm run build
     startCommand: cd apps/backend && npx prisma db push --schema=prisma/schema.postgres.prisma --accept-data-loss && node dist/main.js
     envVars:
+      - key: NODE_VERSION
+        value: 20.18.0
       - key: NODE_ENV
         value: production
       - key: DATABASE_URL
@@ -43,9 +45,13 @@ services:
     runtime: node
     plan: free
     region: singapore
-    buildCommand: npm install && npm run build:portal
+    buildCommand: npm install && npm run build --workspace=packages/shared && cd apps/portal && npm run build
     startCommand: cd apps/portal && npx next start -p $PORT
     envVars:
+      - key: NODE_VERSION
+        value: 20.18.0
+      - key: NODE_OPTIONS
+        value: "--max-old-space-size=450"
       - key: NODE_ENV
         value: production
       - key: BACKEND_URL
@@ -62,9 +68,13 @@ services:
     runtime: node
     plan: free
     region: singapore
-    buildCommand: npm install && npm run build:dashboard
+    buildCommand: npm install && npm run build --workspace=packages/shared && cd apps/dashboard && npm run build
     startCommand: cd apps/dashboard && npx next start -p $PORT
     envVars:
+      - key: NODE_VERSION
+        value: 20.18.0
+      - key: NODE_OPTIONS
+        value: "--max-old-space-size=450"
       - key: NODE_ENV
         value: production
       - key: BACKEND_URL
