@@ -35,7 +35,7 @@ async function bootstrap() {
   SwaggerModule.setup('docs', app, document);
 
   const port = process.env.PORT || 4000;
-  await app.listen(port);
+  await app.listen(port, '0.0.0.0');
   logger.log(`🚀 WiFi Marketing Backend running at: http://localhost:${port}`);
   logger.log(`📖 Swagger API Docs available at: http://localhost:${port}/docs`);
 }

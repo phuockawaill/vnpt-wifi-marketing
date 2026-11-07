@@ -19,7 +19,7 @@ services:
     runtime: node
     plan: free
     region: singapore
-    buildCommand: npm install && npm run build --workspace=packages/shared && cd apps/backend && npx prisma generate --schema=prisma/schema.postgres.prisma && npm run build
+    buildCommand: npm install && npm run build:backend
     startCommand: cd apps/backend && npx prisma db push --schema=prisma/schema.postgres.prisma --accept-data-loss && node dist/main.js
     envVars:
       - key: NODE_ENV
@@ -43,7 +43,7 @@ services:
     runtime: node
     plan: free
     region: singapore
-    buildCommand: npm install && npm run build --workspace=packages/shared && cd apps/portal && npm run build
+    buildCommand: npm install && npm run build:portal
     startCommand: cd apps/portal && npx next start -p $PORT
     envVars:
       - key: NODE_ENV
@@ -62,7 +62,7 @@ services:
     runtime: node
     plan: free
     region: singapore
-    buildCommand: npm install && npm run build --workspace=packages/shared && cd apps/dashboard && npm run build
+    buildCommand: npm install && npm run build:dashboard
     startCommand: cd apps/dashboard && npx next start -p $PORT
     envVars:
       - key: NODE_ENV

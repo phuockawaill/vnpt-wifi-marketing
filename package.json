@@ -10,6 +10,10 @@
   "scripts": {
     "use:sqlite": "node scripts/switch-database.js sqlite",
     "use:postgres": "node scripts/switch-database.js postgres",
+    "build:shared": "npm run build --workspace=packages/shared",
+    "build:backend": "npm run build:shared && cd apps/backend && npx prisma generate --schema=prisma/schema.postgres.prisma && npm run build",
+    "build:portal": "npm run build:shared && npm run build --workspace=apps/portal",
+    "build:dashboard": "npm run build:shared && npm run build --workspace=apps/dashboard",
     "build": "npm run build --workspaces",
     "dev:backend": "npm run dev --workspace=apps/backend",
     "dev:portal": "npm run dev --workspace=apps/portal",
