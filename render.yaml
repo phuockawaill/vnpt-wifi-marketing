@@ -19,7 +19,7 @@ services:
     runtime: node
     plan: free
     region: singapore
-    buildCommand: npm install && cd apps/backend && DATABASE_URL="postgresql://vnpt_admin:mock@localhost:5432/vnpt_wifi_marketing" npx prisma generate --schema=prisma/schema.postgres.prisma && npm run build
+    buildCommand: npm install && DATABASE_URL="postgresql://vnpt_admin:mock@localhost:5432/vnpt_wifi_marketing" npx prisma generate --schema=apps/backend/prisma/schema.postgres.prisma && npm run build --workspace=apps/backend
     startCommand: cd apps/backend && npx prisma db push --schema=prisma/schema.postgres.prisma --accept-data-loss && node dist/main.js
     envVars:
       - key: NODE_VERSION
