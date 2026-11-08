@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "WiFi Marketing Core Backend API & Gateway Controller",
   "scripts": {
-    "build": "nest build",
+    "build": "tsc -p tsconfig.json",
     "format": "prettier --write \"src/**/*.ts\"",
     "start": "nest start",
     "dev": "nest start --watch",
