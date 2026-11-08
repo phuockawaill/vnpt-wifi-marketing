@@ -46,12 +46,14 @@ services:
     plan: free
     region: singapore
     buildCommand: npm install --include=dev && rm -rf apps/portal/.next && npm run build --workspace=apps/portal
-    startCommand: cd apps/portal && npx next start -p $PORT
+    startCommand: cd apps/portal && npx next start -H 0.0.0.0 -p $PORT
     envVars:
       - key: NODE_VERSION
         value: 20.18.0
       - key: NODE_OPTIONS
         value: "--max-old-space-size=450"
+      - key: HOSTNAME
+        value: "0.0.0.0"
       - key: NEXT_TELEMETRY_DISABLED
         value: "1"
       - key: NODE_ENV
@@ -71,12 +73,14 @@ services:
     plan: free
     region: singapore
     buildCommand: npm install --include=dev && rm -rf apps/dashboard/.next && npm run build --workspace=apps/dashboard
-    startCommand: cd apps/dashboard && npx next start -p $PORT
+    startCommand: cd apps/dashboard && npx next start -H 0.0.0.0 -p $PORT
     envVars:
       - key: NODE_VERSION
         value: 20.18.0
       - key: NODE_OPTIONS
         value: "--max-old-space-size=450"
+      - key: HOSTNAME
+        value: "0.0.0.0"
       - key: NEXT_TELEMETRY_DISABLED
         value: "1"
       - key: NODE_ENV
