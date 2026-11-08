@@ -22,13 +22,15 @@ async function bootstrap() {
 
   // Swagger Documentation Setup
   const config = new DocumentBuilder()
-    .setTitle('WiFi Marketing Platform API')
-    .setDescription('Core API for Captive Portal, Campaign Management & Gateway Integrations')
+    .setTitle('WiFi Marketing Platform API - VNPT Đắk Lắk')
+    .setDescription('Core API for Captive Portal, Campaign Management & Ruijie Reyee Cloud Gateway Integrations')
     .setVersion('1.0')
-    .addTag('Captive Portal')
-    .addTag('Campaigns')
-    .addTag('Venues')
-    .addTag('Analytics & Leads')
+    .addTag('Captive Portal', 'API khởi tạo trang chào và xác thực người dùng WiFi')
+    .addTag('Ruijie Cloud & Reyee Integration', 'Chuyên mục cấu hình & các phương thức kết nối Router Ruijie Reyee Cloud')
+    .addTag('Campaigns', 'Quản lý chiến dịch quảng cáo và khảo sát người dùng')
+    .addTag('Venues', 'Quản lý địa điểm và thiết bị phát sóng WiFi')
+    .addTag('Analytics & Leads', 'Thống kê dữ liệu khách hàng và chỉ số tiếp cận')
+    .addTag('Health & System', 'Kiểm tra trạng thái máy chủ và kết nối hệ thống')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

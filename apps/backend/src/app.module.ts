@@ -8,6 +8,7 @@ import { PortalModule } from './modules/portal/portal.module';
 import { VenuesModule } from './modules/venues/venues.module';
 import { CampaignsModule } from './modules/campaigns/campaigns.module';
 import { AnalyticsModule } from './modules/analytics/analytics.module';
+import { RuijieModule } from './modules/ruijie/ruijie.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { AnalyticsModule } from './modules/analytics/analytics.module';
     VenuesModule,
     CampaignsModule,
     AnalyticsModule,
+    RuijieModule,
   ],
   controllers: [AppController],
 })
