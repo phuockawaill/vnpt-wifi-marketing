@@ -12,6 +12,11 @@ export class AnalyticsController {
     return this.analyticsService.getOverviewStats(venueId);
   }
 
+  @Get('dashboard')
+  async getDashboard(@Query('venueId') venueId?: string) {
+    return this.analyticsService.getOverviewStats(venueId);
+  }
+
   @Get('leads')
   async getLeads(@Query('limit') limit?: string) {
     return this.analyticsService.getRecentLeads(limit ? parseInt(limit, 10) : 20);
