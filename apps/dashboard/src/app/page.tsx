@@ -128,7 +128,13 @@ export default function VNPTDakLakDashboard() {
   const [newDevUsername, setNewDevUsername] = useState('admin');
   const [newDevPassword, setNewDevPassword] = useState('');
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || (typeof window !== 'undefined' ? '/api' : 'http://localhost:4000');
+  const API_URL =
+    process.env.NEXT_PUBLIC_API_URL ||
+    (typeof window !== 'undefined' && window.location.hostname.includes('onrender.com')
+      ? 'https://vnpt-wifi-backend.onrender.com'
+      : typeof window !== 'undefined'
+        ? '/api'
+        : 'http://localhost:4000');
 
   const showNotify = (type: 'success' | 'error', message: string) => {
     setNotification({ type, message });
@@ -175,15 +181,49 @@ export default function VNPTDakLakDashboard() {
     fetchAllData();
   }, []);
 
+  const handleActivateCampaign = async (id: string, title?: string) => {
+    // Cập nhật giao diện: đưa chiến dịch này lên ưu tiên cao nhất
+    setCampaigns((prev) =>
+      prev.map((c) =>
+        c.id === id
+          ? { ...c, isActive: true, priority: 10 }
+          : { ...c, priority: 1 },
+      ),
+    );
+
+    try {
+      const res = await fetch(`${API_URL}/v1/campaigns/${id}/activate`, { method: 'PATCH' });
+      if (res.ok) {
+        showNotify('success', `Đã kích hoạt ưu tiên phát sóng chiến dịch "${title || 'Mới'}" thành công!`);
+        fetchAllData();
+      } else {
+        showNotify('error', 'Không thể kích hoạt chiến dịch');
+        fetchAllData();
+      }
+    } catch {
+      showNotify('error', 'Không thể kết nối tới Backend API');
+      fetchAllData();
+    }
+  };
+
   const handleToggleCampaign = async (id: string) => {
+    // Cập nhật giao diện ngay lập tức (Optimistic Update)
+    setCampaigns((prev) =>
+      prev.map((c) => (c.id === id ? { ...c, isActive: !c.isActive } : c)),
+    );
+
     try {
       const res = await fetch(`${API_URL}/v1/campaigns/${id}/toggle`, { method: 'PATCH' });
       if (res.ok) {
         showNotify('success', 'Đã cập nhật trạng thái chiến dịch thành công');
         fetchAllData();
+      } else {
+        showNotify('error', 'Máy chủ không thể cập nhật trạng thái');
+        fetchAllData();
       }
     } catch {
       showNotify('error', 'Không thể kết nối tới Backend API');
+      fetchAllData();
     }
   };
 
@@ -207,12 +247,12 @@ export default function VNPTDakLakDashboard() {
 
   const handleCreateCampaign = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!activeVenue) return;
+    const venueId = activeVenue?.id || 'vnpt-daklak';
 
     try {
       const payload = {
-        venueId: activeVenue.id,
-        title: newCampTitle,
+        venueId,
+        title: newCampTitle || 'Chiến Dịch Chuyển Đổi Số VNPT Đắk Lắk',
         type: newCampType,
         sessionMinutes: Number(newCampSession),
         downloadSpeed: Number(newCampDownload),
@@ -242,12 +282,14 @@ export default function VNPTDakLakDashboard() {
       });
 
       if (res.ok) {
-        showNotify('success', 'Tạo chiến dịch chuyển đổi số VNPT Đắk Lắk thành công!');
+        const created = await res.json();
+        showNotify('success', `Đã kích hoạt chiến dịch "${created.title || newCampTitle}" thành công!`);
         setIsCampaignModalOpen(false);
         setNewCampTitle('');
         fetchAllData();
       } else {
-        showNotify('error', 'Lỗi khi lưu chiến dịch');
+        const errData = await res.json().catch(() => ({}));
+        showNotify('error', errData.message || 'Lỗi khi lưu chiến dịch');
       }
     } catch {
       showNotify('error', 'Không thể kết nối Backend API');
@@ -708,6 +750,25 @@ export default function VNPTDakLakDashboard() {
                             {camp.uploadSpeed ? `${camp.uploadSpeed / 1024}M` : 'Max'}
                           </strong>
                         </div>
+                      </div>
+
+                      <div className="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between">
+                        {camp.isActive && (camp.priority || 0) >= 10 ? (
+                          <span className="inline-flex items-center text-[11px] font-bold text-[#005BAC] bg-blue-50 px-2.5 py-1 rounded-lg border border-blue-200">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#005BAC] animate-pulse mr-1.5"></span>
+                            Đang phát sóng chính
+                          </span>
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={() => handleActivateCampaign(camp.id, camp.title)}
+                            className="inline-flex items-center text-[11px] font-bold text-white bg-[#005BAC] hover:bg-[#004a8c] px-3 py-1 rounded-lg transition-all shadow-xs cursor-pointer"
+                          >
+                            <Radio className="w-3 h-3 mr-1" />
+                            Kích hoạt phát sóng
+                          </button>
+                        )}
+                        <span className="text-[10px] text-slate-400">Ưu tiên: {camp.priority || 1}</span>
                       </div>
                     </div>
                   </div>

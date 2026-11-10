@@ -119,7 +119,13 @@ export default function CaptivePortalVNPTDakLak() {
       setIp(urlIp);
       setVenueSlug(urlVenue);
 
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || (typeof window !== 'undefined' ? '/api' : 'http://localhost:4000');
+      const apiUrl =
+        process.env.NEXT_PUBLIC_API_URL ||
+        (typeof window !== 'undefined' && window.location.hostname.includes('onrender.com')
+          ? 'https://vnpt-wifi-backend.onrender.com'
+          : typeof window !== 'undefined'
+            ? '/api'
+            : 'http://localhost:4000');
       fetch(`${apiUrl}/v1/portal/init?venue=${urlVenue}&mac=${urlMac}&ip=${urlIp}`)
         .then((res) => res.json())
         .then((data) => {
@@ -179,7 +185,13 @@ export default function CaptivePortalVNPTDakLak() {
     if (countdown > 0) return;
 
     setSubmitting(true);
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || (typeof window !== 'undefined' ? '/api' : 'http://localhost:4000');
+    const apiUrl =
+      process.env.NEXT_PUBLIC_API_URL ||
+      (typeof window !== 'undefined' && window.location.hostname.includes('onrender.com')
+        ? 'https://vnpt-wifi-backend.onrender.com'
+        : typeof window !== 'undefined'
+          ? '/api'
+          : 'http://localhost:4000');
 
     try {
       const payload = {

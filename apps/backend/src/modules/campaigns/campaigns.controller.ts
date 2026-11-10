@@ -40,6 +40,16 @@ export class CampaignsController {
     return this.campaignsService.toggleActive(id);
   }
 
+  @Patch(':id/activate')
+  async activate(@Param('id') id: string) {
+    return this.campaignsService.activateCampaign(id);
+  }
+
+  @Post(':id/activate')
+  async activatePost(@Param('id') id: string) {
+    return this.campaignsService.activateCampaign(id);
+  }
+
   @Delete(':id')
   async delete(@Param('id') id: string) {
     return this.campaignsService.delete(id);
