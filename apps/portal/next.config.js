@@ -26,6 +26,26 @@ const nextConfig = {
         source: '/api/:path*',
         destination: `${backendUrl}/:path*`,
       },
+      {
+        source: '/index.html',
+        destination: '/',
+      },
+      {
+        source: '/login',
+        destination: '/',
+      },
+      {
+        source: '/portal',
+        destination: '/',
+      },
+      {
+        source: '/wifi',
+        destination: '/',
+      },
+      {
+        source: '/auth',
+        destination: '/',
+      },
     ];
   },
 };
