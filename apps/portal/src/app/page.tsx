@@ -637,8 +637,13 @@ export default function CaptivePortalVNPTDakLak() {
         <p className="text-slate-500 flex items-center">
           <MapPin className="w-2.5 h-2.5 mr-1 text-slate-400 inline" /> Số 06 Lê Duẩn, P. Tân Thành, TP. Buôn Ma Thuột
         </p>
-        <p className="text-slate-400 flex items-center">
-          <PhoneCall className="w-2.5 h-2.5 mr-1 text-slate-400 inline" /> Hotline: 0262 3855 855 - CSKH: 1800 1166 &copy; 2026
+        <p className="text-slate-400 flex items-center justify-center space-x-1 pt-1">
+          <PhoneCall className="w-2.5 h-2.5 mr-1 text-slate-400 inline" />
+          <span>Hotline: 0262 3855 855 - CSKH: 1800 1166 &copy; 2026</span>
+          <span className="text-slate-300">|</span>
+          <a href="/admin" className="text-[#005BAC] hover:underline font-bold">
+            Trang Quản Trị Hệ Thống &rarr;
+          </a>
         </p>
       </footer>
     </div>
