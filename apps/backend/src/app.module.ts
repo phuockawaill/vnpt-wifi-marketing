@@ -9,6 +9,9 @@ import { VenuesModule } from './modules/venues/venues.module';
 import { CampaignsModule } from './modules/campaigns/campaigns.module';
 import { AnalyticsModule } from './modules/analytics/analytics.module';
 import { RuijieModule } from './modules/ruijie/ruijie.module';
+import { CrmModule } from './modules/crm/crm.module';
+import { VouchersModule } from './modules/vouchers/vouchers.module';
+import { LegacyModule } from './modules/legacy/legacy.module';
 
 @Module({
   imports: [
@@ -21,6 +24,9 @@ import { RuijieModule } from './modules/ruijie/ruijie.module';
     CampaignsModule,
     AnalyticsModule,
     RuijieModule,
+    CrmModule,
+    VouchersModule,
+    LegacyModule,
   ],
   controllers: [AppController],
 })
