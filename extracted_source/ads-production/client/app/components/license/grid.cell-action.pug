@@ -1,0 +1,29 @@
+.btn-group.btn-group-xs
+  a.btn.btn-info(ng-click='vm.onAction("view", data)')
+    |  {{app.isLang === "VN" ? "Lịch sử" : "History"}}
+  .btn-group.btn-group-xs
+    button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')
+      i.icon-more2
+    ul.dropdown-menu.dropdown-menu-right(ng-if="vm.currentUser.profileName === 'superadmin' && (data.status !== 101)")
+      li(ng-if="vm.currentUser.profileName === 'superadmin' && (data.status === 0 || data.status === 1 || data.status === 2)")
+        a.text-info(ng-click='vm.onAction("changeStatus", data, 2)')
+          |  {{app.isLang === "VN" ? "Xác nhận" : "Submit"}}
+      li(ng-if="(data.status === 0 || data.status === 1 || data.status === 2)")
+        a.text-success(ng-click='vm.onAction("approve", data)')
+          |  {{app.isLang === "VN" ? "Duyệt" : "Approve"}}
+      li(ng-if="vm.currentUser.profileName === 'superadmin' && (data.status === 0 || data.status === 1 || data.status === 2)")
+        a.text-danger(ng-click='vm.onAction("changeStatus", data, 101)')
+          |  {{app.isLang === "VN" ? "Huỷ" : "Cancel"}}
+      li(ng-if="vm.currentUser.profileName === 'superadmin'")
+        a.text-success(ng-click='vm.onAction("extendLicense", data)')
+          |  {{app.isLang === "VN" ? "Gia hạn" : "Extend"}}
+    ul.dropdown-menu.dropdown-menu-right(ng-if="vm.currentUser.profileName !== 'superadmin'")
+      li(ng-if="vm.currentUser.profileName === 'admin'")
+        a.text-success(ng-click='app.openDialogLicense(data)')
+          |  {{app.isLang === "VN" ? "Kích hoạt hoặc Duyệt" : "Active or Approve"}}
+      li(ng-if="vm.currentUser.profileName === 'admin' && (data.status === 0 || data.status === 1 || data.status === 2)")
+        a.text-success(ng-click='vm.onAction("approve", data)')
+          |  {{app.isLang === "VN" ? "Duyệt" : "Approve"}}
+      //- li
+      //-   a.text-success(ng-click='vm.onAction("extendLicense", data)')
+      //-     |  Request Extend

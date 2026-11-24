@@ -1,0 +1,92 @@
+//- .form-group(style="margin-bottom: 5px;")
+  //- .row
+    //- .col-sm-6
+      //- h6 Rule
+      //- .radio
+      //-   label
+      //-     .choice.border-primary-600.text-primary-800(ng-click='vm.matchAllFilter = true')
+      //-       span(ng-class='{checked: vm.matchAllFilter}')
+      //-         input.control-primary(type='radio', name='matchingType', checked='vm.matchAllFilter')
+      //-     | Must match all filters
+    //- .col-sm-6
+      //- .radio
+      //-   label
+      //-     .choice.border-primary-600.text-primary-800(ng-click='vm.matchAllFilter = false')
+      //-       span(ng-class='{checked: !vm.matchAllFilter}')
+      //-         input.control-primary(type='radio', name='matchingType', checked='!vm.matchAllFilter')
+      //-     | Should match one filter
+table.table.table-sm.table-bordered
+  thead(style='font-weight:bold;')
+    tr
+      td No
+      td Condition
+      td Criteria
+      td Value
+      td 
+        button.btn.btn-labeled.btn-labeled-left.btn-primary.heading-btn(ng-click="vm.addCurrentFilter()")
+          | Add rule
+          b
+            i.icon-plus3
+  tbody
+    tr(ng-repeat='item in vm.list track by $index')
+      td {{$index + 1}}
+      td
+        .row
+          .col-sm-6
+            .radio
+              label
+                .choice.border-primary-600.text-primary-800(ng-click='item.rule = "and"')
+                  span(ng-class='{checked: item.rule === "and"}')
+                    input.control-primary(type='radio', name='ruleType', ng-checked='item.rule === "and"')
+                | And
+          .col-sm-6
+            .radio
+              label
+                .choice.border-primary-600.text-primary-800(ng-click='item.rule = "or"')
+                  span(ng-class='{checked: item.rule === "or"}')
+                    input.control-primary(type='radio', name='ruleType', ng-checked='item.rule === "or"')
+                | Or
+      td 
+        .input-group-btn
+          button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown')
+            i.icon-filter3.position-left
+            span(ng-bind='item.headerName')
+            span.caret
+          ul.dropdown-menu.dropdown-menu-left
+            li(ng-repeat='s in vm.getMatchFilter(item.field)')
+              a(ng-click='vm.setCurrentFilter(s, item)' ng-bind='::s.headerName')
+      td 
+        .input-group-btn.width-100(ng-if='item.type === "custom"' style='font-size: 1em')
+          //- input.form-control(type='text' ng-model='vm.customField' placeholder='Field name')
+          select.form-control.select-size-xs(select2='item.customFieldOptions' ng-model='item.customField'
+            ng-change='vm.onCustomFieldChanged(item)')
+        select.form-control.select-size-xs.audienceFilter(ng-if='item.field === "range"' ng-model="item.value.type")
+          option(value='time') Time
+          option(value='datetime') Range Time in Date
+        //- select.form-control.select-size-xs.audienceFilter(select2='item.selectOptions' ng-if='item.field !== "range"' ng-model='item.value' multiple)
+        select.form-control.select-size-xs.audienceFilter(select2='item.selectOptions' ng-if='item.field !== "range" && (item.field === "frequency" || item.field === "visitTime")' ng-model='item.value')
+        select.form-control.select-size-xs.audienceFilter(select2='item.selectOptions' ng-if='item.field !== "range" && item.field !== "frequency" && item.field !== "visitTime"' ng-model='item.value' multiple)
+        div(ng-show='item.field === "range"' style="margin-top: 10px")
+          .row
+            .form-group.col-md-6
+              label From Time
+              select.form-control(name='startTime' ng-model='item.value.startTime'
+                ng-options='t.text as t.value for t in vm.timeOptions')
+            .form-group.col-md-6
+              label To Time
+              select.form-control(name='endTime', placeholder='23:59' ng-model='item.value.endTime'
+                ng-options='t.text as t.value for t in vm.timeOptions')
+          .row(ng-if='item.value.type === "datetime"')
+            .form-group.col-md-6(validator)
+              label From Date
+              input.form-control(date-picker='vm.dateOptions' name='scheduleFrom' placeholder='Pick a date',
+                ng-model='item.value.scheduleFrom' required)
+            .form-group.col-md-6(validator)
+              label To Date
+              input.form-control(date-picker='vm.dateOptions' name='scheduleTo' placeholder='Unlimited',
+                ng-model='item.value.scheduleTo' validator-date='From Date' date-after='item.value.scheduleFrom')  
+      td 
+        button.btn.btn-labeled.btn-labeled-left.btn-danger.heading-btn(ng-click="vm.removeFilter($index)")
+          | Remove
+          b
+            i.icon-trash

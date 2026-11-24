@@ -1,0 +1,11 @@
+h5
+  b(style="color: {{this.point.color}}") {{this.key}}
+table
+  tr
+    td Amount:
+    td
+      strong &nbsp {{this.point.y | number: 0}} ({{this.point.percentage.toFixed(0)}}%)
+  tr
+    td Total:
+    td
+      strong &nbsp {{this.point.total | number: 0}}

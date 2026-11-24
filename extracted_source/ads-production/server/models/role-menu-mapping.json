@@ -1,0 +1,32 @@
+{
+  "name": "RoleMenuMapping",
+  "base": "PersistedModel",
+  "strict": true,
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "menuName": {
+      "type": "string"
+    },
+    "roleName": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "role": {
+      "type": "belongsTo",
+      "model": "role",
+      "foreignKey": "roleId"
+    },
+    "menu": {
+      "type": "belongsTo",
+      "model": "Menu",
+      "foreignKey": "menuId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

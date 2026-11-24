@@ -1,0 +1,33 @@
+
+.sidebar-content
+  // Main navigation
+  .sidebar-category.sidebar-category-visible
+    .category-title.h6
+      span
+        i.icon-filter3.position-left
+        | Filter
+      ul.icons-list
+        li
+          a(data-action='collapse')
+    form.category-content(ng-submit='vm.addCurrentFilter()')
+      .form-group
+        .input-group
+          .input-group-btn
+            button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown')
+              span(ng-bind='vm.filter.current.text')
+              span.caret
+            ul.dropdown-menu.dropdown-menu-left
+              li(ng-repeat='s in vm.filter.all')
+                a(ng-click='vm.setCurrentFilter(s)' ng-bind='s.text')
+          input.form-control(type='text', placeholder='Filter value' ng-model='vm.filter.value')
+          .input-group-btn
+            button.btn.btn-primary.btn-icon(type='button' ng-click='vm.addCurrentFilter()')
+              i.icon-search4
+    .category-content(ng-if='vm.filters.length')
+      div.pb-10
+        lable.text-primary Tap each item to toogle. Tap x to remove filter item.
+      button.btn.btn-primary.btn-sm.btn-rounded.btn-labeled.btn-labeled-right.mr-10.mb-10(type='button'
+        ng-repeat='f in vm.filters' ng-click='vm.toggleFilter($index)' ng-class='{disabled: f.disabled}')
+        b(ng-click='vm.removeFilter($index)')
+          i.icon-cross
+        | {{ f.text + ': ' + f.value }}

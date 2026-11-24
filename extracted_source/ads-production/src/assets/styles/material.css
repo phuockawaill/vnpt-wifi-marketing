@@ -1,0 +1,228 @@
+:focus {
+  outline: none; }
+
+body {
+  margin: 0px;
+  font-family: Roboto, sans-serif;
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+  font-weight: bold;
+}
+body.icons-docs {
+  font-family: Roboto, monospace;
+  font-size: 16px;
+  line-height: 28px;
+  color: rgba(0, 0, 0, 0.7);
+  /* icons listing */ }
+  body.icons-docs .material-icons {
+    width: 1em;
+    height: 1em; }
+  body.icons-docs .material-icons.md-18 {
+    font-size: 18px; }
+  body.icons-docs .material-icons.md-24 {
+    font-size: 24px; }
+  body.icons-docs .material-icons.md-36 {
+    font-size: 36px; }
+  body.icons-docs .material-icons.md-48 {
+    font-size: 48px; }
+  body.icons-docs .material-icons.md-dark {
+    color: rgba(0, 0, 0, 0.54); }
+  body.icons-docs .material-icons.md-dark.md-inactive {
+    color: rgba(0, 0, 0, 0.26); }
+  body.icons-docs .material-icons.md-light {
+    color: white; }
+  body.icons-docs .material-icons.md-light.md-inactive {
+    color: rgba(255, 255, 255, 0.3); }
+  body.icons-docs .material-icons.orange600 {
+    color: #FB8C00; }
+.iconDiv span.material-icons{
+    font-size: 18px!important
+}
+
+
+/*slider*/
+.react-slider {
+  height: 100%
+}
+/*.react-slider  .slick-list{
+  height: 100%!important;
+  min-width: 500px;
+}*/
+
+/*.react-slider .slick-slide{
+  height: 300px;
+}*/
+/*.react-slider .slick-prev{
+  left: 0
+}
+.react-slider .slick-next{
+  right: 0
+}*/
+
+
+/*rc-calendar*/
+
+.calendar-sidebar {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid #ccc;
+}
+.rc-calendar-panel {
+}
+.rc-calendar-footer-btn, .rc-calendar-range-middle, .rc-calendar-input-wrap {
+  display: none;
+}
+div[data-reactroot] > div > div > div > div{
+  /*padding: 0!important;*/
+}
+.menuItem{
+  padding: 0!important;
+}
+
+.custom-table th {
+  color:#D5DDE5;
+  background:#0D47A1;
+  border-bottom:4px solid #9ea7af;
+  border-right: 1px solid #343a45;
+  font-size:15px;
+  font-weight: 100;
+  padding:5px;
+  text-align:center;
+}
+
+.custom-table tr {
+  border-bottom: 1px solid #C1C3D1;
+  color:#666B85;
+  font-size:15px;
+  font-weight:normal;
+}
+
+.custom-table tr:hover td {
+  background:#4E5066;
+  color:#FFFFFF;
+  border-bottom: 1px solid #22262e;
+}
+
+.custom-table tr:first-child {
+  border-top:none;
+}
+
+.custom-table tr:last-child {
+  border-bottom:none;
+}
+
+.custom-table tr:nth-child(odd) td {
+  background:#EBEBEB;
+}
+
+.custom-table tr:nth-child(odd):hover td {
+  background:#4E5066;
+}
+
+.custom-table tr:last-child td:first-child {
+  border-bottom-left-radius:3px;
+}
+
+.custom-table tr:last-child td:last-child {
+  border-bottom-right-radius:3px;
+}
+
+.custom-table td {
+    background:#FFFFFF;
+    padding:5px;
+    text-align:left;
+    font-size:15px;
+    border-right: 1px solid #C1C3D1;
+}
+/*geo-suggest*/
+.geosuggest {
+  font-size: 18px;
+  font-size: 1rem;
+  position: relative;
+  width: 50%;
+  margin: auto;
+  text-align: left;
+}
+.geosuggest__input {
+  width: 100%;
+  border: 2px solid transparent;
+  box-shadow: 0 0 1px #3d464d;
+  padding: .5em 1em;
+  -webkit-transition: border 0.2s, box-shadow 0.2s;
+          transition: border 0.2s, box-shadow 0.2s;
+}
+.geosuggest__input:focus {
+  border-color: #267dc0;
+  box-shadow: 0 0 0 transparent;
+}
+.geosuggest__suggests {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 25em;
+  padding: 0;
+  margin-top: -1px;
+  background: #fff;
+  border: 2px solid #267dc0;
+  border-top-width: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  list-style: none;
+  z-index: 5;
+  -webkit-transition: max-height 0.2s, border 0.2s;
+          transition: max-height 0.2s, border 0.2s;
+}
+.geosuggest__suggests--hidden {
+  max-height: 0;
+  overflow: hidden;
+  border-width: 0;
+}
+
+/**
+ * A geosuggest item
+ */
+.geosuggest__item {
+  font-size: 18px;
+  font-size: 1rem;
+  padding: .5em .65em;
+  cursor: pointer;
+}
+.geosuggest__item:hover,
+.geosuggest__item:focus {
+  background: #f5f5f5;
+}
+.geosuggest__item--active {
+  background: #267dc0;
+  color: #fff;
+}
+.geosuggest__item--active:hover,
+.geosuggest__item--active:focus {
+  background: #ccc;
+}
+.form-horizontal .form-group{
+  margin-bottom: 10px;
+}

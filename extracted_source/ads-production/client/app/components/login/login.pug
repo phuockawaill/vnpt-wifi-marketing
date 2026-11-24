@@ -1,0 +1,70 @@
+.login-container
+  .page-container
+    .page-content
+      .content-wrapper
+        ul(style='margin: 0 auto 5px auto; width: 320px; display: flex; list-style: none; padding: 0')
+          li(style="margin: 0 2px; padding: 0px 5px;" ng-class='vm.isLang === "VN" ? "active_flag" : ""', ng-click="vm.isLang = 'VN'")
+            a(href="")
+              img(ng-src='{{vm.vnFlUrl}}', alt="VietNam" width="16" height="16" title="Tiếng Việt")
+          li(style="margin: 0 2px; padding: 0px 5px;" ng-class='vm.isLang === "EN" ? "active_flag" : ""', ng-click="vm.isLang = 'EN'")
+            a(href="")
+              img(ng-src='{{vm.usFlUrl}}', alt="USA" width="16" height="16" title="English")
+        form(ng-if="!vm.notifyConfirm" name='loginForm', ng-submit='vm.login(vm.credentials)', novalidate, autocomplete='off')
+          .panel.panel-body.login-form
+            .text-center
+              .icon-object.border-slate-300.text-slate-300
+                i.icon-reading
+              h5.content-group
+                | {{vm.isLang === "VN" ? "Đăng nhập tài khoản của bạn" : "Login to your account"}}
+                small.display-block {{vm.isLang === "VN" ? "Nhập thông tin đăng nhập bên dưới" : "Enter your credentials below"}}
+            .form-group.has-feedback.has-feedback-left
+              input.form-control(type='text', placeholder='Username' ng-model='vm.credentials.username')
+              .form-control-feedback
+                i.icon-user.text-muted
+            .form-group.has-feedback.has-feedback-left
+              input.form-control(type='password', placeholder='Password' ng-model='vm.credentials.password')
+              .form-control-feedback
+                i.icon-lock2.text-muted
+            .form-group
+              button.btn.btn-primary.btn-block(type='submit' style="margin-bottom: 10px;")
+                | {{vm.isLang === "VN" ? "Đăng nhập" : "Sign in"}}
+                i.fa.fa-sign-in.position-right
+            .form-group
+              a(ui-sref='register.forgot-pass') {{vm.isLang === "VN" ? "Quên mật khẩu?" : "Forgot Your Password?"}}
+            .form-group
+              button.btn.btn-link.btn-block(type='button' style="margin-bottom: 10px;")
+                a(ui-sref='register.register-trial' style="color: black")
+                  | {{vm.isLang === "VN" ? "Đăng ký" : "Register"}}
+                  i.fa.fa-user-plus.position-right
+            //- .form-group
+            //-   button.btn.btn-link.btn-block(type='button' style="margin-bottom: 10px;", ng-click='vm.showRegister = !vm.showRegister')
+            //-     | {{vm.isLang === "VN" ? "Đăng ký" : "Register"}}
+            //-     i.fa.fa-user-plus.position-right
+            //- .form-group(ng-if='vm.showRegister')
+            //-   .input-group-btn(style='display: flex; width: 100%; justify-content: space-around;')
+            //-     button.btn.btn-link(type='button')
+            //-       a(ui-sref='register.register-user')
+            //-         | Publisher
+            //-         i.fa.fa-map-marker.position-right
+            //-     button.btn.btn-link(type='button')
+            //-       a(ui-sref='register.register-trial')
+            //-         | Trial Platform
+            //-         i.fa.fa-user-plus.position-right
+            .alert.bg-warning.alert-styled-left(ng-show='vm.warningMessage')
+              span {{vm.warningMessage}}
+            .alert.bg-danger.alert-styled-left(ng-show='vm.errorMessage')
+              span {{vm.errorMessage}}
+            a.btn.btn-info.btn-block(style="margin-bottom: 10px;" ng-if="vm.showConfirm" ng-click="vm.getConfirm()")
+              | Resend confirm email
+              i.fa.fa-envelope.position-right
+        .panel.panel-body.login-form(ng-if="vm.notifyConfirm")
+            .text-center
+              .icon-object.border-slate-300.text-slate-300
+                i.icon-check
+              h5.content-group
+                | Done
+                small.display-block We'll send an email in 5 minutes. Open it up to activate your account.
+            .form-group
+              button.btn.btn-primary.btn-block(style="margin-bottom: 10px;" ng-click="vm.notifyConfirm=false")
+                i.fa.fa-hand-o-left.position-left
+                | Login

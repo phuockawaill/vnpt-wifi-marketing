@@ -1,0 +1,19 @@
+form#fmEdit.modal.fade.in(name='fmEdit', aria-labelledby='fmEditLabel' novalidate, ng-submit='vm.create()')
+  .modal-dialog.location-url
+    .modal-content
+      .modal-header(ng-class='vm.obj.id ? "bg-info" : "bg-primary"')
+        button.close(type='button', data-dismiss='modal', aria-label='Close') ×
+        h4#fmEditLabel.modal-title Website Category
+      .modal-body
+        .form-group(validator)
+          label Name
+          input.form-control(name='name', placeholder='Give a name', ng-model='vm.obj.text' required)
+        .form-group(validator)
+          label RegExp String
+          input.form-control(name='name', placeholder='string|string1|string2|...', ng-model='vm.obj.options.regexp' required)
+      .modal-footer
+        button.btn.btn-link(type='button', data-dismiss='modal') Cancel
+        button.btn.btn-success#verifyUnifiLogin(type='button' ng-click='vm.verifyUnifiLogin()' ng-if="vm.hotspotType === 'unifi'" ng-disabled="!vm.obj.unifi.baseUrl || !vm.obj.unifi.username || !vm.obj.unifi.password") Verify
+        input.btn(type='submit', ng-disabled='fmEdit.$invalid',
+        ng-class="vm.obj.id ? 'btn-info' : 'btn-primary'"
+        ng-value="vm.obj.id ? 'Edit' : 'Create'")

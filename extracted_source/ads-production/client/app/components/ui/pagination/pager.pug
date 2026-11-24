@@ -1,0 +1,11 @@
+ul.pagination.pagination-flat.pagination-rounded.pagination-xs
+  li(ng-class='{disabled: !previousPage}')
+    a ←
+  li
+    a(ng-if='previousPage' ng-bind='previousPage')
+  li(ng-class='currentPage ? "active" : "disabled"')
+    a(ng-bind='currentPage') 1
+  li
+    a(ng-if='nextPage' ng-bind='nextPage')
+  li(ng-class='{disabled: !nextPage}')
+    a →

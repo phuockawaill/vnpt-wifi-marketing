@@ -1,0 +1,5 @@
+.btn-group.btn-group-xs
+  a.btn.btn-primary(ng-click='vm.onAction("editAp", data)')
+    | {{app.isLang === "VN" ? "Sửa" : "Edit"}}
+  a.btn.btn-danger(ng-click='vm.onAction("deleteAp", data)')
+    | {{app.isLang === "VN" ? "Xóa" : "Delete"}}

@@ -1,0 +1,28 @@
+export default angular.module('app.extensions', [
+  require('./constants/auth').name,
+  require('./constants/messages').name,
+  require('./constants/vn-messages').name,
+
+  // require('./directives/login-dialog').name,
+  // require('./directives/page-loading').name,
+  require('./directives/content-loading').name,
+  // require('./directives/date-time-picker').name,
+  // require('./directives/rome').name,
+  // require('./directives/date-range-picker').name,
+  require('./directives/validator').name,
+  require('./directives/validator-matched').name,
+  require('./directives/validator-date').name,
+  require('./directives/validator-time').name,
+  require('./directives/app-rz-slider').name,
+  // require('./directives/select2').name,
+  // require('./directives/clipboard').name,
+  // require('./directives/popover').name,
+  // require('./directives/countTo').name,
+
+  require('./factories/auth-inteceptor').name,
+  require('./factories/auth-resolver').name,
+  require('./factories/auth-service').name,
+  require('./factories/common-data').name,
+  require('./factories/common-util').name,
+  require('./factories/config').name,
+]);

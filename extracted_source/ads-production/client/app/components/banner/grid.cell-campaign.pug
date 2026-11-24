@@ -1,0 +1,5 @@
+span.text-primary.pr-5(ng-if="data.alertBanner") Alert Banner
+a(data-toggle='modal' data-target='#fmCampaign' ng-click='vm.onAction("viewCampaign", data)' ng-if="!data.alertBanner")
+  span.text-primary.pr-5(ng-bind='vm.bannerMap[data.id]?vm.bannerMap[data.id].length:0')
+  span(ng-bind='vm.bannerMap[data.id].length > 1 ? (app.isLang === "VN" ? "chiến dịch" : "campaigns") : (app.isLang === "VN" ? "chiến dịch" : "campaign")')
+  span.caret

@@ -1,0 +1,35 @@
+{
+  "name": "SMS",
+  "base": "Model",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "http": {
+    "path": "/sms"
+  },
+  "mixins": {
+    "Expire": {
+      "ttl": 600
+    }
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "id": true
+    },
+    "content": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "mac": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

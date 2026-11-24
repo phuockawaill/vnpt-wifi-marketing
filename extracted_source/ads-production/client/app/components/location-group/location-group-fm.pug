@@ -1,0 +1,24 @@
+form#fmEdit.modal.fade.in(name='vm.fmEdit', aria-labelledby='fmEditLabel' novalidate, ng-submit='vm.create()', data-backdrop="static" data-keyboard="false")
+  .modal-dialog.location-url
+    .modal-content
+      .modal-header(ng-class='vm.obj.id ? "bg-info" : "bg-primary"')
+        button.close(type='button', data-dismiss='modal', aria-label='Close', ng-click='vm.closeModal()') ×
+        h4#fmEditLabel.modal-title Wifi Network
+      .modal-body
+        .form-group(validator)
+          label {{app.isLang === "VN" ? "Tên" : "Name"}}
+          input.form-control(name='name', placeholder='{{app.isLang === "VN" ? "Nhập tên" : "Give a name"}}', ng-model='vm.obj.text' required)
+        .form-group(validator)
+          label {{app.isLang === "VN" ? "Địa điểm" : "Location"}}
+          select.form-control(select2='vm.selectLocationOptions' name='locationId'
+            ng-model='vm.obj.locationId' ng-change='vm.objLocationChanged()' multiple="multiple")
+          span.help-block(ng-show='vm.fm.showCreateLocation')
+            | Note: A new location named
+            span.ph-5.text-primary.text-bold(ng-bind='vm.obj.locationId')
+            | will be created. Please update after location creation finished.
+      .modal-footer
+        button.btn.btn-link(type='button', data-dismiss='modal', ng-click='vm.closeModal()') {{app.isLang === "VN" ? "Hủy bỏ" : "Cancel"}}
+        button.btn.btn-success#verifyUnifiLogin(type='button' ng-click='vm.verifyUnifiLogin()' ng-if="vm.hotspotType === 'unifi'" ng-disabled="!vm.obj.unifi.baseUrl || !vm.obj.unifi.username || !vm.obj.unifi.password") Verify
+        input.btn(type='submit',
+        ng-class="vm.obj.id ? 'btn-info' : 'btn-primary'"
+        ng-value="vm.obj.id ? (app.isLang === 'VN' ? 'Cập nhật' : 'Edit') : (app.isLang === 'VN' ? 'Tạo' : 'Create')")

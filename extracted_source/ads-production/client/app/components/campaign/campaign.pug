@@ -1,0 +1,41 @@
+ng-include(src="'campaign/campaign-fm'")
+ng-include(src="'campaign/campaign-fm-banner'")
+ng-include(src="'campaign/campaign-fm-kpi'")
+ng-include(src="'campaign/campaign-fm-location'")
+ng-include(src="'campaign/campaign-fm-adv'")
+ng-include(src="'campaign/campaign-list-banner'")
+ng-include(src="'campaign/campaign-banner-preview'")
+
+.page-container
+  .panel.panel-default
+    .panel-heading.clearfix
+      .panel-title.heading-form
+        a.heading-elements-toggle
+          i.icon-more
+        .form-group.has-feedback.has-feedback-left.m-b-0(style="width: 250px")
+          .input-group
+            input.form-control(type='text', placeholder='{{app.isLang === "VN" ? "Tìm kiếm..." : "Type to search..."}}' ng-model='vm.gridOptions.quickFilterText')
+            .form-control-feedback
+              i.icon-search4
+            .input-group-btn
+              button.btn.dropdown-toggle(type='button', data-toggle='dropdown' ng-class='vm.filters.status.class')
+                span(ng-bind='vm.filters.status.text')
+                span.caret
+              ul.dropdown-menu.dropdown-menu-right
+                li(ng-repeat='s in vm.statusFilters')
+                  a(ng-click='vm.setFilter("status", s)' ng-bind='s.text')
+
+      .heading-elements
+        button.btn.btn-default.heading-btn(type='button' ng-click='vm.onAction("refresh")')
+          i.icon-spinner11.position-left
+          |  {{app.isLang === "VN" ? "Làm mới" : "Refresh"}}
+        button#joyride-create-campaign.btn.btn-labeled.btn-labeled-left.bg-blue.heading-btn(ng-click="vm.onAction('new')" ng-if="!vm.trialUser")
+          | {{app.isLang === "VN" ? "Thêm mới" : "Create Campaign"}}
+          b
+            i.icon-plus3
+
+    .ag-material(ag-grid='vm.gridOptions' ng-style='{height: (vm.viewHeight - 210) +"px"}')
+    //- form
+      section(audience-filter)
+
+div(ng-joy-ride="vm.startJoyRideCampaign" config="vm.joyrideConfigCampaign" on-finish="vm.joyrideFinish('next')"  on-skip="vm.joyrideFinish('skip')")

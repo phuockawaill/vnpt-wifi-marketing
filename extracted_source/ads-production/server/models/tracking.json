@@ -1,0 +1,17 @@
+{
+  "name": "Tracking",
+  "base": "TrackingBase",
+  "strict": true,
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "http": {
+    "path": "/tracking"
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

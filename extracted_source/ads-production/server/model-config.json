@@ -1,0 +1,256 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins",
+      "../node_modules/loopback-ds-timestamp-mixin"
+    ]
+  },
+  "Email": {
+    "dataSource": "mail"
+  },
+  "MailTemplate": {
+      "dataSource": "mongo",
+      "public": true
+  },
+  "MailQueue": {
+      "dataSource": "mongo",
+      "public": true
+  },
+  "MailLog": {
+      "dataSource": "mongo",
+      "public": true
+  },
+  "accessToken": {
+    "dataSource": "mongo",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "mongo",
+    "public": false
+  },
+  "role": {
+    "dataSource": "mongo",
+    "public": false
+  },
+  "roleMapping": {
+    "dataSource": "mongo",
+    "public": false
+  },
+  "user": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "Profile": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "Menu": {
+    "dataSource": "mongo",
+    "public": false
+  },
+  "MenuTree": {
+    "dataSource": "mongo",
+    "public": false
+  },
+  "RoleProfileMapping": {
+    "dataSource": "mongo",
+    "public": false
+  },
+  "RoleMenuMapping": {
+    "dataSource": "mongo",
+    "public": false
+  },
+  "ResourceGroup": {
+    "dataSource": "mongo",
+    "public": false
+  },
+  "ResourceMapping": {
+    "dataSource": "mongo",
+    "public": false
+  },
+  "SelectOption": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "Brand": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "LocationBase": {
+    "dataSource": null,
+    "public": false
+  },
+  "Location": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "APMap": {
+    "dataSource": "mongo",
+    "public": false
+  },
+  "LocationCached": {
+    "dataSource": "redis",
+    "public": false
+  },
+  "TrackingBase": {
+    "dataSource": null,
+    "public": false
+  },
+  "Tracking": {
+    "dataSource": "es",
+    "public": true
+  },
+  "TrackingCached": {
+    "dataSource": "redisTracking",
+    "public": false
+  },
+  "TrackingTTL": {
+    "dataSource": "redisTTL",
+    "public": false
+  },
+  "Device": {
+    "dataSource": "es",
+    "public": true
+  },
+  "Visit": {
+    "dataSource": "es",
+    "public": true
+  },
+  "TemplateBase": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "BannerBase": {
+    "dataSource": null,
+    "public": false
+  },
+  "Banner": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "BannerCached": {
+    "dataSource": "redis",
+    "public": false
+  },
+  "FormGenerateBase": {
+    "dataSource": null,
+    "public": false
+  },
+  "FormGenerate": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "CampaignBase": {
+    "dataSource": null,
+    "public": false
+  },
+  "Campaign": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "CampaignCached": {
+    "dataSource": "redis",
+    "public": false
+  },
+  "CampaignMapping": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "agendaJobs": {
+    "dataSource": "mongo",
+    "public": false
+  },
+  "Report": {
+    "dataSource": null,
+    "public": true
+  },
+  "ReportTracking": {
+    "dataSource": null,
+    "public": true
+  },
+  "ReportAudience": {
+    "dataSource": null,
+    "public": true
+  },
+  "ReportLocation": {
+    "dataSource": null,
+    "public": true
+  },
+  "ReportTopLocation10": {
+    "dataSource": "mongo",
+    "public": false
+  },
+  "ReportTopLocation20": {
+    "dataSource": "mongo",
+    "public": false
+  },
+  "ReportTopLocation30": {
+    "dataSource": "mongo",
+    "public": false
+  },
+  "ReportCampaign": {
+    "dataSource": null,
+    "public": true
+  },
+  "Trending": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "ChartConfig": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "Configuration": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "Fb": {
+    "dataSource": "redisTTL",
+    "public": true
+  },
+  "Verify": {
+    "dataSource": "redisTTL",
+    "public": true
+  },
+  "Ad": {
+    "dataSource": null,
+    "public": true
+  },
+  "AdSession": {
+    "dataSource": "kv",
+    "public": false
+  },
+  "License": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "SessionCached": {
+    "dataSource": "redisTTL",
+    "public": true
+  },
+  "Voucher": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "Transaction": {
+    "dataSource": "mongo",
+    "public": false
+  },
+  "PublisherShare": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "LocationShareCached": {
+    "dataSource": "redis",
+    "public": false
+  }
+}

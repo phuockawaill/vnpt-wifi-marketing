@@ -1,0 +1,484 @@
+{
+  "profiles": [
+    {
+      "name": "superadmin",
+      "description": "Super Admin"
+    },
+    {
+      "name": "admin",
+      "description": "Admin"
+    },
+    {
+      "name": "client",
+      "description": "Client"
+    },
+    {
+      "name": "publisher",
+      "description": "Publisher"
+    },
+    {
+      "name": "brand",
+      "description": "Brand"
+    }
+  ],
+  "roles": [
+    {
+      "id": "admin",
+      "name": "admin",
+      "description": "Admin"
+    },
+    {
+      "id": "createCampaign",
+      "name": "createCampaign",
+      "description": "Can create Campaign"
+    },
+    {
+      "id": "approveCampaign",
+      "name": "approveCampaign",
+      "description": "Can approve Campaign"
+    },
+    {
+      "id": "disableCampaign",
+      "name": "disableCampaign",
+      "description": "Can stop Campaign"
+    },
+    {
+      "id": "enableCampaign",
+      "name": "enableCampaign",
+      "description": "Can start Campaign"
+    },
+    {
+      "id": "deleteCampaign",
+      "name": "deleteCampaign",
+      "description": "Can delete Campaign"
+    },
+    {
+      "id": "viewCampaign",
+      "name": "viewCampaign",
+      "description": "Can view Campaign"
+    },
+    {
+      "id": "dataAllCampaign",
+      "name": "dataAllCampaign",
+      "description": "Has permission on all Campaigns"
+    },
+    {
+      "id": "dataOwnedCampaign",
+      "name": "dataOwnedCampaign",
+      "description": "Has permission on owned Campaigns"
+    },
+    {
+      "id": "createBanner",
+      "name": "createBanner",
+      "description": "Can create Banner"
+    },
+    {
+      "id": "updateBanner",
+      "name": "updateBanner",
+      "description": "Can update Banner"
+    },
+    {
+      "id": "deleteBanner",
+      "name": "deleteBanner",
+      "description": "Can delete Banner"
+    },
+    {
+      "id": "viewBanner",
+      "name": "viewBanner",
+      "description": "Can view Banner"
+    },
+    {
+      "id": "dataAllBanner",
+      "name": "dataAllBanner",
+      "description": "Has permission on all Banners"
+    },
+    {
+      "id": "dataOwnedBanner",
+      "name": "dataOwnedBanner",
+      "description": "Has permission on owned Banners"
+    },
+    {
+      "id": "createLocation",
+      "name": "createLocation",
+      "description": "Can create Location"
+    },
+    {
+      "id": "updateLocation",
+      "name": "updateLocation",
+      "description": "Can update Location"
+    },
+    {
+      "id": "deleteLocation",
+      "name": "deleteLocation",
+      "description": "Can delete Location"
+    },
+    {
+      "id": "dataAllLocation",
+      "name": "dataAllLocation",
+      "description": "Can view all Locations"
+    },
+    {
+      "id": "dataOwnedLocation",
+      "name": "dataOwnedLocation",
+      "description": "Can view owned Locations"
+    }
+  ],
+  "users": [
+    {
+      "name": "Admin",
+      "username": "admin",
+      "email": "admin@genexwifi.vn",
+      "password": "12345678"
+    },
+    {
+      "name": "Agency",
+      "username": "agency",
+      "email": "agency@genexwifi.vn",
+      "password": "12345678",
+      "rootdir": "/agency"
+    },
+    {
+      "name": "Client",
+      "username": "client",
+      "email": "client@genexwifi.vn",
+      "password": "12345678",
+      "rootdir": "/client"
+    },
+    {
+      "name": "Publisher",
+      "username": "publisher",
+      "email": "publisher@genexwifi.vn",
+      "password": "12345678",
+      "rootdir": "/publisher"
+    },
+    {
+      "name": "Brand",
+      "username": "brand",
+      "email": "brand@genexwifi.vn",
+      "password": "12345678",
+      "rootdir": "/brand"
+    }
+  ],
+  "roleProfileMappings": [
+    {
+      "profileName": "superadmin",
+      "roleName": "admin"
+    },
+    {
+      "profileName": "admin",
+      "roleName": "admin"
+    },
+    {
+      "profileName": "client",
+      "roleName": "admin"
+    },
+    {
+      "profileName": "publisher",
+      "roleName": "admin"
+    },
+    {
+      "profileName": "brand",
+      "roleName": "viewCampaign"
+    },
+    {
+      "profileName": "brand",
+      "roleName": "dataOwnedCampaign"
+    }
+  ],
+  "menuTrees": [
+    {
+      "name": "SuperAdmin",
+      "description": "Menu for Super Admin",
+      "tree": [
+        {
+          "text": "Home",
+          "icon": "icon-home5",
+          "children": [
+            {
+              "text": "Dashboard",
+              "url": "report.dashboard",
+              "icon": "icon-display"
+            },
+            {
+              "text": "Audience Information",
+              "url": "report.crm",
+              "icon": "icon-list3"
+            }
+          ]
+        },
+        {
+          "text": "Admin",
+          "icon": "icon-gear",
+          "children": [
+            {
+              "text": "Account",
+              "url": "admin.account",
+              "icon": "icon-users4"
+            },
+            {
+              "text": "City/Province Manage",
+              "url": "admin.city-province",
+              "icon": "icon-map-location"
+            },
+            {
+              "text": "Location",
+              "url": "admin.location",
+              "icon": "icon-location3"
+            },
+            {
+              "text": "Wifi Network",
+              "url": "admin.location-group",
+              "icon": "icon-map5"
+            },
+            {
+              "text": "Creative Ads",
+              "url": "admin.banner",
+              "icon": "icon-images2"
+            },
+            {
+              "text": "Campaign",
+              "url": "admin.campaign",
+              "icon": "icon-magic-wand"
+            },
+            {
+              "text": "Voucher",
+              "url": "admin.voucher",
+              "icon": "icon-newspaper2"
+            },
+            {
+              "text": "Category",
+              "url": "admin.websiteCategory",
+              "icon": "icon-list2"
+            }
+          ]
+        },
+        {
+          "text": "License",
+          "url": "admin.license",
+          "icon": "icon-key"
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "description": "Menu for Admin",
+      "tree": [
+        {
+          "text": "Home",
+          "icon": "icon-home5",
+          "children": [
+            {
+              "text": "Dashboard",
+              "url": "report.dashboard",
+              "icon": "icon-display"
+            },
+            {
+              "text": "Audience Information",
+              "url": "report.crm",
+              "icon": "icon-list3"
+            }
+          ]
+        },
+        {
+          "text": "Admin",
+          "icon": "icon-gear",
+          "children": [
+            {
+              "text": "Account",
+              "url": "admin.account",
+              "icon": "icon-users4"
+            },
+            {
+              "text": "City/Province Manage",
+              "url": "admin.city-province",
+              "icon": "icon-map-location"
+            },
+            {
+              "text": "Location",
+              "url": "admin.location",
+              "icon": "icon-location3"
+            },
+            {
+              "text": "Wifi Network",
+              "url": "admin.location-group",
+              "icon": "icon-map5"
+            },
+            {
+              "text": "Creative Ads",
+              "url": "admin.banner",
+              "icon": "icon-images2"
+            },
+            {
+              "text": "Campaign",
+              "url": "admin.campaign",
+              "icon": "icon-magic-wand"
+            },
+            {
+              "text": "Voucher",
+              "url": "admin.voucher",
+              "icon": "icon-newspaper2"
+            },
+            {
+              "text": "Category",
+              "url": "admin.websiteCategory",
+              "icon": "icon-list2"
+            }
+          ]
+        },
+        {
+          "text": "License",
+          "url": "admin.license",
+          "icon": "icon-key"
+        }
+      ]
+    },
+    {
+      "name": "Client",
+      "description": "Menu for Client",
+      "tree": [
+        {
+          "text": "Home",
+          "icon": "icon-home5",
+          "children": [
+            {
+              "text": "Dashboard",
+              "url": "report.dashboard",
+              "icon": "icon-display"
+            },
+            {
+              "text": "Audience Information",
+              "url": "report.crm",
+              "icon": "icon-list3"
+            }
+          ]
+        },
+        {
+          "text": "Admin",
+          "icon": "icon-gear",
+          "children": [
+            {
+              "text": "Account",
+              "url": "admin.account",
+              "icon": "icon-users4"
+            },
+            {
+              "text": "Location",
+              "url": "admin.location",
+              "icon": "icon-location3"
+            },
+            {
+              "text": "Wifi Network",
+              "url": "admin.location-group",
+              "icon": "icon-map5"
+            },
+            {
+              "text": "Creative Ads",
+              "url": "admin.banner",
+              "icon": "icon-images2"
+            },
+            {
+              "text": "Campaign",
+              "url": "admin.campaign",
+              "icon": "icon-magic-wand"
+            },
+            {
+              "text": "Voucher",
+              "url": "admin.voucher",
+              "icon": "icon-newspaper2"
+            },
+            {
+              "text": "Category",
+              "url": "admin.websiteCategory",
+              "icon": "icon-list2"
+            }
+          ]
+        },
+        {
+          "text": "License",
+          "url": "admin.license",
+          "icon": "icon-key"
+        }
+      ]
+    },
+    {
+      "name": "Publisher",
+      "description": "Menu for Publisher",
+      "tree": [
+        {
+          "text": "Home",
+          "icon": "icon-home5",
+          "children": [
+            {
+              "text": "Dashboard",
+              "url": "report.dashboard",
+              "icon": "icon-display"
+            },
+            {
+              "text": "Audience Information",
+              "url": "report.crm",
+              "icon": "icon-list3"
+            }
+          ]
+        },
+        {
+          "text": "Admin",
+          "icon": "icon-gear",
+          "children": [
+            {
+              "text": "Account",
+              "url": "admin.account",
+              "icon": "icon-users4"
+            },
+            {
+              "text": "Location",
+              "url": "admin.location",
+              "icon": "icon-location3"
+            },
+            {
+              "text": "Wifi Network",
+              "url": "admin.location-group",
+              "icon": "icon-map5"
+            },
+            {
+              "text": "Creative Ads",
+              "url": "admin.banner",
+              "icon": "icon-images2"
+            },
+            {
+              "text": "Campaign",
+              "url": "admin.campaign",
+              "icon": "icon-magic-wand"
+            }
+          ]
+        },
+        {
+          "text": "Monetize Out",
+          "url": "admin.monetize-out",
+          "icon": "icon-share4"
+        }
+      ]
+    },
+    {
+      "name": "Brand",
+      "description": "Menu for Brand",
+      "tree": [
+        {
+          "text": "Home",
+          "icon": "icon-home5",
+          "children": [
+            {
+              "text": "Dashboard",
+              "url": "report.dashboard",
+              "icon": "icon-display"
+            },
+            {
+              "text": "Audience Information",
+              "url": "report.crm",
+              "icon": "icon-list3"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

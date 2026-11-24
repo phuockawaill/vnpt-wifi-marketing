@@ -1,0 +1,47 @@
+ng-include(src="'crm/crm-fm-category'")
+ng-include(src="'crm/crm-location-moving'")
+
+.page-container
+  .panel.panel-default
+    .panel-heading.clearfix
+      .panel-title.heading-form
+        a.heading-elements-toggle
+          i.icon-more
+        form.form-group.m-b-0(style="width: 350px" name='vm.fmFilter' ng-submit='vm.addCurrentFilter()')
+          .input-group
+            .input-group-btn
+              button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown')
+                i.icon-filter3.position-left
+                span(ng-bind='vm.filter.current.headerName')
+                span.caret
+              ul.dropdown-menu.dropdown-menu-left
+                li(ng-repeat='s in vm.filter.all')
+                  a(ng-click='vm.setCurrentFilter(s)' ng-bind='::s.headerName')
+            input(type='hidden' ng-model='vm.filter.current.field' required)
+            input.form-control(type='text', placeholder='Filter value'
+              ng-model='vm.filter.value' ng-show='!vm.filter.current || vm.filter.current.filter == "text"' required)
+            select.form-control(select2='vm.filter.selectOptions' ng-if='vm.filter.current.filter == "select"'
+              ng-model='vm.filter.value')
+              option(value='') Pick a value
+            input.form-control(date-range-picker date-from-to='vm.filter.value' ng-show='vm.filter.current.filter == "date"')
+            .input-group-btn
+              button.btn.btn-primary.btn-icon(type='submit' ng-disabled='vm.fmFilter.$invalid')
+                i.icon-plus2
+
+      .heading-elements
+        button.btn.btn-default.heading-btn(type='button' ng-click='vm.onAction("refresh")')
+          i.icon-spinner11.position-left
+          |  Refresh
+        a.btn.btn-labeled.btn-labeled-left.bg-blue.heading-btn(data-toggle="modal" data-target="#fmEdit" ng-click='vm.onAction("export")')
+          | Export
+          b
+            i.icon-file-download2
+    .panel-body(ng-if='vm.filters.length')
+      div.pb-10
+        lable.text-primary Tap each item to toogle. Tap x to remove filter item.
+      button.btn.btn-primary.btn-sm.btn-rounded.btn-labeled.btn-labeled-right.mr-10.mb-10(type='button'
+        ng-repeat='f in vm.filters' ng-click='vm.toggleFilter($index)' ng-class='{disabled: f.disabled}')
+        b(ng-click='vm.removeFilter($index)')
+          i.icon-cross
+        | {{ f.headerName + ': ' + f.text }}
+    .ag-material(ag-grid='vm.gridOptions' ng-style='{height: (vm.viewHeight - 210) +"px"}')

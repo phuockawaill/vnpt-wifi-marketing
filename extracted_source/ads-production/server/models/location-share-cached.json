@@ -1,0 +1,28 @@
+{
+    "name": "LocationShareCached",
+    "base": "PersistedModel",
+    "idInjection": false,
+    "options": {
+        "validateUpsert": true
+    },
+    "properties": {
+        "id": {
+            "type": "string",
+            "id": true
+        },
+        "value": {
+            "type": "number"
+        },
+        "currentCount": {
+            "type": "number",
+            "default": 1
+        },
+        "createdBy": {
+            "type": "string"
+        }
+    },
+    "validations": [],
+    "relations": {},
+    "acls": [],
+    "methods": {}
+}

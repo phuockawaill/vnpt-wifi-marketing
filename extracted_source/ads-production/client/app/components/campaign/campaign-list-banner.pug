@@ -1,0 +1,23 @@
+form#fmlistBanner.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header.bg-success
+        button.close(type='button', data-dismiss='modal', aria-label='Close') ×
+        h4.modal-title Creative Ads
+      .table-responsive.overflow-auto.mb-20(style='max-height: 400px')
+        table.table
+          thead
+            tr
+              th {{app.isLang === "VN" ? "STT" : "No"}}
+              th {{app.isLang === "VN" ? "Tên" : "Name"}}
+              th {{app.isLang === "VN" ? "Lọc theo" : "Filter"}}
+          tbody
+            tr(ng-if='!vm.objBanners.length')
+              td(colspan='5')
+                h4.text-center.text-muted {{app.isLang === "VN" ? "Không tồn tại creative ads nào" : "Not available creative ads"}}
+            tr(ng-repeat='l in vm.objBanners track by $index' data-dragula-id='{{l.campaignId}}')
+              td(ng-bind='$index + 1')
+              td(ng-bind='l.bannerName')
+              td(ng-bind='l.filterRender')
+              td
+                button.btn.btn-success(type='button' data-toggle='modal' data-target='#fmCatfishCode' ng-click='vm.onAction("preview", l.bannerId)') {{app.isLang === "VN" ? "Xem" : "Preview"}}

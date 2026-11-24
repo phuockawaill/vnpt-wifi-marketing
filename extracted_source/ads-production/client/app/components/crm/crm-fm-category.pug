@@ -1,0 +1,9 @@
+form#fmCategory.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header.bg-success
+        button.close(type='button', data-dismiss='modal', aria-label='Close') ×
+        h4.modal-title "{{vm.rowData.mac}}"
+          i.icon-arrow-right16(style="margin:0 10px;")
+          | Top Interesting Topic
+      .panel-body(highchart='vm.charts["visitSiteData.category"]')

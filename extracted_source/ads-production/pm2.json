@@ -1,0 +1,59 @@
+{
+  "apps": [
+    {
+      "name"        : "ads-production.tracking",
+      "script"      : "dist/server/server.js",
+      "instances"   : 2,
+      "exec_mode"   : "cluster",
+      "max_memory_restart": "3G",
+      "env": {
+        "NODE_ENV"  : "production",
+        "DEBUG"     : "err*",
+        "NODE_TLS_REJECT_UNAUTHORIZED": "0"
+      },
+      "env_debug": {
+        "NODE_ENV"  : "production",
+        "DEBUG"     : "app*,err*,*loopback*"
+      }
+    },
+    {
+      "name"        : "ads-production.tracking-process",
+      "script"      : "dist/server/jobs/tracking-process.js",
+      "max_memory_restart": "3G",
+      "env": {
+        "NODE_ENV"  : "production",
+        "DEBUG"     : "err*"
+      },
+      "env_debug": {
+        "NODE_ENV"  : "production",
+        "DEBUG"     : "app*,err*"
+      }
+    },
+    {
+      "name"        : "ads-production.jobs",
+      "script"      : "dist/server/jobs/index.js",
+      "max_memory_restart": "3G",
+      "env": {
+        "NODE_ENV"  : "production",
+        "DEBUG"     : "err*"
+      },
+      "env_debug": {
+        "NODE_ENV"  : "production",
+        "DEBUG"     : "app*,err*"
+      }
+    },
+    {
+      "name"        : "ads-production.unifi-catch",
+      "script"      : "dist/server/jobs/unifi-catch.js",
+      "max_memory_restart": "3G",
+      "env": {
+        "NODE_ENV"  : "production",
+        "DEBUG"     : "err*"
+      },
+      "env_debug": {
+        "NODE_ENV"  : "production",
+        "DEBUG"     : "app*,err*"
+      }
+    }
+  ]
+}

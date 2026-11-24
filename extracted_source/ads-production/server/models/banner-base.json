@@ -1,0 +1,50 @@
+{
+  "name": "BannerBase",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "scope": {},
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "htmlCode": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "string"
+    },
+    "alertBanner": {
+      "type": "boolean"
+    },
+    "css": {
+      "type": "string"
+    },
+    "js": {
+      "type": "string"
+    },
+    "createdAt": {
+      "type": "date"
+    },
+    "updatedAt": {
+      "type": "date"
+    },
+    "updatedBy": {
+      "type": "string"
+    },
+    "createdByUsername": {
+      "type": "string"
+    },
+    "updatedByUsername": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

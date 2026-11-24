@@ -1,0 +1,36 @@
+{
+  "name": "ChartConfig",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "campaignId": {
+      "type": "string"
+    },
+    "userId": {
+      "type": "string"
+    },
+    "config": {
+      "type": [
+        "object"
+      ],
+      "default": [
+        {
+          "name": "impressionClick"
+        },
+        {
+          "name": "os"
+        },
+        {
+          "name": "device"
+        }
+      ]
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

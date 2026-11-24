@@ -1,0 +1,90 @@
+form#fmEdit.modal.fade.in(name='fmEdit', aria-labelledby='fmEditLabel' novalidate, ng-submit='vm.create()')
+  .modal-dialog
+    .modal-content
+      .modal-header(ng-class='vm.obj.id ? "bg-info" : "bg-primary"')
+        button.close(type='button', data-dismiss='modal', aria-label='Close') ×
+        h4#fmEditLabel.modal-title Voucher
+      .modal-body
+        .form-group.row
+          label.col-sm-4.col-form-label Create
+          .col-sm-2
+            input.form-control(name='number', min=1, type="number", ng-model='vm.obj.number')
+          label.col-sm-2.col-form-label.left vouchers
+        .form-group.row
+          label.col-sm-4.col-form-label Quota
+          .col-sm-3
+            select.form-control(name='quota', ng-model='vm.obj.quota', style='width: 100%;')
+              option(value="1") One device
+              option(value="2") Muilti devices
+              option(value="0") Unlimited
+          .col-sm-2(ng-if="vm.obj.quota ==='2'")
+            input.form-control(name='quota', min=2 type="number", ng-model='vm.obj.quotaNum')
+          label.col-form-label.left(ng-if="vm.obj.quota ==='2'") usages
+        .banner-form.form-group
+          .div.col-sm-2
+          .input-group
+            span Expire from {{vm.obj.expireFromUse?'usage':'create'}}
+            label.switch.col-sm-7
+              input(type="checkbox" ng-model="vm.obj.expireFromUse")
+              span.slider.round
+        .form-group.row
+          label.col-sm-4.col-form-label Expiration Time
+          .col-sm-3
+            select.form-control(name='expire', ng-model='vm.obj.expire', style='width: 100%;')
+              option(value="28800000") 8 hours
+              option(value="86400000") 24 hours
+              option(value="172800000") 2 days
+              option(value="345600000") 4 days
+              option(value="604800000") 7 days
+              option(value="0") User-defined
+          .col-sm-2(ng-if="vm.obj.expire ==='0'")
+            input.form-control(name='expireNum', min=1 type="number", ng-model='vm.obj.expireNum')
+          .col-sm-2(ng-if="vm.obj.expire ==='0'")
+            select.form-control(name='expireType', ng-model='vm.obj.expireType', style='width: 100%;')
+              option(value="minutes") minutes
+              option(value="hours") hours
+              option(value="days") days
+        .form-group.row
+          label.col-sm-4.col-form-label Bandwidth Limit (Download)
+          .col-sm-4
+            input.form-control(name='download', min=0, type="number", ng-model='vm.obj.download')
+          label.col-sm-2.col-form-label.left Kbps
+        .form-group.row
+          label.col-sm-4.col-form-label Bandwidth Limit (Upload)
+          .col-sm-4
+            input.form-control(name='upload', min=0, type="number", ng-model='vm.obj.upload')
+          label.col-sm-2.col-form-label.left Kbps
+        .form-group.row
+          label.col-sm-4.col-form-label Byte Quota
+            i.icon-help(title="" data-toggle="popover" data-content="Byte Quota is per use. If you have chosen multi-use, a total data will be multiplied by the number of uses.")
+          .col-sm-4
+            input.form-control(name='byte', min=0, type="number", ng-model='vm.obj.byte')
+          label.col-sm-2.col-form-label.left MB
+        .form-group.row
+          label.col-sm-4.col-form-label Name
+          .col-sm-8
+            input.form-control(name='name', type="text", ng-model='vm.obj.name')
+        a(data-toggle="collapse" data-target="#collapseConfigure" role="button" style="margin-top:15px;") Customize Voucher
+          .caret
+        .collapse#collapseConfigure
+          .form-group.row
+            label.col-sm-4.col-form-label Length
+            .col-sm-4
+              input.form-control(name='length', type="number", ng-model='vm.obj.length' min="5")
+            label.col-sm-3.col-form-label.left at least 5
+          .form-group.row
+            label.col-sm-4.col-form-label Prefix
+            .col-sm-4
+              input.form-control(name='prefix', ng-model='vm.obj.prefix')
+          .form-group.row
+            label.col-sm-4.col-form-label Type
+            .col-sm-4
+              select.form-control(name='type', ng-model='vm.obj.type', style='width: 100%;')
+                option(value="number") Only Numbers
+                option(value="alphabet") Only Alphabets
+                option(value="mix") Both Numbers & Alphabets
+      .modal-footer
+        button.btn.btn-link(type='button', data-dismiss='modal') Cancel
+        input.btn(type='submit', ng-disabled='fmEdit.$invalid',
+        ng-class="vm.obj.id ? 'btn-info' : 'btn-primary'"
+        ng-value="vm.obj.id ? 'Edit' : 'Create'")

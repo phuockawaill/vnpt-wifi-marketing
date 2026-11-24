@@ -1,0 +1,31 @@
+.page-container
+  .panel.panel-default
+    .panel-heading.clearfix
+      .panel-title.heading-form
+        a.heading-elements-toggle
+          i.icon-more
+        .form-group.has-feedback.has-feedback-left.m-b-0(style="width: 250px")
+          .input-group
+            input.form-control(type='text', placeholder='{{app.isLang === "VN" ? "Tìm kiếm..." : "Type to search..."}}' ng-model='vm.gridOptions.quickFilterText')
+            .form-control-feedback
+              i.icon-search4
+            .input-group-btn
+              button.btn.dropdown-toggle(type='button', data-toggle='dropdown' ng-class='vm.filters.status.class')
+                span(ng-bind='vm.filters.status.text')
+                span.caret
+              ul.dropdown-menu.dropdown-menu-right
+                li(ng-repeat='s in vm.statusFilters')
+                  a(ng-click='vm.setFilter("status", s)' ng-bind='s.text')
+      .heading-elements
+        button.btn.btn-default.heading-btn(type='button' ng-click='vm.refresh()')
+          i.icon-spinner11.position-left
+          |  {{app.isLang === "VN" ? "Tải lại" : "Refresh"}}
+        a.btn.btn-labeled.btn-labeled-left.bg-blue.heading-btn(ng-click="vm.toogleExpandLicense()" ng-if="vm.currentUser.profileName === 'admin' || vm.currentUser.profileName === 'client'")
+          | {{app.isLang === "VN" ? "Yêu cầu license" : "Request License"}}
+          b
+            i.icon-plus3
+        a.btn.btn-labeled.btn-labeled-left.bg-blue.heading-btn(data-toggle="modal" data-target="#fmEditLin" ng-click="vm.onAction('new')" ng-if="vm.currentUser.profileName === 'superadmin'")
+          | {{app.isLang === "VN" ? "Tạo license" : "Create License"}}
+          b
+            i.icon-plus3
+    .ag-material(ag-grid='vm.gridOptions' ng-style='{height: (vm.viewHeight - 210) +"px"}')

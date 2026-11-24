@@ -1,0 +1,22 @@
+form#fmEdit.modal.fade.in(name='fmEdit', aria-labelledby='fmEditLabel' novalidate, ng-submit='vm.create()')
+  .modal-dialog.location-url
+    .modal-content
+      .modal-header(ng-class='vm.obj.id ? "bg-info" : "bg-primary"')
+        button.close(type='button', data-dismiss='modal', aria-label='Close') ×
+        h4#fmEditLabel.modal-title {{app.isLang === "VN" ? "Thành phố/Tỉnh" : "City/Province"}}
+      .modal-body
+        .form-group(validator)
+          label {{app.isLang === "VN" ? "Mã thành phố/tỉnh" : "Code City"}}
+          input.form-control(name='code', placeholder='{{app.isLang === "VN" ? "Nhập mã thành phố" : "Give a code city"}}', ng-model='vm.obj.value' required)
+        .form-group(validator)
+          label {{app.isLang === "VN" ? "Thành phố/tỉnh" : "City"}}
+          input.form-control(name='name', placeholder='{{app.isLang === "VN" ? "Nhập thành phố/tỉnh" : "Give a city/province"}}', ng-model='vm.obj.text' required)
+        .form-group(validator)
+          label {{app.isLang === "VN" ? "Quận/huyện" : "District"}}
+          select.form-control(select2='vm.selectLocationOptions' name='locationId'
+            ng-model='vm.obj.locationId' ng-change='vm.objLocationChanged()')
+      .modal-footer
+        button.btn.btn-link(type='button', data-dismiss='modal') {{app.isLang === "VN" ? "Hủy bỏ" : "Cancel"}}
+        input.btn(type='submit', ng-disabled='fmEdit.$invalid',
+        ng-class="vm.obj.id ? 'btn-info' : 'btn-primary'"
+        ng-value="vm.obj.id ? (app.isLang === 'VN' ? 'Cập nhật' : 'Edit') : (app.isLang === 'VN' ? 'Tạo' : 'Create')")

@@ -1,0 +1,52 @@
+{
+  "name": "Location",
+  "base": "LocationBase",
+  "strict": true,
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "Creator": {},
+    "HookShare": {
+      "type": "Location"
+    },
+    "Owner": {},
+    "ReadOnly": {
+      "activeCampaigns": true
+    }
+  },
+  "properties": {
+    "apList": {
+      "type": [
+        "object"
+      ]
+    },
+    "externalParams": {
+      "type": "object"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "externalType"
+    }
+  ],
+  "methods": {}
+}

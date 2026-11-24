@@ -1,0 +1,688 @@
+const Promise = require('bluebird');
+const moment = require('moment');
+const lodash = require('lodash');
+const csv = require('csv');
+
+const logger = require('../import/logger')().child({ module: 'Model:Device' });
+const debug = require('debug')('app:model:device');
+const error = require('debug')('err:model:device');
+
+module.exports = (Device) => {
+  Device.disableRemoteMethodByName('exists');
+  Device.disableRemoteMethodByName('create');
+  Device.disableRemoteMethodByName('upsert');
+  Device.disableRemoteMethodByName('updateAll');
+  Device.disableRemoteMethodByName('prototype.patchAttributes');
+  Device.disableRemoteMethodByName('prototype.updateAttributes');
+  Device.disableRemoteMethodByName('replaceOrCreate');
+  Device.disableRemoteMethodByName('replaceById');
+  Device.disableRemoteMethodByName('upsertWithWhere');
+  Device.disableRemoteMethodByName('deleteById');
+  Device.disableRemoteMethodByName('createChangeStream');
+
+  Device.audienceFields = [
+    'name',
+    'phone',
+    'email',
+    'gender',
+    'age',
+    'income',
+    'device',
+    'os',
+    'phoneVerified',
+    'phoneCarrier',
+    'emailVefiried',
+  ];
+  Device.historyFields = [
+    'advertiserId',
+    'brandId',
+    'campaignId',
+    'campaignCategoryId',
+    'locationId',
+    'locationCategoryId',
+    'cityId',
+    'bannerId',
+    'ap'
+  ];
+  Device.countFields = {
+    campaignCount: 'campaignId',
+    locationCount: 'locationId',
+    cityCount: 'cityName',
+  };
+
+  Device.toId = mac => mac.toLowerCase().replace(/[^\da-z]/g, '');
+  Device.observe('before save', (ctx, next) => {
+    if (ctx.instance && ctx.isNewInstance) {
+      ctx.instance.id = Device.toId(ctx.instance.mac);
+    }
+    next();
+  });
+
+  const getCurrentProfile = async (req) => {
+    const { accessToken: AccessToken, user: User } = req.app.models;
+    let token = await Promise.resolve(Promise.promisify(AccessToken.findForRequest).call(AccessToken, req))
+    if (!token) return null;
+    return User.findById(token.userId);
+  };
+
+  const getFilterOptions = async (opts, options) => {
+    const context = options.currentContext;
+    delete opts.options;
+
+    const { Profile, Campaign, User, Location } = Device.app.models;
+    let currentProfile = false;
+    if (context) {
+      currentProfile = context.currentProfileName;
+    } else {
+      const usr = await getCurrentProfile(options);
+      let campaigns;
+      // check via profileName
+      switch (usr.profileName) {
+        case 'admin': {
+          let childUsrs = await User.find({ where: { createdBy: usr.id } });
+          campaigns = await Campaign.find({ where: { "or": [{ "createdBy": usr.id }].concat(childUsrs.map(chil => ({ "createdBy": chil.id }))) } });
+          break;
+        }
+        case 'client':
+          campaigns = await Campaign.find({ where: { createdBy: usr.id } });
+          break;
+        case 'publisher': {
+          const locations = await Location.find({ where: { createdBy: usr.id } });
+          opts["meta.locationId"] = { inq: locations.map(loc => loc.id) };
+          break;
+        }
+        case 'brand':
+          campaigns = await Campaign.find({ where: { or: [{ brandId: usr.id }, { brands: usr.id }] } });
+          break;
+        default:
+      }
+      if (campaigns) opts["meta.campaignId"] = { inq: campaigns.map(cmp => cmp.id) };
+      currentProfile = Profile.SYSTEM;
+    }
+    if (currentProfile === Profile.ADVERTISER) {
+      opts.advertiserId = context.currentUserId;
+    } else if (currentProfile === Profile.CLIENT || currentProfile === Profile.PUBLISHER) {
+      opts.brandId = context.currentUserId;
+      delete opts.advertiserId;
+    }
+    // else if (currentProfile === Profile.PUBLISHER) {
+    //   opts.brandId = context.currentUserId;
+    //   delete opts.advertiserId;
+    // }
+
+    const filterOptions = {};
+    Object.keys(opts).forEach((key) => {
+      filterOptions[key] = opts[key];
+    });
+
+    return new Promise((resolve, reject) => {
+      switch (currentProfile) {
+        case Profile.SYSTEM:
+        case Profile.SUPERADMIN:
+        case Profile.ADMIN:
+        case Profile.ADVERTISER:
+        case Profile.CLIENT:
+        case Profile.PUBLISHER:
+          return resolve(filterOptions);
+        // case Profile.PUBLISHER:
+        //   return Promise.all([
+        //     Location.find(
+        //       {
+        //         fields: { id: 1 },
+        //         where: opts.locationId ? { id: opts.locationId } : {},
+        //       },
+        //       options,
+        //     ).then(locations => locations.map(location => location.id)),
+        //     !opts.campaignId
+        //       ? []
+        //       : Campaign.find({ fields: { id: 1 } }, options).then(campaigns =>
+        //         campaigns.map(campaign => campaign.id),
+        //       ),
+        //   ]).then(([locationIds, campaignIds]) => {
+        //     filterOptions.locationId = { inq: locationIds };
+        //     if (filterOptions.campaignId && filterOptions.campaignId.length) {
+        //       filterOptions.campaignId = { inq: campaignIds };
+        //     }
+        //     return resolve(filterOptions);
+        //   });
+        default:
+          return reject(false);
+      }
+    });
+  };
+  const beforeFind = (ctx, _, next) => {
+    const filter = lodash.get(ctx, 'args.filter', {});
+    if (!filter.where) {
+      filter.where = {};
+    }
+    getFilterOptions(filter.where, ctx.req)
+      .then((filterOptions) => {
+        logger.debug({ data: filterOptions }, 'Find filter option');
+        filter.where = filterOptions;
+        ctx.args.filter = filter;
+        next();
+      })
+      .catch(next);
+    // getFilterOptions(filter.where, { currentContext: ctx.req.currentContext })
+    //   .then((filterOptions) => {
+    //     logger.debug({ data: filterOptions }, 'Find filter option');
+    //     filter.where = filterOptions;
+    //     ctx.args.filter = filter;
+    //     const User = Device.app.models.User,
+    //     Profile = Device.app.models.Profile;
+    //     User.findById(ctx.req.accessToken.userId).then((user)=>{
+    //         switch (user.profileName){
+    //             case Profile.ADMIN: next();break;
+    //             case Profile.CLIENT:
+    //                 User.find({where: {createdBy: user.id}}).then((brands)=>{
+    //                     if(brands.length){
+    //                         ctx.args.filter.where.and.push({
+    //                            or: lodash.map(brands,(br)=>{
+    //                                return {"meta.brandId": br.id}
+    //                            })
+    //                         });
+    //                     } else {
+    //                         ctx.args.filter.where.and.push({"meta.brandId": ""});
+    //                     }
+    //                     next();
+    //                 }).catch(next);
+    //                 break;
+    //             case Profile.BRAND:
+    //               ctx.args.filter.where.and.push({"meta.brandId": user.id});
+    //                 next();break;
+    //             default: ;
+    //         }
+    //     }).catch(next);
+    //   })
+    //   .catch(next);
+  };
+
+  Device.findWithTotal = (filter) => {
+    // console.log('filter findWithTotal', JSON.stringify(filter));
+    const { Tracking } = Device.app.models;
+    const esDeviceConn = Device.getDataSource().connector;
+    const esDeviceDB = esDeviceConn.db;
+    const searchDevice = Promise.promisify(esDeviceDB.search, {
+      context: esDeviceDB,
+    });
+
+    filter.limit = 100;
+    if (!isNaN(filter.offset)) {
+      const offset = parseInt(filter.offset, 10);
+      filter.offset = Math.min(1000, offset);
+    } else {
+      delete filter.offset;
+    }
+    let testFilter = { "where": { "and": [{ "or": [{ "exists": "fb" }] }] }, "offset": 0, "limit": 100, "order": ["updatedAt DESC"] };
+    let testFilter1 = { "where": { "and": [{ "exists": "fb" }] }, "offset": 0, "limit": 100, "order": ["updatedAt DESC"] };
+
+    const esQuery = esDeviceConn.buildFilter(Device.modelName, '_doc', filter);
+    logger.debug({ data: esQuery }, 'ES Find filter');
+    convertAdvanceFilter(esQuery);
+
+    const esTrackingConn = Tracking.getDataSource().connector;
+    const esTrackQuery = esTrackingConn.buildFilter(Tracking.modelName, '_doc', lodash.omit(filter, ['offset', 'limit', 'order']));
+    convertAdvanceFilter(esTrackQuery);
+    let queryTracking = false;
+    if (lodash.find(filter.where.and, andI => andI.updatedAt) || lodash.find(filter.where.or, orI => orI.updatedAt)) {
+      esTrackQuery.body.size = 0;
+      esTrackQuery.body.query.bool.must.push({ nested: { path: 'actions', query: { bool: { must: [{ match: { 'actions.action': 'click' } }]} } } });
+      esTrackQuery.body.aggs = {
+        macList: {
+          terms: {
+            field: 'mac',
+            size: 100000
+          }
+        }
+      };
+      queryTracking = true;
+    }
+    const esTrackingDB = esTrackingConn.db;
+    const searchTracking = Promise.promisify(esTrackingDB.search, { context: esTrackingDB });
+    return Promise.all([queryTracking && searchTracking(esTrackQuery)]).spread((responseTracking) => {
+      // console.log('esTrackQuery', JSON.stringify(esTrackQuery));
+      // console.log('trackingQuery data', JSON.stringify(responseTracking));
+      // console.log('esQuery native', JSON.stringify(esQuery));
+      if (responseTracking) {
+        // esQuery.body.query = { ids: { values: responseTracking.aggregations.macList.buckets.map(item => Device.toId(item.key)) } };
+        esQuery.body.query.bool.must = lodash.reject(esQuery.body.query.bool.must, o => o.range && o.range.updatedAt && o.range.updatedAt.lte)
+        .concat({ ids: { values: responseTracking.aggregations.macList.buckets.map(item => Device.toId(item.key)) } });
+      }
+      // console.log('esQuery', JSON.stringify(esQuery));
+
+      return searchDevice(esQuery).then((response) => {
+        const data = response.hits.hits.map(row =>
+          esDeviceConn.dataSourceToModel(Device.modelName, row, 'id'),
+        );
+        const total = response.hits.total;
+        data.map((item) => {
+          if (item.survey) {
+            Object.keys(item.survey).forEach((i) => {
+              item[`survey${i}`] = item.survey[i];
+            });
+          }
+          return item;
+        });
+        return [data, total];
+      });
+    });
+  };
+  Device.remoteMethod('findWithTotal', {
+    accepts: [{ arg: 'filter', type: 'object', description: 'Filter object' }],
+    http: { verb: 'get' },
+    returns: [
+      {
+        arg: 'data',
+        type: [Device.modelName],
+        description: 'Array of devices',
+      },
+      { arg: 'total', type: 'number', description: 'Total matched rows' },
+    ],
+  });
+
+  Device.detail = (id, filter, options) => {
+    if (!filter) {
+      filter = {};
+    }
+    if (!filter.where) {
+      filter.where = {};
+    }
+
+    return Promise.all([
+      Device.findById(id),
+      getFilterOptions(filter.where, options),
+    ]).spread((device, filterOptions) => {
+      if (!device) {
+        throw new Error('Not found!');
+      }
+      filter.where = filterOptions;
+      filter.fields = {};
+      Device.historyFields.forEach((part) => {
+        filter.fields[part] = 0;
+      });
+
+      const Tracking = Device.app.models.Tracking;
+      return Tracking.find(filter);
+    });
+  };
+  Device.remoteMethod('detail', {
+    accepts: [
+      { arg: 'id', type: 'string', required: true },
+      { arg: 'filter', type: 'object' },
+    ],
+    http: { path: '/:id/detail', verb: 'get' },
+    returns: [{ arg: 'detail', type: 'array', root: true }],
+  });
+
+  Device.beforeRemote('find', beforeFind);
+  Device.beforeRemote('findWithTotal', beforeFind);
+  Device.beforeRemote('findById', beforeFind);
+  Device.beforeRemote('findOne', beforeFind);
+
+  const convertAdvanceFilter = (esQueryRaw) => {
+    esQueryRaw.body.sort = esQueryRaw.body.sort.map((item) => {
+      if (item === 'fb.fbId') {
+        return { ['fb.fbId']: { nested_path: 'fb' } }
+      } else if (item['fb.fbId']) {
+        item['fb.fbId'] = { nested_path: 'fb', order: 'desc' };
+      }
+      return item;
+    });
+    if (esQueryRaw.body.query.bool && esQueryRaw.body.query.bool.must) {
+      let reItem;
+      esQueryRaw.body.query.bool.must = esQueryRaw.body.query.bool.must.map((item) => {
+        if (item['match']) {
+          reItem = { ["wildcard"]: item['match'] };
+          Object.keys(item['match']).forEach((key) => {
+            if (typeof item['match'][key] !== 'object') {
+              if (item['match'][key].indexOf('$$hasValue') > -1) {
+                if (key === 'fb') {
+                  reItem = { "nested": { "path": "fb", "query": { "match_all": {} } } };
+                } else {
+                  reItem = { "exists": { "field": key } };
+                }
+              } else if (item['match'][key].indexOf('$$noValue') > -1) {
+                reItem = {};
+                if (!esQueryRaw.body.query.bool.must_not) {
+                  esQueryRaw.body.query.bool.must_not = [];
+                }
+                if (key === 'fb') {
+                  esQueryRaw.body.query.bool.must_not.push({ "nested": { "path": "fb", "query": { "match_all": {} } } });
+                } else {
+                  esQueryRaw.body.query.bool.must_not.push({ "exists": { "field": key } });
+                }
+              } else if (item['match'][key].indexOf('$$fromFb') > -1) {
+                if (key === 'audience.name') {
+                  reItem = { "nested": { "path": "fb", "query": { "exists": { "field": "fb.fbName" } } } };
+                } else {
+                  reItem = { "nested": { "path": "fb", "query": { "exists": { "field": key.replace('audience', 'fb') } } } };
+                }
+              } else if (item['match'][key].indexOf('$$fromGg') > -1) {
+                reItem = { "nested": { "path": "google", "query": { "exists": { "field": key.replace('audience', 'google') } } } };
+              } else if (item['match'][key].indexOf('$$fromSur') > -1) {
+                if (!esQueryRaw.body.query.bool.must_not) {
+                  esQueryRaw.body.query.bool.must_not = [];
+                }
+                esQueryRaw.body.query.bool.must_not.push({ "nested": { "path": "fb", "query": { "match_all": {} } } });
+                esQueryRaw.body.query.bool.must_not.push({ "nested": { "path": "google", "query": { "match_all": {} } } });
+                reItem = { "exists": { "field": key } };
+              }
+            }
+          });
+          return reItem;
+        }
+        if (item['bool'] && item['bool']['should']) {
+          item['bool']['should'] = item['bool']['should'].map((item) => {
+            if (item['match']) {
+              reItem = { ["wildcard"]: item['match'] };
+              Object.keys(item['match']).forEach((key) => {
+                if (typeof item['match'][key] !== 'object') {
+                  if (item['match'][key].indexOf('$$hasValue') > -1) {
+                    if (key === 'fb') {
+                      reItem = { "nested": { "path": "fb", "query": { "match_all": {} } } };
+                    } else {
+                      reItem = { "exists": { "field": key } };
+                    }
+                  } else if (item['match'][key].indexOf('$$noValue') > -1) {
+                    reItem = {};
+                    if (!esQueryRaw.body.query.bool.must_not) {
+                      esQueryRaw.body.query.bool.must_not = [];
+                    }
+                    if (key === 'fb') {
+                      esQueryRaw.body.query.bool.must_not.push({ "nested": { "path": "fb", "query": { "match_all": {} } } });
+                    } else {
+                      esQueryRaw.body.query.bool.must_not.push({ "exists": { "field": key } });
+                    }
+                  } else if (item['match'][key].indexOf('$$fromFb') > -1) {
+                    if (key === 'audience.name') {
+                      reItem = { "nested": { "path": "fb", "query": { "exists": { "field": "fb.fbName" } } } };
+                    } else {
+                      reItem = { "nested": { "path": "fb", "query": { "exists": { "field": key.replace('audience', 'fb') } } } };
+                    }
+                  } else if (item['match'][key].indexOf('$$fromGg') > -1) {
+                    reItem = { "nested": { "path": "google", "query": { "exists": { "field": key.replace('audience', 'google') } } } };
+                  } else if (item['match'][key].indexOf('$$fromSur') > -1) {
+                    if (!esQueryRaw.body.query.bool.must_not) {
+                      esQueryRaw.body.query.bool.must_not = [];
+                    }
+                    esQueryRaw.body.query.bool.must_not.push({ "nested": { "path": "fb", "query": { "match_all": {} } } });
+                    esQueryRaw.body.query.bool.must_not.push({ "nested": { "path": "google", "query": { "match_all": {} } } });
+                    reItem = { "exists": { "field": key } };
+                  }
+                }
+              });
+              return reItem;
+            }
+            return item;
+          });
+        }
+        return item;
+      });
+    }
+  };
+  const getExportInitChunk = (filter) => {
+    const esDeviceConn = Device.getDataSource().connector;
+    const esDeviceDB = esDeviceConn.db;
+    const searchDevice = Promise.promisify(esDeviceDB.search, {
+      context: esDeviceDB,
+    });
+
+    const esQuery = esDeviceConn.buildFilter(
+      Device.modelName,
+      '_doc',
+      filter,
+      1000,
+    );
+    console.log('getExportInitChunk query', JSON.stringify(esQuery));
+    esQuery.scroll = '30s';
+    convertAdvanceFilter(esQuery);
+    logger.debug({ data: esQuery }, 'Export filter');
+
+    const { Tracking } = Device.app.models;
+    const esTrackingConn = Tracking.getDataSource().connector;
+    const esTrackQuery = esTrackingConn.buildFilter(Tracking.modelName, '_doc', lodash.omit(filter, ['offset', 'limit', 'order']));
+    convertAdvanceFilter(esTrackQuery);
+    let queryTracking = false;
+    if (lodash.find(filter.where.and, andI => andI.updatedAt) || lodash.find(filter.where.or, orI => orI.updatedAt)) {
+      esTrackQuery.body.size = 0;
+      esTrackQuery.body.query.bool.must.push({ nested: { path: 'actions', query: { bool: { must: [{ match: { 'actions.action': 'click' } }]} } } });
+      esTrackQuery.body.aggs = {
+        macList: {
+          terms: {
+            field: 'mac',
+            size: 100000
+          }
+        }
+      };
+      queryTracking = true;
+    }
+    const esTrackingDB = esTrackingConn.db;
+    const searchTracking = Promise.promisify(esTrackingDB.search, { context: esTrackingDB });
+    return Promise.all([queryTracking && searchTracking(esTrackQuery)]).spread((responseTracking) => {
+      if (responseTracking) {
+        esQuery.body.query.bool.must = lodash.reject(esQuery.body.query.bool.must, o => o.range && o.range.updatedAt && o.range.updatedAt.lte)
+        .concat({ ids: { values: responseTracking.aggregations.macList.buckets.map(item => Device.toId(item.key)) } });
+      }
+      return searchDevice(esQuery);
+    });
+  };
+  const getExportNextChunk = (scrollId) => {
+    const esDeviceConn = Device.getDataSource().connector;
+    const esDeviceDB = esDeviceConn.db;
+    const scrollDevice = Promise.promisify(esDeviceDB.scroll, {
+      context: esDeviceDB,
+    });
+
+    return scrollDevice({ scroll: '30s', scroll_id: scrollId });
+  };
+  Device.export = (filter, stream, req) => {
+    debug('export %o', filter);
+    const { accessToken: AccessToken, user: User, Location, Campaign } = Device.app.models;
+    let stringifier;
+    const csvHeaders = {
+      mac: 'MAC',
+      'fb.fbId': 'Facebook ID',
+      'fb.fbName': 'Facebook Name',
+      'audience.name': 'Name',
+      'audience.phone': 'Phone',
+      'audience.email': 'Email',
+      'audience.gender': 'Gender',
+      'audience.age': 'Age',
+      'audience.income': 'Income',
+      'audience.device': 'Device',
+      'audience.os': 'OS',
+      locations: 'Locations',
+      updatedAt: 'Last seen',
+    };
+
+    let firstChunk = true;
+    let totalHandled = 0;
+    const locationList = {};
+    const surveyFields = [];
+    const sourceField = '_source';
+    const scrollField = '_scroll_id';
+
+    return Promise.resolve(Promise.promisify(AccessToken.findForRequest).call(AccessToken, req))
+      .then(async (token) => {
+        if (!token) return null;
+        let user = await User.findById(token.userId);
+        let locationData = await Location.find({ fields: { id: 1, name: 1 } });
+        locationData.forEach((loc) => {
+          locationList[loc.id] = loc.name;
+        });
+        let queryCampaign = { fields: { customFields: 1, locations: 1 } };
+        if (user.profileName !== 'superadmin') {
+          if (user.profileName === 'admin') {
+            let childUsrs = await User.find({ where: { createdBy: user.id } });
+            queryCampaign = Object.assign({}, queryCampaign, { where: { "or": [{ "createdBy": user.id }].concat(childUsrs.map(chil => ({ "createdBy": chil.id }))) } });
+          } else {
+            queryCampaign = Object.assign({}, queryCampaign, { where: { createdBy: user.id } });
+          }
+        }
+        return Campaign.find(queryCampaign);
+      }).then((campaigns) => {
+        if (campaigns.length) {
+          let customFields = [];
+          campaigns.forEach((campaign) => {
+            customFields = customFields.concat(lodash.get(campaign, 'customFields', []));
+          });
+          lodash.uniqBy(customFields, 'fieldName').forEach((field) => {
+            csvHeaders[
+              `survey.${field.fieldName}`
+            ] = `${field.displayName} (${field.fieldName})`;
+            surveyFields.push(field.fieldName);
+          });
+        }
+        const whereClauses = lodash.get(filter, 'where.and', []);
+        const [campaignClause] = whereClauses.filter(
+          item => item['meta.campaignId'],
+        );
+        debug('all where', whereClauses);
+        debug('campaign where', campaignClause);
+
+        return (
+          campaignClause && Campaign.findById(campaignClause['meta.campaignId'])
+        );
+      })
+      .then((campaign) => {
+        const customFields = lodash.get(campaign, 'customFields', []);
+        customFields.forEach((field) => {
+          csvHeaders[
+            `survey.${field.fieldName}`
+          ] = `${field.displayName} (${field.fieldName})`;
+          surveyFields.push(field.fieldName);
+        });
+        stringifier = csv.stringify({
+          header: true,
+          columns: csvHeaders,
+          quotedString: true
+        });
+        stringifier.on('readable', () => {
+          let data = stringifier.read();
+          while (data) {
+            stream.write(data);
+            data = stringifier.read();
+          }
+        });
+        return getExportInitChunk(filter);
+      })
+      .then(async function handleResponse(response) {
+        if (response.hits.total > Device.app.get('export').maxRows) {
+          return Promise.reject({
+            statusCode: 500,
+            message: `Too many records (${response.hits.total})`,
+          });
+        }
+        logger.debug(
+          'Chunk data, offset %d/%d',
+          totalHandled,
+          response.hits.total,
+        );
+        if (firstChunk) {
+          if (typeof stream.header === 'function') {
+            stream.header('Content-Type', 'text/csv; charset=utf-8');
+            stream.header(
+              'Content-Disposition',
+              `attachment; filename=crm-${new Date().getTime()}.csv`,
+            );
+          }
+          // stream.write(new Buffer('EFBBBF', 'hex'));
+          stream.write(Buffer.from('EFBBBF', 'hex'));
+          firstChunk = false;
+        }
+
+        response.hits.hits.forEach((device) => {
+          device = device[sourceField];
+          device.locations = device.meta.locationId.map(id => locationList[id] || 'Unknown').join(',').replace(/,Unknown/g, '').replace(/Unknown,/g, '');
+          device.updatedAt = moment(device.updatedAt).format('MMM DD, YYYY HH:mm');
+          device.audience.device = device.audience.device === 'other' ? 'unknown' : device.audience.device;
+          device.audience.os = device.audience.os === 'other' ? 'unknown' : device.audience.os;
+          if (device.survey) {
+            surveyFields.forEach((field) => {
+              device[`survey.${field}`] = device.survey[field];
+            });
+          }
+          if (device.fb && device.fb.fbId) {
+            device.fb.fbId = `https://facebook.com/${device.fb.fbId}`;
+          }
+          stringifier.write(device);
+        });
+        totalHandled += response.hits.hits.length;
+        if (totalHandled < response.hits.total) {
+          return getExportNextChunk(response[scrollField])
+            .then(handleResponse)
+            .catch((err) => {
+              logger.error({ err }, 'Error when get next scroll');
+              console.log('Error when get next scroll', err);
+              stream.end();
+            });
+        }
+        await sleep(1000);
+        return stream.end();
+        // return stream.end();
+      });
+  };
+  const sleep = m => new Promise(r => setTimeout(r, m));
+
+  Device.remoteMethod('export', {
+    description: 'Export CRM',
+    accepts: [
+      { arg: 'filter', type: 'object' },
+      { arg: 'res', type: 'object', http: { source: 'res' } },
+      { arg: 'req', type: 'object', http: { source: 'req' } }
+    ],
+    http: { verb: 'get', path: '/export' }
+  });
+  Device.beforeRemote('export', beforeFind);
+
+  Device.macData = (mac) => {
+    const { Visit } = Device.app.models;
+    return Promise.all([
+      Visit.getMacAgg(mac)
+    ])
+      .spread((data) => {
+        return data;
+      })
+      .catch(error);
+  };
+  Device.remoteMethod('macData', {
+    accepts: [
+      {
+        arg: 'mac',
+        type: 'string',
+        description: 'Mac device',
+        require: true
+      }
+    ],
+    http: { path: '/macData' },
+    returns: { arg: 'data', root: true, type: 'object' },
+  });
+
+  Device.locationMoving = (mac) => {
+    const { Report } = Device.app.models;
+    return Promise.all([
+      Report.getLocationMoving(mac)
+    ])
+      .spread((data) => {
+        let result = {};
+        data.aggregations.location.buckets.forEach((loc) => {
+          const [clickAct] = loc.actionMap.action.buckets.filter(i => i.key === 'click');
+          result[loc.key] = clickAct || {};
+        });
+        return { location: result };
+      })
+      .catch(error);
+  };
+  Device.remoteMethod('locationMoving', {
+    accepts: [
+      {
+        arg: 'mac',
+        type: 'string',
+        description: 'Mac device',
+        require: true
+      }
+    ],
+    http: { path: '/locationMoving' },
+    returns: { arg: 'data', root: true, type: 'object' },
+  });
+};

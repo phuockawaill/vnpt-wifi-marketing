@@ -1,0 +1,15 @@
+{
+  "restApiScheme": "http:",
+  "restApiHost": "wifidian.vnptbinhduong.vn",
+  "restApiRoot": "/api",
+  "appScheme": "http:",
+  "appHost": "wifidian.vnptbinhduong.vn",
+  "cloudcmd": {
+    "mountPath": "/cloudcmd/api/v1/fs",
+    "resourceUrl": "http://filedian.vnptbinhduong.vn",
+    "resourcePath": "/asset"
+  },
+  "recaptchaSiteKey": "6Lcqdd8UAAAAAPCYmNhhjE4CgXj_uXkmIYaPU9WJ",
+  "onlineDocUrl": "http://genexwifi.com/documentation/index.html",
+  "mauticUrl": "http://mautic.genexwifi.com/index.php/s/login?username=USER_NAME&password=PASSWORD"
+}

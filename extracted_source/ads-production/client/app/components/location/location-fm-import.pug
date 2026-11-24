@@ -1,0 +1,46 @@
+form#fmImportLocation.modal.fade.in(data-backdrop="static" name='vm.fmImportLocation', aria-labelledby='fmEditLabel' novalidate, ng-submit='vm.importLocAndAp()')
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header(ng-class='vm.ap.id ? "bg-info" : "bg-primary"')
+        button.close(type='button', data-dismiss='modal', aria-label='Close') ×
+        h4#fmEditLabel.modal-title {{app.isLang === "VN" ? "Nhập địa điểm kèm Access Point" : "Import Location and AP"}}
+      .modal-body
+        div.row
+          input.btn.btn-success.col-md-6#uploadCsvLocation(type='file' name='uploadCsvLocation' accept='.csv' ng-upload-change="vm.addListenerLocation()")
+          div.col-md-6
+            h5(ng-if="vm.importCSVErr" style="color:red") {{app.isLang === "VN" ? "Có lỗi xảy ra, vui lòng kiểm tra và import lại file!" : "Mac address problem, please check and try again!"}}
+            .form-group(ng-if="vm.apList.length && !vm.importCSVErr" style="margin: 8px 0;")
+              input(type="checkbox" ng-model="vm.addApToExists" style="margin-right: 5px;")
+              label.text-warning(style="margin: 0 auto; font-weight: bold") {{app.isLang === "VN" ? "Thêm AP vào tên location đã tồn tại" : "Add AP to location has name which exists"}}
+          h5(ng-if="vm.readingCSV || vm.loadingImport" style="color: orange") Processing...
+        .table-responsive.overflow-auto.mb-20.table-minium(style='max-height: 400px' ng-if="!vm.readingCSV")
+          table.table
+            thead
+              tr
+                th
+                th {{app.isLang === "VN" ? "STT" : "No"}}
+                th {{app.isLang === "VN" ? "Tên Location" : "Location"}}
+                th {{app.isLang === "VN" ? "Tên AP" : "AP Name"}}
+                th Mac Address LAN
+                th Mac 2.4GHz
+                th Mac 5GHz
+                th {{app.isLang === "VN" ? "Trạng thái" : "Status"}}
+            tbody
+              tr(ng-repeat='l in vm.apList track by $index' data-dragula-id='{{l.mac}}')
+                td
+                  i.icon-trash(ng-click='vm.onAction("deleteApCsv", $index)')
+                td(ng-bind='$index + 1')
+                td(ng-bind='l.location')
+                td(ng-bind='l.name')
+                td(ng-bind='l.macLan' ng-style="l.errLan?{'color':'red'}:{'color':'black'}")
+                td(ng-bind='l.mac' ng-style="l.errMac?{'color':'red'}:{'color':'black'}")
+                td(ng-bind='l.mac5' ng-style="l.err5?{'color':'red'}:{'color':'black'}")
+                td(ng-bind='l.status || l.err' ng-style="l.err?{'color':'red'}:{'color':'green'}")
+        h5#openExpandNotify(style="display: none; color: orange")
+          | {{app.isLang === "VN" ? "Số lượng AP hiện tại đã vượt quá giới hạn cho phép, hãy" : "Current number of APs reached your license limitation, please"}}
+          a#openExpandLink(ng-click='vm.toogleExpandLicense()')  {{app.isLang === "VN" ? "mở rộng license để" : "expanding license here"}}
+          |  {{app.isLang === "VN" ? "tiếp tục" : "to continue"}}
+      .modal-footer(ng-if="!vm.loadingImport")
+        button.btn.btn-info(type='button' ng-if="!vm.importSuccess" ng-click='vm.downloadTemplateImportLocation()') {{app.isLang === "VN" ? "Tải bản mẫu" : "Download Template"}}
+        button.btn.btn-link(type='button', data-dismiss='modal') {{app.isLang === "VN" ? "Trở về" : "Back"}}
+        input.btn.btn-primary(type='submit' ng-if="!vm.importSuccess" ng-disabled='(!vm.apList.length || vm.importCSVErr)' value='{{app.isLang === "VN" ? "Bắt đầu nhập" : "Start"}}')

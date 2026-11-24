@@ -1,0 +1,1130 @@
+{
+    "static": [
+        {
+            "name": "default_template",
+            "type": "default",
+            "htmlCode": "<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n    <link rel=\"stylesheet\" href=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/fonts.css\">\n    <link rel=\"stylesheet\" href=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/fonts_2.css\">\n    <title>Template</title>\n    <style>\n        * {\n            font-family: Montserrat, sans-serif;\n\n        }\n\n        body {\n            background-color: #ffffff;\n\n        }\n\n        .img-wrapper {\n            position: relative;\n            width: 100%;\n            text-align: center;\n\n        }\n\n        .img-overlay {\n            position: absolute;\n            top: 0;\n            bottom: 0;\n            left: 0;\n            right: 0;\n            text-align: center;\n\n        }\n\n        .img-overlay:before {\n            content: ' ';\n            display: block;\n            height: 100%;\n            margin: 10px 0 0 0;\n\n        }\n\n        .img-responsive-desktop {\n            width: 50%;\n            height: auto;\n\n        }\n\n        .img-responsive-mobile {\n            display: none;\n\n        }\n\n        .loginButton {\n            color: #ffffff;\n            background-color: #3aaee0;\n            border-style: solid;\n            border-width: 0px;\n            border-color: #cccccc;\n            border-top-style: solid;\n            border-top-width: 0px;\n            border-top-color: #cccccc;\n            border-right-style: solid;\n            border-right-width: 0px;\n            border-right-color: #cccccc;\n            border-bottom-style: solid;\n            border-bottom-width: 0px;\n            border-bottom-color: #cccccc;\n            border-left-style: solid;\n            border-left-width: 0px;\n            border-left-color: #cccccc;\n            border-radius: 4px;\n            padding: 10px;\n            padding-top: 10px;\n            padding-right: 10px;\n            padding-bottom: 10px;\n            padding-left: 10px;\n\n        }\n\n        @media screen and (max-width: 768px) {\n            .img-wrapper {\n                position: relative;\n                width: 100%;\n                text-align: initial;\n\n            }\n\n            .img-overlay {\n                position: absolute;\n                top: 0;\n                bottom: 0;\n                left: 0;\n                right: 0;\n                text-align: center;\n\n            }\n\n            .img-overlay:before {\n                content: ' ';\n                display: block;\n                height: 75%;\n                margin: 0;\n\n            }\n\n            .img-responsive-desktop {\n                display: none;\n\n            }\n\n            .img-responsive-mobile {\n                display: block;\n                width: 100%;\n                height: auto;\n\n            }\n\n            .loginButton {\n                color: #ffffff;\n                background-color: #3aaee0;\n                border-style: solid;\n                border-width: 0px;\n                border-color: #cccccc;\n                border-top-style: solid;\n                border-top-width: 0px;\n                border-top-color: #cccccc;\n                border-right-style: solid;\n                border-right-width: 0px;\n                border-right-color: #cccccc;\n                border-bottom-style: solid;\n                border-bottom-width: 0px;\n                border-bottom-color: #cccccc;\n                border-left-style: solid;\n                border-left-width: 0px;\n                border-left-color: #cccccc;\n                border-radius: 4px;\n                padding: 10px;\n                padding-top: 10px;\n                padding-right: 10px;\n                padding-bottom: 10px;\n                padding-left: 10px;\n\n            }\n        }\n    </style>\n</head>\n\n<body>\n    <div class=\"img-wrapper\"> <img class=\"img-responsive-mobile\"\n            src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/no-image-mobile.jpeg\"> <img\n            class=\"img-responsive-desktop\"\n            src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/no-image-laptop.png\">\n        <div class=\"img-overlay\"> <button id=\"submitLoginButton\" class=\"loginButton\">Connect Internet</button> </div>\n    </div>\n</body>\n\n</html>",
+            "options": {
+                "btn": {
+                    "text": "Connect Internet"
+                },
+                "body": {
+                    "backgroundColor": "#ffffff",
+                    "fontFamily": "Montserrat, sans-serif"
+                },
+                "laptop": {
+                    "bgImage": "http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/no-image-laptop.png",
+                    "sizeImage": "50%",
+                    "btn": {
+                        "color": "#ffffff",
+                        "backgroundColor": "#3aaee0",
+                        "textAlign": "center",
+                        "xDirection": "0%",
+                        "yDirection": "100%",
+                        "borderStyle": "solid",
+                        "borderWidth": "0px",
+                        "borderColor": "#cccccc",
+                        "borderTopStyle": "solid",
+                        "borderTopWidth": "0px",
+                        "borderTopColor": "#cccccc",
+                        "borderRightStyle": "solid",
+                        "borderRightWidth": "0px",
+                        "borderRightColor": "#cccccc",
+                        "borderBottomStyle": "solid",
+                        "borderBottomWidth": "0px",
+                        "borderBottomColor": "#cccccc",
+                        "borderLeftStyle": "solid",
+                        "borderLeftWidth": "0px",
+                        "borderLeftColor": "#cccccc",
+                        "borderRadius": "4px",
+                        "padding": "10px",
+                        "paddingTop": "10px",
+                        "paddingRight": "10px",
+                        "paddingBottom": "10px",
+                        "paddingLeft": "10px"
+                    },
+                    "btnBorderOption": "allsides",
+                    "btnPaddingOption": "allsides"
+                },
+                "mobile": {
+                    "bgImage": "http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/no-image-mobile.jpeg",
+                    "sizeImage": "",
+                    "btn": {
+                        "color": "#ffffff",
+                        "backgroundColor": "#3aaee0",
+                        "textAlign": "center",
+                        "xDirection": "0%",
+                        "yDirection": "75%",
+                        "borderStyle": "solid",
+                        "borderWidth": "0px",
+                        "borderColor": "#cccccc",
+                        "borderTopStyle": "solid",
+                        "borderTopWidth": "0px",
+                        "borderTopColor": "#cccccc",
+                        "borderRightStyle": "solid",
+                        "borderRightWidth": "0px",
+                        "borderRightColor": "#cccccc",
+                        "borderBottomStyle": "solid",
+                        "borderBottomWidth": "0px",
+                        "borderBottomColor": "#cccccc",
+                        "borderLeftStyle": "solid",
+                        "borderLeftWidth": "0px",
+                        "borderLeftColor": "#cccccc",
+                        "borderRadius": "4px",
+                        "padding": "10px",
+                        "paddingTop": "10px",
+                        "paddingRight": "10px",
+                        "paddingBottom": "10px",
+                        "paddingLeft": "10px"
+                    },
+                    "btnBorderOption": "allsides",
+                    "btnPaddingOption": "allsides"
+                }
+            }
+        },
+        {
+            "name": "static_template_1",
+            "type": "fixed",
+            "htmlCode": "<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n    <link rel=\"stylesheet\" href=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/fonts.css\">\n    <link rel=\"stylesheet\" href=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/fonts_2.css\">\n    <title>Template</title>\n    <style>\n        * {\n            font-family: \"Source Sans Pro\", sans-serif;\n        }\n\n        body {\n            background-color: #ffffff;\n\n        }\n\n        .img-wrapper {\n            position: relative;\n            width: 100%;\n            text-align: center;\n\n        }\n\n        .img-overlay {\n            position: absolute;\n            top: auto;\n            bottom: auto;\n            left: 12.5%;\n            right: 12.5%;\n            text-align: center;\n            width: 75%;\n            background: #EA8F2A;\n            height: 50px;\n\n        }\n\n        .img-overlay:before {\n            content: ' ';\n            display: block;\n            height: 100%;\n            margin: 10px 0 0 0;\n\n        }\n\n        .button {\n            width: 90px;\n            border: none;\n            height: 90px;\n            position: absolute;\n            top: -45px;\n            right: 0;\n            background: #EA8F2A;\n            color: #ffffff;\n            outline: none;\n            animation: animationBox 2s ease;\n            border-radius: 50%;\n\n        }\n\n        .movebtn {\n            width: 85px;\n            top: 0;\n            right: 0px;\n            position: absolute;\n\n        }\n\n        .light {\n            width: 85px;\n            top: 0;\n            right: 0px;\n            position: absolute;\n            transform: rotate(180deg);\n            animation: animationLight 5s linear infinite;\n\n        }\n\n        .hand {\n            z-index: 9999;\n            height: 45px;\n            transform: rotate(90deg) translateX(10px);\n            position: absolute;\n            top: 40%;\n            left: -35px;\n            animation: animationHand 1s linear 2.5s infinite;\n            opacity: 0;\n\n        }\n\n        .text-access {\n            font-size: 11px;\n            z-index: 9999;\n            font-weight: bold;\n            position: absolute;\n            top: 85%;\n            left: 0;\n\n        }\n\n        .img-responsive-desktop {\n            width: 75%;\n            height: auto;\n\n        }\n\n        .img-responsive-mobile {\n            display: none;\n\n        }\n\n        @keyframes animationLight {\n            0% {\n                transform: rotate(0)\n            }\n\n            100% {\n                transform: rotate(360deg)\n            }\n\n\n        }\n\n        @keyframes animationBox {\n            0% {\n                transform: translateX(-1000px)\n            }\n\n            100% {\n                transform: translateX(0)\n            }\n\n\n        }\n\n        @keyframes animationHand {\n            0% {\n                opacity: 1;\n                transform: translateX(-10px) rotate(90deg)\n            }\n\n            100% {\n                transform: translateX(10px) rotate(90deg)\n            }\n\n\n        }\n\n        @media screen and (max-width: 768px) {\n            .img-wrapper {\n                position: relative;\n                width: 100%;\n                text-align: initial;\n\n            }\n\n            .img-overlay {\n                position: fixed;\n                top: auto;\n                bottom: 0;\n                left: 0;\n                right: 0;\n                text-align: initial;\n                width: 100%;\n                background: #EA8F2A;\n                height: 50px;\n\n            }\n\n            .img-overlay:before {\n                content: ' ';\n                display: block;\n                height: 45%;\n                margin: 0;\n\n            }\n\n            .img-responsive-desktop {\n                display: none;\n\n            }\n\n            .img-responsive-mobile {\n                display: block;\n                width: 100%;\n                height: auto;\n\n            }\n\n            .button {\n                width: 90px;\n                border: none;\n                height: 90px;\n                position: absolute;\n                top: -45px;\n                right: 0;\n                background: #EA8F2A;\n                color: #ffffff;\n                outline: none;\n                animation: animationBox 2s ease;\n                border-radius: 50%;\n\n            }\n\n            .movebtn {\n                width: 85px;\n                top: 0;\n                right: 0px;\n                position: absolute;\n\n            }\n\n            .light {\n                width: 85px;\n                top: 0;\n                right: 0px;\n                position: absolute;\n                animation: animationLight 5s linear infinite;\n\n            }\n        }\n    </style>\n</head>\n\n<body>\n    <div class=\"img-wrapper\"> <img class=\"img-responsive-mobile\"\n            src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/template_1_mobile.jpg\"> <img\n            class=\"img-responsive-desktop\"\n            src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/template_1_laptop.jpg\">\n        <div class=\"img-overlay\"> <button class=\"button\" id=\"submitLoginButton\"> <img class=\"hand\"\n                    src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/hand.png\"> <span\n                    class=\"text-access\">Kết nối Internet</span> <img class=\"movebtn\"\n                    src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/btnlogin.png\"> <img\n                    class=\"light\" src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/light.png\">\n            </button> </div>\n    </div>\n</body>\n\n</html>",
+            "options": {
+                "btn": {
+                    "text": "Kết nối Internet"
+                },
+                "body": {
+                    "backgroundColor": "#ffffff",
+                    "fontFamily": "\"Source Sans Pro\", sans-serif"
+                },
+                "laptop": {
+                    "bgImage": "http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/template_1_laptop.jpg",
+                    "sizeImage": "75%",
+                    "btn": {
+                        "color": "#ffffff",
+                        "backgroundColor": "#EA8F2A",
+                        "textAlign": "center",
+                        "xDirection": "12.5%",
+                        "yDirection": "100%",
+                        "borderStyle": "solid",
+                        "borderWidth": "0px",
+                        "borderColor": "#cccccc",
+                        "borderTopStyle": "solid",
+                        "borderTopWidth": "0px",
+                        "borderTopColor": "#cccccc",
+                        "borderRightStyle": "solid",
+                        "borderRightWidth": "0px",
+                        "borderRightColor": "#cccccc",
+                        "borderBottomStyle": "solid",
+                        "borderBottomWidth": "0px",
+                        "borderBottomColor": "#cccccc",
+                        "borderLeftStyle": "solid",
+                        "borderLeftWidth": "0px",
+                        "borderLeftColor": "#cccccc",
+                        "borderRadius": "0px",
+                        "padding": "0px",
+                        "paddingTop": "0px",
+                        "paddingRight": "0px",
+                        "paddingBottom": "0px",
+                        "paddingLeft": "0px"
+                    },
+                    "btnBorderOption": "allsides",
+                    "btnPaddingOption": "allsides"
+                },
+                "mobile": {
+                    "bgImage": "http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/template_1_mobile.jpg",
+                    "sizeImage": "",
+                    "btn": {
+                        "color": "#ffffff",
+                        "backgroundColor": "#EA8F2A",
+                        "textAlign": "initial",
+                        "xDirection": "0%",
+                        "yDirection": "45%",
+                        "borderStyle": "solid",
+                        "borderWidth": "0px",
+                        "borderColor": "#cccccc",
+                        "borderTopStyle": "solid",
+                        "borderTopWidth": "0px",
+                        "borderTopColor": "#cccccc",
+                        "borderRightStyle": "solid",
+                        "borderRightWidth": "0px",
+                        "borderRightColor": "#cccccc",
+                        "borderBottomStyle": "solid",
+                        "borderBottomWidth": "0px",
+                        "borderBottomColor": "#cccccc",
+                        "borderLeftStyle": "solid",
+                        "borderLeftWidth": "0px",
+                        "borderLeftColor": "#cccccc",
+                        "borderRadius": "0px",
+                        "padding": "0px",
+                        "paddingTop": "0px",
+                        "paddingRight": "0px",
+                        "paddingBottom": "0px",
+                        "paddingLeft": "0px"
+                    },
+                    "btnBorderOption": "allsides",
+                    "btnPaddingOption": "allsides"
+                }
+            }
+        },
+        {
+            "name": "static_template_2",
+            "type": "normal",
+            "htmlCode": "<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n    <link rel=\"stylesheet\" href=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/fonts.css\">\n    <link rel=\"stylesheet\" href=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/fonts_2.css\">\n    <title>Template</title>\n    <style>\n        * {\n            font-family: Montserrat, sans-serif;\n\n        }\n\n        body {\n            background-color: #ffffff;\n\n        }\n\n        .img-wrapper {\n            position: relative;\n            width: 100%;\n            text-align: center;\n\n        }\n\n        .img-overlay {\n            position: absolute;\n            top: 0;\n            bottom: 0;\n            left: 14%;\n            right: 0;\n            text-align: initial;\n\n        }\n\n        .img-overlay:before {\n            content: ' ';\n            display: block;\n            height: 50%;\n            margin: 10px 0 0 0;\n\n        }\n\n        .img-responsive-desktop {\n            width: 75%;\n            height: auto;\n\n        }\n\n        .img-responsive-mobile {\n            display: none;\n\n        }\n\n        button {\n            position: relative;\n            width: 300px;\n            height: 61px;\n            background: #6E421B;\n            color: #ffffff;\n            border-radius: 0 30px 30px 0;\n            border: none;\n            outline: none;\n            animation: animationButton 1s ease;\n            cursor: pointer;\n\n        }\n\n        button:focus {\n            outline: none;\n\n        }\n\n        @keyframes animationButton {\n            0% {\n                opacity: 0;\n\n            }\n\n            50% {\n                opacity: 0;\n\n            }\n\n            100% {\n                opacity: 1;\n\n            }\n\n\n        }\n\n        img.movebtn {\n            width: 80px;\n            position: absolute;\n            transform: translateX(65px);\n            animation: animationIMG 3s ease;\n            top: -10px;\n            right: 55px;\n            border-style: none;\n\n        }\n\n        .movebtn:focus {\n            outline: none !important;\n\n        }\n\n        .text-click {\n            font-size: 30px;\n            font-weight: 600;\n\n        }\n\n        @keyframes animationIMG {\n            0% {\n                transform: translateX(-167px) rotate(0);\n\n            }\n\n            100% {\n                transform: translateX(65px) rotate(360deg);\n\n            }\n\n\n        }\n\n        @media screen and (max-width: 768px) {\n            .img-wrapper {\n                position: relative;\n                width: 100%;\n                text-align: initial;\n\n            }\n\n            .img-overlay {\n                position: absolute;\n                top: 0;\n                bottom: 0;\n                left: 0;\n                right: 0;\n                text-align: initial;\n\n            }\n\n            .img-overlay:before {\n                content: ' ';\n                display: block;\n                height: 50%;\n                margin: 0;\n\n            }\n\n            .img-responsive-desktop {\n                display: none;\n\n            }\n\n            .img-responsive-mobile {\n                display: block;\n                width: 100%;\n                height: auto;\n\n            }\n\n            button {\n                width: 240px;\n                cursor: pointer !important;\n                animation: animationButton 2s ease;\n\n            }\n\n            @keyframes animationButton {\n                0% {\n                    opacity: 0;\n                    transform: translateX(0)\n                }\n\n                50% {\n                    opacity: 0;\n\n                }\n\n                100% {\n                    opacity: 1;\n\n                }\n\n\n            }\n\n            .text-click {\n                font-size: 24px;\n                margin-left: -40px;\n\n            }\n\n\n        }\n    </style>\n</head>\n\n<body>\n    <div class=\"img-wrapper\"> <img class=\"img-responsive-mobile\"\n            src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/food-mobile.jpg\"> <img\n            class=\"img-responsive-desktop\"\n            src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/food.jpg\">\n        <div class=\"img-overlay\">\n            <button id=\"submitLoginButton\" class=\"loginButton\"> <span class=\"text-click\">Click Here</span> <img\n                    class=\"movebtn\" src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/btnlogin.png\">\n            </button> </div>\n    </div>\n</body>\n\n</html>",
+            "options": {
+                "btn": {
+                    "text": "Click Here"
+                },
+                "body": {
+                    "backgroundColor": "#ffffff",
+                    "fontFamily": "Montserrat, sans-serif"
+                },
+                "laptop": {
+                    "bgImage": "http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/food.jpg",
+                    "sizeImage": "75%",
+                    "btn": {
+                        "color": "#ffffff",
+                        "backgroundColor": "#6E421B",
+                        "textAlign": "initial",
+                        "xDirection": "14%",
+                        "yDirection": "50%",
+                        "borderStyle": "solid",
+                        "borderWidth": "0px",
+                        "borderColor": "#cccccc",
+                        "borderTopStyle": "solid",
+                        "borderTopWidth": "0px",
+                        "borderTopColor": "#cccccc",
+                        "borderRightStyle": "solid",
+                        "borderRightWidth": "0px",
+                        "borderRightColor": "#cccccc",
+                        "borderBottomStyle": "solid",
+                        "borderBottomWidth": "0px",
+                        "borderBottomColor": "#cccccc",
+                        "borderLeftStyle": "solid",
+                        "borderLeftWidth": "0px",
+                        "borderLeftColor": "#cccccc",
+                        "borderRadius": "0px",
+                        "padding": "0px",
+                        "paddingTop": "0px",
+                        "paddingRight": "0px",
+                        "paddingBottom": "0px",
+                        "paddingLeft": "0px"
+                    },
+                    "btnBorderOption": "allsides",
+                    "btnPaddingOption": "allsides"
+                },
+                "mobile": {
+                    "bgImage": "http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/food-mobile.jpg",
+                    "sizeImage": "",
+                    "btn": {
+                        "color": "#ffffff",
+                        "backgroundColor": "#6E421B",
+                        "textAlign": "initial",
+                        "xDirection": "0%",
+                        "yDirection": "50%",
+                        "borderStyle": "solid",
+                        "borderWidth": "0px",
+                        "borderColor": "#cccccc",
+                        "borderTopStyle": "solid",
+                        "borderTopWidth": "0px",
+                        "borderTopColor": "#cccccc",
+                        "borderRightStyle": "solid",
+                        "borderRightWidth": "0px",
+                        "borderRightColor": "#cccccc",
+                        "borderBottomStyle": "solid",
+                        "borderBottomWidth": "0px",
+                        "borderBottomColor": "#cccccc",
+                        "borderLeftStyle": "solid",
+                        "borderLeftWidth": "0px",
+                        "borderLeftColor": "#cccccc",
+                        "borderRadius": "0px",
+                        "padding": "0px",
+                        "paddingTop": "0px",
+                        "paddingRight": "0px",
+                        "paddingBottom": "0px",
+                        "paddingLeft": "0px"
+                    },
+                    "btnBorderOption": "allsides",
+                    "btnPaddingOption": "allsides"
+                }
+            }
+        },
+        {
+            "name": "static_template_3",
+            "type": "normal",
+            "htmlCode": "<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n    <link rel=\"stylesheet\" href=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/fonts.css\">\n    <link rel=\"stylesheet\" href=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/fonts_2.css\">\n    <title>Template</title>\n    <style>\n        * {\n            font-family: Montserrat, sans-serif;\n        }\n\n        body {\n            background: #000000;\n\n        }\n\n        .img-wrapper {\n            position: relative;\n            width: 100%;\n            text-align: center;\n\n        }\n\n        .img-overlay {\n            position: absolute;\n            top: 0;\n            bottom: 0;\n            left: 0%;\n            right: 0%;\n            text-align: center;\n\n        }\n\n        .img-overlay:before {\n            content: ' ';\n            display: block;\n            height: 100%;\n            margin: 10px 0 0 0;\n\n        }\n\n        .img-responsive-desktop {\n            width: 75%;\n            height: auto;\n\n        }\n\n        .img-responsive-mobile {\n            display: none;\n\n        }\n\n        button {\n            background: #e67e22;\n            color: #ffffff;\n            border: 3px solid #fff;\n            border-radius: 50px;\n            font: 1rem \"Margarine\", sans-serif;\n            outline: none;\n            cursor: pointer;\n            transition: 0.2s ease-in-out;\n            letter-spacing: 2px;\n            z-index: 2;\n\n        }\n\n        button:focus {\n            outline: none;\n\n        }\n\n        .button__wrapper {\n            position: relative;\n            height: 60px;\n            width: 240px;\n\n        }\n\n        .button__wrapper:before {\n            content: \"\";\n            position: absolute;\n\n        }\n\n        .button__wrapper:hover .buttonpulsing:before {\n            animation: pulsing 0.2s linear infinite;\n\n        }\n\n        .button__wrapper:hover .buttonpulsing:after {\n            animation: pulsing1 0.2s linear infinite;\n\n        }\n\n        .button__wrapper .text-access {\n            position: absolute;\n            top: 0;\n            right: 0;\n            left: 0;\n            width: 100%;\n            height: 100%;\n            line-height: 60px;\n            border-radius: 50px;\n            background: inherit;\n            z-index: 2;\n\n        }\n\n        .buttonpulsing {\n            width: 100%;\n            height: 100%;\n            border-radius: 50px;\n            z-index: 1;\n            position: relative;\n\n        }\n\n        .buttonpulsing:before,\n        .buttonpulsing:after {\n            content: \"\";\n            width: 100%;\n            height: 100%;\n            border: inherit;\n            top: 0;\n            left: 0;\n            z-index: 0;\n            background: #fff;\n            border-radius: inherit;\n            animation: pulsing 2.5s linear infinite;\n            position: absolute;\n\n        }\n\n        .buttonpulsing:after {\n            animation: pulsing1 2.5s linear infinite;\n\n        }\n\n        @media screen and (max-width: 768px) {\n            .img-wrapper {\n                position: relative;\n                width: 100%;\n                text-align: initial;\n\n            }\n\n            .img-overlay {\n                position: absolute;\n                top: 0;\n                bottom: 0;\n                left: 0%;\n                right: 0%;\n                text-align: center;\n\n            }\n\n            .img-overlay:before {\n                content: ' ';\n                display: block;\n                height: 80%;\n                margin: 0;\n\n            }\n\n            .img-responsive-desktop {\n                display: none;\n\n            }\n\n            .img-responsive-mobile {\n                display: block;\n                width: 100%;\n                height: auto;\n\n            }\n\n\n        }\n\n        @keyframes pulsing {\n            0% {\n                opacity: 1;\n                transform: scaleY(1) scaleX(1);\n\n            }\n\n            20% {\n                opacity: 0.5;\n\n            }\n\n            70% {\n                opacity: 0.2;\n                transform: scaleY(1.8) scaleX(1.4);\n\n            }\n\n            80% {\n                opacity: 0;\n                transform: scaleY(1.8) scaleX(1.4);\n\n            }\n\n            90% {\n                opacity: 0;\n                transform: scaleY(1) scaleX(1);\n\n            }\n\n\n        }\n\n        @keyframes pulsing1 {\n            0% {\n                opacity: 1;\n                transform: scaleY(1) scaleX(1);\n\n            }\n\n            20% {\n                opacity: 0.5;\n\n            }\n\n            70% {\n                opacity: 0.2;\n                transform: scaleY(1.3) scaleX(1.15);\n\n            }\n\n            80% {\n                opacity: 0;\n                transform: scaleY(1.3) scaleX(1.15);\n\n            }\n\n            90% {\n                opacity: 0;\n                transform: scaleY(1) scaleX(1);\n\n            }\n\n\n        }\n    </style>\n</head>\n\n<body>\n    <div class=\"img-wrapper\"> <img class=\"img-responsive-mobile\"\n            src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/template_3_mobile.jpg\"> <img\n            class=\"img-responsive-desktop\"\n            src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/template_3_laptop.jpg\">\n        <div class=\"img-overlay\">\n            <button class=\"button__wrapper\" id=\"submitLoginButton\">\n                <div class=\"text-access\">Truy cập Internet</div>\n                <div class=\"buttonpulsing\"></div>\n            </button> </div>\n    </div>\n</body>\n\n</html>",
+            "options": {
+                "btn": {
+                    "text": "Truy cập Internet"
+                },
+                "body": {
+                    "backgroundColor": "#000000",
+                    "fontFamily": "Montserrat, sans-serif"
+                },
+                "laptop": {
+                    "bgImage": "http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/template_3_laptop.jpg",
+                    "sizeImage": "75%",
+                    "btn": {
+                        "color": "#ffffff",
+                        "backgroundColor": "#e67e22",
+                        "textAlign": "center",
+                        "xDirection": "0%",
+                        "yDirection": "100%",
+                        "borderStyle": "solid",
+                        "borderWidth": "3px",
+                        "borderColor": "#ffffff",
+                        "borderTopStyle": "solid",
+                        "borderTopWidth": "3px",
+                        "borderTopColor": "#ffffff",
+                        "borderRightStyle": "solid",
+                        "borderRightWidth": "3px",
+                        "borderRightColor": "#ffffff",
+                        "borderBottomStyle": "solid",
+                        "borderBottomWidth": "3px",
+                        "borderBottomColor": "#ffffff",
+                        "borderLeftStyle": "solid",
+                        "borderLeftWidth": "3px",
+                        "borderLeftColor": "#ffffff",
+                        "borderRadius": "50px",
+                        "padding": "0px",
+                        "paddingTop": "0px",
+                        "paddingRight": "0px",
+                        "paddingBottom": "0px",
+                        "paddingLeft": "0px"
+                    },
+                    "btnBorderOption": "allsides",
+                    "btnPaddingOption": "more"
+                },
+                "mobile": {
+                    "bgImage": "http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/template_3_mobile.jpg",
+                    "sizeImage": "",
+                    "btn": {
+                        "color": "#ffffff",
+                        "backgroundColor": "#e67e22",
+                        "textAlign": "center",
+                        "xDirection": "0%",
+                        "yDirection": "80%",
+                        "borderStyle": "solid",
+                        "borderWidth": "3px",
+                        "borderColor": "#ffffff",
+                        "borderTopStyle": "solid",
+                        "borderTopWidth": "3px",
+                        "borderTopColor": "#ffffff",
+                        "borderRightStyle": "solid",
+                        "borderRightWidth": "3px",
+                        "borderRightColor": "#ffffff",
+                        "borderBottomStyle": "solid",
+                        "borderBottomWidth": "3px",
+                        "borderBottomColor": "#ffffff",
+                        "borderLeftStyle": "solid",
+                        "borderLeftWidth": "3px",
+                        "borderLeftColor": "#ffffff",
+                        "borderRadius": "50px",
+                        "padding": "0px",
+                        "paddingTop": "0px",
+                        "paddingRight": "0px",
+                        "paddingBottom": "0px",
+                        "paddingLeft": "0px"
+                    },
+                    "btnBorderOption": "allsides",
+                    "btnPaddingOption": "more"
+                }
+            }
+        },
+        {
+            "name": "static_template_4",
+            "type": "fixed",
+            "htmlCode": "<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n    <link rel=\"stylesheet\" href=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/bootstrap.min.css\">\n    <link rel=\"stylesheet\" href=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/fonts.css\">\n    <link rel=\"stylesheet\" href=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/fonts_2.css\">\n    <title>Template</title>\n    <style>\n        * {\n            font-family: Montserrat, sans-serif;\n        }\n\n        body {\n            background: #000000;\n        }\n\n        .bg-opacty {\n            width: 100%;\n            height: 100%;\n            background: gray;\n            position: fixed;\n            top: 0;\n            opacity: 0.35;\n            z-index: 99;\n        }\n\n        .img-wrapper {\n            position: relative;\n            width: 100%;\n            text-align: center;\n        }\n\n        .img-overlay {\n            position: absolute;\n            top: 0;\n            bottom: 0;\n            left: 0;\n            right: 0;\n            text-align: center;\n            z-index: 999;\n        }\n\n        .img-overlay:before {\n            content: ' ';\n            display: block;\n            height: 50%;\n            margin: 10px 0 0 0;\n        }\n\n        .img-responsive-desktop {\n            width: 75%;\n            height: auto;\n        }\n\n        .img-responsive-mobile {\n            display: none;\n        }\n\n        .btn-click {\n            width: 100px;\n            height: 100px;\n            border-radius: 50%;\n            border: none;\n            outline: none;\n            background: transparent;\n            animation: animationButton 2s linear;\n            animation-iteration-count: 1;\n            position: relative;\n        }\n\n        .btn-click:focus {\n            outline: none\n        }\n\n        img.movebtn {\n            width: 95px;\n            height: auto;\n            outline: none;\n            top: 0;\n            right: 0;\n            position: absolute;\n        }\n\n        img.hand {\n            height: 47px;\n            transform: rotate(180deg) translateY(10px);\n            position: absolute;\n            top: -50px;\n            left: 25%;\n            animation: animationHand 1s linear 2.5s infinite;\n            opacity: 0;\n        }\n\n        .light {\n            width: 95px;\n            top: 0;\n            right: 0px;\n            position: absolute;\n            transform: rotate(180deg);\n            animation: animationLight 5s linear infinite;\n        }\n\n        @media screen and (max-width: 768px) {\n            .img-wrapper {\n                position: relative;\n                width: 100%;\n                text-align: initial;\n            }\n\n            .img-overlay {\n                position: absolute;\n                top: 0;\n                bottom: 0;\n                left: 0;\n                right: 0;\n                text-align: center;\n            }\n\n            .img-overlay:before {\n                content: ' ';\n                display: block;\n                height: 50%;\n                margin: 0;\n            }\n\n            .img-responsive-desktop {\n                display: none;\n            }\n\n            .img-responsive-mobile {\n                display: block;\n                width: 100%;\n                height: auto;\n            }\n        }\n\n        @keyframes animationLight {\n            0% {\n                transform: rotate(0)\n            }\n\n            100% {\n                transform: rotate(360deg)\n            }\n        }\n\n        @keyframes animationHand {\n            0% {\n                opacity: 1;\n                transform: translateY(-10px) rotate(180deg)\n            }\n\n            100% {\n                transform: translateY(10px) rotate(180deg)\n            }\n        }\n\n        @keyframes animationButton {\n            0% {\n                transform: translate(0%, -150%);\n            }\n\n            33% {\n                transform: translate(0, 0);\n            }\n\n            66% {\n                transform: translate(0, -150%);\n            }\n\n            100% {\n                transform: translate(0, 0);\n            }\n        }\n    </style>\n</head>\n\n<body>\n    <div class=\"bg-opacty\"></div>\n    <div class=\"img-wrapper\"> <img class=\"img-responsive-mobile\"\n            src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/template_4_mobile.jpg\">\n        <img class=\"img-responsive-desktop\"\n            src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/template_4_laptop.jpg\">\n        <div class=\"img-overlay\"> <button class=\"btn-click\" id=\"submitLoginButton\"> <img class=\"hand\"\n                    src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/hand.png\"> <img class=\"movebtn\"\n                    src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/btnlogin.png\"> <img\n                    class=\"light\" src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/light.png\">\n            </button> </div>\n    </div>\n</body>\n\n</html>",
+            "options": {
+                "btn": {
+                    "text": ""
+                },
+                "body": {
+                    "backgroundColor": "#000000",
+                    "fontFamily": "Montserrat, sans-serif"
+                },
+                "laptop": {
+                    "bgImage": "http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/template_4_laptop.jpg",
+                    "sizeImage": "75%",
+                    "btn": {
+                        "color": "#ffffff",
+                        "backgroundColor": "transparent",
+                        "textAlign": "center",
+                        "xDirection": "0%",
+                        "yDirection": "50%",
+                        "borderStyle": "solid",
+                        "borderWidth": "0px",
+                        "borderColor": "#cccccc",
+                        "borderTopStyle": "solid",
+                        "borderTopWidth": "0px",
+                        "borderTopColor": "#cccccc",
+                        "borderRightStyle": "solid",
+                        "borderRightWidth": "0px",
+                        "borderRightColor": "#cccccc",
+                        "borderBottomStyle": "solid",
+                        "borderBottomWidth": "0px",
+                        "borderBottomColor": "#cccccc",
+                        "borderLeftStyle": "solid",
+                        "borderLeftWidth": "0px",
+                        "borderLeftColor": "#cccccc",
+                        "borderRadius": "0px",
+                        "padding": "0px",
+                        "paddingTop": "0px",
+                        "paddingRight": "0px",
+                        "paddingBottom": "0px",
+                        "paddingLeft": "0px"
+                    },
+                    "btnBorderOption": "allsides",
+                    "btnPaddingOption": "allsides"
+                },
+                "mobile": {
+                    "bgImage": "http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/template_4_mobile.jpg",
+                    "sizeImage": "",
+                    "btn": {
+                        "color": "#ffffff",
+                        "backgroundColor": "transparent",
+                        "textAlign": "center",
+                        "xDirection": "0%",
+                        "yDirection": "50%",
+                        "borderStyle": "solid",
+                        "borderWidth": "0px",
+                        "borderColor": "#cccccc",
+                        "borderTopStyle": "solid",
+                        "borderTopWidth": "0px",
+                        "borderTopColor": "#cccccc",
+                        "borderRightStyle": "solid",
+                        "borderRightWidth": "0px",
+                        "borderRightColor": "#cccccc",
+                        "borderBottomStyle": "solid",
+                        "borderBottomWidth": "0px",
+                        "borderBottomColor": "#cccccc",
+                        "borderLeftStyle": "solid",
+                        "borderLeftWidth": "0px",
+                        "borderLeftColor": "#cccccc",
+                        "borderRadius": "0px",
+                        "padding": "0px",
+                        "paddingTop": "0px",
+                        "paddingRight": "0px",
+                        "paddingBottom": "0px",
+                        "paddingLeft": "0px"
+                    },
+                    "btnBorderOption": "allsides",
+                    "btnPaddingOption": "allsides"
+                }
+            }
+        },
+        {
+            "name": "static_template_5",
+            "type": "normal",
+            "htmlCode": "<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n    <link rel=\"stylesheet\" href=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/fonts.css\">\n    <link rel=\"stylesheet\" href=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/fonts_2.css\">\n    <title>Template</title>\n    <style>\n        * {\n            font-family: Montserrat, sans-serif;\n        }\n\n        body {\n            background: #000000;\n        }\n\n        .img-wrapper {\n            position: relative;\n            width: 100%;\n            text-align: center;\n        }\n\n        .img-overlay {\n            position: absolute;\n            top: 0;\n            bottom: 0;\n            left: 0;\n            right: 0;\n            text-align: center;\n        }\n\n        .img-overlay:before {\n            content: ' ';\n            display: block;\n            height: 40%;\n            margin: 10px 0 0 0;\n        }\n\n        .img-responsive-desktop {\n            width: 75%;\n            height: auto;\n        }\n\n        .img-responsive-mobile {\n            display: none;\n        }\n\n        button {\n            background: transparent;\n            border: none;\n            outline: none;\n        }\n\n        @media screen and (max-width: 768px) {\n            .img-wrapper {\n                position: relative;\n                width: 100%;\n                text-align: initial;\n            }\n\n            .img-overlay {\n                position: absolute;\n                top: 0;\n                bottom: 0;\n                left: 0;\n                right: 0;\n                text-align: center;\n            }\n\n            .img-overlay:before {\n                content: ' ';\n                display: block;\n                height: 40%;\n                margin: 0;\n            }\n\n            .img-responsive-desktop {\n                display: none;\n            }\n\n            .img-responsive-mobile {\n                display: block;\n                width: 100%;\n                height: auto;\n            }\n        }\n\n        svg {\n            width: 50vw;\n            max-width: 430px;\n            z-index: 2;\n            filter: drop-shadow(0 0 40px rgba(0, 0, 0, 0.3));\n        }\n\n        svg text {\n            font-size: 45px;\n        }\n\n        svg path {\n            cursor: pointer;\n            animation: blob 2s infinite forwards;\n            transform-origin: 50% 50%;\n        }\n\n        svg path:hover {\n            fill: #fafafa;\n        }\n\n        @keyframes blob {\n            25% {\n                d: path(\"M 90 210 C 90 180 110 160 130 160 C 160 160 180 140 200 130 C 230 120 270 100 290 140 C 310 170 340 100 360 140 C 370 160 390 180 390 210 C 390 240 380 290 350 280 C 330 270 300 280 280 290 C 260 300 230 300 220 290 C 200 270 160 310 140 280 C 130 260 90 240 90 210 \");\n                transform: rotate(-5deg);\n            }\n\n            50% {\n                d: path(\"M 90 210 C 90 180 100 150 120 130 C 150 100 180 140 200 130 C 230 120 270 100 290 140 C 300 160 330 130 360 140 C 390 150 390 180 390 210 C 390 240 380 300 350 280 C 330 270 320 230 280 260 C 260 280 220 310 200 290 C 180 270 160 280 140 280 C 110 280 90 240 90 210\");\n            }\n\n            75% {\n                d: path(\"M 90 210 C 90 180 110 180 130 170 C 150 160 170 130 200 130 C 240 130 260 150 290 140 C 310 130 340 120 360 140 C 380 160 390 180 390 210 C 390 240 380 260 350 270 C 320 280 290 270 270 260 C 240 250 230 280 210 290 C 180 310 130 300 110 280 C 90 260 90 240 90 210\");\n                transform: rotate(5deg);\n            }\n        }\n    </style>\n</head>\n\n<body>\n    <div class=\"img-wrapper\"> <img class=\"img-responsive-mobile\"\n            src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/template_5_mobile.jpg\">\n        <img class=\"img-responsive-desktop\"\n            src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/template_5_laptop.jpg\">\n        <div class=\"img-overlay\"> <button id=\"submitLoginButton\" class=\"loginButton\"> <svg viewBox=\"45 60 400 320\"\n                    xmlns=\"http://www.w3.org/2000/svg\">\n                    <path fill=\"#FFFFFF\"\n                        d=\"M 90 210 C 90 180 90 150 90 150 C 150 150 180 150 180 150 C 180 150 300 150 300 150 C 300 150 330 150 390 150 C 390 150 390 180 390 210 C 390 240 390 270 390 270 C 330 270 300 270 300 270 C 300 270 180 270 180 270 C 180 270 150 270 90 270 C 90 270 90 240 90 210\"\n                        mask=\"url(#knockout-text)\"> </path>\n                    <mask id=\"knockout-text\">\n                        <rect width=\"100%\" height=\"100%\" fill=\"#fff\" x=\"0\" y=\"0\" /> <text x=\"147\" y=\"207\"\n                            fill=\"#000\">CONNECT</text> <text x=\"147\" y=\"257\" fill=\"#000\">INTERNET</text> </mask>\n                </svg> </button> </div>\n    </div>\n</body>\n\n</html>",
+            "options": {
+                "btn": {
+                    "text": ""
+                },
+                "body": {
+                    "backgroundColor": "#000000",
+                    "fontFamily": "Montserrat, sans-serif"
+                },
+                "laptop": {
+                    "bgImage": "http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/template_5_laptop.jpg",
+                    "sizeImage": "75%",
+                    "btn": {
+                        "color": "transparent",
+                        "backgroundColor": "transparent",
+                        "textAlign": "center",
+                        "xDirection": "0%",
+                        "yDirection": "40%",
+                        "borderStyle": "solid",
+                        "borderWidth": "0px",
+                        "borderColor": "#cccccc",
+                        "borderTopStyle": "solid",
+                        "borderTopWidth": "0px",
+                        "borderTopColor": "#cccccc",
+                        "borderRightStyle": "solid",
+                        "borderRightWidth": "0px",
+                        "borderRightColor": "#cccccc",
+                        "borderBottomStyle": "solid",
+                        "borderBottomWidth": "0px",
+                        "borderBottomColor": "#cccccc",
+                        "borderLeftStyle": "solid",
+                        "borderLeftWidth": "0px",
+                        "borderLeftColor": "#cccccc",
+                        "borderRadius": "0px",
+                        "padding": "0px",
+                        "paddingTop": "0px",
+                        "paddingRight": "0px",
+                        "paddingBottom": "0px",
+                        "paddingLeft": "0px"
+                    },
+                    "btnBorderOption": "allsides",
+                    "btnPaddingOption": "allsides"
+                },
+                "mobile": {
+                    "bgImage": "http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/template_5_mobile.jpg",
+                    "sizeImage": "",
+                    "btn": {
+                        "color": "transparent",
+                        "backgroundColor": "transparent",
+                        "textAlign": "center",
+                        "xDirection": "0%",
+                        "yDirection": "40%",
+                        "borderStyle": "solid",
+                        "borderWidth": "0px",
+                        "borderColor": "#cccccc",
+                        "borderTopStyle": "solid",
+                        "borderTopWidth": "0px",
+                        "borderTopColor": "#cccccc",
+                        "borderRightStyle": "solid",
+                        "borderRightWidth": "0px",
+                        "borderRightColor": "#cccccc",
+                        "borderBottomStyle": "solid",
+                        "borderBottomWidth": "0px",
+                        "borderBottomColor": "#cccccc",
+                        "borderLeftStyle": "solid",
+                        "borderLeftWidth": "0px",
+                        "borderLeftColor": "#cccccc",
+                        "borderRadius": "0px",
+                        "padding": "0px",
+                        "paddingTop": "0px",
+                        "paddingRight": "0px",
+                        "paddingBottom": "0px",
+                        "paddingLeft": "0px"
+                    },
+                    "btnBorderOption": "allsides",
+                    "btnPaddingOption": "allsides"
+                }
+            }
+        },
+        {
+            "name": "static_template_6",
+            "type": "normal",
+            "htmlCode": "<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n    <link rel=\"stylesheet\" href=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/fonts.css\">\n    <link rel=\"stylesheet\" href=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/fonts_2.css\">\n    <title>Template</title>\n    <style>\n        * {\n            font-family: Montserrat, sans-serif;\n        }\n\n        body {\n            background-color: #ffffff;\n\n        }\n\n        .img-wrapper {\n            position: relative;\n            width: 100%;\n            text-align: center;\n\n        }\n\n        .img-overlay {\n            position: absolute;\n            top: 0;\n            bottom: 0;\n            left: 0;\n            right: 0;\n            text-align: center;\n\n        }\n\n        .img-overlay:before {\n            content: ' ';\n            display: block;\n            height: 100%;\n            margin: 10px 0 0 0;\n\n        }\n\n        .img-responsive-desktop {\n            width: 75%;\n            height: auto;\n\n        }\n\n        .img-responsive-mobile {\n            display: none;\n\n        }\n\n        button {\n            -webkit-appearance: none;\n            background: -webkit-gradient(to right, #a2ccb6 0%, #fceeb5 50%, #ee786e 100%);\n            background: linear-gradient(to right, #a2ccb6 0%, #fceeb5 50%, #ee786e 100%);\n            background-size: 500%;\n            border: none;\n            border-radius: 5rem;\n            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);\n            color: #ffffff;\n            cursor: pointer;\n            font: 1em Raleway, sans-serif;\n            font-weight: 400;\n            -webkit-font-smoothing: antialiased;\n            -moz-osx-font-smoothing: grayscale;\n            padding: .375rem .75rem;\n            line-height: 1.5;\n            letter-spacing: 0.05em;\n            outline: none;\n            -webkit-tap-highlight-color: transparent;\n            -webkit-user-select: none;\n            -moz-user-select: none;\n            -ms-user-select: none;\n            user-select: none;\n            animation-name: gradient;\n            -webkit-animation-name: gradient;\n            animation-duration: 2s;\n            -webkit-animation-duration: s;\n            animation-iteration-count: infinite;\n            -webkit-animation-iteration-count: infinite;\n            animation-fill-mode: forwards;\n            -webkit-animation-fill-mode: forwards;\n\n        }\n\n        @media screen and (max-width: 768px) {\n            .img-wrapper {\n                position: relative;\n                width: 100%;\n                text-align: initial;\n\n            }\n\n            .img-overlay {\n                position: absolute;\n                top: 0;\n                bottom: 0;\n                left: 5%;\n                right: 0;\n                text-align: initial;\n\n            }\n\n            .img-overlay:before {\n                content: ' ';\n                display: block;\n                height: 15%;\n                margin: 0;\n\n            }\n\n            .img-responsive-desktop {\n                display: none;\n\n            }\n\n            .img-responsive-mobile {\n                display: block;\n                width: 100%;\n                height: auto;\n\n            }\n\n\n        }\n\n        @keyframes gradient {\n            0% {\n                background-position: 0% 50%;\n\n            }\n\n            100% {\n                background-position: 100%;\n\n            }\n\n\n        }\n    </style>\n</head>\n\n<body>\n    <div class=\"img-wrapper\"> <img class=\"img-responsive-mobile\"\n            src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/template_6_mobile.jpg\">\n        <img class=\"img-responsive-desktop\"\n            src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/template_6_laptop.jpg\">\n        <div class=\"img-overlay\"> <button id=\"submitLoginButton\" class=\"loginButton\">Connect Internet</button> </div>\n    </div>\n</body>\n\n</html>",
+            "options": {
+                "btn": {
+                    "text": "Connect Internet"
+                },
+                "body": {
+                    "backgroundColor": "#ffffff",
+                    "fontFamily": "Montserrat, sans-serif"
+                },
+                "laptop": {
+                    "bgImage": "http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/template_6_laptop.jpg",
+                    "sizeImage": "75%",
+                    "btn": {
+                        "color": "#ffffff",
+                        "backgroundColor": "linear-gradient(to right, #a2ccb6 0%, #fceeb5 50%, #ee786e 100%)",
+                        "textAlign": "center",
+                        "xDirection": "0%",
+                        "yDirection": "100%",
+                        "borderStyle": "solid",
+                        "borderWidth": "0px",
+                        "borderColor": "#cccccc",
+                        "borderTopStyle": "solid",
+                        "borderTopWidth": "0px",
+                        "borderTopColor": "#cccccc",
+                        "borderRightStyle": "solid",
+                        "borderRightWidth": "0px",
+                        "borderRightColor": "#cccccc",
+                        "borderBottomStyle": "solid",
+                        "borderBottomWidth": "0px",
+                        "borderBottomColor": "#cccccc",
+                        "borderLeftStyle": "solid",
+                        "borderLeftWidth": "0px",
+                        "borderLeftColor": "#cccccc",
+                        "borderRadius": "0px",
+                        "padding": "0px",
+                        "paddingTop": "0px",
+                        "paddingRight": "0px",
+                        "paddingBottom": "0px",
+                        "paddingLeft": "0px"
+                    },
+                    "btnBorderOption": "allsides",
+                    "btnPaddingOption": "more"
+                },
+                "mobile": {
+                    "bgImage": "http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/template_6_mobile.jpg",
+                    "sizeImage": "",
+                    "btn": {
+                        "color": "#ffffff",
+                        "backgroundColor": "linear-gradient(to right, #a2ccb6 0%, #fceeb5 50%, #ee786e 100%)",
+                        "textAlign": "initial",
+                        "xDirection": "5%",
+                        "yDirection": "15%",
+                        "borderStyle": "solid",
+                        "borderWidth": "0px",
+                        "borderColor": "#cccccc",
+                        "borderTopStyle": "solid",
+                        "borderTopWidth": "0px",
+                        "borderTopColor": "#cccccc",
+                        "borderRightStyle": "solid",
+                        "borderRightWidth": "0px",
+                        "borderRightColor": "#cccccc",
+                        "borderBottomStyle": "solid",
+                        "borderBottomWidth": "0px",
+                        "borderBottomColor": "#cccccc",
+                        "borderLeftStyle": "solid",
+                        "borderLeftWidth": "0px",
+                        "borderLeftColor": "#cccccc",
+                        "borderRadius": "0px",
+                        "padding": "0px",
+                        "paddingTop": "0px",
+                        "paddingRight": "0px",
+                        "paddingBottom": "0px",
+                        "paddingLeft": "0px"
+                    },
+                    "btnBorderOption": "allsides",
+                    "btnPaddingOption": "more"
+                }
+            }
+        },
+        {
+            "name": "static_template_7",
+            "type": "fixed",
+            "htmlCode": "<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n    <title>Template</title>\n    <style>\n        * {\n            font-family: Montserrat, sans-serif;\n        }\n\n        body {\n            background-color: #ffffff;\n        }\n\n        .img-wrapper {\n            position: relative;\n            width: 100%;\n            text-align: center;\n        }\n\n        .img-overlay {\n            position: absolute;\n            top: auto;\n            bottom: auto;\n            left: 12.5%;\n            right: 12.5%;\n            text-align: center;\n            width: 75%;\n            background: #EA8F2A;\n            height: 50px;\n        }\n\n        .img-overlay:before {\n            content: ' ';\n            display: block;\n            height: 100%;\n            margin: 10px 0 0 0;\n        }\n\n        .img-responsive-desktop {\n            width: 75%;\n            height: auto;\n        }\n\n        .img-responsive-mobile {\n            display: none;\n        }\n\n        button {\n            width: 250px;\n            border: none;\n            position: absolute;\n            top: -40px;\n            right: 20px;\n            background: #EA8F2A;\n            color: #ffffff;\n            outline: none;\n        }\n\n        .cta {\n            display: flex;\n            padding: 15px 0 0 15px;\n            text-decoration: none;\n            font-family: 'Poppins', sans-serif;\n            font-size: 25px;\n            box-shadow: 6px 6px 0 black;\n            transform: skewX(-15deg);\n            box-shadow: 10px 10px 0 black;\n            animation: animationCTA 1s linear infinite;\n        }\n\n        .cta:focus {\n            outline: none;\n        }\n\n        .cta span:nth-child(2) {\n            transition: 0.5s;\n            margin-right: 0px;\n            margin-right: 40px;\n            animation: animationSPAN 1s linear infinite;\n        }\n\n        @keyframes animationCTA {\n            0% {\n                box-shadow: 10px 10px 0 black;\n            }\n\n            100% {\n                box-shadow: 6px 6px 0 black;\n            }\n        }\n\n        @keyframes animationSPAN {\n            0% {\n                margin-right: 40px;\n            }\n\n            100% {\n                margin-right: 0px;\n            }\n        }\n\n        span {\n            transform: skewX(15deg)\n        }\n\n        span:nth-child(2) {\n            width: 20px;\n            margin-left: 30px;\n            position: relative;\n            top: 12%;\n        }\n\n        /**************SVG****************/\n        path.one {\n            transform: translateX(-20px);\n            animation: animationPathOne 1s linear infinite;\n        }\n\n        path.two {\n            transform: translateX(0);\n            animation: color_anim 1s linear infinite;\n        }\n\n        path.three {\n            transform: translateX(20px);\n            animation: animationPathThree 1s linear infinite;\n        }\n\n        /* SVG animations */\n        @keyframes animationPathOne {\n            0% {\n                transform: translateX(0);\n                fill: white;\n            }\n\n            50% {\n                transform: translateX(-20px);\n                fill: #ffffff;\n            }\n\n            100% {\n                fill: white;\n                transform: translateX(0);\n            }\n        }\n\n        @keyframes animationPathThree {\n            0% {\n                transform: translateX(0);\n                fill: white;\n            }\n\n            50% {\n                transform: translateX(20px);\n                fill: #ffffff;\n            }\n\n            100% {\n                fill: white;\n                transform: translateX(0);\n            }\n        }\n\n        @keyframes color_anim {\n            0% {\n                fill: white;\n            }\n\n            50% {\n                fill: #ffffff;\n            }\n\n            100% {\n                fill: white;\n            }\n        }\n\n        /* mobile */\n        @media screen and (max-width: 768px) {\n            .img-wrapper {\n                position: relative;\n                width: 100%;\n                text-align: initial;\n            }\n\n            .img-overlay {\n                position: fixed;\n                top: auto;\n                bottom: 0;\n                left: 0;\n                right: 0;\n                text-align: initial;\n                width: 100%;\n                background: #EA8F2A;\n                height: 50px;\n            }\n\n            .img-overlay:before {\n                content: ' ';\n                display: block;\n                height: 45%;\n                margin: 0;\n            }\n\n            .img-responsive-desktop {\n                display: none;\n            }\n\n            .img-responsive-mobile {\n                display: block;\n                width: 100%;\n                height: auto;\n            }\n\n            button {\n                width: 210px;\n                top: -25px;\n            }\n\n            .cta {\n                padding: 5px 0 5px 5px;\n            }\n\n            svg {\n                width: 30px;\n                height: 30px;\n            }\n\n            .cta span:nth-child(2) {\n                margin-right: 10px;\n                animation: animationSPAN 1s linear infinite;\n            }\n\n            @keyframes animationSPAN {\n                0% {\n                    margin-right: 10px;\n                }\n\n                100% {\n                    margin-right: 0px;\n                }\n            }\n\n            span {\n                transform: skewX(15deg)\n            }\n        }\n    </style>\n</head>\n\n<body>\n    <div class=\"img-wrapper\"> <img class=\"img-responsive-mobile\"\n            src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/template_1_mobile.jpg\"> <img\n            class=\"img-responsive-desktop\"\n            src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/template_1_laptop.jpg\">\n        <div class=\"img-overlay\"> <button id=\"submitLoginButton\" class=\"cta\"> <span>Click Here</span> <span> <svg\n                        width=\"66px\" height=\"43px\" viewBox=\"0 0 66 43\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\"\n                        xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n                        <g id=\"arrow\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\">\n                            <path class=\"one\"\n                                d=\"M40.1543933,3.89485454 L43.9763149,0.139296592 C44.1708311,-0.0518420739 44.4826329,-0.0518571125 44.6771675,0.139262789 L65.6916134,20.7848311 C66.0855801,21.1718824 66.0911863,21.8050225 65.704135,22.1989893 C65.7000188,22.2031791 65.6958657,22.2073326 65.6916762,22.2114492 L44.677098,42.8607841 C44.4825957,43.0519059 44.1708242,43.0519358 43.9762853,42.8608513 L40.1545186,39.1069479 C39.9575152,38.9134427 39.9546793,38.5968729 40.1481845,38.3998695 C40.1502893,38.3977268 40.1524132,38.395603 40.1545562,38.3934985 L56.9937789,21.8567812 C57.1908028,21.6632968 57.193672,21.3467273 57.0001876,21.1497035 C56.9980647,21.1475418 56.9959223,21.1453995 56.9937605,21.1432767 L40.1545208,4.60825197 C39.9574869,4.41477773 39.9546013,4.09820839 40.1480756,3.90117456 C40.1501626,3.89904911 40.1522686,3.89694235 40.1543933,3.89485454 Z\"\n                                fill=\"#FFFFFF\"></path>\n                            <path class=\"two\"\n                                d=\"M20.1543933,3.89485454 L23.9763149,0.139296592 C24.1708311,-0.0518420739 24.4826329,-0.0518571125 24.6771675,0.139262789 L45.6916134,20.7848311 C46.0855801,21.1718824 46.0911863,21.8050225 45.704135,22.1989893 C45.7000188,22.2031791 45.6958657,22.2073326 45.6916762,22.2114492 L24.677098,42.8607841 C24.4825957,43.0519059 24.1708242,43.0519358 23.9762853,42.8608513 L20.1545186,39.1069479 C19.9575152,38.9134427 19.9546793,38.5968729 20.1481845,38.3998695 C20.1502893,38.3977268 20.1524132,38.395603 20.1545562,38.3934985 L36.9937789,21.8567812 C37.1908028,21.6632968 37.193672,21.3467273 37.0001876,21.1497035 C36.9980647,21.1475418 36.9959223,21.1453995 36.9937605,21.1432767 L20.1545208,4.60825197 C19.9574869,4.41477773 19.9546013,4.09820839 20.1480756,3.90117456 C20.1501626,3.89904911 20.1522686,3.89694235 20.1543933,3.89485454 Z\"\n                                fill=\"#FFFFFF\"></path>\n                            <path class=\"three\"\n                                d=\"M0.154393339,3.89485454 L3.97631488,0.139296592 C4.17083111,-0.0518420739 4.48263286,-0.0518571125 4.67716753,0.139262789 L25.6916134,20.7848311 C26.0855801,21.1718824 26.0911863,21.8050225 25.704135,22.1989893 C25.7000188,22.2031791 25.6958657,22.2073326 25.6916762,22.2114492 L4.67709797,42.8607841 C4.48259567,43.0519059 4.17082418,43.0519358 3.97628526,42.8608513 L0.154518591,39.1069479 C-0.0424848215,38.9134427 -0.0453206733,38.5968729 0.148184538,38.3998695 C0.150289256,38.3977268 0.152413239,38.395603 0.154556228,38.3934985 L16.9937789,21.8567812 C17.1908028,21.6632968 17.193672,21.3467273 17.0001876,21.1497035 C16.9980647,21.1475418 16.9959223,21.1453995 16.9937605,21.1432767 L0.15452076,4.60825197 C-0.0425130651,4.41477773 -0.0453986756,4.09820839 0.148075568,3.90117456 C0.150162624,3.89904911 0.152268631,3.89694235 0.154393339,3.89485454 Z\"\n                                fill=\"#FFFFFF\"></path>\n                        </g>\n                    </svg> </span> </button> </div>\n    </div>\n</body>\n\n</html>",
+            "options": {
+                "btn": {
+                    "text": "Click Here"
+                },
+                "body": {
+                    "backgroundColor": "#ffffff",
+                    "fontFamily": "Montserrat, sans-serif"
+                },
+                "laptop": {
+                    "bgImage": "http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/template_1_laptop.jpg",
+                    "sizeImage": "75%",
+                    "btn": {
+                        "color": "#ffffff",
+                        "backgroundColor": "#EA8F2A",
+                        "textAlign": "center",
+                        "xDirection": "12.5%",
+                        "yDirection": "100%",
+                        "borderStyle": "solid",
+                        "borderWidth": "0px",
+                        "borderColor": "#cccccc",
+                        "borderTopStyle": "solid",
+                        "borderTopWidth": "0px",
+                        "borderTopColor": "#cccccc",
+                        "borderRightStyle": "solid",
+                        "borderRightWidth": "0px",
+                        "borderRightColor": "#cccccc",
+                        "borderBottomStyle": "solid",
+                        "borderBottomWidth": "0px",
+                        "borderBottomColor": "#cccccc",
+                        "borderLeftStyle": "solid",
+                        "borderLeftWidth": "0px",
+                        "borderLeftColor": "#cccccc",
+                        "borderRadius": "0px",
+                        "padding": "0px",
+                        "paddingTop": "0px",
+                        "paddingRight": "0px",
+                        "paddingBottom": "0px",
+                        "paddingLeft": "0px"
+                    },
+                    "btnBorderOption": "allsides",
+                    "btnPaddingOption": "allsides"
+                },
+                "mobile": {
+                    "bgImage": "http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/template_1_mobile.jpg",
+                    "sizeImage": "",
+                    "btn": {
+                        "color": "#ffffff",
+                        "backgroundColor": "#EA8F2A",
+                        "textAlign": "initial",
+                        "xDirection": "0%",
+                        "yDirection": "45%",
+                        "borderStyle": "solid",
+                        "borderWidth": "0px",
+                        "borderColor": "#cccccc",
+                        "borderTopStyle": "solid",
+                        "borderTopWidth": "0px",
+                        "borderTopColor": "#cccccc",
+                        "borderRightStyle": "solid",
+                        "borderRightWidth": "0px",
+                        "borderRightColor": "#cccccc",
+                        "borderBottomStyle": "solid",
+                        "borderBottomWidth": "0px",
+                        "borderBottomColor": "#cccccc",
+                        "borderLeftStyle": "solid",
+                        "borderLeftWidth": "0px",
+                        "borderLeftColor": "#cccccc",
+                        "borderRadius": "0px",
+                        "padding": "0px",
+                        "paddingTop": "0px",
+                        "paddingRight": "0px",
+                        "paddingBottom": "0px",
+                        "paddingLeft": "0px"
+                    },
+                    "btnBorderOption": "allsides",
+                    "btnPaddingOption": "allsides"
+                }
+            }
+        },
+        {
+            "name": "static_template_8",
+            "type": "normal",
+            "htmlCode": "<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n    <link rel=\"stylesheet\" href=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/fonts.css\">\n    <link rel=\"stylesheet\" href=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/fonts_2.css\">\n    <title>Template</title>\n    <style>\n        * {\n            font-family: Montserrat, sans-serif;\n        }\n\n        body {\n            background-color: #ffffff;\n        }\n\n        .img-wrapper {\n            position: relative;\n            width: 100%;\n            text-align: center;\n        }\n\n        .img-overlay {\n            position: absolute;\n            top: 0;\n            bottom: 0;\n            left: 0;\n            right: 0;\n            text-align: center;\n        }\n\n        .img-overlay:before {\n            content: ' ';\n            display: block;\n            height: 10%;\n            margin: 10px 0 0 0;\n        }\n\n        .img-responsive-desktop {\n            width: 75%;\n            height: auto;\n        }\n\n        .img-responsive-mobile {\n            display: none;\n        }\n\n        button {\n            position: relative;\n            width: 240px;\n            height: 40px;\n            line-height: 40px;\n            top: 48%;\n            animation: animationButton 4.5s linear;\n            border-radius: 30px;\n            border: none;\n            outline: none;\n            background: #FCFBFF;\n            color: #FBB14C;\n        }\n\n        button:active,\n        button:focus {\n            outline: none;\n        }\n\n        @keyframes animationButton {\n            0% {\n                width: 0px;\n            }\n\n            25% {\n                width: 100px;\n            }\n\n            50% {\n                width: 145px;\n            }\n\n            75% {\n                width: 195px;\n            }\n\n            100% {\n                width: 240px;\n            }\n        }\n\n        span {\n            position: absolute;\n            width: 240px;\n            left: -16px;\n            font-size: 16px;\n            font-weight: 600;\n            font-family: Arial, Helvetica, sans-serif;\n            text-transform: uppercase;\n        }\n\n        span:nth-child(1) {\n            opacity: 0;\n            animation: animationSpan linear 4s;\n        }\n\n        span:nth-child(2) {\n            opacity: 0;\n            animation: animationSpan2 1s linear 4.3s infinite;\n        }\n\n        @keyframes animationSpan {\n            0% {\n                opacity: 0;\n                transform: scale(2)\n            }\n\n            25% {\n                opacity: 0;\n            }\n\n            50% {\n                opacity: 0;\n            }\n\n            75% {\n                opacity: 0;\n            }\n\n            100% {\n                opacity: 1;\n                transform: scale(1)\n            }\n        }\n\n        @keyframes animationSpan2 {\n            0% {\n                opacity: 1;\n                transform: scale(1.1)\n            }\n\n            100% {\n                opacity: 1;\n                transform: scale(1)\n            }\n        }\n\n        .ball {\n            width: 75px;\n            display: block;\n            transform: translate(232%, -27%);\n            animation: animationBall 4s linear;\n            opacity: 1;\n        }\n\n        .ball2 {\n            width: 75px;\n            display: block;\n            transform: translate(232%, -125%);\n            animation: animationBall2 1s linear 4s infinite;\n            opacity: 0;\n        }\n\n        @keyframes animationBall {\n            0% {\n                opacity: 1;\n                transform: translate(-50%, -27%) rotate(0);\n            }\n\n            25% {\n                opacity: 1;\n                transform: translate(50%, -27%);\n            }\n\n            50% {\n                opacity: 1;\n                transform: translate(100%, -27%);\n            }\n\n            75% {\n                opacity: 1;\n                transform: translate(150%, -27%);\n            }\n\n            100% {\n                opacity: 0;\n                transform: translate(232%, -27%) rotate(360deg);\n            }\n        }\n\n        @keyframes animationBall2 {\n            0% {\n                opacity: 1;\n                transform: translate(232%, -125%) rotate(0);\n            }\n\n            100% {\n                opacity: 1;\n                transform: translate(232%, -125%) rotate(360deg);\n            }\n        }\n\n        @media screen and (max-width: 768px) {\n            .img-wrapper {\n                position: relative;\n                width: 100%;\n                text-align: initial;\n            }\n\n            .img-overlay {\n                position: absolute;\n                top: 0;\n                bottom: 0;\n                left: 0;\n                right: 0;\n                text-align: center;\n            }\n\n            .img-overlay:before {\n                content: ' ';\n                display: block;\n                height: 45%;\n                margin: 0;\n            }\n\n            .img-responsive-desktop {\n                display: none;\n            }\n\n            .img-responsive-mobile {\n                display: block;\n                width: 100%;\n                height: auto;\n            }\n        }\n    </style>\n</head>\n\n<body>\n    <div class=\"img-wrapper\"> <img class=\"img-responsive-mobile\"\n            src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/football-mobile.jpg\"> <img\n            class=\"img-responsive-desktop\"\n            src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/football.jpg\">\n        <div class=\"img-overlay\"> <button id=\"submitLoginButton\" class=\"loginButton\"> <span>Kết nối Internet</span>\n                <span>Kết nối Internet</span> <img class=\"ball\"\n                    src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/btnlogin.png\"> <img\n                    class=\"ball2\" src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/btnlogin.png\">\n            </button> </div>\n    </div>\n</body>\n\n</html>",
+            "options": {
+                "btn": {
+                    "text": "Kết nối Internet"
+                },
+                "body": {
+                    "backgroundColor": "#fff",
+                    "fontFamily": "Montserrat, sans-serif"
+                },
+                "laptop": {
+                    "bgImage": "http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/football.jpg",
+                    "sizeImage": "75%",
+                    "btn": {
+                        "color": "#FBB14C",
+                        "backgroundColor": "#FCFBFF",
+                        "textAlign": "center",
+                        "xDirection": "0%",
+                        "yDirection": "10%",
+                        "borderStyle": "solid",
+                        "borderWidth": "0px",
+                        "borderColor": "#cccccc",
+                        "borderTopStyle": "solid",
+                        "borderTopWidth": "0px",
+                        "borderTopColor": "#cccccc",
+                        "borderRightStyle": "solid",
+                        "borderRightWidth": "0px",
+                        "borderRightColor": "#cccccc",
+                        "borderBottomStyle": "solid",
+                        "borderBottomWidth": "0px",
+                        "borderBottomColor": "#cccccc",
+                        "borderLeftStyle": "solid",
+                        "borderLeftWidth": "0px",
+                        "borderLeftColor": "#cccccc",
+                        "borderRadius": "0px",
+                        "padding": "0px",
+                        "paddingTop": "0px",
+                        "paddingRight": "0px",
+                        "paddingBottom": "0px",
+                        "paddingLeft": "0px"
+                    },
+                    "btnBorderOption": "allsides",
+                    "btnPaddingOption": "allsides"
+                },
+                "mobile": {
+                    "bgImage": "http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/football-mobile.jpg",
+                    "sizeImage": "",
+                    "btn": {
+                        "color": "#FBB14C",
+                        "backgroundColor": "#FCFBFF",
+                        "textAlign": "center",
+                        "xDirection": "0%",
+                        "yDirection": "45%",
+                        "borderStyle": "solid",
+                        "borderWidth": "0px",
+                        "borderColor": "#cccccc",
+                        "borderTopStyle": "solid",
+                        "borderTopWidth": "0px",
+                        "borderTopColor": "#cccccc",
+                        "borderRightStyle": "solid",
+                        "borderRightWidth": "0px",
+                        "borderRightColor": "#cccccc",
+                        "borderBottomStyle": "solid",
+                        "borderBottomWidth": "0px",
+                        "borderBottomColor": "#cccccc",
+                        "borderLeftStyle": "solid",
+                        "borderLeftWidth": "0px",
+                        "borderLeftColor": "#cccccc",
+                        "borderRadius": "0px",
+                        "padding": "0px",
+                        "paddingTop": "0px",
+                        "paddingRight": "0px",
+                        "paddingBottom": "0px",
+                        "paddingLeft": "0px"
+                    },
+                    "btnBorderOption": "allsides",
+                    "btnPaddingOption": "allsides"
+                }
+            }
+        },
+        {
+            "name": "static_template_9",
+            "type": "normal",
+            "htmlCode": "<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n    <link rel=\"stylesheet\" href=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/fonts.css\">\n    <link rel=\"stylesheet\" href=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/fonts_2.css\">\n    <title>Template</title>\n    <style>\n        * {\n            font-family: Montserrat, sans-serif;\n        }\n\n        body {\n            background-color: #ffffff;\n\n        }\n\n        .img-wrapper {\n            position: relative;\n            width: 100%;\n            text-align: center;\n\n        }\n\n        .img-overlay {\n            position: absolute;\n            top: 0;\n            bottom: 0;\n            left: 0;\n            right: 0;\n            text-align: center;\n\n        }\n\n        .img-overlay:before {\n            content: ' ';\n            display: block;\n            height: 10%;\n            margin: 10px 0 0 0;\n\n        }\n\n        .img-responsive-desktop {\n            width: 75%;\n            height: auto;\n\n        }\n\n        .img-responsive-mobile {\n            display: none;\n\n        }\n\n        button {\n            width: 200px;\n            font-size: 20px;\n            border-radius: 25px;\n            padding: 5px;\n            font-weight: 600;\n            color: #ffffff;\n            border: none;\n            background: linear-gradient(to right, #3a0303 0%, #674545c9 52%, #540608 100%);\n            overflow: hidden;\n            position: relative;\n\n        }\n\n        button:focus {\n            outline: none;\n\n        }\n\n        button:before {\n            content: \"\";\n            display: inline;\n            position: absolute;\n            width: 10%;\n            height: 100%;\n            background: white;\n            left: -20%;\n            top: 0;\n            transform: skewX(-51deg);\n            box-shadow: 0px 10px 10px white;\n            opacity: 0.8;\n            animation: animationButton 2s linear infinite;\n\n        }\n\n        button:after {\n            content: \"\";\n            display: inline;\n            position: absolute;\n            width: 10%;\n            height: 100%;\n            background: white;\n            left: -20%;\n            top: 0;\n            transform: skewX(-51deg);\n            box-shadow: 0px 10px 10px white;\n            opacity: 0.8;\n            animation: animationButton 1s linear infinite;\n\n        }\n\n        @keyframes animationButton {\n            0% {\n                left: 120%;\n\n            }\n\n            100% {\n                left: -20%;\n\n            }\n\n\n        }\n\n        @media screen and (max-width: 768px) {\n            .img-wrapper {\n                position: relative;\n                width: 100%;\n                text-align: initial;\n\n            }\n\n            .img-overlay {\n                position: absolute;\n                top: 0;\n                bottom: 0;\n                left: 0;\n                right: 0;\n                text-align: center;\n\n            }\n\n            .img-overlay:before {\n                content: ' ';\n                display: block;\n                height: 10%;\n                margin: 0;\n\n            }\n\n            .img-responsive-desktop {\n                display: none;\n\n            }\n\n            .img-responsive-mobile {\n                display: block;\n                width: 100%;\n                height: auto;\n\n            }\n\n            button {\n                width: 180px;\n                background: linear-gradient(to right, #5360ec 10%, #6e0f69 100%);\n\n            }\n\n\n        }\n    </style>\n</head>\n\n<body>\n    <div class=\"img-wrapper\"> <img class=\"img-responsive-mobile\"\n            src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/moto-mobile.jpg\"> <img\n            class=\"img-responsive-desktop\"\n            src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/moto.jpg\">\n        <div class=\"img-overlay\">\n            <button id=\"submitLoginButton\" class=\"loginButton\">Kết nối Internet</button> </div>\n    </div>\n</body>\n\n</html>",
+            "options": {
+                "btn": {
+                    "text": "Kết nối Internet"
+                },
+                "body": {
+                    "backgroundColor": "#ffffff",
+                    "fontFamily": "Montserrat, sans-serif"
+                },
+                "laptop": {
+                    "bgImage": "http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/moto.jpg",
+                    "sizeImage": "75%",
+                    "btn": {
+                        "color": "#ffffff",
+                        "backgroundColor": "linear-gradient(to right, #3a0303 0%, #674545c9 52%, #540608 100%)",
+                        "textAlign": "center",
+                        "xDirection": "0%",
+                        "yDirection": "10%",
+                        "borderStyle": "solid",
+                        "borderWidth": "0px",
+                        "borderColor": "#cccccc",
+                        "borderTopStyle": "solid",
+                        "borderTopWidth": "0px",
+                        "borderTopColor": "#cccccc",
+                        "borderRightStyle": "solid",
+                        "borderRightWidth": "0px",
+                        "borderRightColor": "#cccccc",
+                        "borderBottomStyle": "solid",
+                        "borderBottomWidth": "0px",
+                        "borderBottomColor": "#cccccc",
+                        "borderLeftStyle": "solid",
+                        "borderLeftWidth": "0px",
+                        "borderLeftColor": "#cccccc",
+                        "borderRadius": "0px",
+                        "padding": "0px",
+                        "paddingTop": "0px",
+                        "paddingRight": "0px",
+                        "paddingBottom": "0px",
+                        "paddingLeft": "0px"
+                    },
+                    "btnBorderOption": "allsides",
+                    "btnPaddingOption": "allsides"
+                },
+                "mobile": {
+                    "bgImage": "http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/moto-mobile.jpg",
+                    "sizeImage": "",
+                    "btn": {
+                        "color": "#ffffff",
+                        "backgroundColor": "linear-gradient(to right, #3a0303 0%, #674545c9 52%, #540608 100%)",
+                        "textAlign": "center",
+                        "xDirection": "0%",
+                        "yDirection": "10%",
+                        "borderStyle": "solid",
+                        "borderWidth": "0px",
+                        "borderColor": "#cccccc",
+                        "borderTopStyle": "solid",
+                        "borderTopWidth": "0px",
+                        "borderTopColor": "#cccccc",
+                        "borderRightStyle": "solid",
+                        "borderRightWidth": "0px",
+                        "borderRightColor": "#cccccc",
+                        "borderBottomStyle": "solid",
+                        "borderBottomWidth": "0px",
+                        "borderBottomColor": "#cccccc",
+                        "borderLeftStyle": "solid",
+                        "borderLeftWidth": "0px",
+                        "borderLeftColor": "#cccccc",
+                        "borderRadius": "0px",
+                        "padding": "0px",
+                        "paddingTop": "0px",
+                        "paddingRight": "0px",
+                        "paddingBottom": "0px",
+                        "paddingLeft": "0px"
+                    },
+                    "btnBorderOption": "allsides",
+                    "btnPaddingOption": "allsides"
+                }
+            }
+        },
+        {
+            "name": "static_template_10",
+            "type": "normal",
+            "htmlCode": "<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n    <link rel=\"stylesheet\" href=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/fonts.css\">\n    <link rel=\"stylesheet\" href=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/fonts_2.css\">\n    <title>Template</title>\n    <style>\n        * {\n            font-family: Montserrat, sans-serif;\n        }\n\n        body {\n            background-color: #ffffff;\n\n        }\n\n        .img-wrapper {\n            position: relative;\n            width: 100%;\n            text-align: center;\n\n        }\n\n        .img-overlay {\n            position: absolute;\n            top: 0;\n            bottom: 0;\n            left: 65%;\n            right: 0;\n            text-align: initial;\n\n        }\n\n        .img-overlay:before {\n            content: ' ';\n            display: block;\n            height: 25%;\n            margin: 10px 0 0 0;\n\n        }\n\n        .img-responsive-desktop {\n            width: 75%;\n            height: auto;\n\n        }\n\n        .img-responsive-mobile {\n            display: none;\n\n        }\n\n        button {\n            color: #ffffff;\n            background: transparent;\n            border: none;\n            font-size: 16px;\n            font-weight: 600;\n            line-height: 45px;\n            height: 45px;\n            position: relative;\n            text-decoration: none;\n            text-transform: uppercase;\n            padding: 0 15px;\n            text-align: center;\n            transition: all 0.25s;\n\n        }\n\n        button:hover,\n        button:active,\n        button:focus {\n            text-decoration: none;\n            color: white;\n            outline: none;\n\n        }\n\n        button svg {\n            height: 45px;\n            left: 0;\n            position: absolute;\n            top: 0;\n            width: 100%;\n\n        }\n\n        button rect {\n            fill: none;\n            stroke: rgb(102, 0, 255);\n            stroke-width: 10;\n            stroke-dasharray: 50;\n            transition-delay: none;\n            animation: animationSVG 1s linear infinite;\n\n        }\n\n        @keyframes animationSVG {\n            0% {\n                fill: none;\n                stroke: red;\n                stroke-width: 10;\n                stroke-dasharray: 50;\n                transition-delay: none;\n\n            }\n\n            25% {\n                stroke: rgb(26, 0, 226);\n                stroke-width: 10;\n                stroke-dasharray: 100;\n\n            }\n\n            50% {\n                stroke: green;\n                stroke-width: 10;\n                stroke-dasharray: 150;\n\n            }\n\n            75% {\n                stroke: rgb(255, 247, 0);\n                stroke-width: 10;\n                stroke-dasharray: 200;\n\n            }\n\n            100% {\n                stroke: rgb(128, 0, 126);\n                stroke-width: 10;\n                stroke-dasharray: 250;\n\n            }\n\n\n        }\n\n        @media screen and (max-width: 768px) {\n            .img-wrapper {\n                position: relative;\n                width: 100%;\n                text-align: initial;\n\n            }\n\n            .img-overlay {\n                position: absolute;\n                top: 0;\n                bottom: 0;\n                left: 0;\n                right: 0;\n                text-align: center;\n\n            }\n\n            .img-overlay:before {\n                content: ' ';\n                display: block;\n                height: 82%;\n                margin: 0;\n\n            }\n\n            .img-responsive-desktop {\n                display: none;\n\n            }\n\n            .img-responsive-mobile {\n                display: block;\n                width: 100%;\n                height: auto;\n\n            }\n\n            button {\n                font-size: 14px;\n\n            }\n\n\n        }\n    </style>\n</head>\n\n<body>\n    <div class=\"img-wrapper\"> <img class=\"img-responsive-mobile\"\n            src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/ps4-mobile.jpg\"> <img\n            class=\"img-responsive-desktop\" src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/ps4.jpg\">\n        <div class=\"img-overlay\">\n            <button id=\"submitLoginButton\" class=\"loginButton\"> <svg>\n                    <rect x=\"0\" y=\"0\" fill=\"none\" width=\"100%\" height=\"100%\" /> </svg> kết nối internet\n            </button> </div>\n    </div>\n</body>\n\n</html>",
+            "options": {
+                "btn": {
+                    "text": "kết nối internet"
+                },
+                "body": {
+                    "backgroundColor": "#ffffff",
+                    "fontFamily": "Montserrat, sans-serif"
+                },
+                "laptop": {
+                    "bgImage": "http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/ps4.jpg",
+                    "sizeImage": "75%",
+                    "btn": {
+                        "color": "#ffffff",
+                        "backgroundColor": "transparent",
+                        "textAlign": "initial",
+                        "xDirection": "65%",
+                        "yDirection": "25%",
+                        "borderStyle": "solid",
+                        "borderWidth": "0px",
+                        "borderColor": "#cccccc",
+                        "borderTopStyle": "solid",
+                        "borderTopWidth": "0px",
+                        "borderTopColor": "#cccccc",
+                        "borderRightStyle": "solid",
+                        "borderRightWidth": "0px",
+                        "borderRightColor": "#cccccc",
+                        "borderBottomStyle": "solid",
+                        "borderBottomWidth": "0px",
+                        "borderBottomColor": "#cccccc",
+                        "borderLeftStyle": "solid",
+                        "borderLeftWidth": "0px",
+                        "borderLeftColor": "#cccccc",
+                        "borderRadius": "0px",
+                        "padding": "0px",
+                        "paddingTop": "0px",
+                        "paddingRight": "0px",
+                        "paddingBottom": "0px",
+                        "paddingLeft": "0px"
+                    },
+                    "btnBorderOption": "allsides",
+                    "btnPaddingOption": "more"
+                },
+                "mobile": {
+                    "bgImage": "http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/ps4-mobile.jpg",
+                    "sizeImage": "",
+                    "btn": {
+                        "color": "#ffffff",
+                        "backgroundColor": "transparent",
+                        "textAlign": "center",
+                        "xDirection": "0%",
+                        "yDirection": "82%",
+                        "borderStyle": "solid",
+                        "borderWidth": "0px",
+                        "borderColor": "#cccccc",
+                        "borderTopStyle": "solid",
+                        "borderTopWidth": "0px",
+                        "borderTopColor": "#cccccc",
+                        "borderRightStyle": "solid",
+                        "borderRightWidth": "0px",
+                        "borderRightColor": "#cccccc",
+                        "borderBottomStyle": "solid",
+                        "borderBottomWidth": "0px",
+                        "borderBottomColor": "#cccccc",
+                        "borderLeftStyle": "solid",
+                        "borderLeftWidth": "0px",
+                        "borderLeftColor": "#cccccc",
+                        "borderRadius": "0px",
+                        "padding": "0px",
+                        "paddingTop": "0px",
+                        "paddingRight": "0px",
+                        "paddingBottom": "0px",
+                        "paddingLeft": "0px"
+                    },
+                    "btnBorderOption": "allsides",
+                    "btnPaddingOption": "more"
+                }
+            }
+        },
+        {
+            "name": "static_template_11",
+            "type": "normal",
+            "htmlCode": "<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n    <link rel=\"stylesheet\" href=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/fonts.css\">\n    <link rel=\"stylesheet\" href=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/fonts_2.css\">\n    <title>Template</title>\n    <style>\n        * {\n            font-family: Montserrat, sans-serif;\n        }\n\n        body {\n            background-color: #ffffff;\n\n        }\n\n        .img-wrapper {\n            position: relative;\n            width: 100%;\n            text-align: center;\n\n        }\n\n        .img-overlay {\n            position: absolute;\n            top: 0;\n            bottom: 0;\n            left: 0;\n            right: 0;\n            text-align: center;\n\n        }\n\n        .img-overlay:before {\n            content: ' ';\n            display: block;\n            height: 25%;\n            margin: 10px 0 0 0;\n\n        }\n\n        .img-responsive-desktop {\n            width: 75%;\n            height: auto;\n\n        }\n\n        .img-responsive-mobile {\n            display: none;\n\n        }\n\n        button {\n            text-transform: uppercase;\n            font-size: 20px;\n            padding: 5px 20px;\n            position: relative;\n            border: none;\n            outline: none;\n            font-weight: 600;\n            width: 200px;\n            height: 50px;\n            overflow: hidden;\n            background: linear-gradient(to right, #603813 0%, #b29f94 51%, #603813 100%);\n\n        }\n\n        button:hover,\n        button:focus,\n        button:active {\n            outline: none;\n\n        }\n\n        span:nth-child(1) {\n            width: 100%;\n            height: 100%;\n            left: 0;\n            top: -100%;\n            position: absolute;\n            background: white;\n            animation: animationSpan1 2.5s linear infinite;\n\n        }\n\n        @keyframes animationSpan1 {\n            0% {\n                top: -100%;\n\n            }\n\n            50% {\n                top: 0%;\n\n            }\n\n            100% {\n                top: -100%;\n\n            }\n\n\n        }\n\n        span:nth-child(2) {\n            position: absolute;\n            width: 100%;\n            height: 100%;\n            top: 0;\n            left: 0;\n            line-height: 250%;\n            color: white;\n            animation: animationSpan2 2.3s linear infinite;\n\n        }\n\n        @keyframes animationSpan2 {\n            0% {\n                color: white;\n\n            }\n\n            50% {\n                color: white;\n\n            }\n\n            100% {\n                color: black;\n\n            }\n\n\n        }\n\n        span:nth-child(3) {\n            position: absolute;\n            width: 100%;\n            height: 100%;\n            top: 50px;\n            left: 0;\n            border-left: 3px solid white;\n            border-right: 3px solid white;\n            line-height: 250%;\n            animation: animationSpan3 2.5s linear infinite;\n\n        }\n\n        @keyframes animationSpan3 {\n            0% {\n                top: 50px;\n\n            }\n\n            50% {\n                top: 0;\n\n            }\n\n            100% {\n                top: 50px;\n\n            }\n\n\n        }\n\n        @media screen and (max-width: 768px) {\n            .img-wrapper {\n                position: relative;\n                width: 100%;\n                text-align: initial;\n\n            }\n\n            .img-overlay {\n                position: absolute;\n                top: 0;\n                bottom: 0;\n                left: 0;\n                right: 0;\n                text-align: center;\n\n            }\n\n            .img-overlay:before {\n                content: ' ';\n                display: block;\n                height: 65%;\n                margin: 0;\n\n            }\n\n            .img-responsive-desktop {\n                display: none;\n\n            }\n\n            .img-responsive-mobile {\n                display: block;\n                width: 100%;\n                height: auto;\n\n            }\n\n            button {\n                background: linear-gradient(to right, #1a1f22 0%, #074461 51%, #161819 100%)\n            }\n\n\n        }\n    </style>\n</head>\n\n<body>\n    <div class=\"img-wrapper\"> <img class=\"img-responsive-mobile\"\n            src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/furniture-mobile.jpg\"> <img\n            class=\"img-responsive-desktop\"\n            src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/furniture.jpg\">\n        <div class=\"img-overlay\"> <button id=\"submitLoginButton\" class=\"loginButton\"> <span></span> <span>kết nối\n                    internet</span> <span></span> </button> </div>\n    </div>\n</body>\n\n</html>",
+            "options": {
+                "btn": {
+                    "text": "Kết nối Internet"
+                },
+                "body": {
+                    "backgroundColor": "#ffffff",
+                    "fontFamily": "Montserrat, sans-serif"
+                },
+                "laptop": {
+                    "bgImage": "http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/furniture.jpg",
+                    "sizeImage": "75%",
+                    "btn": {
+                        "color": "transparent",
+                        "backgroundColor": "linear-gradient(to right, #603813 0%, #b29f94 51%, #603813 100%)",
+                        "textAlign": "center",
+                        "xDirection": "0%",
+                        "yDirection": "25%",
+                        "borderStyle": "solid",
+                        "borderWidth": "0px",
+                        "borderColor": "#cccccc",
+                        "borderTopStyle": "solid",
+                        "borderTopWidth": "0px",
+                        "borderTopColor": "#cccccc",
+                        "borderRightStyle": "solid",
+                        "borderRightWidth": "0px",
+                        "borderRightColor": "#cccccc",
+                        "borderBottomStyle": "solid",
+                        "borderBottomWidth": "0px",
+                        "borderBottomColor": "#cccccc",
+                        "borderLeftStyle": "solid",
+                        "borderLeftWidth": "0px",
+                        "borderLeftColor": "#cccccc",
+                        "borderRadius": "0px",
+                        "padding": "0px",
+                        "paddingTop": "0px",
+                        "paddingRight": "0px",
+                        "paddingBottom": "0px",
+                        "paddingLeft": "0px"
+                    },
+                    "btnBorderOption": "allsides",
+                    "btnPaddingOption": "more"
+                },
+                "mobile": {
+                    "bgImage": "http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/furniture-mobile.jpg",
+                    "sizeImage": "",
+                    "btn": {
+                        "color": "transparent",
+                        "backgroundColor": "linear-gradient(to right, #603813 0%, #b29f94 51%, #603813 100%)",
+                        "textAlign": "center",
+                        "xDirection": "0%",
+                        "yDirection": "65%",
+                        "borderStyle": "solid",
+                        "borderWidth": "0px",
+                        "borderColor": "#cccccc",
+                        "borderTopStyle": "solid",
+                        "borderTopWidth": "0px",
+                        "borderTopColor": "#cccccc",
+                        "borderRightStyle": "solid",
+                        "borderRightWidth": "0px",
+                        "borderRightColor": "#cccccc",
+                        "borderBottomStyle": "solid",
+                        "borderBottomWidth": "0px",
+                        "borderBottomColor": "#cccccc",
+                        "borderLeftStyle": "solid",
+                        "borderLeftWidth": "0px",
+                        "borderLeftColor": "#cccccc",
+                        "borderRadius": "0px",
+                        "padding": "0px",
+                        "paddingTop": "0px",
+                        "paddingRight": "0px",
+                        "paddingBottom": "0px",
+                        "paddingLeft": "0px"
+                    },
+                    "btnBorderOption": "allsides",
+                    "btnPaddingOption": "more"
+                }
+            }
+        },
+        {
+            "name": "static_template_12",
+            "type": "normal",
+            "htmlCode": "<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n    <link rel=\"stylesheet\" href=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/fonts.css\">\n    <link rel=\"stylesheet\" href=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/fonts_2.css\">\n    <title>Template</title>\n    <style>\n        * {\n            font-family: Montserrat, sans-serif;\n        }\n\n        body {\n            background-color: #ffffff;\n\n        }\n\n        .img-wrapper {\n            position: relative;\n            width: 100%;\n            text-align: center;\n\n        }\n\n        .img-overlay {\n            position: absolute;\n            top: 0;\n            bottom: 0;\n            left: 0;\n            right: 0;\n            text-align: center;\n\n        }\n\n        .img-overlay:before {\n            content: ' ';\n            display: block;\n            height: 44%;\n            margin: 10px 0 0 0;\n\n        }\n\n        .img-responsive-desktop {\n            width: 75%;\n            height: auto;\n\n        }\n\n        .img-responsive-mobile {\n            display: none;\n\n        }\n\n        button {\n            background: linear-gradient(to right, #2A92AB 0%, #89fffd 51%, #2A92AB 100%);\n            box-shadow: 1px 7px 10px #2A92AB;\n            color: #ffffff;\n            width: 200px;\n            height: 45px;\n            line-height: 45px;\n            font-size: 16px;\n            border-radius: 25px;\n            border: none;\n            outline: none;\n            position: relative;\n            text-transform: uppercase;\n            font-family: sans-serif;\n\n        }\n\n        button:hover,\n        button:active,\n        button:focus {\n            outline: none;\n\n        }\n\n        button:before {\n            content: \"\";\n            width: 200px;\n            height: 50px;\n            background: #2A92AB;\n            position: absolute;\n            left: 50%;\n            top: 50%;\n            transform: translate(-50%, -50%);\n            border-radius: 25px;\n            animation: animationButton1 2s ease-in;\n            opacity: 0;\n\n        }\n\n        button:after {\n            content: \"\";\n            width: 200px;\n            height: 50px;\n            background: #89fffd9c;\n            position: absolute;\n            left: 50%;\n            top: 50%;\n            transform: translate(-50%, -50%);\n            border-radius: 25px;\n            animation: animationButton1 2s ease-in .5s;\n            opacity: 0;\n\n        }\n\n        @keyframes animationButton1 {\n            0% {\n                width: 1360px;\n                height: 650px;\n                opacity: 1;\n\n            }\n\n            50% {\n                opacity: 1;\n                width: 500px;\n                height: 500px;\n                border-radius: 50%;\n\n            }\n\n            75% {\n                opacity: 1;\n                width: 50px;\n                height: 50px;\n                border-radius: 50%;\n\n            }\n\n            100% {\n                opacity: 1;\n                width: 200px;\n                height: 50px;\n                border-radius: 25px\n            }\n\n\n        }\n\n        @media screen and (max-width: 768px) {\n            .img-wrapper {\n                position: relative;\n                width: 100%;\n                text-align: initial;\n\n            }\n\n            .img-overlay {\n                position: absolute;\n                top: 0;\n                bottom: 0;\n                left: 0;\n                right: 0;\n                text-align: center;\n\n            }\n\n            .img-overlay:before {\n                content: ' ';\n                display: block;\n                height: 45%;\n                margin: 0;\n\n            }\n\n            .img-responsive-desktop {\n                display: none;\n\n            }\n\n            .img-responsive-mobile {\n                display: block;\n                width: 100%;\n                height: auto;\n\n            }\n\n            @keyframes animationButton1 {\n                0% {\n                    width: 400px;\n                    height: 650px;\n                    opacity: 1;\n\n                }\n\n                50% {\n                    opacity: 1;\n                    width: 100px;\n                    height: 100px;\n                    border-radius: 50%;\n\n                }\n\n                75% {\n                    opacity: 1;\n                    width: 50px;\n                    height: 50px;\n                    border-radius: 50%;\n\n                }\n\n                100% {\n                    opacity: 1;\n                    width: 200px;\n                    height: 50px;\n                    border-radius: 25px\n                }\n\n\n            }\n\n\n        }\n    </style>\n</head>\n\n<body>\n    <div class=\"img-wrapper\"> <img class=\"img-responsive-mobile\"\n            src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/template_12_mobile.jpg\"> <img\n            class=\"img-responsive-desktop\"\n            src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/template_12_laptop.jpg\">\n        <div class=\"img-overlay\">\n            <button id=\"submitLoginButton\" class=\"loginButton\">Kết nối internet</button> </div>\n    </div>\n</body>\n\n\n</html>",
+            "options": {
+                "btn": {
+                    "text": "Kết nối internet"
+                },
+                "body": {
+                    "backgroundColor": "#ffffff",
+                    "fontFamily": "Montserrat, sans-serif"
+                },
+                "laptop": {
+                    "bgImage": "http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/template_12_laptop.jpg",
+                    "sizeImage": "75%",
+                    "btn": {
+                        "color": "#ffffff",
+                        "backgroundColor": "linear-gradient(to right, #2A92AB 0%, #89fffd 51%, #2A92AB 100%)",
+                        "textAlign": "center",
+                        "xDirection": "0%",
+                        "yDirection": "44%",
+                        "borderStyle": "solid",
+                        "borderWidth": "0px",
+                        "borderColor": "#cccccc",
+                        "borderTopStyle": "solid",
+                        "borderTopWidth": "0px",
+                        "borderTopColor": "#cccccc",
+                        "borderRightStyle": "solid",
+                        "borderRightWidth": "0px",
+                        "borderRightColor": "#cccccc",
+                        "borderBottomStyle": "solid",
+                        "borderBottomWidth": "0px",
+                        "borderBottomColor": "#cccccc",
+                        "borderLeftStyle": "solid",
+                        "borderLeftWidth": "0px",
+                        "borderLeftColor": "#cccccc",
+                        "borderRadius": "0px",
+                        "padding": "0px",
+                        "paddingTop": "0px",
+                        "paddingRight": "0px",
+                        "paddingBottom": "0px",
+                        "paddingLeft": "0px"
+                    },
+                    "btnBorderOption": "allsides",
+                    "btnPaddingOption": "allsides"
+                },
+                "mobile": {
+                    "bgImage": "http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/template_12_mobile.jpg",
+                    "sizeImage": "",
+                    "btn": {
+                        "color": "#ffffff",
+                        "backgroundColor": "linear-gradient(to right, #2A92AB 0%, #89fffd 51%, #2A92AB 100%)",
+                        "textAlign": "center",
+                        "xDirection": "0%",
+                        "yDirection": "45%",
+                        "borderStyle": "solid",
+                        "borderWidth": "0px",
+                        "borderColor": "#cccccc",
+                        "borderTopStyle": "solid",
+                        "borderTopWidth": "0px",
+                        "borderTopColor": "#cccccc",
+                        "borderRightStyle": "solid",
+                        "borderRightWidth": "0px",
+                        "borderRightColor": "#cccccc",
+                        "borderBottomStyle": "solid",
+                        "borderBottomWidth": "0px",
+                        "borderBottomColor": "#cccccc",
+                        "borderLeftStyle": "solid",
+                        "borderLeftWidth": "0px",
+                        "borderLeftColor": "#cccccc",
+                        "borderRadius": "0px",
+                        "padding": "0px",
+                        "paddingTop": "0px",
+                        "paddingRight": "0px",
+                        "paddingBottom": "0px",
+                        "paddingLeft": "0px"
+                    },
+                    "btnBorderOption": "allsides",
+                    "btnPaddingOption": "allsides"
+                }
+            }
+        }
+    ],
+    "video": [
+        {
+            "name": "default_video_template",
+            "type": "video_default",
+            "htmlCode": "\n<!DOCTYPE html>\n<html>\n\n<head>\n    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\" />\n    <title>Video</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\">\n    <style>\n        * {\n            margin: 0 auto;\n            box-sizing: border-box;\n            outline: none;\n        }\n\n        *::before,\n        *::after {\n            box-sizing: border-box;\n        }\n\n        img {\n            max-width: 100%;\n            vertical-align: middle;\n        }\n\n        .main_video {\n            overflow: hidden;\n            max-width: 640px;\n            padding: 0px;\n            text-align: center;\n        }\n\n        .content {\n            position: relative;\n            text-align: center;\n        }\n\n        .over_lay_video {\n            position: absolute;\n            width: 100%;\n            height: 100%;\n            left: 0;\n            right: 0;\n            z-index: 999;\n        }\n\n        .divCountdown {\n            display: none;\n            position: absolute;\n            border: 1px #ffffff solid;\n            color: #ffffff;\n            border-radius: 100%;\n            padding: 2%;\n            top: 5%;\n            right: 5%;\n            background: #000000;\n            opacity: .8;\n        }\n\n        #video {\n            margin-bottom: 0px;\n            background-color: #000000;\n            max-width: 720px;\n            vertical-align: middle;\n        }\n\n        .bottom {\n            position: relative;\n        }\n\n        .divBtnLogin {\n            display: none;\n            position: absolute;\n            top: 0;\n            right: 0;\n            bottom: 0;\n            left: 0;\n            text-align: center;\n        }\n\n        .divBtnLogin:before {\n            content: '';\n            display: block;\n            height: 5%;\n            margin: 0;\n        }\n\n        .loginButton {\n            outline: none;\n            background-color: #3aaee0;\n            color: #ffffff;\n            padding: 10px;\n            border-radius: 4px;\n            font-size: 16px;\n        }\n\n        .loginButton:focus {\n            outline: none;\n        }\n\n        @media screen and (max-width: 768px) {\n            .loginButton {\n                font-size: 14px;\n            }\n        }\n    </style>\n</head>\n\n<body onload='loadBtn(0)'>\n    <div class=\"main_video\">\n        <div class=\"header\"> <img src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/header_image.jpg\">\n        </div>\n        <div class=\"content\"> <span class=\"divCountdown\"></span>\n            <div class=\"over_lay_video\" onclick=\"onPlay(0);\">\n            </div> <video style=\"width: 100%\" playinlines playsinline=\"\" webkit-playsinline=\"\" muted\n                src=\"http://cloud.wifiex4u.com:20081/asset/engenius/acb/video.mp4\"\n                poster=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/poster_video.jpg\" id=\"video\">\n            </video>\n        </div>\n        <div class=\"bottom\">\n            <div class=\"divBtnLogin\"> <button class=\"loginButton\" id=\"submitLoginButton\"> Click here to access Internet\n                </button> </div> <img\n                src=\"http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/footer_image.jpg\">\n        </div>\n    </div>\n\n    <script type=\"text/javascript\">\n        if (screen.width > 768) {\n            document.querySelector('.main_video').style.width = 640 / 1070 * window.innerHeight + 'px';\n        } else {\n            document.querySelector('.main_video').style.width = 'auto';\n        }\n\n        var displayDivLogin;\n        function loadBtn(milisecond) {\n            displayDivLogin = setTimeout(function () {\n                document.querySelector('.divBtnLogin').style.display = 'block';\n            }, milisecond);\n        }\n\n        var video = document.getElementById(\"video\");\n        var onTimeVideo;\n\n        function onPlay(count) {\n            clearTimeout(displayDivLogin);\n            document.querySelector('.over_lay_video').style.display = 'none';\n            function onCount() {\n                if (count > 1) {\n                    count = count - 1;\n                    document.querySelector('.divCountdown').style.display = 'block';\n                    document.querySelector('.divCountdown').innerHTML = count + ' s';\n                    closeFullscreen(document.getElementById(\"video\"));\n                } else {\n                    document.querySelector('.divCountdown').style.display = 'none'; document.querySelector('.divBtnLogin').style.display = 'block';\n                }\n            }\n            video.play();\n            video.controls = true;\n            video.onended = window.ended;\n            document.querySelector('.divCountdown').style.display = 'block';\n            document.querySelector('.divCountdown').innerHTML = count + ' s'; onTimeVideo = setInterval(onCount, 1000);\n        } function ended() {\n            clearInterval(onTimeVideo);\n        }\n\n        function closeFullscreen(element) {\n            if (element.exitFullscreen) {\n                element.exitFullscreen();\n            } else if (element.mozCancelFullScreen) {\n                element.mozCancelFullScreen();\n            } else if (element.webkitExitFullscreen) {\n                element.webkitExitFullscreen();\n            } else if (element.msExitFullscreen) {\n                element.msExitFullscreen();\n            }\n        }     \n    </script>\n</body>\n\n</html>\n",
+            "options": {
+                "body": {
+                    "backgroundColor": "#ffffff",
+                    "fontFamily": "Montserrat, sans-serif"
+                },
+                "img": {
+                    "imgOption": "header",
+                    "enableHeaderImg": "on",
+                    "enableFooterImg": "on",
+                    "enablePosterImg": "on",
+                    "headerImg": "http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/header_image.jpg",
+                    "footerImg": "http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/footer_image.jpg",
+                    "posterImg": "http://210.211.117.184:20081/asset/wifiex4uVP/templates/images/poster_video.jpg"
+                },
+                "video": {
+                    "videoSrc": "http://cloud.wifiex4u.com:20081/asset/engenius/acb/video.mp4",
+                    "muted": true,
+                    "autoPlay": false,
+                    "displayTimeBtn": 5,
+                    "displayTimeBtnCustom": 3
+                },
+                "btn": {
+                    "btnBorderOption": "allsides",
+                    "btnPaddingOption": "allsides",
+                    "text": "Click here to access Internet",
+                    "color": "#ffffff",
+                    "backgroundColor": "#3aaee0",
+                    "textAlign": "center",
+                    "xDirection": "0%",
+                    "yDirection": "5%",
+                    "borderStyle": "solid",
+                    "borderWidth": "0px",
+                    "borderColor": "#cccccc",
+                    "borderTopStyle": "solid",
+                    "borderTopWidth": "0px",
+                    "borderTopColor": "#cccccc",
+                    "borderRightStyle": "solid",
+                    "borderRightWidth": "0px",
+                    "borderRightColor": "#cccccc",
+                    "borderBottomStyle": "solid",
+                    "borderBottomWidth": "0px",
+                    "borderBottomColor": "#cccccc",
+                    "borderLeftStyle": "solid",
+                    "borderLeftWidth": "0px",
+                    "borderLeftColor": "#cccccc",
+                    "borderRadius": "4px",
+                    "padding": "10px",
+                    "paddingTop": "10px",
+                    "paddingRight": "10px",
+                    "paddingBottom": "10px",
+                    "paddingLeft": "10px"
+                }
+            }
+        }
+    ]
+}

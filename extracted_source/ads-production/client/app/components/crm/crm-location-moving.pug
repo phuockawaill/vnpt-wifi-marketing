@@ -1,0 +1,9 @@
+form#fmLocationMv.modal.fade(novalidate name='fm.fmLocMv')
+  .modal-dialog(style="min-width: 850px")
+    .modal-content
+      .modal-header.bg-info
+        button.close(type='button', data-dismiss='modal', aria-label='Close') ×
+        h4.modal-title "{{vm.rowData.mac}}"
+          i.icon-arrow-right16(style="margin:0 10px;")
+          | Location Moving
+      .ag-material(ag-grid='vm.gridOptionsLocMove' style="height: 700px")

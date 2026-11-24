@@ -1,0 +1,49 @@
+#fmLocationGroup.modal.fade.in(style='z-index:1060', tabindex='-1', role='dialog', aria-labelledby='locationlistAPModalTitle1', aria-hidden='true')
+  .modal-dialog.modal-lg(role='document')
+    .modal-content
+      .modal-header.bg-primary
+        h5#devicelistAPModalTitle1.modal-title {{app.isLang === "VN" ? "Danh sách địa điểm" : "Location List"}}
+        button.close(type='button', data-dismiss='modal', aria-label='Close')
+          span(aria-hidden='true') ×
+      .modal-body
+        .form-group.has-feedback.has-feedback-left.m-b-0(style="width: 250px")
+          input.form-control(type='text', placeholder='{{app.isLang === "VN" ? "Tìm kiếm địa điểm" : "Search Location"}}' ng-model='vm.searchLC', ng-model-options='{debounce: 1000}', ng-change="vm.handleLocationList('search')")
+          .form-control-feedback
+            i.icon-search4
+        div(style='max-height:300px;overflow-y:auto;margin-bottom: 5px;')
+          table.table
+            thead.thead-light
+              tr
+                th(scope='col') {{app.isLang === "VN" ? "STT" : "No"}}
+                th(scope='col') {{app.isLang === "VN" ? "Địa điểm" : "Location"}}
+                th(scope='col') {{app.isLang === "VN" ? "Thành phố/tỉnh" : "City/Province"}}
+                th(scope='col') {{app.isLang === "VN" ? "Địa chỉ" : "Address"}}
+            tbody
+              tr(ng-repeat='locationPaging in vm.locationPagings')
+                th(scope='row') {{$index+obj.offset+1}}
+                td {{locationPaging.name}}
+                td {{locationPaging.cityName}}
+                td {{locationPaging.address}}
+        nav.nav-custom-pagination(ng-if="vm.isPaging")
+          .form-group
+            select.form-control(ng-model='vm.selectPagination', ng-change="vm.handleLocationList('limit')")
+              option(value='10') 10
+              option(value='25') 25
+              option(value='50') 50
+              option(value='100') 100
+          ul.pagination.justify-content-end
+            li.page-item(ng-class="{'disabledPagination': vm.dtpage.offset == 0}", ng-click="vm.handleLocationList('first')")
+              a.page-link(aria-label='Previous')
+                i.icon-first
+            li.page-item(ng-class="{'disabledPagination': vm.dtpage.offset == 0}", ng-click="vm.handleLocationList('previous')")
+              a.page-link(aria-label='Previous')
+                i.icon-previous
+            li.page-item.item-page
+              a.page-link(aria-label='Page')
+                span {{vm.currentPage}}
+            li.page-item(ng-class="{'disabledPagination': vm.currentPage >= vm.lastPage}", ng-click="vm.handleLocationList('next')")
+              a.page-link(aria-label='Next')
+                i.icon-next
+            li.page-item(ng-class="{'disabledPagination': vm.currentPage >= vm.lastPage}", ng-click="vm.handleLocationList('last')")
+              a.page-link(aria-label='Next')
+                i.icon-last

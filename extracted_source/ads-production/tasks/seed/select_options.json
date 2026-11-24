@@ -1,0 +1,1322 @@
+[
+  {
+    "type": "city",
+    "text": "TP Hồ Chí Minh",
+    "value": "tp_hcm",
+    "options": {
+      "location": {
+        "lng": 106.666672,
+        "lat": 10.750000
+      },
+      "district": [
+        {
+          "text": "Quận 1",
+          "value": "q1_tphcm"
+        },
+        {
+          "text": "Quận 2",
+          "value": "q2_tphcm"
+        },
+        {
+          "text": "Quận 3",
+          "value": "q3_tphcm"
+        },
+        {
+          "text": "Quận 4",
+          "value": "q4_tphcm"
+        },
+        {
+          "text": "Quận 5",
+          "value": "q5_tphcm"
+        },
+        {
+          "text": "Quận 6",
+          "value": "q6_tphcm"
+        },
+        {
+          "text": "Quận 7",
+          "value": "q7_tphcm"
+        },
+        {
+          "text": "Quận 8",
+          "value": "q8_tphcm"
+        },
+        {
+          "text": "Quận 9",
+          "value": "q9_tphcm"
+        },
+        {
+          "text": "Quận 10",
+          "value": "q10_tphcm"
+        },
+        {
+          "text": "Quận 11",
+          "value": "q11_tphcm"
+        },
+        {
+          "text": "Quận 12",
+          "value": "q12_tphcm"
+        },
+        {
+          "text": "Bình Tân",
+          "value": "qbinh_tan_tphcm"
+        },
+        {
+          "text": "Bình Thạnh",
+          "value": "qbinh_thanh_tphcm"
+        },
+        {
+          "text": "Phú Nhuận",
+          "value": "qphu_nhuan_tphcm"
+        },
+        {
+          "text": "Tân Bình",
+          "value": "qtan_binh_tphcm"
+        },
+        {
+          "text": "Tân Phú",
+          "value": "qtan_phu_tphcm"
+        },
+        {
+          "text": "Thủ Đức",
+          "value": "qthu_duc_tphcm"
+        },
+        {
+          "text": "Gò Vấp",
+          "value": "qgo_vap_tphcm"
+        }
+      ],
+      "openWeatherCityId": 1566083
+    }
+  },
+  {
+    "type": "city",
+    "text": "Hà Nội",
+    "value": "ha_noi",
+    "options": {
+      "location": {
+        "lng": 105.841171,
+        "lat": 21.024500
+      },
+      "district": [
+        {
+          "text": "Ba Đình",
+          "value": "qba_dinh_hn"
+        },
+        {
+          "text": "Bắc Từ Liêm",
+          "value": "qbac_tu_liem_hn"
+        },
+        {
+          "text": "Cầu Giấy",
+          "value": "qcau_giay_hn"
+        },
+        {
+          "text": "Đống Đa",
+          "value": "qdong_da_hn"
+        },
+        {
+          "text": "Hai Bà Trưng",
+          "value": "qhai_ba_trung_hn"
+        },
+        {
+          "text": "Hà Đông",
+          "value": "qha_dong_hn"
+        },
+        {
+          "text": "Hoàn Kiếm",
+          "value": "qhoan_kiem_hn"
+        },
+        {
+          "text": "Hoàng Mai",
+          "value": "qhoang_mai_hn"
+        },
+        {
+          "text": "Long Biên",
+          "value": "qlong_bien_hn"
+        },
+        {
+          "text": "Nam Từ Liêm",
+          "value": "qnam_tu_liem_hn"
+        },
+        {
+          "text": "Tây Hồ",
+          "value": "qtay_ho_hn"
+        },
+        {
+          "text": "Thanh Xuân",
+          "value": "qthanh_xuan_hn"
+        }
+      ],
+      "openWeatherCityId": 1581130
+    }
+  },
+  {
+    "type": "city",
+    "text": "Đà Nẵng",
+    "value": "da_nang",
+    "options": {
+      "location": {
+        "lng": 108.220833,
+        "lat": 16.067780
+      },
+      "district": [
+        {
+          "text": "Cẩm Lệ",
+          "value": "qcam_le_dn"
+        },
+        {
+          "text": "Hải Châu",
+          "value": "qhai_chau_dn"
+        },
+        {
+          "text": "Liên Chiểu",
+          "value": "qlien_chieu_dn"
+        },
+        {
+          "text": "Ngũ Hành Sơn",
+          "value": "qngu_hanh_son_dn"
+        },
+        {
+          "text": "Sơn Trà",
+          "value": "qson_tra_dn"
+        },
+        {
+          "text": "Thanh Khê",
+          "value": "qthanh_khe_dn"
+        }
+      ],
+      "openWeatherCityId": 1583992
+    }
+  },
+  {
+    "type": "city",
+    "text": "Cần Thơ",
+    "value": "can_tho",
+    "options": {
+      "location": {
+        "lng": 105.783333,
+        "lat": 10.033330
+      },
+      "district": [
+        {
+          "text": "Bình Thủy",
+          "value": "qbinh_thuy_ct"
+        },
+        {
+          "text": "Cái Răng",
+          "value": "qcai_rang_ct"
+        },
+        {
+          "text": "Ninh Kiều",
+          "value": "qninh_kieu_ct"
+        },
+        {
+          "text": "Ô Môn",
+          "value": "qo_mon_ct"
+        },
+        {
+          "text": "Thốt Nốt",
+          "value": "qthot_not_ct"
+        }
+      ],
+      "openWeatherCityId": 1586203
+    }
+  },
+  {
+    "type": "city",
+    "text": "Hải Phòng",
+    "value": "hai_phong",
+    "options": {
+      "location": {
+        "lng": 106.6636413,
+        "lat": 20.8467333
+      },
+      "district": [
+        {
+          "text": "Dương Kinh",
+          "value": "qduong_kinh_hp"
+        },
+        {
+          "text": "Đồ Sơn",
+          "value": "qdo_son_hp"
+        },
+        {
+          "text": "Hải An",
+          "value": "qhai_an_hp"
+        },
+        {
+          "text": "Hồng Bàng",
+          "value": "qhong_bang_hp"
+        },
+        {
+          "text": "Kiến An",
+          "value": "qkien_an_hp"
+        },
+        {
+          "text": "Lê Chân",
+          "value": "qle_chan_hp"
+        },
+        {
+          "text": "Ngô Quyền",
+          "value": "qngo_quyen_hp"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "An Giang",
+    "value": "an_giang",
+    "options": {
+      "location": {
+        "lng": 104.8928473,
+        "lat": 10.5720082
+      },
+      "district": [
+        {
+          "text": "Long Xuyên",
+          "value": "long_xuyen_ag"
+        },
+        {
+          "text": "Châu Đốc",
+          "value": "chau_doc_ag"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "Bà Rịa - Vũng Tàu",
+    "value": "ba_ria_vung_tau",
+    "options": {
+      "location": {
+        "lng": 107.1492176,
+        "lat": 10.5622613
+      },
+      "district": [
+        {
+          "text": "Bà Rịa",
+          "value": "ba_ria_brvt"
+        },
+        {
+          "text": "Vũng Tàu",
+          "value": "vung_tau_brvt"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "Bắc Giang",
+    "value": "bac_giang",
+    "options": {
+      "location": {
+        "lng": 106.1759874,
+        "lat": 21.374535
+      }
+    }
+  },
+  {
+    "type": "city",
+    "text": "Bắc Kạn",
+    "value": "bac_kan",
+    "options": {
+      "location": {
+        "lng": 105.5579378,
+        "lat": 22.272135
+      }
+    }
+  },
+  {
+    "type": "city",
+    "text": "Bạc Liêu",
+    "value": "bac_lieu",
+    "options": {
+      "location": {
+        "lng": 105.2650593,
+        "lat": 9.328477
+      }
+    }
+  },
+  {
+    "type": "city",
+    "text": "Bắc Ninh",
+    "value": "bac_ninh",
+    "options": {
+      "location": {
+        "lng": 105.9590713,
+        "lat": 21.1166085
+      }
+    }
+  },
+  {
+    "type": "city",
+    "text": "Bến Tre",
+    "value": "ben_tre",
+    "options": {
+      "location": {
+        "lng": 106.1318259,
+        "lat": 10.0664326
+      }
+    }
+  },
+  {
+    "type": "city",
+    "text": "Bình Định",
+    "value": "binh_dinh",
+    "options": {
+      "location": {
+        "lng": 108.4178179,
+        "lat": 14.1026665
+      },
+      "district": [
+        {
+          "text": "Quy Nhơn",
+          "value": "quy_nhon_binh_dinh"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "Bình Dương",
+    "value": "binh_duong",
+    "options": {
+      "location": {
+        "lng": 106.3701406,
+        "lat": 11.1820478
+      },
+      "district": [
+        {
+          "text": "Thủ Dầu Một",
+          "value": "thu_dau_mot_binh_duong"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "Bình Phước",
+    "value": "binh_phuoc",
+    "options": {
+      "location": {
+        "lng": 106.6380421,
+        "lat": 11.7993331
+      },
+      "district": [
+        {
+          "text": "Đồng Xoài",
+          "value": "dong_xoai_bp"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "Bình Thuận",
+    "value": "binh_thuan",
+    "options": {
+      "location": {
+        "lng": 107.6190616,
+        "lat": 11.0315587
+      },
+      "district": [
+        {
+          "text": "Phan Thiết",
+          "value": "phan_thiet_bt"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "Cà Mau",
+    "value": "ca_mau",
+    "options": {
+      "location": {
+        "lng": 104.7842532,
+        "lat": 9.0622432
+      }
+    }
+  },
+  {
+    "type": "city",
+    "text": "Cao Bằng",
+    "value": "cao_bang",
+    "options": {
+      "location": {
+        "lng": 105.4906972,
+        "lat": 22.7377885
+      }
+    }
+  },
+  {
+    "type": "city",
+    "text": "Đắk Lắk",
+    "value": "dak_lak",
+    "options": {
+      "district": [
+        {
+          "text": "Buôn Ma Thuột",
+          "value": "buon_ma_thuot_dak_lak"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "Đắk Nông",
+    "value": "dak_nong"
+  },
+  {
+    "type": "city",
+    "text": "Điện Biên",
+    "value": "dien_bien",
+    "options": {
+      "district": [
+        {
+          "text": "Điện Biên Phủ",
+          "value": "dien_bien_phu_dien_bien"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "Đồng Nai",
+    "value": "dong_nai",
+    "options": {
+      "district": [
+        {
+          "text": "Biên Hòa",
+          "value": "bien_hoa_dong_nai"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "Đồng Tháp",
+    "value": "dong_thap",
+    "options": {
+      "district": [
+        {
+          "text": "Cao Lãnh",
+          "value": "cao_lanh_dong_thap"
+        },
+        {
+          "text": "Sa Đéc",
+          "value": "sa_dec_dong_thap"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "Gia Lai",
+    "value": "gia_lai",
+    "options": {
+      "district": [
+        {
+          "text": "Pleiku",
+          "value": "pleiku_gia_lai"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "Hà Giang",
+    "value": "ha_giang",
+    "options": {
+      "district": [
+        {
+          "text": "Hà Giang",
+          "value": "ha_giang_ha_giang"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "Hà Nam",
+    "value": "ha_nam",
+    "options": {
+      "district": [
+        {
+          "text": "Phủ Lý",
+          "value": "phu_ly_ha_nam"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "Hà Tĩnh",
+    "value": "ha_tinh"
+  },
+  {
+    "type": "city",
+    "text": "Hải Dương",
+    "value": "hai_duong"
+  },
+  {
+    "type": "city",
+    "text": "Hậu Giang",
+    "value": "hau_giang",
+    "options": {
+      "district": [
+        {
+          "text": "Vị Thanh",
+          "value": "vi_thanh_hau_giang"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "Hòa Bình",
+    "value": "hoa_binh"
+  },
+  {
+    "type": "city",
+    "text": "Hưng Yên",
+    "value": "hung_yen"
+  },
+  {
+    "type": "city",
+    "text": "Khánh Hòa",
+    "value": "khanh_hoa",
+    "options": {
+      "location": {
+        "lng": 109.183327,
+        "lat": 12.250000
+      },
+      "district": [
+        {
+          "text": "Nha Trang",
+          "value": "nha_trang_khanh_hoa"
+        },
+        {
+          "text": "Cam Ranh",
+          "value": "cam_ranh_khanh_hoa"
+        }
+      ],
+      "openWeatherCityId": 1572151
+    }
+  },
+  {
+    "type": "city",
+    "text": "Kiên Giang",
+    "value": "kien_giang",
+    "options": {
+      "district": [
+        {
+          "text": "Rạch Giá",
+          "value": "rach_gia_kg"
+        },
+        {
+          "text": "Hà Tiên",
+          "value": "ha_tien_kg"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "Kon Tum",
+    "value": "kon_tum"
+  },
+  {
+    "type": "city",
+    "text": "Lai Châu",
+    "value": "lai_chau"
+  },
+  {
+    "type": "city",
+    "text": "Lâm Đồng",
+    "value": "lam_dong",
+    "options": {
+      "district": [
+        {
+          "text": "Đà Lạt",
+          "value": "da_lat_lam_dong"
+        },
+        {
+          "text": "Bảo Lộc",
+          "value": "bao_loc_lam_dong"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "Lạng Sơn",
+    "value": "lang_son"
+  },
+  {
+    "type": "city",
+    "text": "Lào Cai",
+    "value": "lao_cai"
+  },
+  {
+    "type": "city",
+    "text": "Long An",
+    "value": "long_an",
+    "options": {
+      "district": [
+        {
+          "text": "Tân An",
+          "value": "tan_an_long_an"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "Nam Định",
+    "value": "nam_dinh"
+  },
+  {
+    "type": "city",
+    "text": "Nghệ An",
+    "value": "nghe_an",
+    "options": {
+      "district": [
+        {
+          "text": "Vinh",
+          "value": "vinh_nghe_an"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "Ninh Bình",
+    "value": "ninh_binh",
+    "options": {
+      "district": [
+        {
+          "text": "Tam Điệp",
+          "value": "tam_diep_ninh_binh"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "Ninh Thuận",
+    "value": "ninh_thuan",
+    "options": {
+      "district": [
+        {
+          "text": "Phan Rang - Tháp Chàm",
+          "value": "pr_tc_ninh_thuan"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "Phú Thọ",
+    "value": "phu_tho",
+    "options": {
+      "district": [
+        {
+          "text": "Việt Trì",
+          "value": "viet_tri_phu_tho"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "Quảng Bình",
+    "value": "quang_binh",
+    "options": {
+      "district": [
+        {
+          "text": "Đồng Hới",
+          "value": "dong_hoi_quang_binh"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "Quảng Nam",
+    "value": "quang_nam",
+    "options": {
+      "district": [
+        {
+          "text": "Tam Kỳ",
+          "value": "tam_ky_quang_nam"
+        },
+        {
+          "text": "Hội An",
+          "value": "hoi_an_quang_nam"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "Quảng Ngãi",
+    "value": "quang_ngai"
+  },
+  {
+    "type": "city",
+    "text": "Quảng Ninh",
+    "value": "quang_ninh",
+    "options": {
+      "district": [
+        {
+          "text": "Hạ Long",
+          "value": "ha_long_quang_ninh"
+        },
+        {
+          "text": "Cẩm Phả",
+          "value": "cam_pha_quang_ninh"
+        },
+        {
+          "text": "Móng Cái",
+          "value": "mong_cai_quang_ninh"
+        },
+        {
+          "text": "Uông Bí",
+          "value": "uong_bi_quang_ninh"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "Quảng Trị",
+    "value": "quang_tri",
+    "options": {
+      "district": [
+        {
+          "text": "Đông Hà",
+          "value": "dong_ha_quang_tri"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "Sóc Trăng",
+    "value": "soc_trang"
+  },
+  {
+    "type": "city",
+    "text": "Sơn La",
+    "value": "son_la"
+  },
+  {
+    "type": "city",
+    "text": "Tây Ninh",
+    "value": "tay_ninh"
+  },
+  {
+    "type": "city",
+    "text": "Thái Bình",
+    "value": "thai_binh"
+  },
+  {
+    "type": "city",
+    "text": "Thái Nguyên",
+    "value": "thai_nguyen",
+    "options": {
+      "district": [
+        {
+          "text": "Sông Công",
+          "value": "song_cong_thai_nguyen"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "Thanh Hóa",
+    "value": "thanh_hoa",
+    "options": {
+      "district": [
+        {
+          "text": "Sầm Sơn",
+          "value": "sam_son_thanh_hoa"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "Thừa Thiên Huế",
+    "value": "thua_thien_hue"
+  },
+  {
+    "type": "city",
+    "text": "Tiền Giang",
+    "value": "tien_giang",
+    "options": {
+      "district": [
+        {
+          "text": "Mỹ Tho",
+          "value": "my_tho_tien_giang"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "Trà Vinh",
+    "value": "tra_vinh"
+  },
+  {
+    "type": "city",
+    "text": "Tuyên Quang",
+    "value": "tuyen_quang"
+  },
+  {
+    "type": "city",
+    "text": "Vĩnh Long",
+    "value": "vinh_long"
+  },
+  {
+    "type": "city",
+    "text": "Vĩnh Phúc",
+    "value": "vinh_phuc",
+    "options": {
+      "district": [
+        {
+          "text": "Vĩnh Yên",
+          "value": "vinh_yen_vinh_phuc"
+        },
+        {
+          "text": "Phúc Yên",
+          "value": "phuc_yen_vinh_phuc"
+        }
+      ]
+    }
+  },
+  {
+    "type": "city",
+    "text": "Yên Bái",
+    "value": "yen_bai"
+  },
+  {
+    "type": "city",
+    "text": "Phú Yên",
+    "value": "phu_yen",
+    "options": {
+      "district": [
+        {
+          "text": "Tuy Hòa",
+          "value": "tuy_hoa_phu_yen"
+        }
+      ]
+    }
+  },
+  {
+    "type": "os_category",
+    "text": "Android",
+    "value": "android",
+    "options": {
+      "match": "android"
+    }
+  },
+  {
+    "type": "os_category",
+    "text": "iOS",
+    "value": "ios",
+    "options": {
+      "match": "ios"
+    }
+  },
+  {
+    "type": "os_category",
+    "text": "Windows Phone",
+    "value": "windows_phone",
+    "options": {
+      "match": "windows phone"
+    }
+  },
+  {
+    "type": "os_category",
+    "text": "Windows",
+    "value": "windows",
+    "options": {
+      "match": "windows"
+    }
+  },
+  {
+    "type": "os_category",
+    "text": "macOS",
+    "value": "mac",
+    "options": {
+      "match": "(macos|mac os|osx|os x)"
+    }
+  },
+  {
+    "type": "os_category",
+    "text": "Linux",
+    "value": "linux",
+    "options": {
+      "match": "(linux|ubuntu)"
+    }
+  },
+  {
+    "type": "os_category",
+    "text": "Chrome OS",
+    "value": "chrome_os",
+    "options": {
+      "match": "chrome os"
+    }
+  },
+  {
+    "type": "os_category",
+    "text": "Unknown",
+    "value": "other"
+  },
+  {
+    "type": "device_category",
+    "text": "Mobile",
+    "value": "mobile",
+    "options": {
+      "match": "mobile"
+    }
+  },
+  {
+    "type": "device_category",
+    "text": "Tablet",
+    "value": "tablet",
+    "options": {
+      "match": "tablet"
+    }
+  },
+  {
+    "type": "device_category",
+    "text": "PC",
+    "value": "pc",
+    "options": {
+      "match": "(pc|laptop|desktop)"
+    }
+  },
+  {
+    "type": "device_category",
+    "text": "Unknown",
+    "value": "other"
+  },
+  {
+    "type": "age_category",
+    "text": "< 18",
+    "value": "under_18"
+  },
+  {
+    "type": "age_category",
+    "text": "18 - 24",
+    "value": "18_to_24"
+  },
+  {
+    "type": "age_category",
+    "text": "25 - 34",
+    "value": "25_to_34"
+  },
+  {
+    "type": "age_category",
+    "text": "35 - 44",
+    "value": "35_to_44"
+  },
+  {
+    "type": "age_category",
+    "text": "> 45",
+    "value": "higher_45"
+  },
+  {
+    "type": "age_category",
+    "text": "Unknown",
+    "value": "other"
+  },
+  {
+    "type": "gender_category",
+    "text": "Male",
+    "value": "male"
+  },
+  {
+    "type": "gender_category",
+    "text": "Female",
+    "value": "female"
+  },
+  {
+    "type": "gender_category",
+    "text": "Unknown",
+    "value": "other"
+  },
+  {
+    "type": "marital_category",
+    "text": "Single",
+    "value": "single"
+  },
+  {
+    "type": "marital_category",
+    "text": "In a Relationship",
+    "value": "in_a_relationship"
+  },
+  {
+    "type": "marital_category",
+    "text": "Married",
+    "value": "married"
+  },
+  {
+    "type": "marital_category",
+    "text": "With Kids",
+    "value": "with_kids"
+  },
+  {
+    "type": "marital_category",
+    "text": "Unknown",
+    "value": "other"
+  },
+  {
+    "type": "income_category",
+    "text": "< $300",
+    "value": "under_$300"
+  },
+  {
+    "type": "income_category",
+    "text": "$300 - $600",
+    "value": "_$300_to_$600"
+  },
+  {
+    "type": "income_category",
+    "text": "$700 - $1200",
+    "value": "_$700_to_$1200"
+  },
+  {
+    "type": "income_category",
+    "text": "$1300 - $2000",
+    "value": "_$1300_to_$2000"
+  },
+  {
+    "type": "income_category",
+    "text": "> $2000",
+    "value": "higher_$2000"
+  },
+  {
+    "type": "income_category",
+    "text": "Unknown",
+    "value": "other"
+  },
+  {
+    "type": "purpose_category",
+    "text": "Reading News",
+    "value": "reading_news"
+  },
+  {
+    "type": "purpose_category",
+    "text": "Social Login",
+    "value": "social_login"
+  },
+  {
+    "type": "purpose_category",
+    "text": "Search",
+    "value": "search"
+  },
+  {
+    "type": "purpose_category",
+    "text": "Watching Video",
+    "value": "watching_video"
+  },
+  {
+    "type": "purpose_category",
+    "text": "Shopping",
+    "value": "shopping"
+  },
+  {
+    "type": "purpose_category",
+    "text": "Others",
+    "value": "other"
+  },
+  {
+    "type": "interest_category",
+    "text": "Shopping",
+    "value": "shopping"
+  },
+  {
+    "type": "interest_category",
+    "text": "Fashion",
+    "value": "fashion"
+  },
+  {
+    "type": "interest_category",
+    "text": "Sport",
+    "value": "sport"
+  },
+  {
+    "type": "phone_carrier_category",
+    "text": "Viettel",
+    "value": "viettel",
+    "options": {
+      "heads": [
+        "086",
+        "096",
+        "097",
+        "098",
+        "0162",
+        "0163",
+        "0164",
+        "0165",
+        "0166",
+        "0167",
+        "0168",
+        "0169",
+        "039",
+        "038",
+        "037",
+        "036",
+        "035",
+        "034",
+        "033",
+        "032"
+      ]
+    }
+  },
+  {
+    "type": "phone_carrier_category",
+    "text": "Mobifone",
+    "value": "mobiphone",
+    "options": {
+      "heads": [
+        "090",
+        "093",
+        "0120",
+        "0121",
+        "0122",
+        "0126",
+        "0128",
+        "070",
+        "079",
+        "077",
+        "076",
+        "078"
+      ]
+    }
+  },
+  {
+    "type": "phone_carrier_category",
+    "text": "Vinaphone",
+    "value": "vinaphone",
+    "options": {
+      "heads": [
+        "091",
+        "094",
+        "0123",
+        "0124",
+        "0125",
+        "0127",
+        "0129",
+        "085",
+        "084",
+        "083",
+        "082",
+        "081"
+      ]
+    }
+  },
+  {
+    "type": "phone_carrier_category",
+    "text": "Vietnamobile",
+    "value": "vietnamobile",
+    "options": {
+      "heads": [
+        "092",
+        "0188",
+        "0186",
+        "056",
+        "058"
+      ]
+    }
+  },
+  {
+    "type": "phone_carrier_category",
+    "text": "Gmobile",
+    "value": "gmobile",
+    "options": {
+      "heads": [
+        "099",
+        "0199",
+        "059"
+      ]
+    }
+  },
+  {
+    "type": "tracking_action",
+    "text": "Data",
+    "value": "data"
+  },
+  {
+    "type": "tracking_action",
+    "text": "Click",
+    "value": "click"
+  },
+  {
+    "type": "tracking_action",
+    "text": "Impression",
+    "value": "impression"
+  },
+  {
+    "type": "default_filter_fields",
+    "text": "Os",
+    "value": "os",
+    "options": {
+      "multi": true
+    }
+  },
+  {
+    "type": "default_filter_fields",
+    "text": "Device",
+    "value": "device",
+    "options": {
+      "multi": true
+    }
+  },
+  {
+    "type": "default_filter_fields",
+    "text": "Income",
+    "value": "income",
+    "options": {
+      "multi": true
+    }
+  },
+  {
+    "type": "default_filter_fields",
+    "text": "Gender",
+    "value": "gender",
+    "options": {
+      "multi": true
+    }
+  },
+  {
+    "type": "default_filter_fields",
+    "text": "Age",
+    "value": "age",
+    "options": {
+      "multi": true
+    }
+  },
+  {
+    "type": "default_filter_type",
+    "text": "Has Data",
+    "value": "has_data"
+  },
+  {
+    "type": "default_filter_type",
+    "text": "No Data",
+    "value": "no_data"
+  },
+  {
+    "type": "default_filter_type",
+    "text": "Value",
+    "value": "value"
+  }
+]

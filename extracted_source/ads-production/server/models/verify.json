@@ -1,0 +1,41 @@
+{
+  "name": "Verify",
+  "base": "Model",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "http": {
+    "path": "/verify"
+  },
+  "mixins": {
+    "Expire": {
+      "ttl": 600
+    }
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "id": true
+    },
+    "phone": {
+      "type": "string"
+    },
+    "phoneCode": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "emailCode": {
+      "type": "string"
+    },
+    "mac": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

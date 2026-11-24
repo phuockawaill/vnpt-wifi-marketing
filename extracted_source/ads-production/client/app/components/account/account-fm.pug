@@ -1,0 +1,42 @@
+form#fmEdit.modal.fade(tabindex='-1', role='dialog', aria-labelledby='fmEditLabel', autocomplete='off', name='vm.fmEdit', novalidate, ng-submit='vm.create(vm.fmEdit.$valid)', data-backdrop="static" data-keyboard="false")
+  .modal-dialog
+    .modal-content
+      .modal-header(ng-class='vm.obj.id ? "bg-info" : "bg-primary"')
+        button.close(type='button', data-dismiss='modal', aria-label='Close', ng-click='vm.closeModal()')
+          span(aria-hidden='true') ×
+        h4#fmEditLabel.modal-title {{app.isLang === "VN" ? "Tài khoản" : "Account"}}
+      .modal-body
+        .form-horizontal.form-bordered
+          .form-group
+            label.col-md-4.control-label {{app.isLang === "VN" ? "Tên" : "Name"}}
+            .col-md-7
+              input.form-control(name='name', type='text', style='width: 100%;', placeholder='{{app.isLang === "VN" ? "Nhập tên" : "Give a name"}}', ng-model='vm.obj.name')
+          .form-group(validator ng-if='!vm.obj.id')
+            label.col-md-4.control-label {{app.isLang === "VN" ? "Tên đăng nhập" : "Username"}}
+            .col-md-7
+              input.form-control(name='username', type='text', style='width: 100%;', placeholder='{{app.isLang === "VN" ? "Nhập Tên đăng nhập *" : "Username *"}}', ng-model='vm.obj.username', required)
+          .form-group(validator ng-if='vm.profileKey[vm.obj.profileId] === "brand"')
+            label.col-md-4.control-label Email
+            .col-md-7
+              input.form-control(name='email', type='email', style='width: 100%;', placeholder='{{app.isLang === "VN" ? "Nhập email *" : "Email *"}}', ng-model='vm.obj.email')
+          .form-group(validator ng-if='vm.profileKey[vm.obj.profileId] !== "brand"')
+            label.col-md-4.control-label Email
+            .col-md-7
+              input.form-control(name='email', type='email', style='width: 100%;', placeholder='{{app.isLang === "VN" ? "Nhập email *" : "Email *"}}', ng-model='vm.obj.email', required)
+          .form-group(validator)
+            label.col-md-4.control-label {{app.isLang === "VN" ? "Mật khẩu" : "Password"}}
+            .col-md-7
+              input.form-control(name='password', type='password', style='width: 100%;', placeholder='{{app.isLang === "VN" ? "Nhập mật khẩu *" : "Password *"}}', ng-model='vm.obj.password', required, autocomplete='off')
+          .form-group(validator)
+            label.col-md-4.control-label {{app.isLang === "VN" ? "Xác nhận mật khẩu" : "Confirm Password"}}
+            .col-md-7
+              input.form-control(name='passwordConfirmation', type='password', style='width: 100%;', placeholder='{{app.isLang === "VN" ? "Nhập xác nhận mật khẩu *" : "Confirm Password *"}}', ng-model="vm.passwordConfirmation", required, autocomplete='off', data-matched='password')
+          .form-group(validator ng-show='!vm.obj.id && (vm.currentUser.profileName==="superadmin" || vm.currentUser.profileName==="admin")')
+            label.col-md-4.control-label {{app.isLang === "VN" ? "Loại tài khoản" : "Account Type"}}
+            .col-md-7
+              select.form-control(name='profileId', ng-options='p.id as p.description for p in vm.profiles', ng-model='vm.obj.profileId', required, style='width: 100%;')
+      .modal-footer
+        button.btn.btn-default(type='button', data-dismiss='modal', ng-click='vm.closeModal()') {{app.isLang === "VN" ? "Hủy bỏ" : "Cancel"}}
+        input.btn(type='submit',
+          ng-class="vm.obj.id ? 'btn-info' : 'btn-primary'"
+          ng-value="vm.obj.id ? (app.isLang === 'VN' ? 'Cập nhật' : 'Edit') : (app.isLang === 'VN' ? 'Tạo' : 'Create')")

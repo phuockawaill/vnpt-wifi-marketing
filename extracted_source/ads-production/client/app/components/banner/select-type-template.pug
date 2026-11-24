@@ -1,0 +1,8 @@
+form#fmTypeTemplate.modal.fade.in(name='fmTypeTemplate', aria-labelledby='fmEditLabel' novalidate)
+  .modal-dialog.banner-form
+    .modal-content
+      .modal-header(ng-class='vm.obj.id ? "bg-info" : "bg-primary"')
+        button.close(type='button', data-dismiss='modal', aria-label='Close') ×
+        h4#fmEditLabel.modal-title Select type
+      .list-group
+        a.list-group-item(ng-repeat="(key, val) in vm.prototypeTemplate track by $index" ng-click="vm.showEditor(null, key)", data-dismiss='modal') {{val.name}}

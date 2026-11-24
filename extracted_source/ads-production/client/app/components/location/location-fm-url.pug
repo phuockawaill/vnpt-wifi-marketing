@@ -1,0 +1,34 @@
+form#fmUrl.modal.fade.in(name='vm.fmUrl', aria-labelledby='fmUrlLabel' novalidate)
+  .modal-dialog.location-url
+    .modal-content
+      .modal-header.bg-primary
+        button.close(type='button', data-dismiss='modal', aria-label='Close') ×
+        h4#fmCodeLabel.modal-title Captive Portal URL
+      .modal-body
+        .form-group
+          label Captive Portal URL
+          .input-group
+            input#urlSrc.form-control(name='urlSrc', placeholder='Link add to HG',
+              ng-model='vm.objCode.jsCode' ng-disabled='!vm.objCode.jsCode')
+            .input-group-btn
+              button.btn.btn-primary(type='button' ng-disabled='!vm.objCode.jsCode' ng-click='vm.onAction("copyCode", true)') Copy
+        .form-group
+          label Map paramaters for your approriated hotspot
+          .input-group
+            span Login URL
+            input.form-control.params(ng-model='vm.obj.externalParams.loginurl')
+            i.icon-help(title="" data-toggle="popover" data-content="This is parameter on Querystring of user request on that the system would parse to get value, pass it to action property of FORM in creative ads banner. When user clicks button on creative ads banner, user browser would make a GET/POST call to Hotspot to allow go out the internet.")
+          .input-group
+            span  User MAC
+            input.form-control.params(ng-model='vm.obj.externalParams.macFieldName')
+            i.icon-help( title="" data-toggle="popover" data-content="This is parameter on Querystring of user request on that the system would parse to get value. This parameter is identifier of user device.")
+            i(style={"font-size": '11px', color: 'red', "padding-top": '7px'} ng-if="!vm.obj.externalParams.macFieldName") (*)
+          .input-group
+            span  AP MAC
+            input.form-control.params(ng-model='vm.obj.externalParams.ap')
+            i.icon-help(title="" data-toggle="popover" data-content="This is parameter on Querystring of user request on that the system would parse to get value. This parameter is identifier of AP or Hotspot")
+            i(style={"font-size": '11px', color: 'red', "padding-top": '7px'} ng-if="!vm.obj.externalParams.ap") (*)
+      .modal-footer
+        span(ng-if="!vm.obj.externalParams.macFieldName || !vm.obj.externalParams.ap" style={color: 'red'}) Please declare required paramaters as such as: User MAC & AP MAC
+        button.btn.btn-link(type='button', data-dismiss='modal') Close
+        button.btn.btn-primary(type='button' ng-click='vm.onAction("generateCode", true)' ng-disabled='!vm.obj.externalParams.macFieldName || !vm.obj.externalParams.ap') Generate

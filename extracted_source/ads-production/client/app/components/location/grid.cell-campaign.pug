@@ -1,0 +1,4 @@
+a(data-toggle='modal' data-target='#fmCampaign' ng-click='vm.onAction("editCampaign", data)')
+  span.text-primary.text-bold.pr-5(ng-bind='data.activeCampaigns.length || 0')
+  | {{app.isLang === "VN" ? "đang chạy" : "running"}}
+  span.caret

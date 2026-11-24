@@ -1,0 +1,9 @@
+form#fmApList.modal.fade(novalidate name='fm.fmAp')
+  .modal-dialog(style="width: 960px")
+    .modal-content
+      .modal-header.bg-info
+        button.close(type='button', data-dismiss='modal', aria-label='Close') ×
+        h4.modal-title Access Points at {{vm.obj.name}}
+      .ag-material(ag-grid='vm.gridOptionsAP' style="height: 400px")
+      .modal-footer
+        a.btn.btn-success#exportCSV(ng-if='vm.obj.apList && vm.obj.apList.length') Export

@@ -1,0 +1,38 @@
+form#fmEdit.modal.fade.in(name='vm.fmEdit', aria-labelledby='fmEditLabel' novalidate, ng-submit='vm.create(vm.fmEdit.$valid)', data-backdrop="static" data-keyboard="false")
+  .modal-dialog
+    .modal-content
+      .modal-header(ng-class='vm.obj.id ? "bg-info" : "bg-primary"')
+        button.close(type='button', data-dismiss='modal', aria-label='Close', ng-click='vm.closeModal()') ×
+        h4#fmEditLabel.modal-title {{app.isLang === "VN" ? "Địa điểm" : "Location"}}
+      .modal-body
+        .form-group(validator)
+          label {{app.isLang === "VN" ? "Tên" : "Name"}}
+          input.form-control(name='name', placeholder='{{app.isLang === "VN" ? "Nhập tên" : "Give a name"}}', ng-model='vm.obj.name' required)
+        //- .form-group(validator)
+        //-   label Location Group
+        //-   select.form-control(select2='vm.selectGroupOptions' name='categoryId'
+        //-     ng-model='vm.obj.categoryId' ng-change='vm.objLocationGroupChanged()' required)
+        //-   span.help-block(ng-show='vm.fm.showCreateGroup')
+        //-     | Note: A new location group named
+        //-     span.ph-5.text-primary.text-bold(ng-bind='vm.obj.categoryId')
+        //-     | will be created. Please update after location creation finished.
+        .form-group
+          label Wifi Network
+          select.form-control(name='city' select2='vm.selectNetwork'
+            ng-model='vm.obj.categoryId' placeholder='{{app.isLang === "VN" ? "Chọn Wifi Network" : "Pick a Wifi Network"}}')
+        //- .form-group
+        //-   label {{app.isLang === "VN" ? "Thành phố/Tỉnh" : "City/Province"}}
+        //-   select.form-control(name='city' select2='vm.selectCity'
+        //-     ng-model='vm.obj.cityId' placeholder='{{app.isLang === "VN" ? "Chọn thành phố/tỉnh" : "Pick a city"}}' ng-change='vm.selectCityChange()')
+        //- .form-group(ng-if='vm.districts.length > 0 && vm.obj.cityId')
+        //-   label {{app.isLang === "VN" ? "Quận/Huyện" : "District"}}
+        //-   select.form-control(name='district' select2='vm.selectDistrict'
+        //-     ng-model='vm.obj.districtId' placeholder='{{app.isLang === "VN" ? "Chọn quận/huyện" : "Pick a district"}}')
+        //- .form-group(ng-if='vm.obj.cityId')
+          label {{app.isLang === "VN" ? "Địa chỉ" : "Address"}}
+          input.form-control(name='address', placeholder='{{app.isLang === "VN" ? "Nhập địa chỉ" : "Pick an address"}}', ng-model='vm.obj.address')
+      .modal-footer
+        button.btn.btn-link(type='button', data-dismiss='modal', ng-click='vm.closeModal()') {{app.isLang === "VN" ? "Hủy bỏ" : "Cancel"}}
+        input.btn(type='submit',
+        ng-class="vm.obj.id ? 'btn-info' : 'btn-primary'"
+        ng-value="vm.obj.id ? (app.isLang === 'VN' ? 'Cập nhật' : 'Edit') : (app.isLang === 'VN' ? 'Tạo' : 'Create')")

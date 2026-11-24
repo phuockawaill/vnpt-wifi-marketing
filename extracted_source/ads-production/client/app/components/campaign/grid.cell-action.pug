@@ -1,0 +1,19 @@
+.btn-group.btn-group-xs
+  a.btn.btn-info(data-toggle='modal', data-target='#fmEdit' ng-click='vm.onAction("edit", data)')
+    |  {{app.isLang === "VN" ? "Sửa" : "Edit"}}
+  .btn-group.btn-group-xs
+    button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')
+      i.icon-more2
+    ul.dropdown-menu.dropdown-menu-right
+      li
+        a(ng-click='vm.onAction("enable", data)' ng-if='data.status == "stopped" || data.status == "finished"')
+          |  Enable
+      li
+        a(ng-click='vm.onAction("disable", data)' ng-if='data.status == "scheduled" || data.status == "running"')
+          |  Disable
+      li
+        a(ng-click='vm.onAction("edit", data)' data-toggle='modal' data-target='#fmAdvanced')
+          |  {{app.isLang === "VN" ? "Nâng cao" : "Advanced"}}
+      li
+        a.text-danger(ng-click='vm.onAction("delete", data)' ng-if="!vm.trialUser")
+          |  {{app.isLang === "VN" ? "Xóa" : "Delete"}}

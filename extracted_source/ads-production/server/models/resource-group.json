@@ -1,0 +1,19 @@
+{
+  "name": "ResourceGroup",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "users": {
+      "type": "hasMany",
+      "model": "user",
+      "foreignKey": "resourceGroupId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

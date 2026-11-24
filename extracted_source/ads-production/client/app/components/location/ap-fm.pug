@@ -1,0 +1,50 @@
+form#fmAddAp.modal.fade.in(name='vm.fmAddAp', aria-labelledby='fmEditLabel' novalidate, ng-submit='vm.createAp()')
+  .modal-dialog
+    .modal-content
+      .modal-header(ng-class='vm.ap.id ? "bg-info" : "bg-primary"')
+        button.close(type='button', data-dismiss='modal', aria-label='Close') ×
+        h4#fmEditLabel.modal-title {{app.isLang === "VN" ? "Thêm Access Point vào" : "Add Access Point to"}} {{vm.obj.name}}
+      .modal-body
+        input(type="checkbox" ng-model="vm.importCSVMode")
+        label Import CSV
+        div(ng-if="!vm.importCSVMode")
+          .form-group(validator)
+            label {{app.isLang === "VN" ? "Tên" : "Name"}}
+            input.form-control(name='name', placeholder='{{app.isLang === "VN" ? "Nhập tên" : "Give a name"}}', ng-model='vm.ap.name' required)
+          .form-group
+            label MAC LAN
+            input.form-control(name='macLan', placeholder='{{app.isLang === "VN" ? "Nhập MAC LAN" : "Give Mac LAN port address"}}', ng-model='vm.ap.macLan')
+          .form-group
+            label MAC 2.4GHz
+            input.form-control(name='mac', placeholder='{{app.isLang === "VN" ? "Nhập MAC 2.4GHz" : "Give Mac 2.4GHz address"}}', ng-model='vm.ap.mac')
+          .form-group
+            label MAC 5.0GHz
+            input.form-control(name='mac5', placeholder='{{app.isLang === "VN" ? "Nhập MAC 5.0GHz" : "Give Mac 5.0GHz address"}}', ng-model='vm.ap.mac5')
+        div(ng-if="vm.importCSVMode")
+          input.btn.btn-success#uploadCsv(type='file' name='uploadCsv' accept='.csv' ng-upload-change="vm.addListener()")
+          .table-responsive.overflow-auto.mb-20(style='max-height: 400px' ng-if="!vm.readingCSV")
+            table.table
+              thead
+                tr
+                  th
+                  th {{app.isLang === "VN" ? "STT" : "No"}}
+                  th {{app.isLang === "VN" ? "Tên" : "Name"}}
+                  th Mac LAN
+                  th Mac 2.4 GHz
+                  th Mac 5.0 GHz
+              tbody
+                tr(ng-repeat='l in vm.apList track by $index' data-dragula-id='{{l.mac}}')
+                  td
+                    i.icon-trash(ng-click='vm.onAction("deleteApCsv", $index)')
+                  td(ng-bind='$index + 1')
+                  td(ng-bind='l.name')
+                  td(ng-bind='l.macLan' ng-style="l.errLan?{'color':'red'}:{'color':'black'}")
+                  td(ng-bind='l.mac' ng-style="l.err?{'color':'red'}:{'color':'black'}")
+                  td(ng-bind='l.mac5' ng-style="l.err5?{'color':'red'}:{'color':'black'}")
+        h5#openExpandNotify(style="display: none; color: orange")
+          | {{app.isLang === "VN" ? "Số lượng AP hiện tại đã vượt quá giới hạn cho phép, hãy" : "Current number of APs reached your license limitation, please"}}
+          a#openExpandLink(ng-click='vm.toogleExpandLicense()')  {{app.isLang === "VN" ? "mở rộng license để" : "expanding license here"}}
+          |  {{app.isLang === "VN" ? "tiếp tục" : "to continue"}}
+      .modal-footer
+        button.btn.btn-link(type='button', data-dismiss='modal') {{app.isLang === "VN" ? "Hủy bỏ" : "Cancel"}}
+        input.btn.btn-primary(type='submit' ng-disabled='(!vm.ap.name || (!vm.ap.mac && !vm.ap.mac5 && !vm.ap.macLan)) && (!vm.apList.length || vm.importCSVErr)' value='{{app.isLang === "VN" ? "Tạo mới" : "Create"}}')

@@ -1,0 +1,260 @@
+.row
+  .col-md-3(ng-repeat='(key, c) in vm.charts' ng-if='c.dynamic')
+    .panel.panel-flat
+      .panel-heading
+        h5.panel-title
+          i.icon-chart.position-left
+          span(ng-bind='::c.name')
+      .panel-boby(highchart='vm.charts[key]')
+
+.panel.panel-flat(ng-if="vm.shareFlag")
+  .panel-heading
+    h5.panel-title
+      i.icon-stats-bars.position-left
+      | DSP Platform 
+    a(ng-click="vm.toogleDaily()")
+      span.text-primary.pr-5 {{app.isLang === "VN" ? "Báo cáo hàng ngày" : "Daily Report"}}
+      span.icon-ctrl(ng-if="vm.detailDaily")
+      span.caret(ng-if="!vm.detailDaily")
+    br
+    a(ng-click="vm.toogleVenue()") 
+      span.text-primary.pr-5 {{app.isLang === "VN" ? "Chi tiết các địa điểm" : "Locations Detail"}}
+      span.icon-ctrl(ng-if="vm.detailVenue")
+      span.caret(ng-if="!vm.detailVenue")
+  .panel-body
+    .row
+      .col-md-3.text-center
+        h3#hour.h3(style="color: blue; margin-top:0") {{vm.dspData.click.toLocaleString()}}
+        h5.panel-title Click
+      .col-md-3.text-center
+        h3#day.display-4(style="color: red; margin-top:0") {{vm.dspData.impression.toLocaleString()}}
+        h5.panel-title Impression
+      .col-md-3.text-center
+        h3#day.display-4(style="color: #46be8a; margin-top:0") {{vm.dspData.ctr.toLocaleString()}} {{vm.dspData.ctr?'%':''}}
+        h5.panel-title CTR
+      .col-md-3.text-center
+        h3#totalVisitor.display-4(style="color: orange; margin-top:0") {{vm.dspData.revenue?'đ ':''}} {{vm.dspData.revenue.toLocaleString()}}
+        h5.panel-title {{app.isLang === "VN" ? "Tổng doanh thu" : "Total Revenue"}}
+  .panel.panel-flat(ng-show="vm.detailDaily" style="margin-bottom: 0")
+    .ag-material(ag-grid='vm.gridOptionsDailyDSP' style="height: 400px")
+  .panel.panel-flat(ng-show="vm.detailVenue" style="margin-bottom: 0")
+    .ag-material(ag-grid='vm.gridOptionsVenueDSP' style="height: 400px")
+
+.panel.panel-flat(ng-show="!vm.shareFlag")
+  .panel-heading
+    h5.panel-title
+      i.icon-stats-dots.position-left
+      | {{app.isLang === "VN" ? "SỐ LIỆU CHIẾN DỊCH" : "CAMPAIGN METRIC"}} [
+      a.dashboard-popover(title="" data-toggle="popoverCampaign" data-content="") ?
+      | ]
+      a.heading-elements-toggle
+        i.icon-more
+    //- .heading-elements(chart-config='vm.charts["tracking.action"]')
+  .row
+    .col-md-3
+      .panel-body
+        .row
+          .col-md-12.text-center
+            h3#ctr.h3(style="color: #f2a654; margin-top:0") {{vm.actionsData.ctr.toFixed(2)}}
+            h5.panel-title CTR
+        .row
+          .col-md-6.text-center
+            h3#impression.h3(style="color: #62a8ea; margin-top:0") {{vm.actionsData.impression.toLocaleString()}}
+            h5.panel-title Impression
+          .col-md-6.text-center
+            h3#click.display-4(style="color: #46be8a; margin-top:0") {{vm.actionsData.click.toLocaleString()}}
+            h5.panel-title Click
+    .col-md-9
+      .panel-body(highchart='vm.charts["tracking.action"]')
+
+.row(ng-if="vm.filter.campaignId && !vm.filter.bannerId" style="margin-bottom: 0")
+  .col-md-5
+    .panel.panel-flat( style="margin-bottom: 0")
+      .panel-heading
+        h5.panel-title
+          i.icon-pie-chart.position-left
+          | {{app.isLang === "VN" ? "TOP TRANG QUẢNG CÁO" : "TOP CREATIVE ADS"}}
+      .panel-body(highchart='vm.charts["tracking.topBanner"]')
+  .col-md-7
+    .panel.panel-flat( style="margin-bottom: 0")
+      .panel-heading
+        h5.panel-title
+          i.icon-users.position-left
+          | {{app.isLang === "VN" ? "SỐ LƯỢNG NGƯỜI DÙNG" : "USER"}}
+        a(ng-click="vm.toogleDetail()")
+          span.text-primary.pr-5 Detail
+          span.icon-ctrl(ng-if="vm.detailUser")
+          span.caret(ng-if="!vm.detailUser")
+      .panel-body
+        .row
+          .col-md-4.text-center
+            h3#hour.h3(style="color: blue; margin-top:0") {{vm.visitorData.hour.toLocaleString()}}
+            h5.panel-title {{app.isLang === "VN" ? "Giờ hiện tại" : "Current Hour"}}
+          .col-md-4.text-center
+            h3#day.display-4(style="color: red; margin-top:0") {{vm.visitorData.day.toLocaleString()}}
+            h5.panel-title {{app.isLang === "VN" ? "Trong ngày" : "Today"}}
+          .col-md-4.text-center
+            h3#totalVisitor.display-4(style="color: orange; margin-top:0") {{vm.visitorData.totalVisitor.toLocaleString()}}
+            h5.panel-title {{app.isLang === "VN" ? "Tổng cộng" : "Total"}}
+
+.panel.panel-flat(ng-if="!vm.filter.campaignId || vm.filter.bannerId")
+  .panel-heading
+    h5.panel-title
+      i.icon-users.position-left
+      | {{app.isLang === "VN" ? "SỐ LƯỢNG NGƯỜI DÙNG" : "USER"}}
+    a(ng-click="vm.toogleDetail()")
+      span.text-primary.pr-5 {{app.isLang === "VN" ? "Xem chi tiết" : "Detail"}}
+      span.icon-ctrl(ng-if="vm.detailUser")
+      span.caret(ng-if="!vm.detailUser")
+  .panel-body
+    .row
+      .col-md-4.text-center
+        h3#hour.h3(style="color: blue; margin-top:0") {{vm.visitorData.hour.toLocaleString()}}
+        h5.panel-title {{app.isLang === "VN" ? "Giờ hiện tại" : "Current Hour"}}
+      .col-md-4.text-center
+        h3#day.display-4(style="color: red; margin-top:0") {{vm.visitorData.day.toLocaleString()}}
+        h5.panel-title {{app.isLang === "VN" ? "Trong ngày" : "Today"}}
+      .col-md-4.text-center
+        h3#totalVisitor.display-4(style="color: orange; margin-top:0") {{vm.visitorData.totalVisitor.toLocaleString()}}
+        h5.panel-title {{app.isLang === "VN" ? "Tổng cộng" : "Total"}}
+.panel.panel-flat(ng-show="vm.detailUser")
+  .ag-material(ag-grid='vm.gridOptions' style="height: 400px")
+.panel.panel-flat( style="margin-top: 20px")
+  .row
+    .col-md-6
+      .panel-heading
+        h5.panel-title
+          i.icon-pie-chart.position-left
+          | {{app.isLang === "VN" ? "NGUỒN NGƯỜI DÙNG" : "SOURCE"}} [
+          a.dashboard-popover(title="" data-toggle="popoverSource" data-content="") ?
+          | ]
+      .panel-body(highchart='vm.charts["device.source"]')
+    .col-md-6
+      .panel-heading
+        h5.panel-title
+          i.icon-pie-chart.position-left
+          | TOP {{vm.filter.locationId? 'AP' : app.isLang === "VN" ? 'ĐỊA ĐIỂM' : 'LOCATION' }} [
+          a.dashboard-popover(title="" data-toggle="topVisitor" data-content="{{vm.filter.locationId? 'Report about top Access Points of selected location on which has highest logged in users' : 'Report about top locations on which has highest logged in users'}}") ?
+          | ]
+      .panel-body(highchart='vm.charts["tracking.topVisitor"]')
+
+.panel.panel-flat#top_interest
+  .row
+    .col-md-6
+      .panel-heading
+        h5.panel-title
+          i.icon-pie-chart.position-left
+          | TOP {{app.isLang === "VN" ? "CHỦ ĐỀ ĐƯỢC QUAN TÂM" : "INTERESTING TOPIC"}}
+      .panel-body(highchart='vm.charts["visitSiteData.category"]')
+    .col-md-6
+      .panel-heading
+        h5.panel-title
+          i.icon-pie-chart.position-left
+          | TOP {{app.isLang === "VN" ? "TRANG WEB" : "WEBSITE"}}
+      .panel-body(highchart='vm.charts["visitSiteData.website"]')
+
+.panel.panel-flat
+  .row
+    .col-md-4
+      .panel-heading
+        h5.panel-title
+          i.icon-pie-chart.position-left
+          | {{app.isLang === "VN" ? "TẦN SUẤT TRUY CẬP" : "FREQUENCY"}} [
+          a.dashboard-popover(title="" data-toggle="popoverFrequency" data-content="") ?
+          | ]
+      .panel-boby(highchart='vm.charts["tracking.macFrequency-pie"]')
+    .col-md-8
+      .panel-heading
+        h5.panel-title
+          i.icon-chart.position-left
+          | {{app.isLang === "VN" ? "CHI TIẾT" : "DETAIL"}}
+          a.heading-elements-toggle
+            i.icon-more
+        //- .heading-elements(chart-config='vm.charts["tracking.macFrequency"]')
+      .panel-boby(highchart='vm.charts["tracking.macFrequency"]')
+
+.panel.panel-flat
+  .panel-heading
+    h5.panel-title
+      i.icon-stats-dots.position-left
+      | {{app.isLang === "VN" ? "HÀNH VI NGƯỜI DÙNG" : "BEHAVIOUR"}} [
+      a.dashboard-popover(title="" data-toggle="popoverBehaviour" data-content="") ?
+      | ]
+      a.heading-elements-toggle
+        i.icon-more
+    //- .heading-elements(chart-config='vm.charts["tracking.newReturn"]')
+  .row
+    .col-md-5
+      .panel-body(style="min-width: 300px; max-width: 400px;" highchart='vm.charts["tracking.newReturn-sum"]')
+    .col-md-7
+      .panel-body(highchart='vm.charts["tracking.newReturn"]')
+
+.panel.panel-flat
+  .row
+    .col-md-4
+      .panel-heading
+        h5.panel-title
+          i.icon-pie-chart.position-left
+          | {{app.isLang === "VN" ? "GIỚI TÍNH" : "GENDER"}}
+      .panel-boby(highchart='vm.charts["device.gender"]')
+    .col-md-8
+      .panel-heading
+        h5.panel-title
+          i.icon-chart.position-left
+          | {{app.isLang === "VN" ? "CHI TIẾT" : "DETAIL"}}
+          a.heading-elements-toggle
+            i.icon-more
+        //- .heading-elements(chart-config='vm.charts["device.gender-detail"]')
+      .panel-boby(highchart='vm.charts["device.gender-detail"]')
+
+.panel.panel-flat
+  .row
+    .col-md-4
+      .panel-heading
+        h5.panel-title
+          i.icon-pie-chart.position-left
+          | {{app.isLang === "VN" ? "ĐỘ TUỔI" : "AGE"}}
+      .panel-boby(highchart='vm.charts["device.age"]')
+    .col-md-8
+      .panel-heading
+        h5.panel-title
+          i.icon-chart.position-left
+          | {{app.isLang === "VN" ? "CHI TIẾT" : "DETAIL"}}
+          a.heading-elements-toggle
+            i.icon-more
+        //- .heading-elements(chart-config='vm.charts["device.age-detail"]')
+      .panel-boby(highchart='vm.charts["device.age-detail"]')
+
+.panel.panel-flat
+  .row
+    .col-md-4
+      .panel-heading
+        h5.panel-title
+          i.icon-pie-chart.position-left
+          | {{app.isLang === "VN" ? "THU NHẬP" : "INCOME"}}
+      .panel-boby(highchart='vm.charts["device.income"]')
+    .col-md-8
+      .panel-heading
+        h5.panel-title
+          i.icon-chart.position-left
+          | {{app.isLang === "VN" ? "CHI TIẾT" : "DETAIL"}}
+          a.heading-elements-toggle
+            i.icon-more
+        //- .heading-elements(chart-config='vm.charts["device.income-detail"]')
+      .panel-boby(highchart='vm.charts["device.income-detail"]')
+
+.row
+  .col-md-6
+    .panel.panel-flat
+      .panel-heading
+        h5.panel-title
+          i.icon-pie-chart.position-left
+          | {{app.isLang === "VN" ? "LOẠI THIẾT BỊ" : "DEVICE TYPE"}}
+      .panel-boby(highchart='vm.charts["device.device"]')
+  .col-md-6
+    .panel.panel-flat
+      .panel-heading
+        h5.panel-title
+          i.icon-pie-chart.position-left
+          | {{app.isLang === "VN" ? "HỆ ĐIỀU HÀNH" : "OS"}}
+      .panel-boby(highchart='vm.charts["device.os"]')

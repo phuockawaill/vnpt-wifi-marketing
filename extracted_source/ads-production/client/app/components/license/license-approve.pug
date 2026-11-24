@@ -1,0 +1,38 @@
+form#fmAppLin.modal.fade(tabindex='-1' role='dialog' name='fmAppLin')
+  .modal-dialog.modal-sm
+    .modal-content
+      .modal-header.bg-primary
+        button.close(type='button' data-dismiss='modal' aria-label='Close')
+          span(aria-hidden='true') ×
+        h4.modal-title {{app.isLang === "VN" ? "Duyệt license" : "Approve license"}}
+      .modal-body
+        .form-horizontal.form-bordered
+          .form-group(validator)
+            label.col-md-4.control-label {{app.isLang === "VN" ? "Tài khoản" : "Account"}}
+            .col-md-7
+              select.form-control(name='accountApprove', ng-options='p.id as p.description for p in vm.approveList', ng-model='vm.objChange.userId', required, style='width: 100%;')
+        .form-group
+          input(type="checkbox" ng-model="vm.objChange.active" style="margin-right: 5px;")
+          label {{app.isLang === "VN" ? "Kích hoạt license sau khi được duyệt" : "Active license after approved"}}
+
+      .modal-footer
+        input.btn.btn-success(type='submit' ng-value='"Approve"' ng-disabled="fmAppLin.$invalid" ng-click="vm.approveChange()")
+
+form#fmExtendLin.modal.fade(tabindex='-1' role='dialog' name='fmExtendLin')
+  .modal-dialog.modal-sm
+    .modal-content
+      .modal-header.bg-primary
+        button.close(type='button' data-dismiss='modal' aria-label='Close')
+          span(aria-hidden='true') ×
+        h4.modal-title {{app.isLang === "VN" ? "Gia hạn license" : "Extend license"}}
+      .modal-body
+        h5 License 
+          b {{vm.objChange.key}} 
+          | {{vm.objChange.message}}
+          b {{vm.objChange.currentTime}}
+        h5 Extend license to 
+          b {{vm.objChange.nextTime}}
+          | ?
+
+      .modal-footer
+        input.btn.btn-success(type='submit' ng-value='vm.currentUser.profileName === "superadmin"?"Extend":"Request"' ng-disabled="fmExtendLin.$invalid" ng-click="vm.confirmExtend()")

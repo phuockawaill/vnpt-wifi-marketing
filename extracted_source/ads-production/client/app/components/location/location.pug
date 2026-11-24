@@ -1,0 +1,36 @@
+ng-include(src="'location/location-fm'")
+ng-include(src="'location/location-fm-code'")
+ng-include(src="'location/location-fm-url'")
+ng-include(src="'location/location-fm-campaign'")
+ng-include(src="'location/location-fm-ap'")
+ng-include(src="'location/ap-fm'")
+ng-include(src="'location/location-move'")
+ng-include(src="'location/location-fm-import'")
+
+.page-container
+  .panel.panel-default
+    .panel-heading.clearfix
+      .panel-title.heading-form
+        a.heading-elements-toggle
+          i.icon-more
+        .form-group.has-feedback.has-feedback-left.m-b-0(style="width: 250px")
+          input.form-control(type='text', placeholder='{{app.isLang === "VN" ? "Tìm kiếm..." : "Type to search..."}}' ng-model='vm.gridOptions.quickFilterText')
+          .form-control-feedback
+            i.icon-search4
+      .heading-elements
+        button.btn.btn-info.heading-btn(type='button' ng-click='vm.onAction("importVen")')
+          i.icon-download4.position-left
+          | Import
+        button.btn.btn-info.heading-btn(type='button' ng-disabled='vm.loadingEXIM' ng-click='vm.onAction("exportVen")')
+          i.icon-upload4.position-left
+          | Export
+        button.btn.btn-default.heading-btn(type='button' ng-click='vm.onAction("refresh")')
+          i.icon-spinner11.position-left
+          |  {{app.isLang === "VN" ? "Làm mới" : "Refresh"}}
+        a#joyride-create-location.btn.btn-labeled.btn-labeled-left.bg-blue.heading-btn(ng-click="vm.onAction('new')" ng-if="!vm.trialUser")
+          | {{app.isLang === "VN" ? "Thêm mới" : "Create Location"}}
+          b
+            i.icon-plus3
+    .ag-material(ag-grid='vm.gridOptions' ng-style='{height: (vm.viewHeight - 210) +"px"}')
+
+div(ng-joy-ride="vm.startJoyRideLoc" config="vm.joyrideConfigLoc" on-finish="vm.joyrideFinish('next')"  on-skip="vm.joyrideFinish('skip')")

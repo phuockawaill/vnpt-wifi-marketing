@@ -1,0 +1,16 @@
+form#fmLocList.modal.fade(novalidate name='fm.fmLocList')
+  .modal-dialog(style="width: 500px")
+    .modal-content
+      .modal-header.bg-warning
+        button.close(type='button', data-dismiss='modal', aria-label='Close') ×
+        h4.modal-title Move To Location
+      .table-responsive.select-row.overflow-auto.mb-20(style='max-height: 400px')
+        table.table
+          thead
+            tr
+              th No
+              th Name
+          tbody
+            tr(ng-repeat='l in vm.locations | filterLoc:vm.obj.id' ng-click="vm.onMoveAp(l)")
+              td(ng-bind='$index + 1')
+              td(ng-bind='l.name')

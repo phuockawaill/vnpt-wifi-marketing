@@ -1,0 +1,35 @@
+form#fmActiveLicense.modal.fade(modal='app.modalExpandOptions' tabindex='-1' role='dialog' name='fmActiveLicense')
+  .modal-dialog.modal-sm
+    .modal-content
+      .modal-header.bg-primary
+        button.close(type='button' data-dismiss='modal' aria-label='Close')
+          span(aria-hidden='true') ×
+        h4.modal-title License
+      ul.nav.mb-3(style="display: flex;padding: 10px; justify-content: center;")
+        li.nav-item
+          a.btn.btn-labeled.btn-default.heading-btn(ng-class="{'bg-teal': app.modeLicense === 'active'}" ng-click='app.onChangeViewLicense("active")') Active
+        li.nav-item
+          a.btn.btn-labeled.btn-default.heading-btn(ng-class="{'bg-teal': app.modeLicense === 'approve'}" ng-click='app.onChangeViewLicense("approve")') Approve for Client
+      div(ng-if="app.modeLicense === 'active'")
+        .modal-body
+          .form-bordered
+            .form-group(validator)
+              label {{app.isLang === "VN" ? "Mã License" : "License Key"}}
+              input.form-control(name='activeKey' type='text' placeholder='License Key'
+                ng-model='app.activeKey' required autocomplete='off')
+        .modal-footer
+          button.btn.btn-link(type='button' data-dismiss='modal') {{app.isLang === "VN" ? "Huỷ" : "Cancel"}}
+          input.btn.btn-primary(ng-disabled='fmActiveLicense.$invalid' ng-value='"Active"' ng-click="app.SubmitActive()")
+      div(ng-if="app.modeLicense === 'approve'")
+        .modal-body
+          .form-horizontal.form-bordered
+            .form-group(validator)
+              label.col-md-4.control-label {{app.isLang === "VN" ? "Tài khoản" : "Account"}}
+              .col-md-7
+                select.form-control(name='accountApprove', ng-options='p.id as p.description for p in app.childUsers', ng-model='app.objChange.userId', required, style='width: 100%;')
+          .form-group
+            input(type="checkbox" ng-model="app.objChange.active" style="margin-right: 5px;")
+            label {{app.isLang === "VN" ? "Kích hoạt tài khoản sau khi duyệt" : "Active license after approved"}}
+        .modal-footer
+          button.btn.btn-link(type='button' data-dismiss='modal') {{app.isLang === "VN" ? "Huỷ" : "Cancel"}}
+          input.btn.btn-success(type='submit' ng-value='"Approve"' ng-disabled="!app.objChange.userId" ng-click="app.approveChange()")

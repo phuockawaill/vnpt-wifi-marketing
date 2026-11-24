@@ -1,0 +1,86 @@
+{
+  "name": "LocationBase",
+  "base": "PersistedModel",
+  "strict": true,
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "TimeStamp": {
+      "validateUpsert": true,
+      "required": false
+    }
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "categoryId": {
+      "type": "string"
+    },
+    "categoryName": {
+      "type": "string"
+    },
+    "cityId": {
+      "type": "string"
+    },
+    "cityName": {
+      "type": "string"
+    },
+    "districtId": {
+      "type": "string"
+    },
+    "districtName": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "location": {
+      "type": "object"
+    },
+    "noOfAccessPoint": {
+      "type": "number",
+      "default": 0
+    },
+    "clickPerMonth": {
+      "type": "number",
+      "default": 0
+    },
+    "reachPerMonth": {
+      "type": "number",
+      "default": 0
+    },
+    "clickPerDay": {
+      "type": "number",
+      "default": 0
+    },
+    "reachPerDay": {
+      "type": "number",
+      "default": 0
+    },
+    "activeCampaigns": {
+      "type": [
+        "object"
+      ]
+    },
+    "createdBy": {
+      "type": "string"
+    },
+    "updatedBy": {
+      "type": "string"
+    },
+    "createdByUsername": {
+      "type": "string"
+    },
+    "updatedByUsername": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

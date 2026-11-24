@@ -1,0 +1,33 @@
+form#fmExpandLicense.modal.fade(modal='app.modalExpandOptions' tabindex='-1' role='dialog' name='app.fmExpandLicense'
+  ng-submit='app.SubmitExpand(app.fmExpandLicense.$valid)')
+  .modal-dialog.modal-sm
+    .modal-content
+      .modal-header.bg-primary
+        button.close(type='button' data-dismiss='modal' aria-label='Close')
+          span(aria-hidden='true') ×
+        h4.modal-title {{app.isLang === "VN" ? "Yêu cầu License" : "Request License"}}
+      .modal-body#submitBody
+        .form-bordered
+          .form-group(validator)
+            label {{app.isLang === "VN" ? "Số lượng AP" : "Number of APs"}}
+            input.form-control(name='numberAp' type='number' min='1' placeholder='Number of APs'
+              ng-model='app.objExpand.numberAp' required autocomplete='off')
+          .form-group(validator)
+            label {{app.isLang === "VN" ? "Địa chỉ email" : "Your Email"}}
+            input.form-control(name='email' type='email' placeholder='Your Email'
+              ng-model='app.objExpand.email' required autocomplete='off')
+          .form-group(validator)
+            label {{app.isLang === "VN" ? "Xác nhận email" : "Email confirmation"}}
+            input.form-control(name='emailConfirm' type='email' placeholder='Confirm your Email'
+              ng-model="app.objExpand.emailConfirm" required autocomplete='off' data-matched='email')
+          .form-group(validator)
+            label {{app.isLang === "VN" ? "Số điện thoại" : "Phone Number"}}
+            input.form-control(name='phone' type='phone' placeholder='Phone Number'
+              ng-model='app.objExpand.phone' autocomplete='off')
+          .form-group
+            label {{app.isLang === "VN" ? "Xác thực Captcha" : "Validate Captcha to submit"}}
+            .g-recaptcha(vc-recaptcha, key="app.recaptchaSiteKey" on-create="app.setWidgetId(widgetId)" on-success="app.setResponse(response)")
+          .form-group
+            button.btn.btn-primary.btn-block(type='submit') {{app.isLang === "VN" ? "Gửi Yêu cầu" : "Submit"}}
+      .modal-body#loadingSubmit(style="display:none;")
+        .loading(style="margin:0 auto;")

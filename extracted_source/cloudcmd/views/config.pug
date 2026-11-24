@@ -1,0 +1,109 @@
+doctype html
+html(lang='en', ng-app='app', ng-controller='AppCtrl')
+	head
+		meta(charset='utf-8')
+		meta(name='robots', content='noindex,nofollow')
+		meta(name='theme-color', content='rgb(49,123,249)')
+		meta(content='width=device-width,initial-scale=1', name='viewport')
+		link(rel='stylesheet', media='all', href='/style/config.css')
+		link(rel='stylesheet', media='all', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+		link(rel='stylesheet', media='all', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+		link(rel='stylesheet', media='all', href='vendor/ng-notify/dist/ng-notify.min.css')
+		script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+		script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+		title Config
+	body
+		.header
+			nav.navbar.navbar-default(style='background-color:transparent')
+				.container-fluid
+					.navbar-header
+						button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+							span.sr-only Toggle navigation
+							span.icon-bar
+							span.icon-bar
+							span.icon-bar
+						a.navbar-brand(href='#', style='padding:1px 1px')
+							img(src='http://www.wifiex4u.vn/images/wifiex4u_logo2.png')
+					#bs-example-navbar-collapse-1.collapse.navbar-collapse
+						ul.nav.navbar-nav.navbar-right
+							li
+								button.btn.btn-default(type='submit', style='margin:5px;background:transparent', ng-click='newUser()', data-toggle='modal', data-target='#myModal') New user
+							li
+								form(method='GET' action='/', style='margin:5px')
+									button.btn.btn-default(title='return', style='background:transparent;')
+										i.fa.fa-reply
+		#myModal.modal.fade(role='dialog')
+			.modal-dialog
+				.modal-content
+					.modal-header
+						button.close(type='button', data-dismiss='modal') ×
+						h4.modal-title {{ title }}
+					.modal-body
+						.register
+							.register-form
+								form#formRegister(style='padding:10px')
+									.form-group
+										label Username
+										input#InputUsername.form-control(type='text', placeholder='Username', name='username', ng-model='register.username')
+										p#pUsername * Please enter your username
+									.form-group
+										label Email
+										input#InputEmail.form-control(type='text', placeholder='Email', name='email', ng-model='register.email')
+										p#pEmail * Please enter your email
+									.form-group
+										label Password
+										input#InputPassword.form-control(type='password', placeholder='Password', name='password', ng-model='register.password')
+										p#pPassword * Please enter your password
+									.form-group
+										label Confirm Password 
+										input#InputConfirmPassword.form-control(type='password', placeholder='Confirm Password', name='passwordConfirm', ng-model='register.passwordConfirm')
+										p#pConfirmPassword * Please enter your confirm password
+										p#pConfirmPasswordMatch * Your password and confirm password not match
+									.form-group
+										label Root Dir
+										input#InputRootDir.form-control(type='text', placeholder='Root Dir', name='rootdir', ng-model='register.rootdir')
+										p#pRootDir * Please enter root dir
+									.checkbox
+										label
+											input#checkAdmin(type='checkbox', name='isAdmin', ng-true-value='1', ng-default-value='0', ng-model='register.isAdmin')
+											|  is admin?
+									button#btnRegister.btn(type='submit', disabled='', ng-show='!updater', ng-click='createUser(register)') Register
+									button#btnUpdate.btn(type='submit', disabled='', ng-show='updater', ng-click='updateUser(register)') Update
+					.modal-footer
+						button.btn.btn-default(type='button', data-dismiss='modal') Close
+		.listUser(style='width:100%;padding:10px')
+			.table-responsive(style='border:1px solid #ccc;max-height:300px;background:transparent')
+				table.table
+					thead
+						tr
+							th Username
+							th Email
+							th Type
+							th RootDir
+							th SecretKey
+							th ClientKey
+							th ClientId
+							th Edit
+							th Delete
+					tbody
+						tr(ng-repeat='u in users')
+							td {{ u.username }}
+							td {{ u.email }}
+							td {{ u.type == 1 ? 'admin' : '' }}
+							td {{ u.rootdir }}
+							td {{ u.secretkey }}
+							td {{ u.clientkey }}
+							td {{ u.clientId }}
+							td
+								button.btn-success(style='border:none;width:30px', ng-click='editUser(u)', data-toggle='modal', data-target='#myModal')
+									i.fa.fa-pencil(aria-hidden='true')
+							td
+								button.btn-danger(style='border:none;width:30px', ng-click='deleteUser(u)')
+									i.fa.fa-times(aria-hidden='true')
+		script(src='vendor/angular/angular.min.js')
+		script(src='vendor/ng-notify/dist/ng-notify.min.js')
+		script(src='vendor/lodash/dist/lodash.min.js')
+		script(src='vendor/angular-resource/angular-resource.min.js')
+		script(src='vendor/angular-ui-router/release/angular-ui-router.min.js')
+		script(src='/js/config.js')
+		script(src='/js/config_angular.js')

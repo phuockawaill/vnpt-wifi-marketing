@@ -1,0 +1,55 @@
+{
+  "name": "Brand",
+  "plural": "Brands",
+  "base": "user",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true,
+    "mongodb": {
+      "collection": "user"
+    }
+  },
+  "mixins": {
+    "Owner": {}
+  },
+  "hidden": [
+    "profileId",
+    "profileName",
+    "resourceGroupId"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "username": {
+      "type": "string",
+      "required": false
+    },
+    "email": {
+      "type": "string",
+      "required": false
+    },
+    "password": {
+      "type": "string",
+      "required": false
+    }
+  },
+  "validations": [],
+  "relations": {
+    "owner": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "ownedBy"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "manageBrandCMS",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

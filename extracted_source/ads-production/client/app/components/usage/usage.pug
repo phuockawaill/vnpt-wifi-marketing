@@ -1,0 +1,13 @@
+.page-container.sidebar-opposite-visible
+  .page-content(ng-if="vm.mode==='desktop'")
+    // Main sidebar
+    .sidebar.sidebar-opposite.sidebar-default(style='display: block; padding:0; margin: 0 auto')
+      ng-include(src='"usage/usage-sidebar"')
+    .content-wrapper(style='display: block')
+      ng-include(src="'usage/usage-main'")
+  .page-content(ng-if="vm.mode==='mobile'")
+    // Main sidebar
+    .sidebar.sidebar-opposite.sidebar-default
+      ng-include(src='"usage/usage-sidebar"')
+    .content-wrapper
+      ng-include(src="'usage/usage-main'")

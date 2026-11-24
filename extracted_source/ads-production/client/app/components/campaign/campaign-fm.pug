@@ -1,0 +1,144 @@
+#fmEdit.modal.fade(data-backdrop="static" data-keyboard="false")
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header(ng-class='vm.obj.id ? "bg-info" : "bg-primary"')
+        button.close(type='button', data-dismiss='modal', aria-label='Close', ng-click='vm.closeModal()') ×
+        h4.modal-title {{app.isLang === "VN" ? "Chiến dịch" : "Campaign"}}
+      .modal-body
+        form(novalidate name='vm.fmEdit1' ng-show='vm.fm.currentStep == 1')
+          h5.margin-top-0 1/{{vm.fm.totalStep}} Main Configuration
+          .form-group(validator)
+            label {{app.isLang === "VN" ? "Tên" : "Name"}}
+            input.form-control(name='name' placeholder='{{app.isLang === "VN" ? "Nhập tên" : "Give your campaign a name"}}' ng-model='vm.obj.name' required)
+          .form-group(validator data-label='Creative Ads')
+            label {{app.isLang === "VN" ? "Chọn Creative Ads mặc định" : "Pick a default Creative Ads"}}
+            .input-group(data-message-holder)
+              select(select2='vm.selectBannerOptions' name='bannerId'
+                ng-model='vm.obj.bannerDefaultId' ng-change='vm.objBannerChanged()' required)
+              .input-group-btn
+                button.btn.btn-info(type='button' ng-disabled='vm.fm.showCreateBanner'
+                  ng-click='vm.onAction("preview", vm.obj.bannerDefaultId)') View
+            span.help-block(ng-show='vm.fm.showCreateBanner')
+              | Note: A new Creative Ads named
+              span.ph-5.text-primary.text-bold(ng-bind='vm.obj.bannerDefaultId')
+              | will be created. Please update after campaign creation finished.
+          .banner-form.form-group
+            .input-group
+              label.switch.col-sm-7
+                input(type="checkbox" ng-model="vm.obj.isCatfish")
+                span.slider.round
+              span(style="margin-top:2px;margin-left:10px") Catfish campaign
+          .form-group(validator)
+            label Landing page
+            input.form-control(type='url', name='landingPageUrl', placeholder='http://',
+              ng-model='vm.obj.landingPageUrl', required)
+          .form-group(validator data-label='Brand')
+            label {{app.isLang === "VN" ? "Chọn một brand hoặc gõ để tạo" : "Pick brand or type a name to create"}}
+            select.form-control(select2='vm.selectBrandOptions' name='brandId' multiple="multiple"
+              ng-change='vm.objBrandChanged()'
+              ng-model='vm.obj.brands' required)
+            span.help-block(ng-show='vm.fm.showCreateBrand')
+              | Note: {{app.isLang === "VN" ? "Một brand mới với tên" : "A new brand named"}}
+              span.ph-5.text-primary.text-bold(ng-bind='vm.createBrands.join(", ")')
+              | {{app.isLang === "VN" ? "sẽ được tạo. Vui lòng cập nhật sau khi việc tạo campaign hoàn tất." : "will be created. Please update after campaign creation finished."}}
+
+        form(novalidate name='vm.fmEdit2' ng-show='vm.fm.currentStep == 2')
+          h5.margin-top-0 2/{{vm.fm.totalStep}} Rules
+          h5 {{app.isLang === "VN" ? "Địa điểm" : "Location"}}
+          .form-group.padding-10(validator data-label='Location')
+            label {{app.isLang === "VN" ? "Chọn location(s)" : "Pick location(s) this campaign will run"}}
+            select(select2='vm.selectLocationOptions' name='locationId' id="locationId" multiple="multiple"
+              ng-model='vm.objLocs' required)
+          h5(data-toggle="collapse" data-target="#collapseSplashpage" role="button" style="margin-top:15px;") Advanced Creative Ads
+            .caret
+          .collapse.padding-10#collapseSplashpage
+            .form-group(ng-form name='vm.fmAudience')
+              label Creative Ads
+              .input-group
+                select.form-control.select-size-xs(select2='vm.selectBannerOptions' ng-model='vm.objBan.value')
+                .input-group-btn
+                  button.btn.btn-labeled.btn-labeled-left.btn-primary(type='button' ng-disabled='!vm.objBan.value'
+                    ng-click='vm.addBanner(vm.objBan.value)')
+                    | {{app.isLang === "VN" ? "Thêm Creative Ads" : "Add Creative Ads"}}
+                    b
+                      i.icon-plus2
+            .banner-form.form-group(ng-if="vm.obj.banners && vm.obj.banners.length")
+              .input-group
+                label.switch.col-sm-7
+                  input(type="checkbox" ng-model="vm.obj.randomBanner")
+                  span.slider.round
+                span(style="margin-top:2px;margin-left:10px;width:auto") Random matched creative ads
+            div
+              button.btn.btn-rounded.btn-labeled.btn-labeled-right.mb-10.mr-10(
+                ng-repeat='b in vm.objBan.selected' ng-click='vm.editBanner(b)'
+                ng-class='b === vm.objBan.current ? "btn-primary" : "btn-default"')
+                span(ng-bind='::b.bannerName')
+                b(ng-click='vm.removeBanner(b)')
+                  i.icon-cross
+            section.mt-5(audience-filter='vm.inBannerFilter' ng-show='vm.objBan.current')
+          h5(data-toggle="collapse" data-target="#collapseAudience" role="button" style="margin-top:15px;") Audience Targeting
+            .caret
+          .collapse.padding-10#collapseAudience
+            section(audience-filter='vm.inAuFilter')
+          h5(data-toggle="collapse" data-target="#collapseSchedule" role="button" style="margin-top:15px;") Schedule
+            .caret
+          .collapse.padding-10#collapseSchedule
+            .row
+              .form-group.col-md-6(validator)
+                label {{app.isLang === "VN" ? "Từ ngày" : "From Date"}}
+                input.form-control(date-picker='vm.dateOptions' name='scheduleFrom' placeholder='{{app.isLang === "VN" ? "Chọn ngày" : "Pick a date"}}',
+                  ng-model='vm.obj.scheduleFrom' ng-disabled="vm.trialUser" required)
+              .form-group.col-md-6(validator)
+                label {{app.isLang === "VN" ? "Đến ngày" : "To Date"}}
+                input.form-control(date-picker='vm.dateOptions' name='scheduleTo' placeholder='Unlimited',
+                  ng-model='vm.obj.scheduleTo' validator-date='From Date' date-after='vm.obj.scheduleFrom' ng-disabled="vm.trialUser")
+            .row
+              .form-group.col-md-6
+                label {{app.isLang === "VN" ? "Từ khoảng thời gian" : "From Time"}}
+                select.form-control(name='startTimeOfDay' ng-model='vm.obj.startTimeOfDay'
+                  ng-options='t.text as t.value for t in vm.timeOptions')
+                  option(value='') Unlimited
+              .form-group.col-md-6(validator)
+                label {{app.isLang === "VN" ? "Đến khoảng thời gian" : "To Time"}}
+                select.form-control(name='endTimeOfDay', placeholder='23:59' ng-model='vm.obj.endTimeOfDay'
+                  ng-options='t.text as t.value for t in vm.timeOptions'
+                  min='vm.obj.startTimeOfDay')
+                  option(value='') Unlimited
+            .form-group
+              label {{app.isLang === "VN" ? "Ngày chạy trong tuần (Để trống để chạy tất cả các ngày trong tuần)" : "Days of week"}}
+              select(select2='vm.selectDayOfWeekOptions' name='daysOfWeek' multiple="multiple"
+                ng-model='vm.obj.daysOfWeek')
+
+        form(novalidate name='vm.fmEdit3' ng-show='vm.fm.currentStep == 3')
+          h5.margin-top-0
+            | 3/{{vm.fm.totalStep}} KPI
+            small.text-italic.m-l-5(style='margin-left: 10px') {{app.isLang === "VN" ? "(Để trống hoặc set 0 để chạy không giới hạn)" : "(Leave blank or set 0 to run unlimited)"}}
+          .row
+            .form-group.col-md-6(validator)
+              label {{app.isLang === "VN" ? "KPI tổng" : "Total KPI"}}
+              input.form-control(type='number' name='kpi', placeholder='Unlimited', ng-model='vm.obj.kpi' min=0)
+            .form-group.col-md-6(validator)
+              label {{app.isLang === "VN" ? "KPI hàng ngày" : "Daily KPI"}}
+              input.form-control(type='number' name='kpiPerDay', placeholder='Unlimited', ng-model='vm.obj.kpiPerDay' min=0 ng-attr-max='{{vm.obj.kpi}}')
+          .form-group
+            label
+              a.text-primary(data-toggle='modal', data-target='#fmKpi' ng-click='vm.onAction("initDetailKpi")')
+                i.icon-cog.mr-5
+                | {{app.isLang === "VN" ? "Xem cấu hình KPI chi tiết" : "Show detailed KPI configuration"}}
+                span.caret
+      .modal-footer
+        .pull-left
+          ul.pagination.pagination-flat.pagination-rounded
+            li(ng-click='vm.fmBack()' ng-class='{"disabled": vm.fm.currentStep == 1}')
+              a ‹
+            li(ng-repeat='i in vm.arrStep'
+              ng-class='{"active": vm.fm.currentStep == i}'
+              ng-click='vm.fmGo(i)')
+              a(ng-bind='::i' ng-class='{"text-danger": vm.fmValid(i)}')
+            li(ng-click='vm.fmNext()' ng-class='{"disabled": vm.fm.currentStep == 3}')
+              a ›
+        button.btn.btn-link(type='button' data-dismiss='modal', aria-label='Close', ng-click='vm.closeModal()') {{app.isLang === "VN" ? "Hủy bỏ" : "Cancel"}}
+        button.btn(type='submit' data-dismiss='modal' ng-disabled='!vm.fmValid()'
+          ng-click='vm.onAction("create")'
+          ng-class='vm.obj.id ? "btn-info" : "btn-primary"'
+          ng-bind='vm.obj.id ? (app.isLang === "VN" ? "Sửa" : "Edit") : (app.isLang === "VN" ? "Tạo" : "Create")')

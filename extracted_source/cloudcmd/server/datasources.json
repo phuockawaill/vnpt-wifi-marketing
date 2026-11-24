@@ -1,0 +1,23 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "main": {
+    "host": "127.0.0.1",
+    "port": 27017,
+    "database": "test",
+    "password": "",
+    "name": "main",
+    "user": "",
+    "connector": "mongodb",
+    "enableGeoIndexing": true
+  },
+  "productSave": {
+    "host": "127.0.0.1",
+    "port": "52717",
+    "user": "client",
+    "password": "wifiex4um0ng0Cli3nt!%40#qwe123",
+    "database": "resource"
+  }
+}

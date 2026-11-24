@@ -1,0 +1,569 @@
+{
+  "brands": [
+    {
+      "id": "579b87a3b52875c0804f1177",
+      "name": "Vinamilk",
+      "email": "vinamilk@mail.com",
+      "ownedBy": "579b87a3b52875c0804f1129",
+      "ownedByUsername": "advertiser"
+    },
+    {
+      "id": "579b87a3b52875c0804f1183",
+      "name": "Clear",
+      "email": "clear@mail.com",
+      "ownedBy": "579b87a3b52875c0804f1129",
+      "ownedByUsername": "advertiser"
+    },
+    {
+      "id": "579b87a3b52875c0804f1184",
+      "name": "PS",
+      "email": "ps@mail.com",
+      "ownedBy": "579b87a3b52875c0804f112a",
+      "ownedByUsername": "advertiser2"
+    },
+    {
+      "id": "579b87a3b52875c0804f1185",
+      "name": "Pepsi",
+      "email": "pepsi@mail.com",
+      "ownedBy": "579b87a3b52875c0804f112a",
+      "ownedByUsername": "advertiser2"
+    }
+  ],
+  "locations": [
+    {
+      "id": "579b87a3b52875c0804f1172",
+      "name": "Cafe Hình Như Là",
+      "address": "3 Cửu Long, Cư xá Bắc Hải, Phường 15, Quận 10",
+      "categoryId": "coffee",
+      "categoryName": "Coffee Shops",
+      "cityId": "tp_hcm",
+      "cityName": "TP Hồ Chí Minh",
+      "noOfAccessPoint": 3,
+      "clickPerMonth": 5000,
+      "reachPerMonth": 45000,
+      "location": {
+        "lat": 10.7819115,
+        "lng": 106.659925
+      },
+      "ownedBy": "579b87a3b52875c0804f112d",
+      "ownedByUsername": "publisher2"
+    },
+    {
+      "id": "579b87a3b52875c0804f1178",
+      "name": "Cafe Viva",
+      "address": "27 Nguyễn Minh Hoàng, Phường 12, Tân Bình",
+      "categoryId": "coffee",
+      "categoryName": "Coffee Shops",
+      "cityId": "tp_hcm",
+      "cityName": "TP Hồ Chí Minh",
+      "noOfAccessPoint": 2,
+      "clickPerMonth": 4000,
+      "reachPerMonth": 40000,
+      "location": {
+        "lat": 10.799995,
+        "lng": 106.6505794
+      },
+      "ownedBy": "579b87a3b52875c0804f112d",
+      "ownedByUsername": "publisher2"
+    },
+    {
+      "id": "579b87a3b52875c0804f117e",
+      "name": "Cafe Trung Nguyên",
+      "address": "48 Nguyễn Bỉnh Khiêm, TP. Nha Trang",
+      "categoryId": "coffee",
+      "categoryName": "Coffee Shops",
+      "cityId": "khanh_hoa",
+      "cityName": "Khánh Hòa",
+      "noOfAccessPoint": 2,
+      "clickPerMonth": 2000,
+      "reachPerMonth": 15000,
+      "location": {
+        "lat": 12.2571254,
+        "lng": 109.1924921
+      },
+      "ownedBy": "579b87a3b52875c0804f112d",
+      "ownedByUsername": "publisher2"
+    },
+    {
+      "id": "579b87a3b52875c0804f1182",
+      "name": "Nội Bài International Airport",
+      "address": "Phú Minh, Sóc Sơn, Phú Cường, Sóc Sơn",
+      "categoryId": "airport",
+      "categoryName": "Airports",
+      "cityId": "ha_noi",
+      "cityName": "Hà Nội",
+      "noOfAccessPoint": 30,
+      "clickPerMonth": 100000,
+      "reachPerMonth": 5000000,
+      "location": {
+        "lat": 21.2187149,
+        "lng": 105.8019822
+      },
+      "ownedBy": "579b87a3b52875c0804f112b",
+      "ownedByUsername": "publisher"
+    },
+    {
+      "id": "579b87a3b52875c0804f1189",
+      "name": "Tân Sơn Nhất International Airport",
+      "address": "Tân Bình",
+      "categoryId": "airport",
+      "categoryName": "Airports",
+      "cityId": "tp_hcm",
+      "cityName": "TP Hồ Chí Minh",
+      "noOfAccessPoint": 50,
+      "clickPerMonth": 200000,
+      "reachPerMonth": 2000000,
+      "location": {
+        "lat": 16.0530722,
+        "lng": 108.199187
+      },
+      "ownedBy": "579b87a3b52875c0804f112b",
+      "ownedByUsername": "publisher"
+    },
+    {
+      "id": "579b87a3b52875c0804f118b",
+      "name": "Đà Nẵng International Airport",
+      "address": "Duy Tân, Hòa Thuận Tây, Quận Hải Châu",
+      "categoryId": "airport",
+      "categoryName": "Airports",
+      "cityId": "da_nang",
+      "cityName": "Đà Nẵng",
+      "noOfAccessPoint": 20,
+      "clickPerMonth": 100000,
+      "reachPerMonth": 1000000,
+      "location": {
+        "lat": 16.0530722,
+        "lng": 108.199187
+      },
+      "ownedBy": "579b87a3b52875c0804f112b",
+      "ownedByUsername": "publisher"
+    },
+    {
+      "id": "579b87a3b52875c0804f118d",
+      "name": "KTX ĐH Quốc Gia Khu A",
+      "address": "Thủ Đức",
+      "categoryId": "university",
+      "categoryName": "Universities",
+      "cityId": "tp_hcm",
+      "cityName": "TP Hồ Chí Minh",
+      "noOfAccessPoint": 100,
+      "clickPerMonth": 500000,
+      "reachPerMonth": 2000000,
+      "location": {
+        "lat": 10.8782309,
+        "lng": 106.8040217
+      },
+      "ownedBy": "579b87a3b52875c0804f112b",
+      "ownedByUsername": "publisher"
+    },
+    {
+      "id": "579b87a3b52875c0804f118f",
+      "name": "KTX ĐH Công Nghiệp",
+      "address": "Gò Vấp",
+      "categoryId": "university",
+      "categoryName": "Universities",
+      "cityId": "tp_hcm",
+      "cityName": "TP Hồ Chí Minh",
+      "noOfAccessPoint": 70,
+      "clickPerMonth": 300000,
+      "reachPerMonth": 2000000,
+      "location": {
+        "lat": 10.8217591,
+        "lng": 106.6848502
+      },
+      "ownedBy": "579b87a3b52875c0804f112d",
+      "ownedByUsername": "publisher2"
+    },
+    {
+      "id": "579b87a3b52875c0804f1190",
+      "name": "KTX QN",
+      "address": "Vạn Tường, Bình Trị, Bình Sơn",
+      "categoryId": "university",
+      "categoryName": "Universities",
+      "cityId": "quang_ngai",
+      "cityName": "Quảng Ngãi",
+      "noOfAccessPoint": 30,
+      "clickPerMonth": 100000,
+      "reachPerMonth": 500000,
+      "location": {
+        "lat": 15.329776,
+        "lng": 108.8546307
+      }
+    }
+  ],
+  "banners": [
+    {
+      "id": "579b87a3b52875c0804f1173",
+      "name": "Banner all 1",
+      "width": 500,
+      "height": 200,
+      "htmlCode": "<p>Banner all 1</p>\n",
+      "target": "all",
+      "ownedBy": "579b87a3b52875c0804f1129",
+      "ownedByUsername": "advertiser"
+    },
+    {
+      "id": "579b87a3b52875c0804f117c",
+      "name": "Banner mobile 1",
+      "width": 500,
+      "height": 200,
+      "htmlCode": "<p>Banner mobile 1</p>\n",
+      "target": "mobile",
+      "ownedBy": "579b87a3b52875c0804f1129",
+      "ownedByUsername": "advertiser"
+    },
+    {
+      "id": "579b87a3b52875c0804f1181",
+      "name": "Banner desktop 1",
+      "width": 500,
+      "height": 200,
+      "htmlCode": "<p>Banner desktop 1</p>\n",
+      "target": "desktop",
+      "ownedBy": "579b87a3b52875c0804f1129",
+      "ownedByUsername": "advertiser"
+    },
+    {
+      "id": "579b87a3b52875c0804f1195",
+      "name": "Banner all 2",
+      "width": 500,
+      "height": 200,
+      "htmlCode": "<p>Banner all 2</p>\n",
+      "target": "all",
+      "ownedBy": "579b87a3b52875c0804f112a",
+      "ownedByUsername": "advertiser2"
+    },
+    {
+      "id": "579b87a3b52875c0804f1196",
+      "name": "Banner mobile 2",
+      "width": 500,
+      "height": 200,
+      "htmlCode": "<p>Banner mobile 2</p>\n",
+      "target": "mobile",
+      "ownedBy": "579b87a3b52875c0804f112a",
+      "ownedByUsername": "advertiser2"
+    },
+    {
+      "id": "579b87a3b52875c0804f1197",
+      "name": "Banner desktop 2",
+      "width": 500,
+      "height": 200,
+      "htmlCode": "<p>Banner desktop 2</p>\n",
+      "target": "desktop",
+      "ownedBy": "579b87a3b52875c0804f112a",
+      "ownedByUsername": "advertiser2"
+    }
+  ],
+  "campaigns": [
+    {
+      "id": "579b87a3b52875c0804f1191",
+      "name": "Campaign 1",
+      "scheduleFrom": "2016-03-01T04:00:00Z",
+      "scheduleTo": "2016-12-30T04:00:00Z",
+      "audience": {
+        "age": [
+          "18_to_24",
+          "25_to_34",
+          "35_to_44"
+        ],
+        "gender": ["female"],
+        "os": null
+      },
+      "kpi": 50000,
+      "landingPageUrl": "page1.vn",
+      "brandId": "579b87a3b52875c0804f1184",
+      "brandName": "PS",
+      "categoryId": "offer",
+      "categoryName": "Get people to claim your offer",
+      "locations": [
+        {
+          "locationId": "579b87a3b52875c0804f1182",
+          "locationName": "Noi Bai Airport",
+          "cityId": "ha_noi",
+          "cityName": "Hà Nội",
+          "categoryId": "airport",
+          "categoryName": "Airports",
+          "kpiPerDay": 217
+        },
+        {
+          "locationId": "579b87a3b52875c0804f1172",
+          "locationName": "Cafe Hinh Nhu La",
+          "cityId": "tp_hcm",
+          "cityName": "TP Hồ Chí Minh",
+          "categoryId": "coffee",
+          "categoryName": "Coffee Shops",
+          "kpiPerDay": 125
+        },
+        {
+          "locationId": "579b87a3b52875c0804f1189",
+          "locationName": "Tan Son Nhat Airport",
+          "cityId": "tp_hcm",
+          "cityName": "TP Hồ Chí Minh",
+          "categoryId": "airport",
+          "categoryName": "Airports",
+          "kpiPerDay": 75
+        },
+        {
+          "locationId": "579b87a3b52875c0804f118b",
+          "locationName": "Da Nang Airport",
+          "cityId": "da_nang",
+          "cityName": "Đà Nẵng",
+          "categoryId": "airport",
+          "categoryName": "Airports",
+          "kpiPerDay": 53
+        },
+        {
+          "locationId": "579b87a3b52875c0804f1178",
+          "locationName": "Cafe VivaStar",
+          "cityId": "tp_hcm",
+          "cityName": "TP Hồ Chí Minh",
+          "categoryId": "coffee",
+          "categoryName": "Coffee Shops",
+          "kpiPerDay": 145
+        },
+        {
+          "locationId": "579b87a3b52875c0804f117e",
+          "locationName": "Cafe Trung Nguyen",
+          "cityId": "khanh_hoa",
+          "cityName": "Khánh Hòa",
+          "categoryId": "coffee",
+          "categoryName": "Coffee Shops",
+          "kpiPerDay": 56
+        }
+      ],
+      "bannerMobileId": "579b87a3b52875c0804f1195",
+      "bannerMobileName": "Banner all 2",
+      "bannerDesktopId": "579b87a3b52875c0804f1197",
+      "bannerDesktopName": "Banner desktop 2",
+      "ownedBy": "579b87a3b52875c0804f112a",
+      "ownedByUsername": "advertiser2"
+    },
+    {
+      "id": "579b87a3b52875c0804f1192",
+      "name": "Campaign 2",
+      "scheduleFrom": "2016-04-01T04:00:00Z",
+      "scheduleTo": "2016-12-30T04:00:00Z",
+      "audience": {
+        "age": [
+          "under_18",
+          "18_to_24"
+        ],
+        "gender": ["male"],
+        "os": null
+      },
+      "kpi": 40000,
+      "landingPageUrl": "page2.vn",
+      "brandId": "579b87a3b52875c0804f1183",
+      "brandName": "Clear",
+      "categoryId": "offer",
+      "categoryName": "Get people to claim your offer",
+      "locations": [
+        {
+          "locationId": "579b87a3b52875c0804f1178",
+          "locationName": "Cafe VivaStar",
+          "cityId": "tp_hcm",
+          "cityName": "TP Hồ Chí Minh",
+          "categoryId": "coffee",
+          "categoryName": "Coffee Shops",
+          "kpiPerDay": 142
+        },
+        {
+          "locationId": "579b87a3b52875c0804f117e",
+          "locationName": "Cafe Trung Nguyen",
+          "cityId": "khanh_hoa",
+          "cityName": "Khánh Hòa",
+          "categoryId": "coffee",
+          "categoryName": "Coffee Shops",
+          "kpiPerDay": 179
+        },
+        {
+          "locationId": "579b87a3b52875c0804f1189",
+          "locationName": "Tan Son Nhat Airport",
+          "cityId": "tp_hcm",
+          "cityName": "TP Hồ Chí Minh",
+          "categoryId": "airport",
+          "categoryName": "Airports",
+          "kpiPerDay": 132
+        },
+        {
+          "locationId": "579b87a3b52875c0804f118f",
+          "locationName": "KTX ĐH Công Ngiệp",
+          "cityId": "tp_hcm",
+          "cityName": "TP Hồ Chí Minh",
+          "categoryId": "university",
+          "categoryName": "Universities",
+          "kpiPerDay": 186
+        },
+        {
+          "locationId": "579b87a3b52875c0804f1182",
+          "locationName": "Noi Bai Airport",
+          "cityId": "ha_noi",
+          "cityName": "Hà Nội",
+          "categoryId": "airport",
+          "categoryName": "Airports",
+          "kpiPerDay": 201
+        },
+        {
+          "locationId": "579b87a3b52875c0804f1172",
+          "locationName": "Cafe Hinh Nhu La",
+          "cityId": "tp_hcm",
+          "cityName": "TP Hồ Chí Minh",
+          "categoryId": "coffee",
+          "categoryName": "Coffee Shops",
+          "kpiPerDay": 105
+        }
+      ],
+      "bannerMobileId": "579b87a3b52875c0804f1173",
+      "bannerMobileName": "Banner all 1",
+      "bannerDesktopId": "579b87a3b52875c0804f1181",
+      "bannerDesktopName": "Banner desktop 1",
+      "ownedBy": "579b87a3b52875c0804f1129",
+      "ownedByUsername": "advertiser"
+    },
+    {
+      "id": "579b87a3b52875c0804f1193",
+      "name": "Campaign 3",
+      "scheduleFrom": "2016-07-01T00:00:00Z",
+      "scheduleTo": "2016-12-30T04:00:00Z",
+      "audience": {
+        "age": [
+          "35_to_44",
+          "higher_45"
+        ],
+        "gender": null,
+        "os": null
+      },
+      "kpi": 10000,
+      "landingPageUrl": "page3.vn",
+      "brandId": "579b87a3b52875c0804f1185",
+      "brandName": "Pepsi",
+      "categoryId": "video",
+      "categoryName": "Get video views",
+      "locations": [
+        {
+          "locationId": "579b87a3b52875c0804f1189",
+          "locationName": "Tan Son Nhat Airport",
+          "cityId": "tp_hcm",
+          "cityName": "TP Hồ Chí Minh",
+          "categoryId": "airport",
+          "categoryName": "Airports",
+          "kpiPerDay": 165
+        },
+        {
+          "locationId": "579b87a3b52875c0804f118d",
+          "locationName": "KTX ĐH Quốc Gia",
+          "cityId": "tp_hcm",
+          "cityName": "TP Hồ Chí Minh",
+          "categoryId": "university",
+          "categoryName": "Universities",
+          "kpiPerDay": 202
+        },
+        {
+          "locationId": "579b87a3b52875c0804f117e",
+          "locationName": "Cafe Trung Nguyen",
+          "cityId": "khanh_hoa",
+          "cityName": "Khánh Hòa",
+          "categoryId": "coffee",
+          "categoryName": "Coffee Shops",
+          "kpiPerDay": 157
+        },
+        {
+          "locationId": "579b87a3b52875c0804f118b",
+          "locationName": "Da Nang Airport",
+          "cityId": "da_nang",
+          "cityName": "Đà Nẵng",
+          "categoryId": "airport",
+          "categoryName": "Airports",
+          "kpiPerDay": 226
+        },
+        {
+          "locationId": "579b87a3b52875c0804f118f",
+          "locationName": "KTX ĐH Công Ngiệp",
+          "cityId": "tp_hcm",
+          "cityName": "TP Hồ Chí Minh",
+          "categoryId": "university",
+          "categoryName": "Universities",
+          "kpiPerDay": 96
+        },
+        {
+          "locationId": "579b87a3b52875c0804f1172",
+          "locationName": "Cafe Hinh Nhu La",
+          "cityId": "tp_hcm",
+          "cityName": "TP Hồ Chí Minh",
+          "categoryId": "coffee",
+          "categoryName": "Coffee Shops",
+          "kpiPerDay": 140
+        },
+        {
+          "locationId": "579b87a3b52875c0804f1178",
+          "locationName": "Cafe VivaStar",
+          "cityId": "tp_hcm",
+          "cityName": "TP Hồ Chí Minh",
+          "categoryId": "coffee",
+          "categoryName": "Coffee Shops",
+          "kpiPerDay": 196
+        },
+        {
+          "locationId": "579b87a3b52875c0804f1182",
+          "locationName": "Noi Bai Airport",
+          "cityId": "ha_noi",
+          "cityName": "Hà Nội",
+          "categoryId": "airport",
+          "categoryName": "Airports",
+          "kpiPerDay": 181
+        }
+      ],
+      "bannerMobileId": "579b87a3b52875c0804f1195",
+      "bannerMobileName": "Banner all 2",
+      "bannerDesktopId": "579b87a3b52875c0804f1195",
+      "bannerDesktopName": "Banner all 2",
+      "ownedBy": "579b87a3b52875c0804f112a",
+      "ownedByUsername": "advertiser2"
+    },
+    {
+      "id": "579b87a3b52875c0804f1194",
+      "name": "Campaign 4",
+      "scheduleFrom": "2016-07-07T04:00:00Z",
+      "scheduleTo": "2016-12-30T04:00:00Z",
+      "audience": {
+        "age": [
+          "25_to_34",
+          "35_to_44"
+        ],
+        "gender": ["female"],
+        "os": ["android"]
+      },
+      "kpi": 15000,
+      "landingPageUrl": "page4.vn",
+      "brandId": "579b87a3b52875c0804f1177",
+      "brandName": "Vinamilk",
+      "categoryId": "collect",
+      "categoryName": "Collect leads for your business",
+      "locations": [
+        {
+          "locationId": "579b87a3b52875c0804f118f",
+          "locationName": "KTX ĐH Công Ngiệp",
+          "cityId": "tp_hcm",
+          "cityName": "TP Hồ Chí Minh",
+          "categoryId": "university",
+          "categoryName": "Universities",
+          "kpiPerDay": 199
+        },
+        {
+          "locationId": "579b87a3b52875c0804f117e",
+          "locationName": "Cafe Trung Nguyen",
+          "cityId": "khanh_hoa",
+          "cityName": "Khánh Hòa",
+          "categoryId": "coffee",
+          "categoryName": "Coffee Shops",
+          "kpiPerDay": 249
+        }
+      ],
+      "bannerMobileId": "579b87a3b52875c0804f117c",
+      "bannerMobileName": "Banner mobile 1",
+      "bannerDesktopId": "579b87a3b52875c0804f1173",
+      "bannerDesktopName": "Banner all 1",
+      "ownedBy": "579b87a3b52875c0804f1129",
+      "ownedByUsername": "advertiser"
+    }
+  ]
+}

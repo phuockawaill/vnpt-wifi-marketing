@@ -1,0 +1,62 @@
+form#fmCode.modal.fade.in(name='vm.fmCode', aria-labelledby='fmCodeLabel' novalidate ng-submit='vm.onAction("generateCode")')
+  .modal-dialog
+    .modal-content
+      .modal-header.bg-success
+        button.close(type='button', data-dismiss='modal', aria-label='Close') ×
+        h4#fmCodeLabel.modal-title Get render code
+      .modal-body
+        .form-group.row
+            label.col-md-4.control-label Model
+            .col-md-8
+              select.form-control(name='hotspotType', ng-options='p.id as p.name for p in vm.hotspotTypes', ng-model='vm.hotspotType', style='width: 100%;')
+        .form-group(ng-if="vm.hotspotType === 'xirrus'")
+          label External URL
+          .input-group
+            input#urlSrcEx.form-control(name='urlSrcEx', placeholder='Link add to Controller',
+              ng-model='vm.objType.url' ng-disabled='!vm.objType.url')
+            .input-group-btn
+              button.btn.btn-primary(type='button' ng-disabled='!vm.objType.url' ng-click='vm.onAction("copyCode", "urlSrcEx")') Copy
+              button.btn.btn-success(type='button' ng-click='vm.onAction("generateUrl")') Generate
+        .form-group(ng-if="vm.hotspotType === 'default'")
+          label Mac field name
+          .input-group
+            input.form-control(name='name', placeholder='Cookie name/Querystring name to get mac',
+              ng-model='vm.objCode.macField', required)
+            .input-group-btn
+              button.btn.btn-success(type='submit') Generate
+        .form-group(ng-show='vm.objCode.jsCode && (vm.hotspotType === "default" || vm.hotspotType === "pfsense")')
+          label Generated code
+          textarea#code.form-control.pre-scrollable(name="code" rows="10" ng-bind='vm.objCode.jsCode')
+      .modal-footer
+        button.btn.btn-link(type='button', data-dismiss='modal') Close
+        button.btn.btn-success(type='button' ng-if="vm.hotspotType === 'default' || vm.hotspotType === 'pfsense'" ng-click='vm.onAction("downloadCode")' ng-disabled='!vm.objCode.jsCode') Download
+        button.btn.btn-primary(type='button' ng-if="vm.hotspotType === 'pfsense'" ng-click='vm.onAction("generateUrl")') Generate
+
+form#fmCatfishCode.modal.fade.in(name='vm.fmCatfishCode', aria-labelledby='fmCatfishCodeLabel' novalidate ng-submit='vm.onAction("generateCode", true)')
+  .modal-dialog
+    .modal-content
+      .modal-header.bg-success
+        button.close(type='button', data-dismiss='modal', aria-label='Close') ×
+        h4#fmCatfishCodeLabel.modal-title Campaign {{vm.objCatfishCode.campaignName}} &rArr; Get Catfish
+      .modal-body
+        .form-group
+          label Mac field name
+          .input-group
+            input.form-control(name='name', placeholder='Cookie name/Querystring name to get mac',
+              ng-model='vm.objCatfishCode.macField', required)
+            .input-group-btn
+              button.btn.btn-success(type='submit') Generate
+        .form-group
+          label Whitelist Hostnames
+          input.form-control(name='hosts', placeholder='hostnames separated by commas or spaces',
+            ng-model='vm.objCatfishCode.hosts')
+        .form-group(validator)
+          label AP's Host
+          input.form-control(name='host', placeholder='Entering host:port',
+            ng-model='vm.objCatfishCode.apRoute' ng-pattern="/^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]):[0-9]+$/")
+        .form-group(ng-show='vm.objCatfishCode.jsCode')
+          label Generated code
+          textarea#catfishCode.form-control.pre-scrollable(name="code" rows="10" ng-bind='vm.objCatfishCode.jsCode')
+      .modal-footer
+        button.btn.btn-link(type='button', data-dismiss='modal') Close
+        button.btn.btn-success(type='button' ng-click='vm.onAction("copyCode")' ng-disabled='!vm.objCatfishCode.jsCode') Copy

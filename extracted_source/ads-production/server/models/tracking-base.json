@@ -1,0 +1,49 @@
+{
+  "name": "TrackingBase",
+  "base": "PersistedModel",
+  "strict": true,
+  "idInjection": true,
+  "indexes": {},
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "TimeStamp": {
+      "validateUpsert": true,
+      "required": false
+    }
+  },
+  "properties": {
+    "mac": {
+      "type": "string"
+    },
+    "ip": {
+      "type": "string"
+    },
+    "actions": {
+      "type": [
+        "object"
+      ],
+      "require": true
+    },
+    "emailActions": {
+      "type": [
+        "object"
+      ]
+    },
+    "count": {
+      "type": "number",
+      "default": 1
+    },
+    "meta": {
+      "type": "object"
+    },
+    "uaString": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

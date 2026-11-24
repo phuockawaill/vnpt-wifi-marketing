@@ -1,0 +1,98 @@
+.page-container(ng-if='vm.mode==="generateForm"')
+  .panel.panel-default
+    .panel-heading.clearfix
+      .panel-title.heading-form
+        a.heading-elements-toggle
+          i.icon-more
+        .form-group.has-feedback.has-feedback-left.m-b-0(style="width: 250px")
+          input.form-control(type='text', placeholder='Type to search...' ng-model='vm.gridOptionsForm.quickFilterText')
+          .form-control-feedback
+            i.icon-search4
+      .heading-elements
+        button.btn.btn-default.heading-btn(type='button' ng-click='vm.onAction("refresh")')
+          i.icon-spinner11.position-left
+          |  Refresh
+        a.btn.btn-labeled.btn-labeled-left.bg-blue.heading-btn(data-toggle="modal" data-target="#fmGenerate" ng-click="vm.onAction('newForm')")
+          | Generate Form
+          b
+            i.icon-plus3
+    .ag-material(ag-grid='vm.gridOptionsForm' style="height: 700px")
+
+
+
+
+form#fmGenerate.modal.fade.in(name='vm.fmUrl', aria-labelledby='fmUrlLabel' novalidate)
+  .modal-dialog.banner-form
+    .modal-content
+      .modal-header.bg-primary
+        button.close(type='button', data-dismiss='modal', aria-label='Close') ×
+        h4#fmCodeLabel.modal-title Generate Form
+      .modal-body
+        .form-group
+          h5 User Demography
+          div(style={display: 'flex', width: '100%', "flex-direction": 'row'})
+            div(style={width: '50%'})
+              .input-group
+                span Full name
+                input.form-control.params(ng-model='vm.userData.name')
+              .input-group
+                span Phone number
+                input.form-control.params(ng-model='vm.userData.phone')
+              .input-group
+                span Email
+                input.form-control.params(ng-model='vm.userData.email')
+              .input-group
+                span Gender
+                input.form-control.params(ng-model='vm.userData.gender')
+            div(style={width: '50%'})
+              .input-group
+                span Age
+                input.form-control.params(ng-model='vm.userData.age')
+              .input-group
+                span Income
+                input.form-control.params(ng-model='vm.userData.income')
+              .input-group
+                span Nationality
+                input.form-control.params(ng-model='vm.userData.country')
+              .input-group
+                span Hobbies
+                input.form-control.params(ng-model='vm.userData.favorite')
+        .form-group
+          h5 Survey Fields
+            i.icon-plus-circle2(ng-click='vm.onAction("addField")' style={'margin-left': '10px', color: 'blue', cursor: 'pointer'})
+          div(style={display: 'inline-block'})
+            .input-group(ng-repeat="l in vm.userData.survey track by $index", style={float: 'left', "margin-right": '15px'})
+              span Field {{$index + 1}}
+                i.icon-minus-circle2(ng-click='vm.onAction("removeField", $index)' style={'margin-left': '10px', color: 'red', cursor: 'pointer'})
+              input.form-control.params(ng-model='vm.userData.survey[$index]')
+        .form-group
+          h5(style={width:'100%', display: 'inline-block'}) Form Properties
+          .input-group(style={width: '50%', float: 'left'})
+            span Method {{vm.userData.method}}
+            label.switch
+              input(type="checkbox" ng-true-value="'POST'" ng-false-value="'GET'" ng-model="vm.userData.method")
+              span.slider.round
+          .input-group(style={width: '50%', height: '30px'})
+            span Action url
+            input.form-control.params(ng-model='vm.userData.actionurl')
+            i(style={"font-size": '11px', color: 'red', "padding-top": '7px'} ng-if="!vm.userData.actionurl") (*)
+          .input-group(style={width: '50%', height: '30px'})
+            span User URL Field
+            input.form-control.params(ng-model='vm.userData.userurl')
+            i(style={"font-size": '11px', color: 'red', "padding-top": '7px'} ng-if="!vm.userData.userurl") (*)
+          .input-group(style={width: '50%', float: 'left'})
+            span Form name
+            input.form-control.params(ng-model='vm.userData.formName')
+            i(style={"font-size": '11px', color: 'red', "padding-top": '7px'} ng-if="!vm.userData.formName") (*)
+          .input-group(style={width: '50%'})
+            span Button ID
+            input.form-control.params(ng-model='vm.userData.buttonId')
+            i(style={"font-size": '11px', color: 'red', "padding-top": '7px'} ng-if="!vm.userData.buttonId") (*)
+        .form-group
+          label(style={float:'left', margin: '8px'}) Generated code
+          button.btn.btn-primary(ng-disabled='!vm.userData.generateCode' ng-click='vm.onAction("copyCode")') Copy
+          textarea#code.form-control.pre-scrollable(name="code" rows="10" ng-bind='vm.userData.generateCode' ng-show='vm.userData.generateCode')
+      .modal-footer
+        span(ng-if="!vm.userData.actionurl || !vm.userData.formName || !vm.userData.buttonId" style={color: 'red'}) Please declare required paramaters
+        button.btn.btn-link(type='button', data-dismiss='modal') Close
+        button.btn.btn-primary(type='button' ng-click='vm.onAction("generateCode")' ng-disabled="!vm.userData.actionurl || !vm.userData.formName || !vm.userData.buttonId") Generate

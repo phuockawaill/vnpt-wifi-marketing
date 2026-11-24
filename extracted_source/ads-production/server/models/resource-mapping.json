@@ -1,0 +1,44 @@
+{
+  "name": "ResourceMapping",
+  "base": "PersistedModel",
+  "strict": true,
+  "idInjection": true,
+  "indexes": {
+    "key_index": {
+      "keys": {
+        "resourceType": 1,
+        "resourceId": 1,
+        "resourceGroupId": 1
+      },
+      "options": {
+        "unique": true
+      }
+    }
+  },
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "resourceType": {
+      "type": "string",
+      "required": true
+    },
+    "scope": {
+      "type": "string",
+      "default": "OWNER"
+    },
+    "options": {
+      "type": "object"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "resourceGroup": {
+      "type": "belongsTo",
+      "model": "ResourceGroup",
+      "foreignKey": "resourceGroupId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

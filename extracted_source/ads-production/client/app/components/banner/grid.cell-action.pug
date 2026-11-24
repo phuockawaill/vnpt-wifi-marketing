@@ -1,0 +1,14 @@
+.btn-group.btn-group-xs
+  a.btn.btn-info(ng-click='vm.onAction("edit", data)')
+    |  {{app.isLang === "VN" ? "Sửa" : "Edit"}}
+  a.btn.btn-success(ng-click='vm.onAction("view", data)')
+    |  {{app.isLang === "VN" ? "Xem" : "View"}}
+  a.btn.btn-success(ng-click='vm.onAction("viewTab", data)')
+    |  {{app.isLang === "VN" ? "Xem trên tab mới" : "View on new tab"}}
+  .btn-group.btn-group-xs(ng-if="!vm.trialUser")
+    button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')
+      i.icon-more2
+    ul.dropdown-menu.dropdown-menu-right
+      li
+        a.text-danger(ng-click='vm.onAction("delete", data)')
+          |  {{app.isLang === "VN" ? "Xóa" : "Delete"}}

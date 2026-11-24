@@ -1,0 +1,25 @@
+form#fmConfig.modal.fade(modal='app.modalPassOptions' tabindex='-1' role='dialog' name='fmConfig'
+  ng-submit='app.updateConfig()')
+  .modal-dialog.modal-sm(ng-if='app.currentUser.profileName==="superadmin"')
+    .modal-content
+      .modal-header.bg-primary
+        button.close(type='button' data-dismiss='modal' aria-label='Close')
+          span(aria-hidden='true') ×
+        h4.modal-title Configuration
+      .modal-body
+        .form-bordered
+          .form-group
+            label Max file size (MB)
+            input.form-control(name='currentPw', type="number", min="1", placeholder='Max file size to upload',
+              ng-model='app.config.maxFileSize')
+          .form-group
+            label Cloudcmd source path
+            input.form-control(name='currentPw', placeholder='path to view file',
+              ng-model='app.config.cloudSourcePath')
+          .form-group
+            label Cloudcmd root directory
+            input.form-control(name='currentPw', placeholder='physical path on server',
+              ng-model='app.config.cloudDir')
+      .modal-footer
+        button.btn.btn-link(type='button' data-dismiss='modal') Cancel
+        input.btn.btn-success(type='submit' ng-value='"Save"')

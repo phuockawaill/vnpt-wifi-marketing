@@ -1,0 +1,33 @@
+form#fmBanner.modal.fade(novalidate name='fm.fmBan')
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header(ng-class='vm.obj.id ? "bg-info" : "bg-primary"')
+        button.close(type='button', data-dismiss='modal', aria-label='Close') ×
+        h4.modal-title Advanced Creative Ads
+      .modal-body
+        .form-group(ng-form name='vm.fmAudience')
+          label Creative Ads
+          .input-group
+            select.form-control.select-size-xs(select2='vm.selectBannerOptions' ng-model='vm.objBan.value')
+            .input-group-btn
+              button.btn.btn-primary.btn-icon(type='button' ng-disabled='!vm.objBan.value'
+                ng-click='vm.addBanner(vm.objBan.value)')
+                i.icon-plus2
+        div
+          button.btn.btn-rounded.btn-labeled.btn-labeled-right.mb-10.mr-10(
+            ng-repeat='b in vm.objBan.selected' ng-click='vm.editBanner(b)'
+            ng-class='b === vm.objBan.current ? "btn-primary" : "btn-default"')
+            span(ng-bind='::b.bannerName')
+            b(ng-click='vm.removeBanner(b)')
+              i.icon-cross
+        section.mt-5(audience-filter='vm.inBannerFilter' ng-show='vm.objBan.current')
+        .banner-form.form-group
+          .input-group
+            label.switch.col-sm-7
+              input(type="checkbox" ng-model="vm.obj.randomBanner")
+              span.slider.round
+            span(style="margin-top:2px;margin-left:10px") Random Creative Ads
+      .modal-footer
+        button.btn.btn-link(type='button' data-dismiss='modal') Cancel
+        button.btn(data-dismiss='modal' ng-click='vm.onAction("applyAdvancedBanner")'
+          ng-class='vm.obj.id ? "btn-info" : "btn-primary"') Apply

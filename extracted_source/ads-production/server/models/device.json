@@ -1,0 +1,119 @@
+{
+  "name": "Device",
+  "base": "PersistedModel",
+  "strict": true,
+  "idInjection": false,
+  "indexes": {},
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "TimeStamp": {
+      "validateUpsert": true,
+      "required": false
+    }
+  },
+  "hidden": [
+    "advertiserId",
+    "advertiserName",
+    "bannerId",
+    "bannerName",
+    "brandId",
+    "brandName",
+    "campaignCategoryId",
+    "campaignCategoryName",
+    "campaignCount",
+    "campaignId",
+    "campaignName",
+    "cityCount",
+    "cityName",
+    "locationCategoryId",
+    "locationCategoryName",
+    "locationCount",
+    "locationId",
+    "locationName"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "id": true,
+      "required": true
+    },
+    "mac": {
+      "type": "string",
+      "required": true
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "campaignId": ["string"]
+      }
+    },
+    "uaString": {
+      "type": "string"
+    },
+    "audience": {
+      "type": "object"
+    },
+    "survey": {
+      "type": "object"
+    },
+    "fb": {
+      "type": "object",
+      "fbId": {
+        "type": "string"
+      },
+      "fbName": {
+        "type": "string"
+      },
+      "gender": {
+        "type": "string"
+      },
+      "email": {
+        "type": "string"
+      }
+    },
+    "google": {
+      "type": "object"
+    },
+    "zalo": {
+      "type": "object"
+    },
+    "twitter ": {
+      "type": "object"
+    },
+    "category": ["string"],
+    "mainCategory": "string",
+    "voucher": "string",
+    "frequencyData": "object"
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getData"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "infoMac"
+    }
+  ],
+  "methods": {}
+}

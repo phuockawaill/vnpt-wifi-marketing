@@ -32,3 +32,15 @@ yarn-error.log*
 # OS generated files
 .DS_Store
 Thumbs.db
+
+# Virtual Machine and Large Binaries
+VM_/
+*.vmdk
+*.ovf
+*.zip
+__pycache__/
+
+# Extracted heavy compiled outputs (keep source code, exclude 3GB client dist)
+extracted_source/ads-production/dist/
+extracted_source/ads-production/backup/
+

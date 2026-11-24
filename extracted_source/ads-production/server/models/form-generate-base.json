@@ -1,0 +1,18 @@
+{
+  "name": "FormGenerateBase",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "scope": {},
+  "properties": {
+    "survey": {
+      "type": "array"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

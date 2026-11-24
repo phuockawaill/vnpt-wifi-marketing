@@ -1,0 +1,38 @@
+.login-container
+  .page-container
+    .page-content
+      .content-wrapper
+        ul(style='margin: 0 auto 5px auto; width: 450px; display: flex; list-style: none; padding: 0')
+          li(style="margin: 0 2px; padding: 0px 5px;" ng-class='vm.isLang === "VN" ? "active_flag" : ""', ng-click="vm.isLang = 'VN'")
+            a(href="")
+              img(ng-src='{{vm.vnFlUrl}}', alt="VietNam" width="16" height="16" title="Việt Nam")
+          li(style="margin: 0 2px; padding: 0px 5px;" ng-class='vm.isLang === "EN" ? "active_flag" : ""', ng-click="vm.isLang = 'EN'")
+            a(href="")
+              img(ng-src='{{vm.usFlUrl}}', alt="USA" width="16" height="16" title="English")
+        form#resetPassForm(name='vm.resetPassForm', ng-submit='vm.reset(vm.credentials, vm.resetPassForm.$valid)', novalidate)
+          .panel.panel-body.login-form(style='width: 450px')
+            .text-center
+              .icon-object.border-slate-300.text-slate-300
+                i.icon-unlocked2
+              h5.content-group
+                | {{vm.isLang === "VN" ? "Khôi phục mật khẩu" : "Reset Password"}}
+            .col-md-12
+              .form-group.has-feedback.has-feedback-left(validator)
+                label {{vm.isLang === "VN" ? "Tên đăng nhập" : "Username"}}
+                input.form-control(type='text', name='username', placeholder='{{vm.isLang === "VN" ? "Tên đăng nhập *" : "Username *"}}', ng-model='vm.credentials.username', ng-change='vm.trim()' required)
+                .form-control-feedback
+                  i.icon-user-check.text-muted
+            .col-md-12
+              .form-group.has-feedback.has-feedback-left(validator)
+                label {{vm.isLang === "VN" ? "Email khôi phục" : "Email"}}
+                input.form-control(type='email', name='email', placeholder='Email *', ng-model='vm.credentials.email' required)
+                .form-control-feedback
+                  i.icon-mail5.text-muted
+            .col-md-12
+              .form-group
+                button.btn.btn-primary.btn-block(type='submit')
+                  | Send Email
+                  i.fa.fa-share.position-right
+            .col-md-12(ng-show='vm.errorMessage')
+              .alert.bg-danger.alert-styled-left
+                span {{vm.errorMessage}}

@@ -1,0 +1,5 @@
+.btn-group.btn-group-xs
+  a.btn.btn-info(data-toggle='modal', data-target='#fmGenerate' ng-click='vm.onAction("editForm", data)')
+    |  {{app.isLang === "VN" ? "Sửa" : "Edit"}}
+  a.btn.btn-danger(ng-click='vm.onAction("deleteForm", data)')
+    |  {{app.isLang === "VN" ? "Xóa" : "Delete"}}

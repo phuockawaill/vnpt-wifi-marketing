@@ -1,0 +1,41 @@
+{
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "allowImportExportEverywhere": true
+  },
+  "extends": "airbnb-base",
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "globals": {
+    "jquery": true,
+    "$": true,
+    "angular": true
+  },
+  "plugins": [
+    "import"
+  ],
+  "settings": {
+    "import/resolver": "webpack"
+  },
+  "rules": {
+    "comma-dangle": ["error", "never"],
+    "no-underscore-dangle": "warn",
+    "global-require": "warn",
+    "class-methods-use-this": "warn",
+    "max-len": 0,
+    "no-console": "warn",
+    "import/no-extraneous-dependencies": "warn",
+    "indent": "off",
+    "no-confusing-arrow": [
+      "error",
+      {
+        "allowParens": false
+      }
+    ],
+    "no-multi-spaces": 0,
+    "key-spacing": "off",
+    "no-use-before-define": "off"
+  }
+}

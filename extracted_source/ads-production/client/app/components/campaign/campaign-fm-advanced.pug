@@ -1,0 +1,139 @@
+#fmAdvanced.modal.fade(novalidate name='fm.fmAdv')
+  .modal-dialog(style="width: 660px;")
+    .modal-content
+      .modal-header(ng-class='vm.obj.id ? "bg-info" : "bg-primary"')
+        button.close(type='button', data-dismiss='modal', aria-label='Close') ×
+        h4.modal-title {{app.isLang === "VN" ? "Cấu hình nâng cao" : "Campaign advanced configuration"}}
+      .tabbable.pt-5
+        ul.nav.nav-tabs.nav-tabs-bottom.no-margin-bottom
+          li.active
+            a(data-target='#tab-customField', data-toggle='tab') {{app.isLang === "VN" ? "Trường tự chọn" : "Custom field"}}
+          li
+            a(data-target='#tab-fb', data-toggle='tab') {{app.isLang === "VN" ? "Đăng nhập với Facebook" : "Login with Facebook"}}
+          li
+            a(data-target='#tab-gg', data-toggle='tab') {{app.isLang === "VN" ? "Đăng nhập với Google" : "Login with Google"}}
+          li
+            a(data-target='#tab-email', data-toggle='tab') Email Template
+        .tab-content
+          form#tab-customField.tab-pane.pb-20.form-inline.active(name='vm.fmCf' novalidate ng-submit='vm.onAction("addCustomField")')
+            table.table
+              thead
+                tr
+                  th {{app.isLang === "VN" ? "STT" : "No"}}
+                  th {{app.isLang === "VN" ? "Tên trường" : "Field name"}}
+                  th {{app.isLang === "VN" ? "Tên hiển thị" : "Display name"}}
+                  th Score
+                  th.text-right {{app.isLang === "VN" ? "Hành động" : "Action"}}
+                tr
+                  th
+                  th
+                    input.form-control(name='fieldName' placeholder='{{app.isLang === "VN" ? "Để tracking API" : "Used in tracking API"}}'
+                      ng-model='vm.cfObj.fieldName' required)
+                  th
+                    input.form-control(name='displayName' placeholder='{{app.isLang === "VN" ? "Hiển thị trong report" : "Displayed in report"}}'
+                      ng-model='vm.cfObj.displayName' required)
+                  th
+                    input.form-control(type='checkbox' name='displayName' ng-model='vm.cfObj.countPoint')
+                  th.text-right
+                    input.btn.btn-success(type='submit' value='{{app.isLang === "VN" ? "Thêm" : "Add"}}' ng-disabled='vm.fmCf.$invalid')
+              tbody
+                tr(ng-repeat='f in vm.cfObjs track by f.fieldName')
+                  td(ng-bind='$index + 1')
+                  td(ng-bind='f.fieldName')
+                  td(ng-bind='f.displayName')
+                  td(ng-bind='f.countPoint?"Yes":"No"')
+                  td.text-right
+                    input.btn.btn-danger(type='button' value='Delete'
+                      ng-click='vm.onAction("deleteCustomField", $index)')
+          form#tab-fb.tab-pane.pt-20.ph-20(name='vm.fmFb' novalidate)
+            .row
+              .form-group.col-sm-6
+                label App ID
+                input.form-control(type='text', name='fbAppId' placeholder='Facebook App ID'
+                  ng-model='vm.fbObj.appId')
+              .form-group.col-sm-6
+                label App Secret
+                input.form-control(type='password', name='fbAppSecret' placeholder='Facebook App Secret'
+                  ng-model='vm.fbObj.appSecret')
+            .form-group
+              label App Domain
+              input.form-control(type='text', name='fbAppDomain' placeholder='Facebook App Domain'
+                ng-model='vm.fbObj.appDomain')
+              span.help-block
+                | Note: You must add a local DNS record point above domain to
+                span.ph-5.text-primary.text-bold(ng-bind='vm.appHostname')
+            .form-group
+              input(type="checkbox" ng-model="vm.fbObj.sendEmail" style="margin-right: 5px;")
+              label {{app.isLang === "VN" ? "Gửi mail" : "Send email"}}
+            .form-group
+              label {{app.isLang === "VN" ? "Hành động sau khi đăng nhập" : "Action after login"}}
+              select.form-control(name='fbFeed' ng-model='vm.fbObj.feed')
+                option(value='') {{app.isLang === "VN" ? "Truy cập internet" : "None"}}
+                //- option(value='implicit') Checkin (Post Automatically)
+                option(value='explicit') {{app.isLang === "VN" ? "Share lên tường và truy cập internet" : "Share (User has to approve)"}}
+            section(ng-show="vm.fbObj.feed")
+              section(ng-show="vm.fbObj.feed == 'implicit'")
+                .form-group(tootip='Find it at http://findmyfbid.com/')
+                  label Facebook Page ID
+                  input.form-control(type='text', name='fbFeedPage' ng-model='vm.fbObj.feedBody.place')
+                  span.help-block
+                    | Note: Your page must be a
+                    span.pl-5.text-success.text-bold Place
+                    | , or a
+                    span.ph-5.text-success.text-bold Local Business
+                    | to use this feature. You can get Page ID with
+                    span.ph-5.text-primary.text-bold
+                      a(href='https://findmyfbid.com/', target='_blank') this tool.
+                .form-group
+                  label Message
+                  textarea.form-control(type='text', name='fbFeedMessage' rows='2'
+                    placeholder='The message the user added to the check-in.'
+                    ng-model='vm.fbObj.feedBody.message')
+              section(ng-show="vm.fbObj.feed == 'explicit'")
+                .form-group
+                  label Link
+                  input.form-control(type='text', name='fbFeedLink' placeholder='{{app.isLang === "VN" ? "URL để share" : "URL to share"}}'
+                    ng-model='vm.fbObj.feedBody.link')
+                //- .row
+                  .form-group.col-md-4
+                    label Title
+                    input.form-control(type='text', name='fbFeedName' placeholder='Title of the link'
+                      ng-model='vm.fbObj.feedBody.name')
+                  .form-group.col-md-8
+                    label Caption
+                    input.form-control(type='text', name='fbFeedCaption'
+                      placeholder='Caption of the link (appears beneath the link title)'
+                      ng-model='vm.fbObj.feedBody.caption')
+                //- .form-group
+                  label Description
+                  textarea.form-control.height-50(name='fbFeedDescription'
+                    placeholder='Description of the link (appears beneath the link caption)'
+                    ng-model='vm.fbObj.feedBody.description')
+                //- .form-group
+                  label Thumbnail
+                  input.form-control(type='text', name='fbFeedPicture'
+                    placeholder='The URL of a picture attached to the post. At least 200px by 200px'
+                    ng-model='vm.fbObj.feedBody.picture')
+          form#tab-gg.tab-pane.pt-20.ph-20(name='vm.fmGg' novalidate)
+            .form-group
+              label Client ID
+              input.form-control(type='text', name='ggClientId' placeholder='Client Id'
+                ng-model='vm.ggObj.clientId')
+              span.help-block
+                | Note: You must add a DNS hostname with port not IP
+            .form-group
+              input(type="checkbox" ng-model="vm.ggObj.sendEmail" style="margin-right: 5px;")
+              label {{app.isLang === "VN" ? "Gửi mail sau khi đăng nhập" : "Send email after login"}}
+            .form-group
+              input(type="checkbox" ng-model="vm.ggObj.emailLogin" style="margin-right: 5px;")
+              label {{app.isLang === "VN" ? "Xác nhận người dùng bằng email" : "Validate user by Email"}}
+          form#tab-email.tab-pane.pt-20.ph-20(name='vm.fmEmail' novalidate)
+            .form-group
+              label HTML Template
+              textarea.form-control.height-200(name='ggEMailTemplate' rows='10'
+                placeholder='Email html template'
+                ng-model='vm.ggObj.emailTemplate')
+      .modal-footer
+        button.btn.btn-link(type='button' data-dismiss='modal') {{app.isLang === "VN" ? "Hủy bỏ" : "Cancel"}}
+        button.btn(data-dismiss='modal' ng-click='vm.onAction("create")'
+          ng-class='vm.obj.id ? "btn-info" : "btn-primary"') {{app.isLang === "VN" ? "Áp dụng" : "Apply"}}

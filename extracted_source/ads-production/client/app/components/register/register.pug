@@ -1,0 +1,135 @@
+.login-container
+  .page-container
+    .page-content
+      .content-wrapper
+        ul(style='margin: 0 auto 5px auto; width: 450px; display: flex; list-style: none; padding: 0')
+          li(style="margin: 0 2px; padding: 0px 5px;" ng-class='vm.isLang === "VN" ? "active_flag" : ""', ng-click="vm.isLang = 'VN'")
+            a(href="")
+              img(ng-src='{{vm.vnFlUrl}}', alt="VietNam" width="16" height="16" title="Tiếng Việt")
+          li(style="margin: 0 2px; padding: 0px 5px;" ng-class='vm.isLang === "EN" ? "active_flag" : ""', ng-click="vm.isLang = 'EN'")
+            a(href="")
+              img(ng-src='{{vm.usFlUrl}}', alt="USA" width="16" height="16" title="English")
+        form#registerForm(ng-if="!vm.notify" name='vm.registerForm', ng-submit='vm.register(vm.credentials, vm.registerForm.$valid)', novalidate)
+          .panel.panel-body.login-form(style='width: 450px')
+            .text-center
+              .icon-object.border-slate-300.text-slate-300
+                i.icon-reading
+              h5.content-group(ng-if="vm.registerType === 'publisher'")
+                | {{vm.isLang === "VN" ? "Đăng ký tài khoản Publisher" : "Register Publisher"}}
+              h5.content-group(ng-if="vm.registerType === 'client'")
+                | {{vm.isLang === "VN" ? "Đăng ký tài khoản Trial" : "Register Trial"}}
+            .col-md-12(ng-if="vm.registerType === 'publisher'")
+              p(style='font-size: 14px; font-weight: bold; margin: 0; margin-top: 8px; margin-bottom: 15px; padding: 0; text-transform: uppercase; color: #49A0B7;') {{vm.isLang === "VN" ? "thông tin đăng nhập" : "create your free account"}}
+            .col-md-12(ng-if="vm.registerType === 'client'")
+              p(style='font-size: 14px; font-weight: bold; margin: 0; margin-top: 8px; margin-bottom: 15px; padding: 0; text-transform: uppercase; color: #49A0B7;') {{vm.isLang === "VN" ? "thông tin đăng nhập" : "create your trial account"}}
+            .col-md-6
+              .form-group.has-feedback.has-feedback-left(validator)
+                label {{vm.isLang === "VN" ? "Tên đăng nhập" : "Username"}}
+                input.form-control(type='text', name='username', placeholder='{{vm.isLang === "VN" ? "Tên đăng nhập *" : "Username *"}}', ng-model='vm.credentials.username', ng-change='vm.trim()' required)
+                .form-control-feedback
+                  i.icon-user-check.text-muted
+            .col-md-6
+              .form-group.has-feedback.has-feedback-left(validator)
+                label Email
+                input.form-control(type='email', name='email', placeholder='Email *', ng-model='vm.credentials.email' required)
+                .form-control-feedback
+                  i.icon-mail5.text-muted
+            .col-md-6
+              .form-group.has-feedback.has-feedback-left(validator)
+                label {{vm.isLang === "VN" ? "Mật khẩu" : "Password"}}
+                input.form-control(type='password', name='password', placeholder='{{vm.isLang === "VN" ? "Mật khẩu *" : "Password *"}}', ng-model='vm.credentials.password' required)
+                .form-control-feedback
+                  i.icon-key.text-muted
+            .col-md-6
+              .form-group.has-feedback.has-feedback-left(validator)
+                label {{vm.isLang === "VN" ? "Xác nhận mật khẩu" : "Confirm Password"}}
+                input.form-control(type='password', name='confirmpassword', placeholder='{{vm.isLang === "VN" ? "Xác nhận mật khẩu *" : "Confirm Password *"}}', ng-model='vm.credentials.confirmpassword' required data-matched='password')
+                .form-control-feedback
+                  i.icon-key.text-muted
+            .col-md-12(ng-if="vm.registerType === 'publisher'")
+              p(style='font-size: 14px; font-weight: bold; margin: 0; margin-top: 8px; margin-bottom: 15px; padding: 0; text-transform: uppercase; color: #49A0B7;') {{vm.isLang === "VN" ? "thông tin cá nhân" : "billing information"}}
+            .col-md-12(ng-if="vm.registerType === 'client'")
+              p(style='font-size: 14px; font-weight: bold; margin: 0; margin-top: 8px; margin-bottom: 15px; padding: 0; text-transform: uppercase; color: #49A0B7;') {{vm.isLang === "VN" ? "thông tin cá nhân" : "additional information"}}
+            .col-md-6
+              .form-group.has-feedback.has-feedback-left(validator)
+                label {{vm.isLang === "VN" ? "Tên" : "First name"}}
+                input.form-control(type='text', name='firstname', placeholder='{{vm.isLang === "VN" ? "Tên *" : "First name *"}}', ng-model='vm.credentials.firstname' required)
+                .form-control-feedback
+                  i.icon-user.text-muted
+            .col-md-6
+              .form-group.has-feedback.has-feedback-left(validator)
+                label {{vm.isLang === "VN" ? "Họ & tên đệm" : "Last name"}}
+                input.form-control(type='text', name='lastname', placeholder='{{vm.isLang === "VN" ? "Họ & tên đệm *" : "Last name *"}}', ng-model='vm.credentials.lastname' required)
+                .form-control-feedback
+                  i.icon-user-tie.text-muted
+            .col-md-6
+              .form-group.has-feedback.has-feedback-left(validator)
+                label {{vm.isLang === "VN" ? "Thành phố/Tỉnh" : "City/Province"}}
+                select.form-control(name='city' select2='vm.selectCity' ng-model='vm.credentials.cityId' ng-change='vm.selectCityChange()' required)
+            .col-md-6
+              .form-group.has-feedback.has-feedback-left(validator)
+                label {{vm.isLang === "VN" ? "Quận/Huyện" : "District"}}
+                select.form-control(name='district' select2='vm.selectDistrict' ng-model='vm.credentials.districtId' required)
+            .col-md-6
+              .form-group.has-feedback.has-feedback-left(validator)
+                label {{vm.isLang === "VN" ? "Số điện thoại" : "Phone"}}
+                input.form-control(type='text', name='phone' placeholder='{{vm.isLang === "VN" ? "Số điện thoại *" : "Phone *"}}', ng-model='vm.credentials.phone' required  ng-pattern="/^[0-9]{10,11}$/")
+                .form-control-feedback
+                  i.icon-phone2.text-muted
+            .col-md-6
+              .form-group.has-feedback.has-feedback-left
+                label {{vm.isLang === "VN" ? "Địa chỉ/đường/số nhà" : "Street address"}}
+                input.form-control(type='text', name='address' placeholder='{{vm.isLang === "VN" ? "Địa chỉ/đường/số nhà" : "Street address"}}' ng-model='vm.credentials.address')
+                .form-control-feedback
+                  i.icon-home.text-muted
+            .col-md-6(ng-if="vm.registerType === 'publisher'")
+              .form-group.has-feedback.has-feedback-left(validator)
+                label {{vm.isLang === "VN" ? "Ngành kinh doanh" : "Your business"}}
+                select.form-control(name='business' select2='vm.selectBusiness', ng-model='vm.credentials.business' required)
+            //- .col-md-6
+            //-   .form-group.has-feedback.has-feedback-left
+            //-     label Your equipment
+            //-     select.form-control(name='equipment' select2='vm.selectEquipment', ng-model='vm.credentials.equipment')
+            .col-md-6(ng-show='vm.credentials.business === "other"')
+              .form-group
+                input.form-control(type='text', name='business' placeholder='{{vm.isLang === "VN" ? "Ngành kinh doanh khác" : "Write your business"}}', ng-model='vm.credentials.businessOther')
+            .col-md-6(ng-show='vm.credentials.business !== "other"')
+            //- .col-md-6(ng-show='vm.credentials.equipment === "other"')
+            //-   .form-group
+            //-     label(ng-if="vm.registerType === 'client'") &nbsp;
+            //-     input.form-control(type='text', name='equipment' placeholder='Write your equipment', ng-model='vm.credentials.equipmentOther')
+            //- .col-md-6(ng-show='vm.credentials.equipment !== "other"')
+            .col-md-12
+              .form-group
+                .g-recaptcha(vc-recaptcha, key="vm.recaptchaSiteKey" on-create="vm.setWidgetId(widgetId)" on-success="vm.setResponse(response)")
+            .col-md-12
+              .form-group
+                button.btn.btn-primary.btn-block(type='submit' ng-disabled='vm.onload')
+                  | {{vm.isLang === "VN" ? "Tạo tài khoản" : "Create my account"}}
+                  i.fa.fa-sign-in.position-right
+            .col-md-12
+              .form-group
+                a.btn.btn-link.btn-block(ui-sref='login', ng-click='vm.reload()')
+                  i.fa.fa-hand-o-left.position-right(style='margin-right: 5px')
+                  | {{vm.isLang === "VN" ? "Đăng nhập" : "Login"}}
+            .col-md-12
+              .alert.bg-danger.alert-styled-left(ng-show='vm.errorMessage')
+                span {{vm.errorMessage}}
+        .panel.panel-body.login-form(style='width: 405px; text-align: center' ng-if="vm.notify")
+          .text-center
+            .icon-object.border-slate-300.text-slate-300
+              i.icon-user-check
+            h5.content-group(style='font-weight: bold;')
+              | {{vm.isLang === "VN" ? "Đã xong..." : "Almost done..."}}
+          .col-md-12()
+              p {{vm.isLang === "VN" ? "Cảm ơn bạn đã tham gia vào hệ thống " : "Thanks you for joining "}}
+                br
+                | Genex Wifi DSP Platform!
+              p {{vm.isLang === "VN" ? "Hệ thống sẽ gửi một email đến " : "We'll send an email to "}}
+                b {{vm.credentials.email}}
+                |  {{vm.isLang === "VN" ? "trong vòng 5 phút. Hãy mở mail và kích hoạt tài khoản của bạn." : "in 5 minutes. Open it up to activate your account."}}
+          .col-md-12
+            .form-group
+              a.btn.btn-success.btn-block(ui-sref='login', ng-click='vm.reload()')
+                i.fa.fa-hand-o-left.position-left(style='margin-right: 5px')
+                | {{vm.isLang === "VN" ? "Đăng nhập" : "Login"}}

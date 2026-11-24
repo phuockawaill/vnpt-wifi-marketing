@@ -1,0 +1,47 @@
+{
+  "name": "Fb",
+  "base": "Model",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "http": {
+    "path": "/fb"
+  },
+  "mixins": {
+    "Expire": {
+      "ttl": 600
+    }
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "id": true
+    },
+    "accessToken": {
+      "type": "string"
+    },
+    "fbId": {
+      "type": "string"
+    },
+    "fbName": {
+      "type": "string"
+    },
+    "fbEmail": {
+      "type": "string"
+    },
+    "fbGender": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "gender": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

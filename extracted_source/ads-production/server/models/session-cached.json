@@ -1,0 +1,47 @@
+{
+  "name": "SessionCached",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "Expire": {
+      "ttl": 3660
+    }
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "id": true
+    },
+    "token": {
+      "type": "string"
+    },
+    "loginurl": {
+      "type": "string"
+    },
+    "redirect": {
+      "type": "string"
+    },
+    "locationId": {
+      "type": "string"
+    },
+    "ap": {
+      "type": "string"
+    },
+    "campaignId": {
+      "type": "string"
+    },
+    "bannerId": {
+      "type": "string"
+    },
+    "expiredAt": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

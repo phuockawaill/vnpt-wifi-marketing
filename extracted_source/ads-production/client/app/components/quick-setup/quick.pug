@@ -1,0 +1,243 @@
+#wrapper-quick(ng-if='quick.currentUser && quick.currentUser.id && (quick.currentUser.profileName==="client" || quick.currentUser.profileName==="publisher") && !quick.isMobile')
+  nav#sidebar-wrapper.navbar.navbar-inverse.navbar-fixed-top
+    .quick-back-btn(ng-click="quick.setupQuick()")
+    .q-header.bg-primary
+      h4 Quick Setup
+      button(type='button', ng-click='quick.setupQuick()') ×
+
+    .q-body.row
+      .col-md-3
+        .list-group
+          a.list-group-item(ng-class='(quick.step && quick.step === "location") ? "active" : ""')
+            p.list-group-item-heading
+              b Step 1: 
+              |  Add Location
+          a.list-group-item(ng-class='(quick.step && quick.step === "locationGroup") ? "active" : ""')
+            p.list-group-item-heading
+              b Step 2: 
+              |  Assign Wifi Network
+          a.list-group-item(ng-class='(quick.step && quick.step === "creativeAds") ? "active" : ""')
+            p.list-group-item-heading
+              b Step 3:
+              |  Create creative Ads
+          a.list-group-item(ng-class='(quick.step && quick.step === "campaign") ? "active" : ""')
+            p.list-group-item-heading
+              b Step 4:
+              |  Assign Campaign
+          a.list-group-item(ng-class='(quick.step && quick.step === "summary") ? "active" : ""')
+            p.list-group-item-heading
+              b Step 5:
+              |  Review summary
+
+      .col-md-1
+        hr(style='height: 75vh; margin-top: 5vh;border-left: 1px solid #ddd; border-top: 0; margin-left:50%')
+
+      .col-md-8
+        //- location
+        .q-location.row(ng-show='quick.step === "location"')
+          .col-md-4.col-md-offset-4
+            form(name='quick.quickFormLocation')
+              .form-group(validator)
+                label {{app.isLang === "VN" ? "Tên" : "Name"}}
+                input.form-control(name='name', placeholder='{{app.isLang === "VN" ? "Nhập tên *" : "Give a name *"}}', ng-model='quick.quickObj.locationName' required)
+              .form-group(validator)
+                label {{app.isLang === "VN" ? "Thành phố/Tỉnh" : "City/Province"}}
+                select.form-control(name='city' select2='quick.selectCity' ng-model='quick.quickObj.locationCityId' ng-change='quick.selectCityChange()' required)
+              .form-group(validator ng-if='quick.selectDistrict.data.length > 0')
+                label {{app.isLang === "VN" ? "Quận/Huyện" : "District"}}
+                select.form-control(name='district' select2='quick.selectDistrict' ng-model='quick.quickObj.locationDistrictId' required)
+              .form-group(validator)
+                label {{app.isLang === "VN" ? "Địa chỉ" : "Address"}}
+                input.form-control(name='address', placeholder='{{app.isLang === "VN" ? "Nhập địa chỉ *" : "Give an address *"}}', ng-model='quick.quickObj.locationAddress' required)
+
+        //- locationGroup
+        .q-locationGroup(ng-show='quick.step === "locationGroup"')
+          .row(ng-show='quick.showLocationGroup')
+            .col-md-12.q-group-btn
+              button.btn.btn-default(type='button', ng-click='quick.is_locationGroup = "create"; quick.showLocationGroup = false')
+                i.fa.fa-plus
+                | {{app.isLang === "VN" ? "Tạo mới Wifi Network" : "Create New Wifi Network"}}
+              span(ng-show='quick.locationGroups.length') {{app.isLang === "VN" ? "- hoặc -" : "- or -"}}
+              button.btn.btn-default(type='button', ng-show='quick.locationGroups.length', ng-click='quick.is_locationGroup = "selectList"; quick.showLocationGroup = false')
+                i.fa.fa-check-square-o
+                | {{app.isLang === "VN" ? "Chọn một Wifi Network từ danh sách có sẵn" : "Select a wifi network from list available"}}
+          .row(ng-show='!quick.showLocationGroup')
+            .col-md-4.col-md-offset-4(style='text-align: end; padding: 15px 0')
+              a(ng-click='quick.is_locationGroup = ""; quick.showLocationGroup = true')
+                i.fa.fa-reply(style='margin-right: 5px')
+                | {{app.isLang === "VN" ? "Quay lại" : "Back"}}
+          .row(ng-show='quick.is_locationGroup === "create" && !quick.showLocationGroup')
+            .col-md-4.col-md-offset-4
+              form(name='quick.quickFormLocationGr')
+                .form-group(validator)
+                  label {{app.isLang === "VN" ? "Tên wifi network " : "Wifi network name "}}
+                  input.form-control(name='name', placeholder='{{app.isLang === "VN" ? "Nhập tên wifi network *" : "Give wifi network name *"}}', ng-model='quick.quickObj.locationGrName' required)
+          .row(ng-show='quick.is_locationGroup === "selectList" && !quick.showLocationGroup')
+            .col-md-4.col-md-offset-4.q-selectList
+              div.radio(ng-repeat='lg in quick.locationGroups track by $index')
+                label
+                  input(type='radio', name='optradio_location_group', ng-model='quick.quickObj.locationGrSelect', value="{{lg.id}}")
+                  | {{lg.text}}
+
+        //- creativeAds
+        .q-creativeAds(ng-show='quick.step === "creativeAds"')
+          .row(ng-show='quick.showCreativeAds')
+            .col-md-12.q-group-btn
+              button.btn.btn-default(type='button', ng-click='quick.is_creativeAds = "create"; quick.showCreativeAds = false;')
+                i.fa.fa-plus
+                | {{app.isLang === "VN" ? "Tạo mới creative ads" : "Create New Creative Ads"}}
+              span(ng-show='quick.banners.length') {{app.isLang === "VN" ? "- hoặc -" : "- or -"}}
+              button.btn.btn-default(type='button', ng-show='quick.banners.length', ng-click='quick.is_creativeAds = "selectList"; quick.showCreativeAds = false')
+                i.fa.fa-check-square-o
+                | {{app.isLang === "VN" ? "Chọn một creative ads từ danh sách có sẵn" : "Select a creative ads from list available"}}
+          .row(ng-show='!quick.showCreativeAds')
+            .col-md-4.col-md-offset-4(style='text-align: end; padding: 15px 0')
+              a(ng-click='quick.is_creativeAds = ""; quick.showCreativeAds = true')
+                i.fa.fa-reply(style='margin-right: 5px')
+                | {{app.isLang === "VN" ? "Quay lại" : "Back"}}
+          .row(ng-show='quick.is_creativeAds === "create" && !quick.showCreativeAds')
+            .col-md-4.col-md-offset-4(style='text-align: center')
+              .q-group-btn(ng-show='!quick.quickObj.creativeAdsId')
+                p(style='color: #545454; font-size: 15px;') {{app.isLang === "VN" ? "Bạn chưa tạo Creative Ads hoặc bị sự cố trong quá trình tạo" : "You have not created or have a problem when created Creative Ads"}}
+                button.btn.btn-default(type='button', ng-click='quick.switchTo();')
+                  i.fa.fa-plus
+                  | {{app.isLang === "VN" ? "Click để tạo" : "Please click here to create"}}
+              div(ng-show='quick.quickObj.creativeAdsId')
+                i.fa.fa-check-circle-o(style='margin-right: 5px; color: rgba(165,220,134, .8); font-size: 48px')
+                br
+                p(style='color: #545454; font-size: 15px;') {{app.isLang === "VN" ? "Bạn vừa tạo Creative Ads thành công" : "You have been created Creative Ads successfully"}}
+                p(style='color: #545454; font-size: 15px;') {{app.isLang === "VN" ? "Click Next để tiếp tục" : "Click Next to continue"}}
+          .row(ng-show='quick.is_creativeAds === "selectList" && !quick.showCreativeAds')
+            .col-md-4.col-md-offset-4.q-selectList
+              div.radio(ng-repeat='bn in quick.banners track by $index', style='display: flex; justify-content: space-between;')
+                label
+                  input(type='radio', name='optradio_creativeAds', ng-model='quick.quickObj.creativeAdsSelect', value="{{bn.id}}")
+                  | {{bn.name}}
+                a(ng-click='quick.preview(bn.id)') {{app.isLang === "VN" ? "Xem" : "Preview"}}
+
+        //- campaign
+        .q-campaign.row(ng-show='quick.step === "campaign"')
+          .col-md-4.col-md-offset-4
+            form(name='quick.quickFormCampaign')
+              .form-group(style='margin: 15px 0')
+                p(style='color: #516167; text-transform: uppercase; font-size: 13px') Main Configuration
+              .form-group(validator)
+                label {{app.isLang === "VN" ? "Tên campaign" : "Name"}}
+                input.form-control(name='name', placeholder='{{app.isLang === "VN" ? "Nhập tên campaign" : "Give a campaign name"}}', ng-model='quick.quickObj.campaignName' required)
+              .form-group(validator)
+                label Landing page
+                input.form-control(type='url', name='landingPageUrl', placeholder='http://', ng-model='quick.quickObj.campaignLandingPageUrl', required)
+              .form-group(style='margin: 15px 0')
+                p(style='color: #516167; text-transform: uppercase; font-size: 13px') Schedule
+              .form-group(validator)
+                label {{app.isLang === "VN" ? "Từ ngày" : "From date"}}
+                input.form-control(date-picker='quick.dateOptions' name='scheduleFrom' placeholder='{{app.isLang === "VN" ? "Chọn ngày" : "Pick a date"}}', ng-model='quick.quickObj.campaignScheduleFrom' required)
+              .form-group(validator)
+                label {{app.isLang === "VN" ? "Đến ngày" : "To date"}}
+                input.form-control(date-picker='quick.dateOptions' name='scheduleTo' placeholder='{{app.isLang === "VN" ? "Chọn ngày" : "Pick a date"}}', ng-model='quick.quickObj.campaignScheduleTo' required validator-date='From Date' date-after='quick.quickObj.campaignScheduleFrom')
+
+        //- review
+        .q-review(ng-show='quick.step === "summary"')
+          .row
+            .col-md-12.quick-review
+              p {{app.isLang === "VN" ? "Địa điểm" : "Location"}}
+            .col-md-12
+              p
+                b.q-bview {{app.isLang === "VN" ? "Tên:" : "Name:"}}
+                | {{quick.quickObj.locationName}}
+              p 
+                b.q-bview {{app.isLang === "VN" ? "Thành phố/Tỉnh:" : "City/Province:"}}
+                | {{quick.quickObj.locationCityName}}
+              p
+                b.q-bview {{app.isLang === "VN" ? "Quận/Huyện:" : "District:"}}
+                | {{quick.quickObj.locationDistrictName}}
+              p
+                b.q-bview {{app.isLang === "VN" ? "Địa chỉ:" : "Address:"}}
+                | {{quick.quickObj.locationAddress}}
+          .row
+            .col-md-12.quick-review
+              p Wifi network
+            .col-md-12(ng-if='quick.is_locationGroup === "create"')
+              p
+                b.q-bview {{app.isLang === "VN" ? "Tên:" : "Name:"}}
+                | {{quick.quickObj.locationGrName}}
+            .col-md-12(ng-if='quick.is_locationGroup === "selectList"')
+              p
+                b.q-bview {{app.isLang === "VN" ? "Tên:" : "Name:"}}
+                | {{quick.quickObj.locationGrSelectName}}
+          .row
+            .col-md-12.quick-review
+              p Creative Ads
+            .col-md-12(ng-if='quick.is_creativeAds === "create"')
+              p
+                b.q-bview {{app.isLang === "VN" ? "Tên:" : "Name:"}}
+                | {{quick.quickObj.creativeAdsName}}
+              p
+                b.q-bview {{app.isLang === "VN" ? "Xem:" : "Preview:"}}
+                a(ng-click='quick.preview(quick.quickObj.creativeAdsId)') Click here
+            .col-md-12(ng-if='quick.is_creativeAds === "selectList"')
+              p
+                b.q-bview {{app.isLang === "VN" ? "Tên:" : "Name:"}}
+                | {{quick.quickObj.creativeAdsSelectName}}
+              p
+                b.q-bview {{app.isLang === "VN" ? "Xem:" : "Preview:"}}
+                a(ng-click='quick.preview(quick.quickObj.creativeAdsSelect)') Click here
+          .row
+            .col-md-12.quick-review
+              p Campaign
+            .col-md-12
+              p
+                b.q-bview {{app.isLang === "VN" ? "Tên:" : "Name:"}}
+                | {{quick.quickObj.campaignName}}
+              p
+                b.q-bview LandingPageURL:
+                a(href='{{quick.quickObj.campaignLandingPageUrl}}') {{quick.quickObj.campaignLandingPageUrl}}
+              p
+                b.q-bview {{app.isLang === "VN" ? "Schedule - Từ ngày:" : "Schedule From Date:"}}
+                | {{quick.formatMoment(quick.quickObj.campaignScheduleFrom)}}
+              p
+                b.q-bview {{app.isLang === "VN" ? "Schedule - Đến ngày:" : "Schedule To Date:"}}
+                | {{quick.formatMoment(quick.quickObj.campaignScheduleTo)}}
+
+    .q-footer
+      .col-md-12(style='text-align: right')
+        button.btn.btn-link(style='color: #2196F3' type='button', ng-show='quick.stepCount !== 1', ng-click='quick.handleQuickBtn("back")') {{app.isLang === "VN" ? "Quay lại" : "Back"}}
+        button.btn.btn-primary(
+          type='button',
+          ng-show='quick.stepCount !== 5',
+          ng-click='quick.handleQuickBtn("next", quick.quickFormLocation.$valid, quick.quickFormLocationGr.$valid, quick.quickFormCampaign.$valid)'
+        ) {{app.isLang === "VN" ? "Tiếp tục" : "Next"}}
+        button.btn.btn-primary(type='button' ng-show='quick.step === "summary"', ng-click='quick.saveDB()') {{app.isLang === "VN" ? "Hoàn tất" : "Finish"}}
+
+
+//- form create AP
+form#quickFmEdit.modal.fade.in(name='quick.quickFmEdit', aria-labelledby='quickFmEditLabel' novalidate, ng-submit='quick.createAp()', data-backdrop="static" data-keyboard="false")
+  .modal-dialog.modal-fullscreen
+    .modal-content
+      .modal-header.bg-primary
+        h4#quickFmEditLabel.modal-title {{app.isLang === "VN" ? "Thêm Access Point vào" : "Add Access Point to"}} {{quick.quickObj.locationName}}
+      .modal-body
+        .form-group(validator)
+          label {{app.isLang === "VN" ? "Tên" : "Name"}}
+          input.form-control(name='name', placeholder='{{app.isLang === "VN" ? "Nhập tên" : "Give a name"}}', ng-model='quick.quickObj.apName' required)
+        .form-group
+          label MAC LAN
+          input.form-control(name='macLan', placeholder='{{app.isLang === "VN" ? "Nhập địa chỉ Mac LAN" : "Give Mac LAN port address"}}', ng-model='quick.quickObj.apMacLan')
+        .form-group
+          label MAC 2.4GHz
+          input.form-control(name='mac', placeholder='{{app.isLang === "VN" ? "Nhập địa chỉ Mac 2.4GHz" : "Give Mac 2.4GHz address"}}', ng-model='quick.quickObj.apMac')
+        .form-group
+          label MAC 5.0GHz
+          input.form-control(name='mac5', placeholder='{{app.isLang === "VN" ? "Nhập địa chỉ Mac 5.0GHz" : "Give Mac 5.0GHz address"}}', ng-model='quick.quickObj.apMac5')
+        .form-group
+          h5#quickOpenExpandNotify(style="display: none; color: orange")
+            | {{app.isLang === "VN" ? "Số lượng AP hiện tại đã vượt quá giới hạn license cho phép, Hãy " : "Current number of APs reached your license limitation, please "}}
+            a(ng-click='quick.toogleExpandLicense()')  {{app.isLang === "VN" ? "gia hạn license" : "expanding license here"}}
+            |  {{app.isLang === "VN" ? "để tiếp tục" : "to continue"}}
+      .modal-footer
+        input.btn.btn-primary(type='submit', ng-disabled='quick.quickFmEdit.$invalid || (!quick.quickObj.apMacLan && !quick.quickObj.apMac && !quick.quickObj.apMac5)', value='{{app.isLang === "VN" ? "Tạo" : "Create"}}')
+
+
+.bg-overlay#quickOverlayBg
+  p Saving
+    i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw

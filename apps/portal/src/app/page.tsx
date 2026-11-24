@@ -74,6 +74,10 @@ export default function CaptivePortalVNPTDakLak() {
   const [mac, setMac] = useState('D4:CA:6D:88:99:AA');
   const [ip, setIp] = useState('10.20.30.150');
   const [venueSlug, setVenueSlug] = useState('vnpt-daklak');
+  const [gwAddress, setGwAddress] = useState('');
+  const [gwPort, setGwPort] = useState('');
+  const [loginUrl, setLoginUrl] = useState('');
+  const [userUrl, setUserUrl] = useState('');
 
   // AI Assistant message rotation for VNPT Dak Lak
   useEffect(() => {
@@ -118,6 +122,10 @@ export default function CaptivePortalVNPTDakLak() {
       setMac(urlMac);
       setIp(urlIp);
       setVenueSlug(urlVenue);
+      setGwAddress(params.get('gw_address') || '');
+      setGwPort(params.get('gw_port') || '');
+      setLoginUrl(params.get('login_url') || params.get('link-login-only') || '');
+      setUserUrl(params.get('userurl') || params.get('link-orig') || '');
 
       const apiUrl =
         process.env.NEXT_PUBLIC_API_URL ||
@@ -213,6 +221,16 @@ export default function CaptivePortalVNPTDakLak() {
     } finally {
       setSubmitting(false);
       setSuccess(true);
+      // Ruijie Reyee / Wifidog direct release
+      if (gwAddress && gwPort) {
+        setTimeout(() => {
+          window.location.href = `http://${gwAddress}:${gwPort}/wifidog/auth?token=vnpt_${Date.now()}`;
+        }, 1500);
+      } else if (loginUrl) {
+        setTimeout(() => {
+          window.location.href = `${loginUrl}?username=0&password=0`;
+        }, 1500);
+      }
     }
   };
 

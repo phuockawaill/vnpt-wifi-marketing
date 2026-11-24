@@ -1,0 +1,732 @@
+form#fmEdit.modal.fade.in(style='overflow: scroll', name='fmEdit', aria-labelledby='fmEditLabel', novalidate='novalidate', ng-submit='vm.obj.templateType === "video" ? vm.createVideo() : vm.create()', data-backdrop="static" data-keyboard="false")
+  .modal-dialog.modal-fullscreen
+    .modal-content
+      .modal-header.bg-primary
+        button.close(type='button', data-dismiss='modal', aria-label='Close', ng-click='vm.closeModal()') ×
+        h4#fmEditLabel.modal-title Creative Ads
+      .modal-body
+        .row
+          .form-group.col-md-12(validator='validator')
+            label(style='font-weight: bold') {{app.isLang === "VN" ? "Tên" : "Name"}}
+            input.form-control(name='name', placeholder='{{app.isLang === "VN" ? "Nhập tên" : "Give a name"}}', ng-model='vm.obj.name', required='required')
+          .form-group.col-md-12
+            label(style='font-weight: bold') {{app.isLang === "VN" ? "Chọn loại Creative Ads" : "Select Creative Ads Type"}}
+            .row(style='display: flex; justify-content: center')
+              .parent-btn-template
+                button.btn-template(type='button', ng-click='vm.onChooseTemplate("passCode");', ng-class='vm.obj.templateType === "passCode" ? "active" : ""')
+                  span.span-icon
+                    i.fa.fa-html5
+                  br
+                  span.span-text Paste Code
+                i
+              .parent-btn-template
+                button.btn-template(type='button', ng-click='vm.onChooseTemplate("static");', ng-class='vm.obj.templateType === "static" ? "active" : ""')
+                  span.span-icon
+                    i.fa.fa-picture-o
+                  br
+                  span.span-text Static Banner
+                i
+              .parent-btn-template(ng-if='!vm.quickSetup')
+                button.btn-template(type='button', ng-click='vm.onChooseTemplate("video");', ng-class='vm.obj.templateType === "video" ? "active" : ""')
+                  span.span-icon
+                    i.fa.fa-file-video-o
+                  br
+                  span.span-text Video
+                i
+          .form-group.col-md-12(validator='validator', ng-show='vm.obj.templateType === "passCode"')
+            label(style='font-weight: bold') HTML Code
+            .row
+              .col-md-4
+                .form-group.div-call-warning
+                  h5(style='margin-bottom: 20px') * NOTE:
+                  ol.ol-custom-style
+                    li
+                      span {{app.isLang === "VN" ? "Nút" : "Your"}}
+                        b
+                          i  {{app.isLang === "VN" ? "Kết nối Internet " : "Connect Internet "}}
+                        | {{app.isLang === "VN" ? "phải có " : "button must be have "}}
+                        b
+                          i id="submitLoginButton"
+                    li
+                      span {{app.isLang === "VN" ? "Copy đoạn " : "Copy our "}}
+                        b
+                          i &lt;script type="text/javascript"&gt; 
+                        | {{app.isLang === "VN" ? "dưới đây và dán vào vùng HTML của bạn trước thẻ đóng  " : "here and pass to your HTML code before "}}
+                        b
+                          i &lt;/body&gt; 
+                      .input-group(style='margin-top: 10px')
+                        input#bodyScript.form-control(ng-model='vm.bodyScript')
+                        .input-group-btn
+                          button.btn.btn-primary(style='' type='button' ng-click='vm.onAction("copyCode", "bodyScript")') Copy script
+                  div(style='margin: 10px 0')
+                    a(data-target='#collapseExample' data-toggle="collapse") {{app.isLang === "VN" ? "Ví dụ" : "Example"}}
+                      i.fa.fa-angle-down(style='margin-left: 5px')
+                    #collapseExample.collapse(style='border: 1px dashed;border-radius: 4px;margin: 10px 0;padding: 5px; position: relative; width: 100%')
+                      div.hovereffect
+                        img#imgHtmlCodeExample(src="{{vm.imgHtmlCodeExample}}")
+                        div.overlayeffect(ng-click='vm.modalImageFull(vm.imgHtmlCodeExample)')
+                          h2 {{app.isLang === "VN" ? "Xem toàn màn hình" : "View Full screen"}}
+                          p
+                            a
+                              i.fa.fa-eye(style='font-size:16px')
+              .col-md-8
+                textarea.code.form-control(name='passCode', placeholder='{{app.isLang === "VN" ? "Nhập HTML Code" : "Input your HTML code"}}', rows='20', ng-model='vm.obj.passCode', ng-required='vm.obj.templateType === "passCode"')
+      .modal-footer
+        button.btn.btn-link(type='button', data-dismiss='modal', ng-click='vm.closeModal()') {{app.isLang === "VN" ? "Hủy bỏ" : "Cancel"}}
+        button.btn.btn-success(type='button', ng-click='vm.onAction("viewInForm", vm.obj)') {{app.isLang === "VN" ? "Xem trước" : "View"}}
+        input.btn(type='submit', ng-disabled='fmEdit.$invalid', ng-class="vm.obj.id ? 'btn-info' : 'btn-primary'", ng-value="vm.obj.id ? (app.isLang === 'VN' ? 'Sửa' : 'Edit') : (app.isLang === 'VN' ? 'Tạo' : 'Create')", ng-show="vm.obj.templateType !== 'video'")
+        input.btn(type='submit', ng-disabled="fmEdit.$invalid", ng-class="vm.objVideo.id ? 'btn-info' : 'btn-primary'", ng-value="vm.objVideo.id ? (app.isLang === 'VN' ? 'Sửa' : 'Edit') : (app.isLang === 'VN' ? 'Tạo' : 'Create')", ng-show="vm.obj.templateType === 'video'")
+
+
+//- Design Static Image
+form#fmStaticBanner.modal.fade.in(name='fmStaticBanner', aria-labelledby='fmStaticBannerLabel', novalidate='novalidate')
+  .modal-dialog.modal-fullscreen
+    .modal-content
+      .modal-header(ng-class='"bg-primary"')
+        button.close(style='right: 80px', type='button', title='Cancel', data-dismiss='modal', aria-label='Close', ng-click='vm.saveDesign = false')
+          i.fa.fa-times
+        button.close(style='border: 1px solid; padding: 7px 12px; margin-top: -17.5px', type='button', title='Save', data-dismiss='modal', aria-label='Close', ng-click='vm.generateHTML()')
+          i.fa.fa-floppy-o
+        h4#fmStaticBannerLabel.modal-title Design Creative Ads
+      .modal-body(style='padding:0;')
+        .dwrapper
+          nav.dsidebar-left(ng-class='vm.sidebarLeft ? "dactiveLeft" : ""')
+            div(style='color: #516167; border-bottom: 1px solid #dddddd; box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); padding: 5px; margin: 5px 0;')
+              a(ng-click='vm.useTemplate("new")') {{app.isLang === "VN" ? "tạo mới" : "create new"}}
+              p {{app.isLang === "VN" ? "hoặc sử dụng những template bên dưới" : "or use templates bellow here"}}
+            label.caroul-control.prev(ng-click='vm.onCarousel("prev")') ‹
+            label.caroul-control.next(ng-click='vm.onCarousel("next")') ›
+            ul#owl-carousel
+              li.li-carousel-item(ng-repeat='t in vm.defaultTemplates track by $index')
+                .divFrame(id="{{ 'frameLi-' + $index }}")
+                button.btn.btn-warning.btn-use-template(type='button', ng-click='vm.useTemplate(t)') use template
+          .dcontent
+            nav.navbar.navbar-default
+              .container-fluid(style='padding:0')
+                .navbar-header
+                  button.btn.btn-info.btn-sidebar(type='button', ng-click='vm.onOpenSidebar("left")')
+                    i.fa.fa-align-left(style='margin-right:3px')
+                    span Templates
+                  .div-handle-device
+                    button.btn.btn-info(type='button', title="Laptop", ng-class='vm.staticImgPreviewMode === "Laptop" ? "active" : ""', ng-click='vm.editHandleMode("Laptop")')
+                      i.icon-laptop(style='font-size: 20px')
+                    button.btn.btn-info(type='button', title="Mobile", ng-class='vm.staticImgPreviewMode === "Mobile" ? "active" : ""', ng-click='vm.editHandleMode("Mobile")')
+                      i.icon-mobile(style='font-size: 20px')
+                  button.btn.btn-info.btn-sidebar(style='left: auto; right: 0; top: 0', type='button', ng-click='vm.onOpenSidebar("right")')
+                    i.fa.fa-cogs(style='margin-right:3px')
+                    span {{app.isLang === "VN" ? "Cài đặt" : "Settings"}}
+            #edit-handle-area(ng-class='vm.staticImgPreviewMode === "Laptop" ? "edit-handle-laptop" : "edit-handle-mobile"')
+          nav.dsidebar-right(ng-class='vm.sidebarRight ? "dactiveRight" : ""')
+            .dsettings
+              .panel-group(id="accordionStaticImg" role="tablist" aria-multiselectable="true")
+                .panel.panel-default
+                  .panel-heading(role="tab" id="headingOneStaticImg")
+                    a(data-toggle='collapse', data-target="#dsettingGeneral", data-parent="#accordionStaticImg") general
+                    i.fa.fa-chevron-up
+                    i.fa.fa-chevron-down
+                  #dsettingGeneral.panel-collapse.collapse.in(role="tabpanel" aria-labelledby="headingOneStaticImg")
+                    .panel-body
+                      div(style='display: flex; justify-content: space-between; padding-bottom: 10px')
+                        label(style='color: rgb(143, 150, 153); font-size: 12px') {{app.isLang === "VN" ? "Màu nền" : "Background Color"}}
+                        .input-group.input-color-picker
+                          input(color-picker='', color-picker-position="left", color-picker-model='vm.obj.options.body.backgroundColor', color-picker-show-value="false", ng-style='{background:vm.obj.options.body.backgroundColor}')
+                      div(style='display: flex; justify-content: space-between;')
+                        label(style='color: rgb(143, 150, 153); font-size: 12px; width: 100%') {{app.isLang === "VN" ? "Font chữ" : "Font Family"}}
+                        select.form-control(ng-model='vm.obj.options.body.fontFamily', ng-change='vm.onChangeSettings()')
+                          option(ng-repeat="f in vm.fontFamilies track by $index" value="{{f.value}}") {{f.text}}
+                .panel.panel-default
+                  .panel-heading(role="tab" id="headingTwoStaticImg")
+                    a(data-toggle='collapse', data-target="#dsettingImg", data-parent="#accordionStaticImg") image
+                    i.fa.fa-chevron-up
+                    i.fa.fa-chevron-down
+                  #dsettingImg.panel-collapse.collapse(role="tabpanel" aria-labelledby="headingTwoStaticImg")
+                    .panel-body
+                      #dropzone.dropzone(style='margin-bottom: 10px; padding: 10px 50px;')
+                      .form-group.div-call-warning
+                        h4 {{app.isLang === "VN" ? "Định dạng hình ảnh được hỗ trợ" : "Supported Image Formats"}}
+                        span(ng-show="vm.staticImgPreviewMode === 'Laptop'") {{app.isLang === "VN" ? "Độ phân giải khuyến nghị theo tỉ lệ khung hình là" : "Recommended resolution is"}}
+                          br
+                          i
+                            b {{app.isLang === "VN" ? "1625 x 935 (rộng x cao)" : "1625 x 935 (width x height)"}}
+                          |  {{app.isLang === "VN" ? "pixel." : "with aspect ratio pixels."}}
+                          br
+                          br
+                          | {{app.isLang === "VN" ? "Những đuôi file sau được hỗ trợ: " : ""}}
+                          i
+                            b .png, .jpg, .jpeg, .gif
+                          | {{app.isLang === "VN" ? ". Dung lượng upload tối đa: " : " file format was supported. Max file size is "}}
+                          i
+                            b 4 MB
+                        span(ng-show="vm.staticImgPreviewMode !== 'Laptop'") {{app.isLang === "VN" ? "Độ phân giải khuyến nghị theo tỉ lệ khung hình là" : "Recommended resolution is "}}
+                          br
+                          i
+                            b {{app.isLang === "VN" ? "800 x 1250 (rộng x cao)" : "800 x 1250 (width x height)"}}
+                          |  {{app.isLang === "VN" ? "pixel." : "with aspect ratio pixels."}}
+                          br
+                          br
+                          | {{app.isLang === "VN" ? "Những đuôi file sau được hỗ trợ: " : ""}}
+                          i
+                            b .png, .jpg, .jpeg, .gif
+                          | {{app.isLang === "VN" ? ". Dung lượng upload tối đa: " : " file format was supported. Max file size is "}}
+                          i
+                            b 4 MB
+                      .form-group(ng-show="vm.staticImgPreviewMode === 'Laptop'")
+                        label(style='color: rgb(143, 150, 153); font-size: 12px;') {{app.isLang === "VN" ? "Kích thước hình ảnh" : "Size Image"}}
+                        .input-group(style='max-width: 100px; margin-bottom: 10px')
+                          span.input-group-addon(ng-click='vm.onChangeSettings("image", "sizeImage", "minus")') -
+                          .form-control(style='background: transparent; max-width: 70px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;', ng-bind='vm.obj.options.sizeImage')
+                          span.input-group-addon(ng-click='vm.onChangeSettings("image", "sizeImage", "plus")') +
+                .panel.panel-default
+                  .panel-heading(role="tab" id="headingThreeStaticImg")
+                    a(data-toggle='collapse', data-target="#dsettingBtn", data-parent="#accordionStaticImg") button
+                    i.fa.fa-chevron-up
+                    i.fa.fa-chevron-down
+                  #dsettingBtn.panel-collapse.collapse(role="tabpanel" aria-labelledby="headingThreeStaticImg")
+                    .panel-body
+                      div(style='border-bottom: 1px solid rgb(225, 228, 231)', ng-hide='vm.obj.staticBannerType !== "default"')
+                        h5(style='color: #666; font-size: 14px') Text
+                        .form-group
+                          label(style='color: rgb(143, 150, 153); font-size: 12px') Button Text
+                          input.form-control(placeholder='Nhập text', ng-model='vm.obj.options.btn.text', ng-change='vm.onChangeSettings()')
+                        .form-group
+                          label(style='color: rgb(143, 150, 153); font-size: 12px;') Font Weight
+                          select.form-control(ng-model='vm.obj.options.btn.fontWeight', ng-change='vm.onChangeSettings()')
+                            option(value='normal') Normal
+                            option(value='bolder') Bold
+                            option(value='lighter') Light
+                      div(style='border-bottom: 1px solid rgb(225, 228, 231)')
+                        h5(style='color: #666; font-size: 14px') Colors
+                        div(style='display: flex; justify-content: space-around;')
+                          .form-group
+                            label(style='color: rgb(143, 150, 153); font-size: 12px') {{app.isLang === "VN" ? "Màu của chữ" : "Text Color"}}
+                            .input-group.input-color-picker
+                              input(color-picker='', color-picker-position="left", color-picker-model='vm.obj.options.btn.color', color-picker-show-value='false', ng-style='{background:vm.obj.options.btn.color}')
+                          .form-group
+                            label(style='color: rgb(143, 150, 153); font-size: 12px') {{app.isLang === "VN" ? "Màu nền của chữ" : "Background Color"}}
+                            .input-group.input-color-picker
+                              input(color-picker='', color-picker-position="left", color-picker-model='vm.obj.options.btn.backgroundColor', color-picker-show-value='false', ng-style='{background:vm.obj.options.btn.backgroundColor}')
+                      div(ng-hide='vm.obj.staticBannerType === "fixed"')
+                        h5(style='color: #666; font-size: 14px') Spacing
+                        .form-group(style='display: flex; justify-content: space-between; border-bottom: 1px solid #ddd; padding-bottom: 10px')
+                            label(style='color: rgb(143, 150, 153); font-size: 12px; margin-top: 10px') Alignments
+                            div
+                              button.btn.btn-default.btn-alignment(style='border-radius: 0; margin-right: 2px', title='initial', ng-class='vm.obj.options.btn.textAlign === "initial" ? "active" : ""', ng-model='vm.obj.options.btn.textAlign', ng-click='vm.onChangeSettings("btn", "textAlign", "initial")')
+                                i.fa.fa-align-justify
+                              button.btn.btn-default.btn-alignment(style='border-radius: 0; margin-left: 2px', title='center', ng-class='vm.obj.options.btn.textAlign === "center" ? "active" : ""', ng-model='vm.obj.options.btn.textAlign', ng-click='vm.onChangeSettings("btn", "textAlign", "center")')
+                                i.fa.fa-align-center
+                        div(style='border-bottom: 1px solid #ddd; margin-bottom: 10px')
+                          label(style='color: rgb(143, 150, 153); font-size: 12px;') {{app.isLang === "VN" ? "Vị trí button" : "Directions"}}
+                          div(style='display: flex;')
+                            .form-group(style='width: 50%;')
+                              label(style='color: rgb(143, 150, 153); font-size: 12px;') {{app.isLang === "VN" ? "Theo hoành độ" : "Transform to X"}}
+                              .input-group(style='max-width: 100px; margin-bottom: 10px')
+                                span.input-group-addon(ng-class='vm.obj.options.btn.textAlign === "center" ? "disabled": ""', ng-click='vm.onChangeSettings("btn", "xDirection", "minus")') -
+                                .form-control(style='background: transparent; max-width: 70px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;', ng-bind='vm.obj.options.btn.xDirection')
+                                span.input-group-addon(ng-class='vm.obj.options.btn.textAlign === "center" ? "disabled": ""', ng-click='vm.onChangeSettings("btn", "xDirection", "plus")') +
+                            .form-group(style='width: 50%;')
+                              label(style='color: rgb(143, 150, 153); font-size: 12px;') {{app.isLang === "VN" ? "Theo tung độ" : "Transform to Y"}}
+                              .input-group(style='max-width: 100px; margin-bottom: 10px')
+                                span.input-group-addon(ng-click='vm.onChangeSettings("btn", "yDirection", "minus")') -
+                                .form-control(style='background: transparent; max-width: 70px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;', ng-bind='vm.obj.options.btn.yDirection')
+                                span.input-group-addon(ng-click='vm.onChangeSettings("btn", "yDirection", "plus")') +
+                        div(style='border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 10px;', ng-hide='vm.obj.staticBannerType !== "default"')
+                          div(style='display: flex; justify-content: space-between;')
+                            label(style='color: rgb(143, 150, 153); font-size: 12px;') Border
+                            label(style='display: flex')
+                              span(style='color: rgb(143, 150, 153); font-size: 12px; margin-right: 5px; margin-top: 3px;') More Options
+                              label.switch-lock-icon
+                                input(type='checkbox', ng-true-value="'more'" ng-false-value="'allsides'" ng-model="vm.obj.options.btnBorderOption", ng-change='vm.onChangeSettings("btn", "btnBorderOption")')
+                                span
+                                  em
+                                  strong
+                          .border-all-sides(ng-show='vm.obj.options.btnBorderOption === "allsides"')
+                            .form-group
+                              label(style='color: rgb(143, 150, 153); font-size: 12px;') All Sides
+                              select.form-control(ng-model='vm.obj.options.btn.borderStyle', ng-change='vm.onChangeSettings()')
+                                option(value='solid') Solid
+                                option(value='dotted') Dotted
+                                option(value='dashed') Dashed
+                            div(style='display: flex; justify-content: space-between;')
+                              .input-group(style='max-width: 100px')
+                                span.input-group-addon(ng-click='vm.onChangeSettings("btn", "borderWidth", "minus")') -
+                                .form-control(style='background: transparent; max-width: 70px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;', ng-bind='vm.obj.options.btn.borderWidth')
+                                span.input-group-addon(ng-click='vm.onChangeSettings("btn", "borderWidth", "plus")') +
+                              .form-group
+                                .input-group.input-color-picker
+                                  input(color-picker='', color-picker-position="left", color-picker-model='vm.obj.options.btn.borderColor', color-picker-show-value='false', ng-style='{background:vm.obj.options.btn.borderColor}')
+                          .border-more-options(ng-show='vm.obj.options.btnBorderOption === "more"')
+                            div(style='display: flex')
+                              div(style='width: 50%; padding: 5px;')
+                                .form-group
+                                  label(style='color: rgb(143, 150, 153); font-size: 12px;') Top
+                                  select.form-control(ng-model='vm.obj.options.btn.borderTopStyle', ng-change='vm.onChangeSettings()')
+                                    option(value='solid') Solid
+                                    option(value='dotted') Dotted
+                                    option(value='dashed') Dashed
+                                div(style='display: flex; justify-content: space-between;')
+                                  .input-group(style='max-width: 100px; margin-bottom: 10px')
+                                    span.input-group-addon(ng-click='vm.onChangeSettings("btn", "borderTopWidth", "minus")') -
+                                    .form-control(style='background: transparent; max-width: 70px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;', ng-bind='vm.obj.options.btn.borderTopWidth')
+                                    span.input-group-addon(ng-click='vm.onChangeSettings("btn", "borderTopWidth", "plus")') +
+                                  .form-group
+                                    .input-group.input-color-picker
+                                      input(color-picker='', color-picker-position="left", color-picker-model='vm.obj.options.btn.borderTopColor', color-picker-show-value='false', ng-style='{background:vm.obj.options.btn.borderTopColor}')
+                              div(style='width: 50%; padding: 5px;')
+                                .form-group
+                                    label(style='color: rgb(143, 150, 153); font-size: 12px;') Right
+                                    select.form-control(ng-model='vm.obj.options.btn.borderRightStyle', ng-change='vm.onChangeSettings()')
+                                      option(value='solid') Solid
+                                      option(value='dotted') Dotted
+                                      option(value='dashed') Dashed
+                                div(style='display: flex; justify-content: space-between;')
+                                  .input-group(style='max-width: 100px; margin-bottom: 10px')
+                                    span.input-group-addon(ng-click='vm.onChangeSettings("btn", "borderRightWidth", "minus")') -
+                                    .form-control(style='background: transparent; max-width: 70px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;', ng-bind='vm.obj.options.btn.borderRightWidth')
+                                    span.input-group-addon(ng-click='vm.onChangeSettings("btn", "borderRightWidth", "plus")') +
+                                  .form-group
+                                    .input-group.input-color-picker
+                                      input(color-picker='', color-picker-position="left", color-picker-model='vm.obj.options.btn.borderRightColor', color-picker-show-value='false', ng-style='{background:vm.obj.options.btn.borderRightColor}')
+                            div(style='display: flex')
+                              div(style='width: 50%; padding: 5px;')
+                                .form-group
+                                    label(style='color: rgb(143, 150, 153); font-size: 12px;') Bottom
+                                    select.form-control(ng-model='vm.obj.options.btn.borderBottomStyle', ng-change='vm.onChangeSettings()')
+                                      option(value='solid') Solid
+                                      option(value='dotted') Dotted
+                                      option(value='dashed') Dashed
+                                div(style='display: flex; justify-content: space-between;')
+                                  .input-group(style='max-width: 100px; margin-bottom: 10px')
+                                    span.input-group-addon(ng-click='vm.onChangeSettings("btn", "borderBottomWidth", "minus")') -
+                                    .form-control(style='background: transparent; max-width: 70px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;', ng-bind='vm.obj.options.btn.borderBottomWidth')
+                                    span.input-group-addon(ng-click='vm.onChangeSettings("btn", "borderBottomWidth", "plus")') +
+                                  .form-group
+                                    .input-group.input-color-picker
+                                      input(color-picker='', color-picker-position="left", color-picker-model='vm.obj.options.btn.borderBottomColor', color-picker-show-value='false', ng-style='{background:vm.obj.options.btn.borderBottomColor}')
+                              div(style='width: 50%; padding: 5px;')
+                                .form-group
+                                    label(style='color: rgb(143, 150, 153); font-size: 12px;') Left
+                                    select.form-control(ng-model='vm.obj.options.btn.borderLeftStyle', ng-change='vm.onChangeSettings()')
+                                      option(value='solid') Solid
+                                      option(value='dotted') Dotted
+                                      option(value='dashed') Dashed
+                                div(style='display: flex; justify-content: space-between;')
+                                  .input-group(style='max-width: 100px; margin-bottom: 10px')
+                                    span.input-group-addon(ng-click='vm.onChangeSettings("btn", "borderLeftWidth", "minus")') -
+                                    .form-control(style='background: transparent; max-width: 70px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;', ng-bind='vm.obj.options.btn.borderLeftWidth')
+                                    span.input-group-addon(ng-click='vm.onChangeSettings("btn", "borderLeftWidth", "plus")') +
+                                  .form-group
+                                    .input-group.input-color-picker
+                                      input(color-picker='', color-picker-position="left", color-picker-model='vm.obj.options.btn.borderLeftColor', color-picker-show-value='false', ng-style='{background:vm.obj.options.btn.borderLeftColor}')
+                        .form-group(style='border-bottom: 1px solid #ddd; padding-bottom: 10px', ng-hide='vm.obj.staticBannerType !== "default"')
+                          label(style='color: rgb(143, 150, 153); font-size: 12px;') Border Rounded
+                          .input-group(style='max-width: 100px')
+                            span.input-group-addon(ng-click='vm.onChangeSettings("btn", "borderRadius", "minus")') -
+                            .form-control(style='background: transparent; max-width: 70px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;', ng-bind='vm.obj.options.btn.borderRadius')
+                            span.input-group-addon(ng-click='vm.onChangeSettings("btn", "borderRadius", "plus")') +
+                        div(style='border-bottom: 1px solid #ddd; padding-bottom: 10px', ng-hide='vm.obj.staticBannerType !== "default"')
+                          div(style='display: flex; justify-content: space-between;')
+                            label(style='color: rgb(143, 150, 153); font-size: 12px;') Padding
+                            label(style='display: flex')
+                              span(style='color: rgb(143, 150, 153); font-size: 12px; margin-right: 5px; margin-top: 3px;') More Options
+                              label.switch-lock-icon
+                                input(type='checkbox', ng-true-value="'more'" ng-false-value="'allsides'" ng-model="vm.obj.options.btnPaddingOption", ng-change='vm.onChangeSettings("btn", "btnPaddingOption")')
+                                span
+                                  em
+                                  strong
+                          .border-all-sides(ng-show='vm.obj.options.btnPaddingOption === "allsides"')
+                            .form-group
+                              label(style='color: rgb(143, 150, 153); font-size: 12px;') All Sides
+                              .input-group(style='max-width: 100px')
+                                span.input-group-addon(ng-click='vm.onChangeSettings("btn", "padding", "minus")') -
+                                .form-control(style='background: transparent; max-width: 70px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;', ng-bind='vm.obj.options.btn.padding')
+                                span.input-group-addon(ng-click='vm.onChangeSettings("btn", "padding", "plus")') +
+                          .border-more-options(ng-show='vm.obj.options.btnPaddingOption === "more"')
+                            div(style='display: flex')
+                              div(style='width: 50%; padding: 5px;')
+                                .form-group
+                                  label(style='color: rgb(143, 150, 153); font-size: 12px;') Top
+                                  .input-group(style='max-width: 100px; margin-bottom: 10px')
+                                    span.input-group-addon(ng-click='vm.onChangeSettings("btn", "paddingTop", "minus")') -
+                                    .form-control(style='background: transparent; max-width: 70px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;', ng-bind='vm.obj.options.btn.paddingTop')
+                                    span.input-group-addon(ng-click='vm.onChangeSettings("btn", "paddingTop", "plus")') +
+                              div(style='width: 50%; padding: 5px;')
+                                .form-group
+                                  label(style='color: rgb(143, 150, 153); font-size: 12px;') Right
+                                  .input-group(style='max-width: 100px; margin-bottom: 10px')
+                                    span.input-group-addon(ng-click='vm.onChangeSettings("btn", "paddingRight", "minus")') -
+                                    .form-control(style='background: transparent; max-width: 70px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;', ng-bind='vm.obj.options.btn.paddingRight')
+                                    span.input-group-addon(ng-click='vm.onChangeSettings("btn", "paddingRight", "plus")') +
+                            div(style='display: flex')
+                              div(style='width: 50%; padding: 5px;')
+                                .form-group
+                                  label(style='color: rgb(143, 150, 153); font-size: 12px;') Bottom
+                                  .input-group(style='max-width: 100px; margin-bottom: 10px')
+                                    span.input-group-addon(ng-click='vm.onChangeSettings("btn", "paddingBottom", "minus")') -
+                                    .form-control(style='background: transparent; max-width: 70px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;', ng-bind='vm.obj.options.btn.paddingBottom')
+                                    span.input-group-addon(ng-click='vm.onChangeSettings("btn", "paddingBottom", "plus")') +
+                              div(style='width: 50%; padding: 5px;')
+                                .form-group
+                                  label(style='color: rgb(143, 150, 153); font-size: 12px;') Left
+                                  .input-group(style='max-width: 100px; margin-bottom: 10px')
+                                    span.input-group-addon(ng-click='vm.onChangeSettings("btn", "paddingLeft", "minus")') -
+                                    .form-control(style='background: transparent; max-width: 70px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;', ng-bind='vm.obj.options.btn.paddingLeft')
+                                    span.input-group-addon(ng-click='vm.onChangeSettings("btn", "paddingLeft", "plus")') +
+
+
+//- Design Video
+form#fmVideoBanner.modal.fade.in(name='fmVideoBanner', aria-labelledby='fmVideoBannerLabel', novalidate='novalidate')
+  .modal-dialog.modal-fullscreen
+    .modal-content
+      .modal-header(ng-class='"bg-primary"')
+        button.close(style='right: 80px', type='button', title='Cancel', data-dismiss='modal', aria-label='Close')
+          i.fa.fa-times
+        button.close(style='border: 1px solid; padding: 7px 12px; margin-top: -17.5px', type='button', title='Save', data-dismiss='modal', aria-label='Close', ng-click='vm.vidGenerateHTML()')
+          i.fa.fa-floppy-o
+        h4#fmVideoBannerLabel.modal-title Design Video
+      .modal-body(style='padding:0;')
+        .dwrapper
+          .dcontent
+            nav.navbar.navbar-default
+              .container-fluid(style='padding:0')
+                .navbar-header
+                  .div-handle-device
+                    button.btn.btn-info#btn-laptop-video(type='button', title="Laptop", ng-class='vm.videoPreviewMode === "Laptop" ? "active" : ""', ng-click='vm.vidEditHandleMode("Laptop")')
+                      i.icon-laptop(style='font-size: 20px')
+                    button.btn.btn-info(type='button', title="Mobile", ng-class='vm.videoPreviewMode === "Mobile" ? "active" : ""', ng-click='vm.vidEditHandleMode("Mobile")')
+                      i.icon-mobile(style='font-size: 20px')
+                  button.btn.btn-info.btn-sidebar(style='left: auto; right: 0; top: 0', type='button', ng-click='vm.onVideoOpenSidebar("right")')
+                    i.fa.fa-cogs(style='margin-right:3px')
+                    span {{app.isLang === "VN" ? "Cài đặt" : "Settings"}}
+            #edit-handle-video(ng-class='vm.videoPreviewMode === "Laptop" ? "edit-handle-laptop" : "edit-handle-mobile"')
+          nav.dsidebar-right(ng-class='vm.vidSidebarRight ? "dactiveRight" : ""')
+            .dsettings
+              .panel-group(id="accordionVideo" role="tablist" aria-multiselectable="true")
+                .panel.panel-default
+                  .panel-heading(role="tab" id="headingOneVideo")
+                    a(data-toggle='collapse', data-target="#dsettingVideoGeneral" data-parent="#accordionVideo") general
+                    i.fa.fa-chevron-up
+                    i.fa.fa-chevron-down
+                  #dsettingVideoGeneral.panel-collapse.collapse.in(role="tabpanel" aria-labelledby="headingOneVideo")
+                    .panel-body
+                      div(style='display: flex; justify-content: space-between; padding-bottom: 10px')
+                        label(style='color: rgb(143, 150, 153); font-size: 12px') {{app.isLang === "VN" ? "Màu nền" : "Background Color"}}
+                        .input-group.input-color-picker
+                          input(color-picker='', color-picker-position="left", color-picker-model='vm.objVideo.options.body.backgroundColor', color-picker-show-value="false", ng-style='{background:vm.objVideo.options.body.backgroundColor}')
+                      div(style='display: flex; justify-content: space-between;')
+                        label(style='color: rgb(143, 150, 153); font-size: 12px; width: 100%') {{app.isLang === "VN" ? "Font chữ" : "Font Family"}}
+                        select.form-control(ng-model='vm.objVideo.options.body.fontFamily', ng-change='vm.onVideoChangeSettings()')
+                          option(ng-repeat="f in vm.fontFamilies track by $index" value="{{f.value}}") {{f.text}}
+                .panel.panel-default
+                  .panel-heading(role="tab" id="headingTwoVideo")
+                    a(data-toggle='collapse', data-target="#dsettingVideoImage" data-parent="#accordionVideo") image
+                    i.fa.fa-chevron-up
+                    i.fa.fa-chevron-down
+                  #dsettingVideoImage.panel-collapse.collapse(role="tabpanel" aria-labelledby="headingTwoVideo")
+                    .panel-body
+                      .form-group
+                        label(style='color: rgb(143, 150, 153); font-size: 12px;') {{app.isLang === "VN" ? "Vị trí hình ảnh" : "Image Position"}}
+                        div(style='display: flex; justify-content: space-between;')
+                          select.form-control(ng-model='vm.objVideo.options.img.imgOption', style='width: 110px;')
+                            option(value='header') Header
+                            option(value='footer') Footer
+                            option(value='poster') Video Poster
+                          label(style='display: flex', ng-show='vm.objVideo.options.img.imgOption === "header"')
+                            span(style='color: rgb(143, 150, 153); font-size: 12px; margin-right: 5px; margin-top: 3px;') On/Off
+                            label.switch-lock-icon
+                              input(type='checkbox', ng-true-value="'on'" ng-false-value="'off'" ng-model="vm.objVideo.options.img.enableHeaderImg", ng-change='vm.onVideoChangeSettings()')
+                              span
+                                em
+                                strong
+                          label(style='display: flex', ng-show='vm.objVideo.options.img.imgOption === "footer"')
+                            span(style='color: rgb(143, 150, 153); font-size: 12px; margin-right: 5px; margin-top: 3px;') On/Off
+                            label.switch-lock-icon
+                              input(type='checkbox', ng-true-value="'on'" ng-false-value="'off'" ng-model="vm.objVideo.options.img.enableFooterImg", ng-change='vm.onVideoChangeSettings()')
+                              span
+                                em
+                                strong
+                          label(style='display: flex', ng-show='vm.objVideo.options.img.imgOption === "poster"')
+                            span(style='color: rgb(143, 150, 153); font-size: 12px; margin-right: 5px; margin-top: 3px;') On/Off
+                            label.switch-lock-icon
+                              input(type='checkbox', ng-true-value="'on'" ng-false-value="'off'" ng-model="vm.objVideo.options.img.enablePosterImg", ng-change='vm.onVideoChangeSettings()')
+                              span
+                                em
+                                strong
+                      #dropzoneImageVideo.dropzone(style='margin-bottom: 10px; padding: 10px 50px;' ng-show='(vm.objVideo.options.img.imgOption === "header" && vm.objVideo.options.img.enableHeaderImg === "on") || (vm.objVideo.options.img.imgOption === "footer" && vm.objVideo.options.img.enableFooterImg === "on") || (vm.objVideo.options.img.imgOption === "poster" && vm.objVideo.options.img.enablePosterImg === "on")')
+                      .form-group.div-call-warning(ng-show='(vm.objVideo.options.img.imgOption === "header" && vm.objVideo.options.img.enableHeaderImg === "on") || (vm.objVideo.options.img.imgOption === "footer" && vm.objVideo.options.img.enableFooterImg === "on") || (vm.objVideo.options.img.imgOption === "poster" && vm.objVideo.options.img.enablePosterImg === "on")')
+                        h4 {{app.isLang === "VN" ? "Định dạng hình ảnh được hỗ trợ" : "Supported Image Formats"}}
+                        span {{app.isLang === "VN" ? "Độ phân giải khuyến nghị theo tỉ lệ khung hình là" : "Recommended resolution is"}}
+                          br
+                          i(ng-show='vm.objVideo.options.img.imgOption === "header" && vm.objVideo.options.img.enableHeaderImg === "on"')
+                            b {{app.isLang === "VN" ? "640 x 280 (rộng x cao)" : "640 x 280 (width x height)"}}
+                          i(ng-show='vm.objVideo.options.img.imgOption === "footer" && vm.objVideo.options.img.enableFooterImg === "on"')
+                            b {{app.isLang === "VN" ? "640 x 310 (rộng x cao)" : "640 x 310 (width x height)"}}
+                          i(ng-show='vm.objVideo.options.img.imgOption === "poster" && vm.objVideo.options.img.enablePosterImg === "on"')
+                            b {{app.isLang === "VN" ? "640 x 360 (rộng x cao)" : "640 x 360 (width x height)"}}
+                          |  {{app.isLang === "VN" ? "pixel." : "with aspect ratio pixels."}}
+                          br
+                          br
+                          | {{app.isLang === "VN" ? "Những đuôi file sau được hỗ trợ: " : ""}}
+                          i
+                            b .png, .jpg, .jpeg, .gif
+                          | {{app.isLang === "VN" ? ". Dung lượng upload tối đa: " : " file format was supported. Max file size is "}}
+                          i
+                            b 4 MB
+                .panel.panel-default
+                  .panel-heading(role="tab" id="headingThreeVideo")
+                    a(data-toggle='collapse', data-target="#dsettingVideoVid" data-parent="#accordionVideo") video
+                    i.fa.fa-chevron-up
+                    i.fa.fa-chevron-down
+                  #dsettingVideoVid.panel-collapse.collapse(role="tabpanel" aria-labelledby="headingThreeVideo")
+                    .panel-body
+                      #dropzoneVideo.dropzone(style='margin-bottom: 10px; padding: 10px 50px;')
+                      .form-group.div-call-warning
+                        h4 {{app.isLang === "VN" ? "Định dạng video được hỗ trợ" : "Supported Video Formats"}}
+                        span
+                          | {{app.isLang === "VN" ? "Những đuôi file sau được hỗ trợ: " : ""}}
+                          i
+                            b .mp4, .webm, .ogv, .ogg
+                          | {{app.isLang === "VN" ? ". Dung lượng upload tối đa: " : " file format was supported. Max file size is "}}
+                          i
+                            b 6 MB
+                      div
+                        h5(style='color: #666; font-size: 14px') Video Options
+                        .form-group(style='display: flex; justify-content: space-between;')
+                          label(style='display: flex')
+                            span(style='color: rgb(143, 150, 153); font-size: 12px; margin-right: 5px; margin-top: 3px;') {{app.isLang === "VN" ? "Tắt âm thanh" : "Mute"}}
+                            label.switch-lock-icon
+                              input(type='checkbox', ng-true-value="true" ng-false-value="false" ng-model="vm.objVideo.options.video.muted")
+                              span
+                                em
+                                strong
+                          label(style='display: flex')
+                            span(style='color: rgb(143, 150, 153); font-size: 12px; margin-right: 5px; margin-top: 3px;') {{app.isLang === "VN" ? "Tự phát" : "Auto Play"}}
+                            label.switch-lock-icon
+                              input(type='checkbox', ng-true-value="true" ng-false-value="false" ng-model="vm.objVideo.options.video.autoPlay")
+                              span
+                                em
+                                strong
+                        .form-group
+                          label(style='color: rgb(143, 150, 153); font-size: 12px;') {{app.isLang === "VN" ? "Thời gian hiển thị" : "Display Time"}}
+                            b  {{app.isLang === "VN" ? "(Nút kết nối Internet)" : "(Internet Login Button)"}}
+                          div(style='display: flex; justify-content: space-around;')
+                            label.radio-inline(style='color: rgb(143, 150, 153); font-size: 12px')
+                              input(type='radio', name='timedisplaylogin', value='5', ng-model="vm.objVideo.options.video.displayTimeBtn")
+                              | 5s
+                            label.radio-inline(style='color: rgb(143, 150, 153); font-size: 12px')
+                              input(type='radio', name='timedisplaylogin', value='8', ng-model="vm.objVideo.options.video.displayTimeBtn")
+                              | 8s
+                            label.radio-inline(style='color: rgb(143, 150, 153); font-size: 12px')
+                              input(type='radio', name='timedisplaylogin', value='10', ng-model="vm.objVideo.options.video.displayTimeBtn")
+                              | 10s
+                            label.radio-inline(style='color: rgb(143, 150, 153); font-size: 12px')
+                              input(type='radio', name='timedisplaylogin', value='custom', ng-model="vm.objVideo.options.video.displayTimeBtn")
+                              | Custom
+                          label(style='display: flex; justify-content: flex-end;', ng-show='vm.objVideo.options.video.displayTimeBtn === "custom"')
+                            input.form-control(min="3" max="30" type='number', style='color: rgb(143, 150, 153); font-size: 12px; max-width: 90px; margin-top: 10px;', ng-model="vm.objVideo.options.video.displayTimeBtnCustom", onpaste="return false;")
+                .panel.panel-default
+                  .panel-heading(role="tab" id="headingFourVideo")
+                    a(data-toggle='collapse', data-target="#dsettingVideoButton" data-parent="#accordionVideo") button
+                    i.fa.fa-chevron-up
+                    i.fa.fa-chevron-down
+                  #dsettingVideoButton.panel-collapse.collapse(role="tabpanel" aria-labelledby="headingFourVideo")
+                    .panel-body
+                      div(style='border-bottom: 1px solid rgb(225, 228, 231)')
+                        h5(style='color: #666; font-size: 14px') Text
+                        .form-group
+                          label(style='color: rgb(143, 150, 153); font-size: 12px') Button Text
+                          input.form-control(placeholder='Nhập text', ng-model='vm.objVideo.options.btn.text', ng-change='vm.onVideoChangeSettings()')
+                        .form-group
+                          label(style='color: rgb(143, 150, 153); font-size: 12px;') Font Weight
+                          select.form-control(ng-model='vm.objVideo.options.btn.fontWeight', ng-change='vm.onChangeSettings()')
+                            option(value='normal') Normal
+                            option(value='bolder') Bold
+                            option(value='lighter') Light
+                      div(style='border-bottom: 1px solid rgb(225, 228, 231)')
+                        h5(style='color: #666; font-size: 14px') Colors
+                        div(style='display: flex; justify-content: space-around;')
+                          .form-group
+                            label(style='color: rgb(143, 150, 153); font-size: 12px') {{app.isLang === "VN" ? "Màu của chữ" : "Text Color"}}
+                            .input-group.input-color-picker
+                              input(color-picker='', color-picker-position="left", color-picker-model='vm.objVideo.options.btn.color', color-picker-show-value='false', ng-style='{background:vm.objVideo.options.btn.color}')
+                          .form-group
+                            label(style='color: rgb(143, 150, 153); font-size: 12px') {{app.isLang === "VN" ? "Màu nền của chữ" : "Background Color"}}
+                            .input-group.input-color-picker
+                              input(color-picker='', color-picker-position="left", color-picker-model='vm.objVideo.options.btn.backgroundColor', color-picker-show-value='false', ng-style='{background:vm.objVideo.options.btn.backgroundColor}')
+                      div
+                        h5(style='color: #666; font-size: 14px') Spacing
+                        .form-group(style='display: flex; justify-content: space-between; border-bottom: 1px solid #ddd; padding-bottom: 10px')
+                          label(style='color: rgb(143, 150, 153); font-size: 12px; margin-top: 10px') Alignments
+                          div
+                            button.btn.btn-default.btn-alignment(style='border-radius: 0; margin-right: 2px', title='initial', ng-class='vm.objVideo.options.btn.textAlign === "initial" ? "active" : ""', ng-model='vm.objVideo.options.btn.textAlign', ng-click='vm.onVideoChangeSettings("btn", "textAlign", "initial")')
+                              i.fa.fa-align-justify
+                            button.btn.btn-default.btn-alignment(style='border-radius: 0; margin-right: 2px', title='center', ng-class='vm.objVideo.options.btn.textAlign === "center" ? "active" : ""', ng-model='vm.objVideo.options.btn.textAlign', ng-click='vm.onVideoChangeSettings("btn", "textAlign", "center")')
+                              i.fa.fa-align-center
+                        div(style='border-bottom: 1px solid #ddd; margin-bottom: 10px')
+                          label(style='color: rgb(143, 150, 153); font-size: 12px;') {{app.isLang === "VN" ? "Vị trí button" : "Directions"}}
+                          div(style='display: flex;justify-content: space-around;')
+                            .form-group
+                              label(style='color: rgb(143, 150, 153); font-size: 12px;') {{app.isLang === "VN" ? "Theo hoành độ" : "Transform to X"}}
+                              .input-group(style='max-width: 100px; margin-bottom: 10px')
+                                span.input-group-addon(ng-class='vm.objVideo.options.btn.textAlign === "center" ? "disabled": ""', ng-click='vm.onVideoChangeSettings("btn", "xDirection", "minus")') -
+                                .form-control(style='background: transparent; max-width: 70px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;', ng-bind='vm.objVideo.options.btn.xDirection')
+                                span.input-group-addon(ng-class='vm.objVideo.options.btn.textAlign === "center" ? "disabled": ""', ng-click='vm.onVideoChangeSettings("btn", "xDirection", "plus")') +
+                            .form-group
+                              label(style='color: rgb(143, 150, 153); font-size: 12px;') {{app.isLang === "VN" ? "Theo tung độ" : "Transform to Y"}}
+                              .input-group(style='max-width: 100px; margin-bottom: 10px')
+                                span.input-group-addon(ng-click='vm.onVideoChangeSettings("btn", "yDirection", "minus")') -
+                                .form-control(style='background: transparent; max-width: 70px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;', ng-bind='vm.objVideo.options.btn.yDirection')
+                                span.input-group-addon(ng-click='vm.onVideoChangeSettings("btn", "yDirection", "plus")') +
+                        div(style='border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 10px;')
+                          div(style='display: flex; justify-content: space-between;')
+                            label(style='color: rgb(143, 150, 153); font-size: 12px;') Border
+                            label(style='display: flex')
+                              span(style='color: rgb(143, 150, 153); font-size: 12px; margin-right: 5px; margin-top: 3px;') More Options
+                              label.switch-lock-icon
+                                input(type='checkbox', ng-true-value="'more'" ng-false-value="'allsides'" ng-model="vm.objVideo.options.btn.btnBorderOption", ng-change='vm.onVideoChangeSettings("btn", "btnBorderOption")')
+                                span
+                                  em
+                                  strong
+                          .border-all-sides(ng-show='vm.objVideo.options.btn.btnBorderOption === "allsides"')
+                            .form-group
+                              label(style='color: rgb(143, 150, 153); font-size: 12px;') All Sides
+                              select.form-control(ng-model='vm.objVideo.options.btn.borderStyle', ng-change='vm.onVideoChangeSettings()')
+                                option(value='solid') Solid
+                                option(value='dotted') Dotted
+                                option(value='dashed') Dashed
+                            div(style='display: flex; justify-content: space-between;')
+                              .input-group(style='max-width: 100px')
+                                span.input-group-addon(ng-click='vm.onVideoChangeSettings("btn", "borderWidth", "minus")') -
+                                .form-control(style='background: transparent; max-width: 70px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;', ng-bind='vm.objVideo.options.btn.borderWidth')
+                                span.input-group-addon(ng-click='vm.onVideoChangeSettings("btn", "borderWidth", "plus")') +
+                              .form-group
+                                .input-group.input-color-picker
+                                  input(color-picker='', color-picker-position="left", color-picker-model='vm.objVideo.options.btn.borderColor', color-picker-show-value='false', ng-style='{background:vm.objVideo.options.btn.borderColor}')
+                          .border-more-options(ng-show='vm.objVideo.options.btn.btnBorderOption === "more"')
+                            div(style='display: flex')
+                              div(style='width: 50%; padding: 5px;')
+                                .form-group
+                                  label(style='color: rgb(143, 150, 153); font-size: 12px;') Top
+                                  select.form-control(ng-model='vm.objVideo.options.btn.borderTopStyle', ng-change='vm.onVideoChangeSettings()')
+                                    option(value='solid') Solid
+                                    option(value='dotted') Dotted
+                                    option(value='dashed') Dashed
+                                div(style='display: flex; justify-content: space-between;')
+                                  .input-group(style='max-width: 100px; margin-bottom: 10px')
+                                    span.input-group-addon(ng-click='vm.onVideoChangeSettings("btn", "borderTopWidth", "minus")') -
+                                    .form-control(style='background: transparent; max-width: 70px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;', ng-bind='vm.objVideo.options.btn.borderTopWidth')
+                                    span.input-group-addon(ng-click='vm.onVideoChangeSettings("btn", "borderTopWidth", "plus")') +
+                                  .form-group
+                                    .input-group.input-color-picker
+                                      input(color-picker='', color-picker-position="left", color-picker-model='vm.objVideo.options.btn.borderTopColor', color-picker-show-value='false', ng-style='{background:vm.objVideo.options.btn.borderTopColor}')
+                              div(style='width: 50%; padding: 5px;')
+                                .form-group
+                                  label(style='color: rgb(143, 150, 153); font-size: 12px;') Right
+                                  select.form-control(ng-model='vm.objVideo.options.btn.borderRightStyle', ng-change='vm.onVideoChangeSettings()')
+                                    option(value='solid') Solid
+                                    option(value='dotted') Dotted
+                                    option(value='dashed') Dashed
+                                div(style='display: flex; justify-content: space-between;')
+                                  .input-group(style='max-width: 100px; margin-bottom: 10px')
+                                    span.input-group-addon(ng-click='vm.onVideoChangeSettings("btn", "borderRightWidth", "minus")') -
+                                    .form-control(style='background: transparent; max-width: 70px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;', ng-bind='vm.objVideo.options.btn.borderRightWidth')
+                                    span.input-group-addon(ng-click='vm.onVideoChangeSettings("btn", "borderRightWidth", "plus")') +
+                                  .form-group
+                                    .input-group.input-color-picker
+                                      input(color-picker='', color-picker-position="left", color-picker-model='vm.objVideo.options.btn.borderRightColor', color-picker-show-value='false', ng-style='{background:vm.objVideo.options.btn.borderRightColor}')
+                            div(style='display: flex')
+                              div(style='width: 50%; padding: 5px;')
+                                .form-group
+                                  label(style='color: rgb(143, 150, 153); font-size: 12px;') Bottom
+                                  select.form-control(ng-model='vm.objVideo.options.btn.borderBottomStyle', ng-change='vm.onVideoChangeSettings()')
+                                    option(value='solid') Solid
+                                    option(value='dotted') Dotted
+                                    option(value='dashed') Dashed
+                                div(style='display: flex; justify-content: space-between;')
+                                  .input-group(style='max-width: 100px; margin-bottom: 10px')
+                                    span.input-group-addon(ng-click='vm.onVideoChangeSettings("btn", "borderBottomWidth", "minus")') -
+                                    .form-control(style='background: transparent; max-width: 70px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;', ng-bind='vm.objVideo.options.btn.borderBottomWidth')
+                                    span.input-group-addon(ng-click='vm.onVideoChangeSettings("btn", "borderBottomWidth", "plus")') +
+                                  .form-group
+                                    .input-group.input-color-picker
+                                      input(color-picker='', color-picker-position="left", color-picker-model='vm.objVideo.options.btn.borderBottomColor', color-picker-show-value='false', ng-style='{background:vm.objVideo.options.btn.borderBottomColor}')
+                              div(style='width: 50%; padding: 5px;')
+                                .form-group
+                                  label(style='color: rgb(143, 150, 153); font-size: 12px;') Left
+                                  select.form-control(ng-model='vm.objVideo.options.btn.borderLeftStyle', ng-change='vm.onVideoChangeSettings()')
+                                    option(value='solid') Solid
+                                    option(value='dotted') Dotted
+                                    option(value='dashed') Dashed
+                                div(style='display: flex; justify-content: space-between;')
+                                  .input-group(style='max-width: 100px; margin-bottom: 10px')
+                                    span.input-group-addon(ng-click='vm.onVideoChangeSettings("btn", "borderLeftWidth", "minus")') -
+                                    .form-control(style='background: transparent; max-width: 70px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;', ng-bind='vm.objVideo.options.btn.borderLeftWidth')
+                                    span.input-group-addon(ng-click='vm.onVideoChangeSettings("btn", "borderLeftWidth", "plus")') +
+                                  .form-group
+                                    .input-group.input-color-picker
+                                      input(color-picker='', color-picker-position="left", color-picker-model='vm.objVideo.options.btn.borderLeftColor', color-picker-show-value='false', ng-style='{background:vm.objVideo.options.btn.borderLeftColor}')
+                        .form-group(style='border-bottom: 1px solid #ddd; padding-bottom: 10px')
+                          label(style='color: rgb(143, 150, 153); font-size: 12px;') Border Rounded
+                          .input-group(style='max-width: 100px')
+                            span.input-group-addon(ng-click='vm.onVideoChangeSettings("btn", "borderRadius", "minus")') -
+                            .form-control(style='background: transparent; max-width: 70px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;', ng-bind='vm.objVideo.options.btn.borderRadius')
+                            span.input-group-addon(ng-click='vm.onVideoChangeSettings("btn", "borderRadius", "plus")') +
+                        div(style='padding-bottom: 10px')
+                          div(style='display: flex; justify-content: space-between;')
+                            label(style='color: rgb(143, 150, 153); font-size: 12px;') Padding
+                            label(style='display: flex')
+                              span(style='color: rgb(143, 150, 153); font-size: 12px; margin-right: 5px; margin-top: 3px;') More Options
+                              label.switch-lock-icon
+                                input(type='checkbox', ng-true-value="'more'" ng-false-value="'allsides'" ng-model="vm.objVideo.options.btn.btnPaddingOption", ng-change='vm.onVideoChangeSettings("btn", "btnPaddingOption")')
+                                span
+                                  em
+                                  strong
+                          .border-all-sides(ng-show='vm.objVideo.options.btn.btnPaddingOption === "allsides"')
+                            .form-group
+                              label(style='color: rgb(143, 150, 153); font-size: 12px;') All Sides
+                              .input-group(style='max-width: 100px')
+                                span.input-group-addon(ng-click='vm.onVideoChangeSettings("btn", "padding", "minus")') -
+                                .form-control(style='background: transparent; max-width: 70px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;', ng-bind='vm.objVideo.options.btn.padding')
+                                span.input-group-addon(ng-click='vm.onVideoChangeSettings("btn", "padding", "plus")') +
+                          .border-more-options(ng-show='vm.objVideo.options.btn.btnPaddingOption === "more"')
+                            div(style='display: flex')
+                              div(style='width: 50%; padding: 5px;')
+                                .form-group
+                                  label(style='color: rgb(143, 150, 153); font-size: 12px;') Top
+                                  .input-group(style='max-width: 100px; margin-bottom: 10px')
+                                    span.input-group-addon(ng-click='vm.onVideoChangeSettings("btn", "paddingTop", "minus")') -
+                                    .form-control(style='background: transparent; max-width: 70px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;', ng-bind='vm.objVideo.options.btn.paddingTop')
+                                    span.input-group-addon(ng-click='vm.onVideoChangeSettings("btn", "paddingTop", "plus")') +
+                              div(style='width: 50%; padding: 5px;')
+                                .form-group
+                                  label(style='color: rgb(143, 150, 153); font-size: 12px;') Right
+                                  .input-group(style='max-width: 100px; margin-bottom: 10px')
+                                    span.input-group-addon(ng-click='vm.onVideoChangeSettings("btn", "paddingRight", "minus")') -
+                                    .form-control(style='background: transparent; max-width: 70px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;', ng-bind='vm.objVideo.options.btn.paddingRight')
+                                    span.input-group-addon(ng-click='vm.onVideoChangeSettings("btn", "paddingRight", "plus")') +
+                            div(style='display: flex')
+                              div(style='width: 50%; padding: 5px;')
+                                .form-group
+                                  label(style='color: rgb(143, 150, 153); font-size: 12px;') Bottom
+                                  .input-group(style='max-width: 100px; margin-bottom: 10px')
+                                    span.input-group-addon(ng-click='vm.onVideoChangeSettings("btn", "paddingBottom", "minus")') -
+                                    .form-control(style='background: transparent; max-width: 70px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;', ng-bind='vm.objVideo.options.btn.paddingBottom')
+                                    span.input-group-addon(ng-click='vm.onVideoChangeSettings("btn", "paddingBottom", "plus")') +
+                              div(style='width: 50%; padding: 5px;')
+                                .form-group
+                                  label(style='color: rgb(143, 150, 153); font-size: 12px;') Left
+                                  .input-group(style='max-width: 100px; margin-bottom: 10px')
+                                    span.input-group-addon(ng-click='vm.onVideoChangeSettings("btn", "paddingLeft", "minus")') -
+                                    .form-control(style='background: transparent; max-width: 70px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;', ng-bind='vm.objVideo.options.btn.paddingLeft')
+                                    span.input-group-addon(ng-click='vm.onVideoChangeSettings("btn", "paddingLeft", "plus")') +
+
+#generateHTML(style='display: none; opacity: 0')
+#videoGenerateHTML(style='display: none; opacity: 0')
+.bg-overlay#overlayBg
+  p {{vm.saveDesign ? "Generating HTML Code" : "Saving"}}
+    i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw
+.bg-overlay#vidOverlayBg
+  p {{vm.vidSaveDesign ? "Generating HTML Code" : "Saving"}}
+    i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw
+#modalImage.modal-image
+  span.close-image(ng-click='vm.modalImageFull("close")') &times;
+  img#imgHtmlCodeExampleModal.modal-content-image

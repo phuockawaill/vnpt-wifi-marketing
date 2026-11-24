@@ -1,0 +1,147 @@
+.page-content
+  // Main content
+  .content-wrapper
+    // Simple panel
+    .panel.panel-flat
+      .panel-heading
+        h5.panel-title Simple panel
+        .heading-elements
+          ul.icons-list
+            li
+              a(data-action='collapse')
+            li
+              a(data-action='close')
+      .panel-body
+        h6.text-semibold Start your development with no hassle!
+        p.content-group
+          | Common problem of templates is that all code is deeply integrated into the core. This limits your freedom in decreasing amount of code, i.e. it becomes pretty difficult to remove unnecessary code from the project. Limitless allows you to remove unnecessary and extra code easily just by removing the path to specific LESS file with component styling. All plugins and their options are also in separate files. Use only components you actually need!
+        h6.text-semibold What is this?
+        p.content-group
+          | Starter kit is a set of pages, useful for developers to start development process from scratch. Each layout includes base components only: layout, page kits, color system which is still optional, bootstrap files and bootstrap overrides. No extra CSS/JS files and markup. CSS files are compiled without any plugins or components. Starter kit was moved to a separate folder for better accessibility.
+        h6.text-semibold How does it work?
+        p
+          | You open one of the starter pages, add necessary plugins, uncomment paths to files in components.less file, compile new CSS. That's it. I'd also recommend to open one of main pages with functionality you need and copy all paths/JS code from there to your new page, it's just faster and easier.
+    // /simple panel
+    // Table
+    .panel.panel-flat
+      .panel-heading
+        h5.panel-title Basic table
+        .heading-elements
+          ul.icons-list
+            li
+              a(data-action='collapse')
+            li
+              a(data-action='close')
+      .panel-body
+        | Starter pages include the most basic components that may help you start your development process - basic grid example, panel, table and form layouts with standard components. Nothing extra.
+      .table-responsive
+        table.table
+          thead
+            tr
+              th #
+              th First Name
+              th Last Name
+              th Username
+          tbody
+            tr
+              td 1
+              td Eugene
+              td Kopyov
+              td @Kopyov
+            tr
+              td 2
+              td Victoria
+              td Baker
+              td @Vicky
+            tr
+              td 3
+              td James
+              td Alexander
+              td @Alex
+            tr
+              td 4
+              td Franklin
+              td Morrison
+              td @Frank
+    // /table
+    // Grid
+    .row
+      .col-md-6
+        // Horizontal form
+        .panel.panel-flat
+          .panel-heading
+            h5.panel-title Horizontal form
+            .heading-elements
+              ul.icons-list
+                li
+                  a(data-action='collapse')
+                li
+                  a(data-action='close')
+          .panel-body
+            form.form-horizontal(action='#')
+              .form-group
+                label.control-label.col-lg-2 Text input
+                .col-lg-10
+                  input.form-control(type='text')
+              .form-group
+                label.control-label.col-lg-2 Password
+                .col-lg-10
+                  input.form-control(type='password')
+              .form-group
+                label.control-label.col-lg-2 Select
+                .col-lg-10
+                  select.form-control(name='select')
+                    option(value='opt1') Basic select
+                    option(value='opt2') Option 2
+                    option(value='opt3') Option 3
+                    option(value='opt4') Option 4
+                    option(value='opt5') Option 5
+                    option(value='opt6') Option 6
+                    option(value='opt7') Option 7
+                    option(value='opt8') Option 8
+              .form-group
+                label.control-label.col-lg-2 Textarea
+                .col-lg-10
+                  textarea.form-control(rows='5', cols='5', placeholder='Default textarea')
+              .text-right
+                button.btn.btn-primary(type='submit')
+                  | Submit form
+                  i.icon-arrow-right14.position-right
+        // /horizotal form
+      .col-md-6
+        // Vertical form
+        .panel.panel-flat
+          .panel-heading
+            h5.panel-title Vertical form
+            .heading-elements
+              ul.icons-list
+                li
+                  a(data-action='collapse')
+                li
+                  a(data-action='close')
+          .panel-body
+            form(action='#')
+              .form-group
+                label Text input
+                input.form-control(type='text')
+              .form-group
+                label Select
+                select.form-control(name='select')
+                  option(value='opt1') Basic select
+                  option(value='opt2') Option 2
+                  option(value='opt3') Option 3
+                  option(value='opt4') Option 4
+                  option(value='opt5') Option 5
+                  option(value='opt6') Option 6
+                  option(value='opt7') Option 7
+                  option(value='opt8') Option 8
+              .form-group
+                label Textarea
+                textarea.form-control(rows='4', cols='4', placeholder='Default textarea')
+              .text-right
+                button.btn.btn-primary(type='submit')
+                  | Submit form
+                  i.icon-arrow-right14.position-right
+        // /vertical form
+    // /grid
+  // /main content

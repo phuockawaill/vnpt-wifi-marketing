@@ -1,0 +1,41 @@
+{
+  "name": "License",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "indexes": {},
+  "options": {},
+  "mixins": {
+    "TimeStamp": {
+      "required": false
+    }
+  },
+  "hidden": [],
+  "properties": {
+    "history": {
+      "type": ["object"]
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "approveLicense"
+    }
+  ],
+  "methods": {}
+}

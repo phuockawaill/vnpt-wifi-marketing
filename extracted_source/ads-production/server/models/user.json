@@ -1,0 +1,167 @@
+{
+  "name": "user",
+  "plural": "users",
+  "base": "User",
+  "strict": true,
+  "indexes": {
+    "uniq_username": {
+      "keys": {
+        "username": 1
+      },
+      "options": {
+        "unique": true
+      }
+    }
+  },
+  "mixins": {
+    "Creator": {},
+    "TimeStamp": {
+      "validateUpsert": true,
+      "required": false
+    },
+    "ReadOnly": {
+      "clientId": true,
+      "secretkey": true,
+      "clientkey": true,
+      "passwordConfirm": true,
+      "isAdmin": true
+    }
+  },
+  "hidden": [
+    "uploadSize"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "profileName": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "clientId": {
+      "type": "string",
+      "length": 64
+    },
+    "type": {
+      "type": "number",
+      "length": 10
+    },
+    "rootdir": {
+      "type": "string",
+      "length": 255
+    },
+    "secretkey": {
+      "type": "string",
+      "length": 64
+    },
+    "clientkey": {
+      "type": "string",
+      "length": 64
+    },
+    "maxUploadSize": {
+      "type": "number"
+    },
+    "status": {
+      "type": "number",
+      "default": 0
+    },
+    "lang": {
+      "type": "string",
+      "default": "VN"
+    },
+    "options": {
+      "type": "object"
+    },
+    "updatedBy": {
+      "type": "string"
+    },
+    "createdByUsername": {
+      "type": "string"
+    },
+    "updatedByUsername": {
+      "type": "string"
+    },
+    "realm": false,
+    "emailVerified": false,
+    "verificationToken": false
+  },
+  "validations": [],
+  "relations": {
+    "accessTokens": {
+      "type": "hasMany",
+      "model": "accessToken",
+      "foreignKey": "userId"
+    },
+    "profile": {
+      "type": "belongsTo",
+      "model": "Profile",
+      "foreignKey": "profileId"
+    },
+    "resourceGroup": {
+      "type": "belongsTo",
+      "model": "ResourceGroup",
+      "foreignKey": "resourceGroupId"
+    },
+    "publisherShare": {
+      "type": "hasOne",
+      "model": "PublisherShare",
+      "foreignKey": "userId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW",
+      "property": "register"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW",
+      "property": "requestPasswordReset"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW",
+      "property": "getResetToken"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW",
+      "property": "venueTypes"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

@@ -1,0 +1,197 @@
+// Import globals
+@import (reference) '../_main_starters/bootstrap';
+
+@grid-header-row-height: 45px;
+@grid-row-height: 40px;
+
+.header-grid {
+  text-transform: uppercase;
+  line-height: 40px;
+}
+
+.ag-material {
+  .ag-menu {
+    .ag-filter-value {
+      font-weight: normal;
+    }
+  }
+  .ag-header-cell{
+    text-align: center;
+  }
+  .ag-header-cell-label{
+    text-align: center;
+  }
+  .ag-header {
+    border-top: 1px solid @table-border-color;
+    border-bottom: 1px solid @table-border-highlight;
+    color: white;
+    background: @brand-primary;
+    border-bottom: none;
+    font-weight: bold;
+    text-align: center;
+
+    .ag-header-cell-label {
+      padding: 0 @content-padding-large;
+      line-height: @grid-row-height;
+      vertical-align: middle;
+      font-weight: 500;
+    }
+    .ag-header-cell.text-center .ag-header-cell-label {
+      text-align: center;
+    }
+
+    .ag-header-cell-menu-button {
+      opacity: 1;
+      border: none;
+      margin-top: 8px;
+    }
+
+    .ag-header-cell-sorted-asc, .ag-header-cell-sorted-desc {
+      // color: @brand-primary;
+      color: white;
+    }
+
+    .ag-header-icon {
+      // color: @brand-primary;
+      // fill: @brand-primary;
+      color: white;
+      fill: white;
+    }
+  }
+
+  .ag-floating-filter-body {
+    // margin: 0 10px;
+    .ag-floating-filter-input {
+      .form-control;
+    }
+  }
+
+  .ag-floating-filter-button {
+    // display: none;
+  }
+
+  .ag-paging-panel {
+    .ag-paging-row-summary-panel {
+      float: right;
+      width: auto;
+      line-height: @grid-row-height;
+      padding-right: @content-padding-large;
+    }
+    .ag-paging-page-summary-panel {
+      .ag-paging-button {
+        // border: none;
+        color: transparent;
+        background-color: transparent;
+        width: @input-height-base;
+        height: @input-height-base;
+        border: 1px solid transparent;
+        border-radius: 100px;
+        padding: 0;
+        margin: 0;
+
+        &:hover,
+        &:focus {
+          background-color: @pagination-hover-bg;
+
+          &::before {
+            color: @pagination-hover-color;
+          }
+        }
+
+        &:disabled {
+          background-color: transparent;
+          cursor: @cursor-disabled;
+
+          &::before {
+            color: @pagination-disabled-color;
+          }
+        }
+
+        &::before {
+          color: @pagination-color;
+          font-family: 'icomoon';
+          text-align: center;
+          padding: 5px 12px;
+          line-height: 20px;
+          min-width: @input-height-base;
+          display: inline-block;
+        }
+        &[ref="btFirst"] {
+          &::before {
+            content: "«";
+          }
+        }
+        &[ref="btPrevious"] {
+          &::before {
+            content: "‹";
+          }
+        }
+        &[ref="btLast"] {
+          &::before {
+            content: "»";
+          }
+        }
+        &[ref="btNext"] {
+          &::before {
+            content: "›";
+          }
+        }
+      }
+    }
+  }
+
+  .ag-cell {
+    &.overflow-visible {
+      overflow: visible;
+    }
+
+    &.ag-cell-not-inline-editing {
+      padding: 0 @content-padding-large;
+      line-height: @grid-row-height;
+      vertical-align: middle;
+    }
+  }
+  .ag-cell-focus {
+    border: none;
+    outline: none;
+  }
+
+  // border
+  .ag-cell {
+    border: none;
+    border-top: 1px solid @table-border-color;
+  }
+  .ag-row[row="0"] .ag-cell {
+    border-top: none;
+  }
+
+  // background
+  .ag-body, .ag-row, .ag-overlay-no-rows-center {
+    background: transparent;
+  }
+  .ag-row-odd {
+    background-color: @table-bg-accent;
+  }
+  .ag-row-hover {
+    background-color: @table-bg-hover;
+  }
+}
+.ag-ltr {
+  .ag-header-cell-resize{
+    position: absolute;
+    right: -8px;
+    width: 16px;
+    z-index: 4;
+    &::after {
+      border-right: 1px solid #e0e0e0;
+      content: 'resize';
+      display: block;
+      height: 24px;
+      margin-top: 8px;
+      overflow: hidden;
+      text-indent: 8px;
+      width: 8px;
+      box-sizing: initial;
+    }
+  }
+}

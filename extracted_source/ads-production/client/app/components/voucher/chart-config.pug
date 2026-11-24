@@ -1,0 +1,21 @@
+.btn-group
+  button.btn.btn-link.dropdown-toggle(type='button', data-toggle='dropdown')
+    i.icon-cog
+    span.caret
+  ul.dropdown-menu.dropdown-menu-right(ng-click='$event.stopPropagation()')
+    li.radio.radio-right(ng-click='setChartType("column")')
+      label
+        .choice
+          span(ng-class='{checked: params.type == "column"}')
+        |  Column
+    li.radio.radio-right(ng-click='setChartType("areaspline")')
+      label
+        .choice
+          span(ng-class='{checked: params.type == "areaspline"}')
+        |  Area
+    li.divider
+    li.checkbox.checkbox-right(ng-click='toggleChartPercentage()')
+      label
+        .checker
+          span(ng-class='{checked: params.percentage}')
+        |  Percentage

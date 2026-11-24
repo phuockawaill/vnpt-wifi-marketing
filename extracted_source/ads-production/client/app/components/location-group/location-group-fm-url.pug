@@ -1,0 +1,191 @@
+form#fmUrl.modal.fade.in(name='vm.fmUrl', aria-labelledby='fmUrlLabel' novalidate, ng-submit='vm.create()')
+  .modal-dialog.location-url
+    .modal-content
+      .modal-header.bg-primary
+        button.close(type='button', data-dismiss='modal', aria-label='Close') ×
+        h4#fmCodeLabel.modal-title Captive Portal
+      .modal-body
+        .form-group.row
+          label.col-md-4.control-label Model
+          .col-md-8
+            select.form-control(name='hotspotType', ng-options='p.id as p.name for p in vm.hotspotTypes', ng-model='vm.obj.options.hotspotType', style='width: 100%;', ng-change="vm.checkChangeType()")
+        .form-group(ng-if="['aerohive', 'unifi', 'extreme', 'mikrotik', 'ruijie', 'ruijieGateway'].indexOf(vm.obj.options.hotspotType) < 0")
+          label External URL
+          .input-group
+            input#urlSrc.form-control(name='urlSrc', placeholder='Link add to Controller',
+              ng-model='vm.objCode.url' ng-disabled='!vm.objCode.url')
+            .input-group-btn
+              button.btn.btn-primary(type='button' ng-disabled='!vm.objCode.url' ng-click='vm.onAction("copyCode", "urlSrc")') Copy
+              button.btn.btn-success(type='button' ng-click='vm.onAction("generateCode")') Generate
+        .form-group(ng-if="vm.obj.options.hotspotType === 'ruijieGateway' || vm.obj.options.hotspotType === 'ruijie'")
+          label Ad URL
+          .input-group
+            input#urlSrcRG.form-control(name='urlSrcRG', placeholder='Ad Url',
+              ng-model='vm.objCode.url' ng-disabled='!vm.objCode.url')
+            .input-group-btn
+              button.btn.btn-primary(type='button' ng-disabled='!vm.objCode.url' ng-click='vm.onAction("copyCode", "urlSrcRG")') Copy
+              button.btn.btn-success(type='button' ng-click='vm.onAction("generateCode")') Generate
+          .input-group(validator style="margin-top: 10px;")
+            label.control-label(style="margin: 5px;")  Session Timeout(secs)
+            input.form-control.params(type="number" name="sessionTimeout" style="float:right;" ng-model='vm.obj.options.sessionTimeout' min=300)
+        .form-group(ng-if="vm.obj.options.hotspotType === 'aerohive' || vm.obj.options.hotspotType === 'mikrotik' || vm.obj.options.hotspotType === 'ruckus_cloud' || vm.obj.options.hotspotType === 'draytek'")
+          div(ng-if="vm.obj.options.hotspotType === 'aerohive'")
+            .form-group
+              label Login URL
+              .input-group
+                input#urlSrcAerohive.form-control(name='urlSrcAerohive', placeholder='Link add to CWP',
+                  ng-model='vm.objCode.url' ng-disabled='!vm.objCode.url')
+                .input-group-btn
+                  button.btn.btn-primary(type='button' ng-disabled='!vm.objCode.url' ng-click='vm.onAction("copyCode", "urlSrcAerohive")') Copy
+                  button.btn.btn-success(type='button' ng-click='vm.onAction("generateCode")') Generate
+            .form-group
+              label Success Page URL
+              .input-group
+                input#urlSrcSuccessAerohive.form-control(name='urlSrcSuccessAerohive', placeholder='Link add to CWP',
+                  ng-model='vm.objCode.successUrl' ng-disabled='!vm.objCode.successUrl')
+                .input-group-btn
+                  button.btn.btn-primary(type='button' ng-disabled='!vm.objCode.successUrl' ng-click='vm.onAction("copyCode", "urlSrcSuccessAerohive")') Copy
+          div(ng-if="vm.obj.options.hotspotType === 'mikrotik'")
+            .form-group
+              label Hotspot HTML Directory
+              .input-group
+                input.form-control(placeholder='Hotspot HTML Directory', ng-model='vm.hotspotDir' ng-change='vm.objCode.url = ""')
+                .input-group-btn
+                  button.btn.btn-primary(type='button' ng-disabled='!vm.objCode.url' ng-click='vm.onAction("copyCode", "urlSrcMikrotik")') Copy
+                  button.btn.btn-success(type='button' ng-click='vm.onAction("generateCode")') Generate
+            .form-group(ng-show='vm.objCode.url')
+              label Generated Script
+              textarea#urlSrcMikrotik.form-control.pre-scrollable(name="urlSrcMikrotik", rows="10", ng-bind='vm.objCode.url', placeholder='Script generate login template')
+          h5 Configure
+          .row(style="margin-bottom:15px")
+            .form-inline.col-md-12
+              .form-group.col-md-4
+                label.control-label(style="margin: 5px;") Session Timeout(secs)
+              .form-group(validator)
+                input.form-control.params(type="number" name="sessionTimeout" ng-model='vm.obj.aerohive.sessionTimeout' min=300)
+            .form-inline.col-md-12(style="margin-left:0")
+              .form-group.col-md-4
+                label.control-label(style="margin: 5px;") Idle Timeout(secs)
+              .form-group(validator)
+                input.form-control.params(type="number" name="idleTimeout" ng-model='vm.obj.aerohive.idleTimeout' min=120)
+            .form-inline.col-md-12(style="margin-left:0" ng-if="vm.obj.options.hotspotType === 'mikrotik'")
+              .form-group.col-md-4
+                label.control-label(style="margin: 5px;") Rate limit(up/down)
+              .form-group
+                input.form-control.params(ng-model='vm.obj.aerohive.mikrotikRateLimit')
+                span  eg: 5m or 5m/8m
+          a(data-toggle="collapse" data-target="#collapseLocation" role="button" style="margin-top:15px;" ng-if="vm.obj.options.hotspotType === 'aerohive'") Overrive configure each location
+            .caret
+          .collapse#collapseLocation(style="max-height: 150px;overflow:auto")
+            table.table.table-striped
+              thead
+                tr
+                  th No
+                  th Name
+                  th Session TimeOut
+                  th Idle TimeOut
+              tbody
+                tr(ng-repeat='l in vm.locationList track by $index')
+                  td(ng-bind='$index + 1')
+                  td(ng-bind='l.name')
+                  td
+                    input.form-control.params(type="number" ng-model='l.sessionTimeout')
+                  td
+                    input.form-control.params(type="number" ng-model='l.idleTimeout')
+        .form-group(ng-if="vm.obj.options.hotspotType === 'extreme'")
+          .form-group
+            label Login URL
+            .input-group
+              input#urlSrcExtreme.form-control(name='urlSrcExtreme', placeholder='Link add to Controller',
+                ng-model='vm.objCode.url' ng-disabled='!vm.objCode.url')
+              .input-group-btn
+                button.btn.btn-primary(type='button' ng-disabled='!vm.objCode.url' ng-click='vm.onAction("copyCode", "urlSrcExtreme")') Copy
+                button.btn.btn-success(type='button' ng-click='vm.onAction("generateCode")') Generate
+          .form-group
+            label Agreement URL
+            .input-group
+              input#urlSrcAgreeExtreme.form-control(name='urlSrcAgreeExtreme', placeholder='Link add to Controller',
+                ng-model='vm.objCode.options.agree' ng-disabled='!vm.objCode.options')
+              .input-group-btn
+                button.btn.btn-primary(type='button' ng-disabled='!vm.objCode.options' ng-click='vm.onAction("copyCode", "urlSrcAgreeExtreme")') Copy
+          .form-group
+            label Welcome & Welcome Back URL
+            .input-group
+              input#urlSrcWelcomeExtreme.form-control(name='urlSrcWelcomeExtreme', placeholder='Link add to Controller',
+                ng-model='vm.objCode.options.welcome' ng-disabled='!vm.objCode.options')
+              .input-group-btn
+                button.btn.btn-primary(type='button' ng-disabled='!vm.objCode.options' ng-click='vm.onAction("copyCode", "urlSrcWelcomeExtreme")') Copy
+          .form-group
+            label Fail URL
+            .input-group
+              input#urlSrcFailExtreme.form-control(name='urlSrcFailExtreme', placeholder='Link add to Controller',
+                ng-model='vm.objCode.options.fail' ng-disabled='!vm.objCode.options')
+              .input-group-btn
+                button.btn.btn-primary(type='button' ng-disabled='!vm.objCode.options' ng-click='vm.onAction("copyCode", "urlSrcFailExtreme")') Copy
+          .form-group
+            label No service URL
+            .input-group
+              input#urlSrcNoSerExtreme.form-control(name='urlSrcNoSerExtreme', placeholder='Link add to Controller',
+                ng-model='vm.objCode.options.noService' ng-disabled='!vm.objCode.options')
+              .input-group-btn
+                button.btn.btn-primary(type='button' ng-disabled='!vm.objCode.options' ng-click='vm.onAction("copyCode", "urlSrcNoSerExtreme")') Copy
+          .form-group
+            label Registration URL
+            .input-group
+              input#urlSrcRegExtreme.form-control(name='urlSrcRegExtreme', placeholder='Link add to Controller',
+                ng-model='vm.objCode.options.reg' ng-disabled='!vm.objCode.options')
+              .input-group-btn
+                button.btn.btn-primary(type='button' ng-disabled='!vm.objCode.options' ng-click='vm.onAction("copyCode", "urlSrcRegExtreme")') Copy
+        .form-group(ng-if="vm.obj.options.hotspotType === 'unifi'")
+          label Redirect using hostname: 
+            b http://unifi.genexwifi.com
+          br
+          label Login POST Params
+          .input-group
+            span Base URL
+            input.form-control.params(ng-model='vm.obj.unifi.baseUrl')
+            i(style={"font-size": '11px', color: 'red', "padding-top": '7px'} ng-if="!vm.obj.unifi.baseUrl") (*)
+            i.icon-help(title="" data-toggle="popover" data-content="This is parameter on Querystring of user request on that the system would parse to get value, pass it to action property of FORM in creative ads banner. When user clicks button on creative ads banner, user browser would make a GET/POST call to Hotspot to allow go out the internet.")
+          .input-group
+            span  Username
+            input.form-control.params(ng-model='vm.obj.unifi.username')
+            i(style={"font-size": '11px', color: 'red', "padding-top": '7px'} ng-if="!vm.obj.unifi.username") (*)
+            i.icon-help( title="" data-toggle="popover" data-content="This is parameter on Querystring of user request on that the system would parse to get value. This parameter is identifier of user device.")
+          .input-group
+            span  Password
+            input.form-control.params#passwordUnifi(type="password" ng-model='vm.obj.unifi.password')
+            i(style={"font-size": '11px', color: 'red', "padding-top": '7px'} ng-if="!vm.obj.unifi.password") (*)
+            i.icon-eye#passwordIcoUnifi(style="cursor:pointer;margin-top:8px" ng-click="vm.tooglePassword()")
+          .input-group
+            span  Session Timeout
+            input.form-control.params(type="number" name="sessionTimeout" ng-model='vm.obj.unifi.sesion')
+            span(style={"font-size": '11px', color: 'red', "padding-top": '7px'} ng-if="vm.obj.unifi.sesion && vm.obj.unifi.sesion < 10") (greater than or equal 10mins)
+            span(ng-if="!vm.obj.unifi.sesion || vm.obj.unifi.sesion >= 10") &nbsp;(minutes)
+          .input-group
+            span  Upload Limit
+            input.form-control.params(type="number" ng-model='vm.obj.unifi.up')
+            span &nbsp;(kbps)
+          .input-group
+            span  Download Limit
+            input.form-control.params(type="number" ng-model='vm.obj.unifi.down')
+            span &nbsp;(kbps)
+          .input-group
+            span Unifi Cloud OS
+            input(type="checkbox" ng-model="vm.obj.unifi.isUnifiOs")
+          .input-group
+            span  Loading Logo Replace
+            input.form-control.params(ng-model='vm.obj.unifi.loadingLogo')
+        .form-group(ng-if="vm.obj.options.hotspotType === 'ruckus_cloud'")
+          .input-group
+            span  Integration Key
+            input.form-control.params(ng-model='vm.obj.options.integrateKey')
+        .input-group(ng-if="['unifi', 'ruckus_cloud', 'draytek', 'mikrotik'].indexOf(vm.obj.options.hotspotType) > -1")
+          span Tracking Usage
+          input(type="checkbox" ng-model="vm.obj.options.isTrackUsage")
+      .modal-footer
+        button.btn.btn-link(type='button', data-dismiss='modal') Cancel
+        button.btn.btn-success#verifyUnifiLogin(type='button' ng-click='vm.verifyUnifiLogin()' ng-if="vm.obj.options.hotspotType === 'unifi'" ng-disabled="!vm.obj.unifi.baseUrl || !vm.obj.unifi.username || !vm.obj.unifi.password || (vm.obj.unifi.sesion && vm.obj.unifi.sesion < 10)") Verify
+        input.btn(type='submit', ng-disabled='fmEdit.$invalid',
+        class='btn-info'
+        value='Save')
+

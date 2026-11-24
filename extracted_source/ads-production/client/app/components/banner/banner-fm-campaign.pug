@@ -1,0 +1,21 @@
+form#fmCampaign.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header.bg-success(style='background: #2196F3; border: #2196F3')
+        button.close(type='button', data-dismiss='modal', aria-label='Close') ×
+        h4.modal-title {{app.isLang === "VN" ? "Chiến dịch" : "Campaigns"}}
+      .table-responsive.overflow-auto.mb-20(style='max-height: 400px')
+        table.table
+          thead
+            tr
+              th {{app.isLang === "VN" ? "STT" : "No"}}
+              th {{app.isLang === "VN" ? "Tên" : "Name"}}
+              th {{app.isLang === "VN" ? "Lọc theo" : "Filter"}}
+          tbody
+            tr(ng-if='!vm.objCampaigns.length')
+              td(colspan='5')
+                h4.text-center.text-muted {{app.isLang === "VN" ? "Không có chiến dịch nào sử dụng Creative Ads này" : "Not campaign use this Creative Ads"}}
+            tr(ng-repeat='l in vm.objCampaigns track by $index')
+              td(ng-bind='$index + 1')
+              td(ng-bind='l.name')
+              td(ng-bind='l.filterRender')

@@ -1,0 +1,50 @@
+ng-include(src="'banner/banner-fm'")
+ng-include(src="'banner/banner-preview'")
+ng-include(src="'banner/banner-fm-campaign'")
+ul.nav.mb-3(role="tablist")
+  li.nav-item
+    a.btn.btn-labeled.btn-default.heading-btn(ng-class="{'bg-blue': vm.mode === 'banner' || vm.mode === 'template' }" ng-click='vm.mode="banner"') Creative Ads
+  //- li.nav-item
+  //-   a.btn.btn-labeled.btn-default.heading-btn(ng-class="{'bg-blue': vm.mode === 'generateForm'}" ng-click='vm.mode="generateForm"') Form Generation
+  li.nav-item
+    a.btn.btn-labeled.btn-default.heading-btn(ng-class="{'bg-blue': vm.mode === 'fileManager'}" ng-click='vm.onOpenCloud()') {{app.isLang === "VN" ? "Quản lý file" : "File manager"}}
+ng-include(src="'banner/banner-gen-fm'")
+.page-container(ng-if='vm.mode==="banner"')
+  .panel.panel-default
+    .panel-heading.clearfix
+      .panel-title.heading-form
+        a.heading-elements-toggle
+          i.icon-more
+        .form-group.has-feedback.has-feedback-left.m-b-0(style="width: 250px")
+          input.form-control(type='text', placeholder='{{app.isLang === "VN" ? "Tìm kiếm..." : "Type to search..."}}' ng-model='vm.gridOptions.quickFilterText')
+          .form-control-feedback
+            i.icon-search4
+      .heading-elements
+        button.btn.btn-default.heading-btn(type='button' ng-click='vm.onAction("refresh")')
+          i.icon-spinner11.position-left
+          |  {{app.isLang === "VN" ? "Làm mới" : "Refresh"}}
+        a#joyride-create-creativeAds.btn.btn-labeled.btn-labeled-left.bg-blue.heading-btn(ng-click="vm.quickSetup = false;vm.onAction('new')")
+          | {{app.isLang === "VN" ? "Thêm mới" : "Create Creative Ads"}}
+          b
+            i.icon-plus3
+        //- a.btn.btn-labeled.btn-labeled-left.bg-blue.heading-btn(data-toggle="modal" data-target="#fmTypeTemplate")
+          | Create Template
+          b
+            i.icon-plus2
+    .ag-material(ag-grid='vm.gridOptions' ng-style='{height: (vm.viewHeight - 250) +"px"}')
+div(ng-if='vm.mode==="template"' style={'padding-bottom': '25px'})
+  .panel.panel-default
+    .panel-heading.clearfix
+      .panel-title.heading-form
+        button.btn.btn-default.heading-btn(type='button' ng-click='vm.mode="banner"')
+          i.icon-undo.position-left
+          |  {{app.isLang === "VN" ? "Hủy bỏ" : "Cancel"}}
+        a.btn.btn-default.heading-btn(ng-class="{'bg-green': vm.previewMode === 'Laptop' }" type='button' ng-click='vm.changeViewMode("Laptop")') Laptop
+        a.btn.btn-default.heading-btn(ng-class="{'bg-green': vm.previewMode === 'Mobile' }" type='button' ng-click='vm.changeViewMode("Mobile")') Mobile
+      .heading-elements
+        input.form-control.heading-btn(type='text', placeholder='Type name...' ng-model='vm.obj.name' style={width: 'auto'})
+        button.btn.heading-btn(ng-class="vm.obj.id ? 'btn-info' : 'btn-primary'" ng-click="vm.create()" ng-disabled="!vm.obj.name") {{vm.obj.id ? 'Save' : 'Create'}}
+    #gjs
+div#frameCloud(ng-if='vm.mode==="fileManager"' style={'padding-bottom': '25px'})
+
+div(ng-joy-ride="vm.startJoyRideCreative" config="vm.joyrideConfigCreative" on-finish="vm.joyrideFinish('next')"  on-skip="vm.joyrideFinish('skip')")

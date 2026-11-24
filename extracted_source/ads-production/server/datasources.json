@@ -1,0 +1,76 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "mail": {
+    "name": "mail",
+    "connector": "mail",
+    "transports": [
+      {
+        "type": "sendgrid",
+        "auth": {
+          "api_key": "API_KEY"
+        }
+      }
+    ]
+  },
+  "redis": {
+    "host": "127.0.0.1",
+    "port": 6379,
+    "database": "0",
+    "password": "",
+    "name": "redis",
+    "connector": "redis"
+  },
+  "redisTracking": {
+    "host": "127.0.0.1",
+    "port": 6379,
+    "database": "1",
+    "password": "",
+    "name": "redisTracking",
+    "connector": "redis"
+  },
+  "redisTTL": {
+    "host": "127.0.0.1",
+    "port": 6379,
+    "database": "3",
+    "password": "",
+    "name": "redisTTL",
+    "connector": "redis"
+  },
+  "kv": {
+    "host": "127.0.0.1",
+    "port": 6379,
+    "db": "3",
+    "password": "",
+    "name": "kv",
+    "connector": "kv-redis"
+  },
+  "mongo": {
+    "host": "127.0.0.1",
+    "port": 27017,
+    "url": "",
+    "database": "test",
+    "password": "",
+    "name": "mongo",
+    "user": "",
+    "connector": "mongodb",
+    "enableGeoIndexing": true
+  },
+  "es": {
+    "name": "es",
+    "connector": "es",
+    "hosts": [
+      {
+        "host": "127.0.0.1",
+        "port": 9200
+      }
+    ],
+    "index": "ads2-v1",
+    "log": "error",
+    "apiVersion": "2.3",
+    "defaultSize": 10,
+    "requestTimeout": 30000
+  }
+}

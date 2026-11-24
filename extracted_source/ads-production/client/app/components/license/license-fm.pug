@@ -1,0 +1,20 @@
+form#fmEditLin.modal.fade(role='dialog' name='fmEditLin')
+  .modal-dialog.modal-sm
+    .modal-content
+      .modal-header.bg-primary
+        button.close(type='button' data-dismiss='modal' aria-label='Close')
+          span(aria-hidden='true') ×
+        h4.modal-title {{app.isLang === "VN" ? "Tạo license" : "Create license"}}
+      .modal-body
+        .form-horizontal.form-bordered
+          .form-group(validator)
+            label.col-md-4.control-label {{app.isLang === "VN" ? "Số lượng AP" : "Number of APs"}}
+            .col-md-7
+              input.form-control(name='numberAp' type='number' min='1' placeholder='Number of APs'
+                ng-model='vm.obj.numberAp' required autocomplete='off')
+          .form-group(validator)
+            label.col-md-4.control-label {{app.isLang === "VN" ? "Tài khoản" : "Account"}}
+            .col-md-7
+              select.form-control.select-size-xs(name='accountId' select2='vm.selectAccountOptions' ng-model='vm.obj.userId' required)
+      .modal-footer
+        input.btn.btn-primary(type='submit' ng-value='"Create"' ng-disabled="fmEditLin.$invalid" ng-click="vm.onAction('create')")

@@ -1,0 +1,34 @@
+form#fmKpi.modal.fade(novalidate name='fm.fmLoc')
+  .modal-dialog(style="min-width: 850px")
+    .modal-content
+      .modal-header(ng-class='vm.obj.id ? "bg-info" : "bg-primary"')
+        button.close(type='button', data-dismiss='modal', aria-label='Close') ×
+        h4.modal-title {{app.isLang === "VN" ? "KPI chi tiết" : "Detailed KPI"}}
+      .table-responsive.overflow-auto(style='max-height: 400px')
+        table.table
+          thead
+            tr
+              th {{app.isLang === "VN" ? "STT" : "No"}}
+              th {{app.isLang === "VN" ? "Địa điểm" : "Location"}}
+              th {{app.isLang === "VN" ? "KPI tổng" : "Total KPI"}}
+              th {{app.isLang === "VN" ? "KPI hàng ngày" : "Daily KPI"}}
+              th {{app.isLang === "VN" ? "impression tracking URL của bên thứ 3" : "3rd impression tracking URL"}}
+              th Custom Landing Page URL
+          tbody
+            tr(ng-repeat='l in vm.kpiObj')
+              td(ng-bind='$index + 1')
+              td(ng-bind='l.locationName')
+              td
+                input.form-control(type='number' ng-model='l.kpi' min=0 placeholder='Unlimited')
+              td
+                input.form-control(type='number' ng-model='l.kpiPerDay' min=0 ng-attr-max='{{l.kpi}}' placeholder='Unlimited')
+              td
+                input.form-control(type='text' ng-model='l.impressionRedirectUrl' placeholder='http://')
+              td
+                input.form-control(type='text' ng-model='l.redirectUrl' placeholder='http://')
+      .modal-body
+        lable.text-primary {{app.isLang === "VN" ? "(*) Để trống hoặc set 0 để chạy không giới hạn" : "(*) Leave blank or set 0 to run unlimited"}}
+      .modal-footer
+        button.btn.btn-link(type='button' data-dismiss='modal') {{app.isLang === "VN" ? "Hủy bỏ" : "Cancel"}}
+        button.btn(data-dismiss='modal' ng-click='vm.onAction("applyDetailKpi")'
+          ng-class='vm.obj.id ? "btn-info" : "btn-primary"') {{app.isLang === "VN" ? "Áp dụng" : "Apply"}}

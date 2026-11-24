@@ -1,0 +1,27 @@
+
+.sidebar-content.no-print
+  //- Main navigation
+  .sidebar-category.sidebar-category-visible
+    .category-content.row
+      .h6.col-md-1(style='margin-top: 0')
+        span
+          i.icon-filter3.position-left
+          | {{app.isLang === "VN" ? "Lọc" : "Filter"}}
+      .form-group.col-md-3
+        label {{app.isLang === "VN" ? "Ngày báo cáo" : "Report Date"}}
+        input.form-control(name='reportDateUsage' date-range-picker
+          lang-pick='app.isLang' pick-range='true' date-from='vm.filter.from' date-to='vm.filter.to' date-changed='vm.onReportDateChanged')
+      .form-group.col-md-2
+        label {{app.isLang === "VN" ? "Chiến dịch" : "Campaign"}}
+        select.form-control(name='campaign' select2='vm.selectCampaignOptions'
+          ng-model='vm.filter.campaignId' ng-change='vm.onCampaignChanged(vm.filter.campaignId, "{{vm.filter.campaignId}}")')
+      .form-group.col-md-2
+        label {{app.isLang === "VN" ? "Địa điểm" : "Location"}}
+        select.form-control(name='location' select2='vm.selectLocationOptions'
+          ng-model='vm.filter.locationId' ng-change='vm.onLocationChanged(vm.filter.locationId, "{{vm.filter.locationId}}")')
+      button.btn.btn-default.heading-btn.col-md-2(type='button' ng-click='vm.exportChart()' style='margin-top: 25px; margin-left: 15px;')
+        i.icon-database-export.position-left
+        |  {{app.isLang === "VN" ? "Xuất PDF report" : "Export PDF Report"}}
+      button.btn.btn-default.heading-btn.col-md-2(type='button' ng-click='vm.refresh()' style='width: 100px; margin-top: 25px; margin-left: 15px;')
+        i.icon-spinner11.position-left
+        |  {{app.isLang === "VN" ? "Tải lại" : "Refresh"}}

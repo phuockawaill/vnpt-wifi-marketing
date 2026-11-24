@@ -1,0 +1,25 @@
+ng-include(src="'location-group/location-group-fm'")
+ng-include(src="'location-group/location-group-fm-url'")
+ng-include(src="'location-group/locations-for-group-fm'")
+
+.page-container
+  .panel.panel-default
+    .panel-heading.clearfix
+      .panel-title.heading-form
+        a.heading-elements-toggle
+          i.icon-more
+        .form-group.has-feedback.has-feedback-left.m-b-0(style="width: 250px")
+          input.form-control(type='text', placeholder='{{app.isLang === "VN" ? "Tìm kiếm..." : "Type to search..."}}' ng-model='vm.gridOptions.quickFilterText')
+          .form-control-feedback
+            i.icon-search4
+      .heading-elements
+        button.btn.btn-default.heading-btn(type='button' ng-click='vm.onAction("refresh")')
+          i.icon-spinner11.position-left
+          |  {{app.isLang === "VN" ? "Làm mới" : "Refresh"}}
+        a#joyride-create-wifi-network.btn.btn-labeled.btn-labeled-left.bg-blue.heading-btn(ng-click="vm.onAction('new')" ng-if="!vm.trialUser")
+          | {{app.isLang === "VN" ? "Thêm mới" : "Create Wifi Network"}}
+          b
+            i.icon-plus3
+    .ag-material(ag-grid='vm.gridOptions' ng-style='{height: (vm.viewHeight - 210) +"px"}')
+
+div(ng-joy-ride="vm.startJoyRideLocGr" config="vm.joyrideConfigLocGr" on-finish="vm.joyrideFinish('next')"  on-skip="vm.joyrideFinish('skip')")

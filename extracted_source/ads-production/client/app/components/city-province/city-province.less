@@ -1,0 +1,45 @@
+.nav-custom-pagination {
+	border: 1px solid #e0e0e0;
+	color: rgba(0, 0, 0, 0.54);
+	display: flex;
+    padding: 10px;
+    div.form-group {
+        margin: 0 !important;
+    }
+
+    >ul {
+        flex-grow: 1;
+        margin: 0;
+        li {
+            a {
+                border: none !important;
+                background-color: transparent;
+                &:hover {
+                    border-radius: 100%;
+                }
+            }
+        }
+
+        li.item-page {
+            a:hover {
+                background: transparent;
+            }
+        }
+
+        li.disabledPagination {
+            color: #cccccc;
+            pointer-events: none;
+
+            i:before {
+                color: #cccccc;
+                pointer-events: none;
+            }
+
+            a:hover {
+                cursor: not-allowed;
+                color: #cccccc;
+                background: transparent;
+            }
+        }
+    }
+}

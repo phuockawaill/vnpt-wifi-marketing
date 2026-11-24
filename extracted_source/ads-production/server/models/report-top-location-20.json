@@ -1,0 +1,68 @@
+{
+  "name": "ReportTopLocation20",
+  "base": "PersistedModel",
+  "strict": true,
+  "idInjection": true,
+  "indexes": {
+    "index_1": {
+      "cityId": 1
+    },
+    "index_2": {
+      "categoryId": 1
+    },
+    "index_3": {
+      "advertiserId": 1,
+      "locationId": 1,
+      "reportDate": 1
+    }
+  },
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "TimeStamp": {
+      "validateUpsert": true,
+      "required": false
+    }
+  },
+  "properties": {
+    "advertiserId": {
+      "type": "string",
+      "required": true
+    },
+    "advertiserName": {
+      "type": "string"
+    },
+    "locationId": {
+      "type": "string"
+    },
+    "locationName": {
+      "type": "string"
+    },
+    "cityId": {
+      "type": "string",
+      "required": true
+    },
+    "cityName": {
+      "type": "string"
+    },
+    "categoryId": {
+      "type": "string",
+      "required": true
+    },
+    "categoryName": {
+      "type": "string"
+    },
+    "clickBooked": {
+      "type": "number",
+      "default": 0
+    },
+    "reportDate": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

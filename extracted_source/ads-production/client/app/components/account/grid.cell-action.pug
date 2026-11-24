@@ -1,0 +1,7 @@
+.btn-group.btn-group-xs
+  a.btn.btn-info(data-toggle='modal', data-target='#fmEdit' ng-click='vm.onAction("edit", data)')
+    |  {{app.isLang === "VN" ? "Sửa" : "Edit"}}
+  a.btn.btn-warning(ng-click='vm.onAction("getClientkey", data)')
+    |  {{app.isLang === "VN" ? "Lấy Key" : "Get Key"}}
+  a.btn.btn-danger(ng-click='vm.onAction("delete", data)' ng-if='vm.currentUser.id !== data.id')
+    |  {{app.isLang === "VN" ? "Xóa" : "Delete"}}

@@ -1,0 +1,34 @@
+.panel.panel-flat#report-chart
+  .panel-heading
+    h5.panel-title
+      i.icon-stats-dots.position-left
+      | {{app.isLang === "VN" ? "SỐ LIỆU" : "METRIC"}} [
+      a.dashboard-popover(title="" data-toggle="popoverCampaign" data-content="") ?
+      | ]
+      a.heading-elements-toggle
+        i.icon-more
+    //- .heading-elements(chart-config='vm.charts["tracking.action"]')
+  //- .row
+  //-   .col-md-3
+  //-     .panel-body
+  //-       .row
+  //-         .col-md-12.text-center
+  //-           h3#ctr.h3(style="color: #f2a654; margin-top:0") {{vm.actionsData.ctr.toFixed(2)}}
+  //-           h5.panel-title CTR
+  //-       .row
+  //-         .col-md-6.text-center
+  //-           h3#impression.h3(style="color: #62a8ea; margin-top:0") {{vm.actionsData.impression.toLocaleString()}}
+  //-           h5.panel-title Impression
+  //-         .col-md-6.text-center
+  //-           h3#click.display-4(style="color: #46be8a; margin-top:0") {{vm.actionsData.click.toLocaleString()}}
+  //-           h5.panel-title Click
+  //-   .col-md-9
+  .panel-body(highchart='vm.charts["tracking.action"]')
+  .ag-material(ag-grid='vm.gridOptions' style="height: 300px")
+
+.panel.panel-flat.no-print
+  .panel-heading
+    h5.panel-title
+      i.icon-users.position-left
+      | {{app.isLang === "VN" ? "Dữ liệu" : "DATA"}}
+  .ag-material(ag-grid='vm.gridOptionsDetail' style="height: 700px")

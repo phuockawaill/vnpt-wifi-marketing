@@ -1,0 +1,62 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+@media screen and (max-width: 768px) {
+  .register-form {
+    width: initial !important;
+    margin:10px 10px !important;
+  }
+}
+
+.header {
+  width:100%;
+  margin-top: 1px;
+}
+.register {
+    width:100%;
+}
+
+.register-form {
+  margin:10px auto;
+  background:#ffffff;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+form {
+  font-family: "Roboto", sans-serif;
+}
+form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  background: #4CAF50;
+  color: #FFFFFF;
+  width: 100%;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+form button:hover,.form button:active,.form button:focus {
+  background: #43A047;
+}
+form p {
+  color: red;
+  font-family: "Roboto", sans-serif;
+  font-style: italic;
+  display: none; 
+}
+#btnRegister:disabled {
+  background: #ccc;
+}
+
+#btnUpdate:disabled {
+  background: #ccc;
+}
+
+body {
+  background: #0072c6;/* fallback for old browsers */
+  background: -webkit-linear-gradient(right, #0072c6, #0072c6);
+  background: -moz-linear-gradient(right, #0072c6, #0072c6);
+  background: -o-linear-gradient(right, #0072c6, #0072c6);
+  background: linear-gradient(to left, #0072c6, #0072c6);
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

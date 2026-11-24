@@ -1,0 +1,38 @@
+{
+  "name": "Profile",
+  "base": "PersistedModel",
+  "strict": true,
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string"
+    },
+    "menuTreeName": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "roles": {
+      "type": "hasMany",
+      "model": "role",
+      "foreignKey": "profileId",
+      "through": "RoleProfileMapping",
+      "keyThrough": "roleId"
+    },
+    "menu": {
+      "type": "belongsTo",
+      "model": "MenuTree",
+      "foreignKey": "menuTreeId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

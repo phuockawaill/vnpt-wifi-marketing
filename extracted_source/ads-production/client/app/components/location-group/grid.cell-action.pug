@@ -1,0 +1,12 @@
+.btn-group.btn-group-xs
+  a.btn.btn-success(data-toggle='modal', data-target='#fmUrl' ng-click='vm.onAction("exportUrl", data)')
+    |  Captive Portal
+  a.btn.btn-info(data-toggle='modal', data-target='#fmEdit' ng-click='vm.onAction("edit", data)' ng-if="!vm.trialUser")
+    |  {{app.isLang === "VN" ? "Sửa" : "Edit"}}
+  .btn-group.btn-group-xs(ng-if="!vm.trialUser")
+    button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')
+      i.icon-more2
+    ul.dropdown-menu.dropdown-menu-right
+      li
+        a.text-danger(ng-click='vm.onAction("delete", data)')
+          |  {{app.isLang === "VN" ? "Xóa" : "Delete"}}

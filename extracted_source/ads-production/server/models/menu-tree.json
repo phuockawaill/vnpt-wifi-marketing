@@ -1,0 +1,35 @@
+{
+  "name": "MenuTree",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string"
+    },
+    "tree": {
+      "type": [
+        "object"
+      ]
+    },
+    "options": {
+      "type": "object"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "profiles": {
+      "type": "hasMany",
+      "model": "MenuTree",
+      "foreignKey": "menuTreeId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,21 @@
+form#fmHisList.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header.bg-success
+        button.close(type='button', data-dismiss='modal', aria-label='Close') ×
+        h4.modal-title {{app.isLang === "VN" ? "Lịch sử" : "History"}}
+      .table-responsive.overflow-auto.mb-20(style='max-height: 400px')
+        table.table
+          thead
+            tr
+              th {{app.isLang === "VN" ? "Thời gian" : "Time"}}
+              th {{app.isLang === "VN" ? "Hành động" : "Action"}}
+              th {{app.isLang === "VN" ? "Tài khoản" : "User"}}
+          tbody
+            tr(ng-if='!vm.historyList.length')
+              td(colspan='5')
+                h4.text-center.text-muted {{app.isLang === "VN" ? "Không có dữ liệu" : "Not available data"}}
+            tr(ng-repeat='h in vm.historyList track by $index' data-dragula-id='{{h.campaignId}}')
+              td(ng-bind='vm.formatMoment(h.createdAt)')
+              td(ng-bind='h.destUser?h.action+" to "+vm.accountMap[h.destUser].username:h.action')
+              td(ng-bind='vm.accountMap[h.user] ? vm.accountMap[h.user].username : "admin"')

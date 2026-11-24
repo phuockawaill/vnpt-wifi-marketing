@@ -1,0 +1,135 @@
+version: '3.8'
+
+services:
+  # -------------------------------------------------------------
+  # 1. Genex Ads Core Application (LoopBack 3 + PM2 Cluster)
+  # -------------------------------------------------------------
+  genex-ads:
+    build:
+      context: .
+      dockerfile: Dockerfile.ads-production
+    container_name: genex-ads-app
+    restart: always
+    ports:
+      - "9080:9080"
+    environment:
+      - NODE_ENV=production
+      - NODE_TLS_REJECT_UNAUTHORIZED=0
+      - PORT=9080
+    depends_on:
+      - genex-mongo
+      - genex-redis
+      - genex-elasticsearch
+    volumes:
+      - ./ads-production/server/datasources.production.json:/data/ads-production/dist/server/datasources.production.json:ro
+      - ./ads-production/server/config.production.json:/data/ads-production/dist/server/config.production.json:ro
+      - genex-asset-data:/data/asset
+    networks:
+      - genex-net
+
+  # -------------------------------------------------------------
+  # 2. MongoDB Database (Entities, Campaigns, Banners, Users)
+  # -------------------------------------------------------------
+  genex-mongo:
+    image: mongo:4.4
+    container_name: genex-mongodb
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=ctinBDDTSM0nGo
+      - MONGO_INITDB_DATABASE=db
+    ports:
+      - "52718:27017"
+    volumes:
+      - genex-mongo-data:/data/db
+    networks:
+      - genex-net
+
+  # -------------------------------------------------------------
+  # 3. Redis In-Memory Cache & Session Broker
+  # -------------------------------------------------------------
+  genex-redis:
+    image: redis:5.0-alpine
+    container_name: genex-redis
+    restart: always
+    command: ["redis-server", "--requirepass", "ctinBDR3dis!@#qwe123", "--port", "6379"]
+    ports:
+      - "56381:6379"
+    volumes:
+      - genex-redis-data:/data
+    networks:
+      - genex-net
+
+  # -------------------------------------------------------------
+  # 4. Elasticsearch Engine (Ad Analytics, Tracking Events)
+  # -------------------------------------------------------------
+  genex-elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.6.16
+    container_name: genex-elasticsearch
+    restart: always
+    environment:
+      - cluster.name=genex-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+      - xpack.security.enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    ports:
+      - "59200:9200"
+    volumes:
+      - genex-es-data:/usr/share/elasticsearch/data
+    networks:
+      - genex-net
+
+  # -------------------------------------------------------------
+  # 5. MySQL Database (FreeRADIUS AAA Accounting & Radcheck)
+  # -------------------------------------------------------------
+  genex-mysql:
+    image: mysql:5.7
+    container_name: genex-mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=Genexwifi@2022
+      - MYSQL_DATABASE=radius
+      - MYSQL_USER=radius
+      - MYSQL_PASSWORD=Genexwifi@2022
+    ports:
+      - "3306:3306"
+    volumes:
+      - genex-mysql-data:/var/lib/mysql
+    networks:
+      - genex-net
+
+  # -------------------------------------------------------------
+  # 6. CloudCMD File Manager (Web-based media asset upload)
+  # -------------------------------------------------------------
+  genex-cloudcmd:
+    image: coderaiser/cloudcmd:latest
+    container_name: genex-cloudcmd
+    restart: always
+    environment:
+      - CLOUDCMD_ROOT=/data/asset
+      - CLOUDCMD_PORT=8085
+      - CLOUDCMD_PREFIX=/cloudcmd
+    ports:
+      - "8085:8085"
+    volumes:
+      - genex-asset-data:/data/asset
+    networks:
+      - genex-net
+
+volumes:
+  genex-mongo-data:
+  genex-redis-data:
+  genex-es-data:
+  genex-mysql-data:
+  genex-asset-data:
+
+networks:
+  genex-net:
+    driver: bridge

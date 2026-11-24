@@ -1,0 +1,75 @@
+{
+  "initial:before": {
+    "loopback#favicon": {}
+  },
+  "initial": {
+    "compression": {},
+    "cors": {
+      "params": {
+        "origin": true,
+        "credentials": true,
+        "maxAge": 86400
+      }
+    },
+    "helmet#xssFilter": {},
+    "helmet#frameguard": {
+      "params": [
+        "deny"
+      ]
+    },
+    "helmet#hsts": {
+      "params": {
+        "maxAge": 0,
+        "includeSubdomains": true
+      }
+    },
+    "helmet#hidePoweredBy": {},
+    "helmet#ieNoOpen": {},
+    "helmet#noSniff": {},
+    "helmet#noCache": {
+      "enabled": true
+    }
+  },
+  "session": {},
+  "auth": {
+    "loopback#token": {
+      "params": {
+        "model": "accessToken"
+      }
+    }
+  },
+  "parse": {
+    "cookie-parser": {
+      "params": "${cookieSecret}"
+    },
+    "body-parser#json": {},
+    "body-parser#urlencoded": {
+      "params": {
+        "extended": true
+      }
+    }
+  },
+  "routes": {
+    "loopback#rest": {
+      "paths": [
+        "${restApiRoot}"
+      ]
+    }
+  },
+  "files": {
+    "loopback#static": [
+      {
+        "params": "$!../client/"
+      },
+      {
+        "params": "$!../../public/"
+      }
+    ]
+  },
+  "final": {
+    "./middleware/urlNotFound": {}
+  },
+  "final:after": {
+    "strong-error-handler": {}
+  }
+}

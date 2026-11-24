@@ -1,0 +1,21 @@
+ng-include(src="'website-category/category-fm'")
+
+.page-container
+  .panel.panel-default
+    .panel-heading.clearfix
+      .panel-title.heading-form
+        a.heading-elements-toggle
+          i.icon-more
+        .form-group.has-feedback.has-feedback-left.m-b-0(style="width: 250px")
+          input.form-control(type='text', placeholder='Type to search...' ng-model='vm.gridOptions.quickFilterText')
+          .form-control-feedback
+            i.icon-search4
+      .heading-elements
+        button.btn.btn-default.heading-btn(type='button' ng-click='vm.onAction("refresh")')
+          i.icon-spinner11.position-left
+          |  Refresh
+        a.btn.btn-labeled.btn-labeled-left.bg-blue.heading-btn(data-toggle="modal" data-target="#fmEdit" ng-click="vm.onAction('new')" ng-if="!vm.trialUser")
+          | Create Category
+          b
+            i.icon-plus3
+    .ag-material(ag-grid='vm.gridOptions' ng-style='{height: (vm.viewHeight - 210) +"px"}')

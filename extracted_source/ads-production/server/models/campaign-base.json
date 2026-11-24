@@ -1,0 +1,172 @@
+{
+  "name": "CampaignBase",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "TimeStamp": {
+      "validateUpsert": true,
+      "required": false
+    }
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "brandId": {
+      "type": "string",
+      "required": true
+    },
+    "brandName": {
+      "type": "string"
+    },
+    "brands": {
+      "type": ["string"]
+    },
+    "scheduleFrom": {
+      "type": "date",
+      "required": true
+    },
+    "scheduleTo": {
+      "type": "date"
+    },
+    "daysOfWeek": {
+      "type": ["string"]
+    },
+    "startTimeOfDay": {
+      "type": "number"
+    },
+    "endTimeOfDay": {
+      "type": "number"
+    },
+    "isCatfish": {
+      "type": "boolean",
+      "default": false
+    },
+    "active": {
+      "type": "boolean",
+      "default": false
+    },
+    "status": {
+      "type": "string",
+      "default": "created"
+    },
+    "audience": {
+      "type": ["object"],
+      "default": []
+    },
+    "locations": {
+      "type": ["object"],
+      "required": true
+    },
+    "kpi": {
+      "type": "number"
+    },
+    "kpiPerDay": {
+      "type": "number"
+    },
+    "click": {
+      "type": "number",
+      "default": 0
+    },
+    "clickToday": {
+      "type": "number",
+      "default": 0
+    },
+    "impression": {
+      "type": "number",
+      "default": 0
+    },
+    "impressionToday": {
+      "type": "number",
+      "default": 0
+    },
+    "ctr": {
+      "type": "string",
+      "default": "0.00%"
+    },
+    "ctrToday": {
+      "type": "string",
+      "default": "0.00%"
+    },
+    "kpiCompleted": {
+      "type": "string",
+      "default": "0.00%"
+    },
+    "kpiCompletedToday": {
+      "type": "string",
+      "default": "0.00%"
+    },
+    "bannerDefaultId": {
+      "type": "string",
+      "required": true
+    },
+    "bannerDefaultName": {
+      "type": "string"
+    },
+    "banners": {
+      "type": ["object"]
+    },
+    "landingPageUrl": {
+      "type": "string",
+      "required": true
+    },
+    "customFields": {
+      "type": ["object"]
+    },
+    "fb": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string"
+        },
+        "appSecret": {
+          "type": "string"
+        },
+        "appDomain": {
+          "type": "string"
+        },
+        "feed": {
+          "type": "string"
+        },
+        "feedBody": {
+          "type": "object"
+        }
+      }
+    },
+    "gg": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "sendEmail": {
+          "type": "boolean",
+          "default": false
+        },
+        "emailLogin": {
+          "type": "boolean"
+        },
+        "emailTemplate": {
+          "type": "string"
+        }
+      }
+    },
+    "updatedBy": {
+      "type": "string"
+    },
+    "createdByUsername": {
+      "type": "string"
+    },
+    "updatedByUsername": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,16 @@
+{
+  "presets": [
+    ["es2015"]
+  ],
+  "plugins": [
+    "add-module-exports",
+    "transform-object-rest-spread",
+    "transform-es2015-destructuring",
+    "syntax-async-functions",
+    "transform-async-to-generator",
+    "transform-regenerator",
+    "syntax-dynamic-import"
+  ],
+  "sourceMaps": true,
+  "retainLines": true
+}

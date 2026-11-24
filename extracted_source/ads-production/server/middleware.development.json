@@ -1,0 +1,20 @@
+{
+  "files": {
+    "loopback#static": [
+      {
+        "params": "$!../client/"
+      },
+      {
+        "params": "$!../public/"
+      }
+    ]
+  },
+  "final:after": {
+    "strong-error-handler": {
+      "params": {
+        "debug": true,
+        "log": true
+      }
+    }
+  }
+}

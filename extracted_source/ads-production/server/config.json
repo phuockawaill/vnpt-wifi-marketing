@@ -1,0 +1,78 @@
+{
+  "host": "127.0.0.1",
+  "port": 3000,
+  "httpsPort": 3001,
+  "portcloud": 8084,
+  "cookieSecret": "secret",
+  "restApiScheme": "http:",
+  "restApiHost": "127.0.0.1:3000",
+  "restApiRoot": "/api",
+  "appScheme": "http:",
+  "appHost": "127.0.0.1:3000",
+  "appHostName": "wifidian.vnptbinhduong.vn",
+  "dspHost": "http://127.0.0.1:3004",
+  "reportUsageURL": "http://127.0.0.1:9000",
+  "secretKey": "",
+  "recaptchaURL": "https://www.google.com/recaptcha/api/siteverify",
+  "recaptchaSecretKey": "",
+  "remoting": {
+    "rest": {
+      "normalizeHttpPath": false,
+      "xml": false,
+      "handleErrors": false
+    },
+    "json": {
+      "strict": false,
+      "limit": "100kb"
+    },
+    "urlencoded": {
+      "extended": true,
+      "limit": "100kb"
+    },
+    "cors": false,
+    "errorHandler": {
+      "disableStackTrace": false
+    }
+  },
+  "logoutSessionsOnSensitiveChanges": "true",
+  "legacyExplorer": false,
+  "logger": {
+    "level": "info",
+    "error": {
+      "type": "stderr"
+    }
+  },
+  "jobs": {
+    "observe-campaign": "1 minutes",
+    "email-service": "1 minutes"
+  },
+  "export": {
+    "maxRows": 100000
+  },
+  "template": {
+    "useMinified": true
+  },
+  "mail": {
+    "host": "smtp.gmail.com",
+    "username": "info.genexwifi@gmail.com",
+    "password": "oklogin12345",
+    "sender": "Genex Wifi DSP Platform <info.genexwifi@gmail.com>",
+    "accountCreated": false
+  },
+  "sms": {
+    "vg": {
+      "username": "user",
+      "password": "pass",
+      "from": "0000"
+    }
+  },
+  "cloudcmd": {
+    "rootDir": "/",
+    "mountPath": "/cloudcmd",
+    "resourceUrl": "",
+    "resourcePath": "/resource",
+    "editor": "dword",
+    "packer": "zip",
+    "maxFileSize": 10
+  }
+}

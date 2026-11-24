@@ -1,0 +1,29 @@
+# Dockerfile for Genex WiFi Marketing (ads-production)
+FROM node:12-stretch-slim
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    python \
+    make \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install PM2 globally to manage multiple workers
+RUN npm install -g pm2
+
+WORKDIR /data/ads-production
+
+# Copy package definitions and install production dependencies
+COPY ads-production/package*.json ./
+RUN npm install --production --legacy-peer-deps || npm install --production
+
+# Copy source code and compiled dist
+COPY ads-production/ ./
+
+# Expose HTTP port
+EXPOSE 9080
+
+# Run via PM2 cluster mode
+CMD ["pm2-runtime", "pm2.json"]

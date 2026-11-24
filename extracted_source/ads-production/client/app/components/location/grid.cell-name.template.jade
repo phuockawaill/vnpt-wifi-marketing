@@ -1,0 +1,11 @@
+div.pull-left(style='margin: 10px')
+  span
+    i.fa.fa-fw.fa-plane.green-600(ng-if="row.entity.categoryName == 'Airports'")
+    i.fa.fa-fw.fa-train.orange-600(ng-if="row.entity.categoryName == 'Train & Bus Stations'")
+    i.fa.fa-fw.fa-coffee.brown-600(ng-if="row.entity.categoryName == 'Coffee Shops'")
+    i.fa.fa-fw.fa-wifi.cyan-600(ng-if="row.entity.categoryName == 'Public Areas'")
+    i.fa.fa-fw.fa-graduation-cap.purple-600(ng-if="row.entity.categoryName == 'Universities'")
+    i.fa.fa-fw.fa-hospital-o.pink-600(ng-if="row.entity.categoryName == 'Hospitals'")
+    i.fa.fa-fw.fa-institution.indigo-600(ng-if="row.entity.categoryName == 'Malls'")
+    i.fa.fa-fw.fa-question.red-600(ng-if="row.entity.categoryName == 'Others'")
+    | | {{row.entity.name}}

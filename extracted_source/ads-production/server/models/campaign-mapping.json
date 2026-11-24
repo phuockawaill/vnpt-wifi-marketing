@@ -1,0 +1,59 @@
+{
+  "name": "CampaignMapping",
+  "plural": "CampaignMappings",
+  "base": "PersistedModel",
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "campaignId": {
+      "type": "string",
+      "required": true
+    },
+    "campaignName": {
+      "type": "string",
+      "required": true
+    },
+    "locationId": {
+      "type": "string",
+      "required": true
+    },
+    "locationName": {
+      "type": "string",
+      "required": true
+    },
+    "priority": {
+      "type": "number",
+      "required": true
+    },
+    "kpi": {
+      "type": "number"
+    },
+    "kpiPerDay": {
+      "type": "number"
+    },
+    "impressionRedirectUrl": {
+      "type": "string"
+    },
+    "redirectUrl": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    }
+  ],
+  "methods": {}
+}

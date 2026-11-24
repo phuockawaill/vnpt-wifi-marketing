@@ -1,0 +1,264 @@
+::-webkit-input-placeholder {
+ color: #a6a6a6;
+ font-weight: lighter;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+ color: #a6a6a6;
+ font-weight: lighter;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+ color: #a6a6a6;
+ font-weight: lighter;
+}
+
+:-ms-input-placeholder {
+ color: #a6a6a6;
+ font-weight: lighter;
+}
+
+.toolbar-view {
+  height: 46px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #f5f5f5;
+  padding: 9px 20px;
+}
+.toolbar-group {
+  display: flex;
+}
+.split-toolbar-view{
+  border-right: 1px solid #ddd;
+  width: 1px;
+  height: 30px;
+  margin: 10px;
+}
+
+.dialog-title{
+  color: white!important;
+  background: #404040;
+  padding: 10px 12px!important;
+  font-size: 16px!important;
+}
+
+.react-grid-item.fixedElement{
+  -webkit-transition: top 0.1s;
+  transition: top 0.1s
+}
+
+.cardImage:hover {
+  width: 120%;
+  height: 120%;
+}
+
+.styled-select {
+   background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+   height: 29px;
+   overflow: hidden;
+   width: 240px;
+}
+
+.styled-select select {
+   background: transparent;
+   border: none;
+   font-size: 14px;
+   height: 29px;
+   padding: 5px; /* If you add too much padding here, the options won't show in IE */
+   width: 268px;
+}
+
+.styled-select.slate {
+   background: url(http://i62.tinypic.com/2e3ybe1.jpg) no-repeat right center;
+   height: 34px;
+   width: 240px;
+}
+
+.styled-select.slate select {
+   border: 1px solid #ccc;
+   font-size: 16px;
+   height: 34px;
+   width: 268px;
+}
+
+select.custom{
+   -webkit-appearance: button;
+   -webkit-border-radius: 2px;
+   -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+   -webkit-padding-end: 20px;
+   -webkit-padding-start: 2px;
+   -webkit-user-select: none;
+   background-image: url(https://i1117.photobucket.com/albums/k593/ngocsang1501/select-icon_zpshfjehh0d.png);
+   background-position: 97% center;
+   background-repeat: no-repeat;
+   border: 1px solid #AAA;
+   color: #555;
+   font-size: inherit;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   background-size: 10px 10px;
+   background-color: #F1F1F1;
+}
+.selectCombobox {
+  border-bottom: "1px solid black";
+}
+
+a:hover, a:focus{
+      text-decoration: none;
+}
+/*Report Stocklist table*/
+table.stockInStore{
+  width: 100%;
+}
+.stockInStore th {
+  color:#D5DDE5;
+  background:#0D47A1;
+  border-bottom:4px solid #9ea7af;
+  border-right: 1px solid #343a45;
+  font-size:15px;
+  font-weight: bold;
+  padding:5px;
+  text-align:center;
+  white-space: nowrap;
+}
+
+.stockInStore tr {
+  border-bottom: 1px solid #C1C3D1;
+  color:#666B85;
+  font-size:15px;
+  font-weight:normal;
+}
+
+.stockInStore tr:nth-child(odd) td {
+  background:#EBEBEB;
+}
+
+.stockInStore td {
+    background:#FFFFFF;
+    padding:5px;
+    text-align:center;
+    font-size:15px;
+    border-right: 1px solid #C1C3D1;
+}
+
+/*react-paginate*/
+.react-paginate {
+    display: inline-block;
+    padding: 4px 0 0;
+    width: 100%;
+    text-align: center;
+    margin: 0
+}
+
+.react-paginate a {
+  color: black;
+    float: left;
+    padding: 5px 12px;
+    text-decoration: none;
+    transition: background-color .3s;
+    font-size: 12px;
+}
+
+.react-paginate span {
+  color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+
+.react-paginate li.active a {
+    background-color: rgb(7, 88, 164);
+    color: white;
+}
+
+.react-paginate ul {
+    display: inline-block;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.react-paginate li {
+    display: inline-block;
+}
+
+.react-paginate li:focus {
+    outline: none;
+}
+
+.react-paginate .break a {
+    cursor: default;
+}
+
+/*smooth-scroll*/
+.smoothScroll {
+  overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/*drawerNotify*/
+.drawerNotify{
+
+}
+
+.table#datatable > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+  padding: 5px;
+  font-size: 12px;
+  line-height: 12px;
+  vertical-align: middle;
+}
+
+/*loginS2*/
+.panel-default {
+ opacity: 0.9;
+ margin-top:30px;
+}
+.form-group.last {
+ margin-bottom:0px;
+}
+
+/*Chat*/
+.chat-custom:hover i.option-chat {
+    display: block !important;
+}
+
+.facebook-button-class {
+  width: 140px;
+  height: 36px;
+  background-color: #3C5A96;
+  border-radius: 7px;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.facebook-button-class:hover {
+  color: #fff;
+}
+
+.loginGoogle {
+  width: 140px;
+  height: 36px;
+  background-color: #FF4139;
+  border-radius: 7px;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.loginGoogle:hover {
+  color: #fff;
+}
+
+th.choseMonth:hover {
+  background-color: #d6d6d6
+}
+.selectDate {
+  cursor: pointer;
+}
+.selectDate:hover {
+  background-color: yellow;
+}
+
+.ag-header-group-cell {
+  text-align: center;
+}

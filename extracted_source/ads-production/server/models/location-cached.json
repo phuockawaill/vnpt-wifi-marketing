@@ -1,0 +1,41 @@
+{
+  "name": "LocationCached",
+  "base": "LocationBase",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "id": true
+    },
+    "keyId": {
+      "type": "string"
+    },
+    "ownedBy": {
+      "type": "string"
+    },
+    "ownedByUsername": {
+      "type": "string"
+    },
+    "externalParams": {
+      "type": "object"
+    },
+    "apList": {
+      "type": [
+        "object"
+      ]
+    },
+    "createdAt": {
+      "type": "date"
+    },
+    "updatedAt": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

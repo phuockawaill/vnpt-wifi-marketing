@@ -1,0 +1,4 @@
+a(data-toggle='modal' data-target='#fmLocation' ng-click='vm.onAction("viewLocation", data)')
+  span.text-primary.pr-5(ng-bind='data.locations.length')
+  span(ng-bind='data.locations.length > 1 ? (app.isLang === "VN" ? "địa điểm" : "locations") : (app.isLang === "VN" ? "địa điểm" : "location")')
+  span.caret

@@ -1,0 +1,62 @@
+{
+    "name": "MailQueue",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+        "validateUpsert": true
+    },
+    "mixins": {
+        "TimeStamp": {
+            "validateUpsert": true,
+            "required": false
+        },
+        "Creator": {}
+    },
+    "properties": {
+        "mailTemplateId": {
+            "type": "string"
+        },
+        "message": {
+            "to": "string",
+            "cc": "string",
+            "bcc": "string",
+            "subject": "string"
+        },
+        "locals": {
+            "type": "object"
+        },
+        "status": {
+            "type": "string",
+            "default": "waiting"
+        }
+    },
+    "validations": [],
+    "relations": {
+        "mailTemplate": {
+            "type": "belongsTo",
+            "model": "MailTemplate",
+            "foreignKey": "mailTemplateId"
+        }
+    },
+    "acls": [
+        {
+            "accessType": "*",
+            "principalType": "ROLE",
+            "principalId": "$unauthenticated",
+            "permission": "DENY"
+        },
+        {
+            "accessType": "*",
+            "principalType": "ROLE",
+            "principalId": "$authenticated",
+            "permission": "ALLOW"
+        },
+        {
+            "accessType": "*",
+            "principalType": "ROLE",
+            "principalId": "admin",
+            "permission": "ALLOW"
+        }
+    ],
+    "methods": {}
+}

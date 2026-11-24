@@ -1,0 +1,26 @@
+.panel.panel-default
+  .panel-heading.clearfix
+    h5.panel-title
+      | Title
+      a.heading-elements-toggle
+        i.icon-more
+      //- form.form-group.m-b-0(style="width: 250px" ng-submit='vm.addCurrentFilter()')
+        .input-group
+          .input-group-btn
+            button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown')
+              span(ng-bind='vm.filter.current.text')
+              span.caret
+            ul.dropdown-menu.dropdown-menu-left
+              li(ng-repeat='s in vm.filter.all')
+                a(ng-click='vm.setCurrentFilter(s)' ng-bind='s.text')
+          input.form-control(type='text', placeholder='Filter value' ng-model='vm.filter.value')
+          .input-group-btn
+            button.btn.btn-primary.btn-icon(type='button' ng-click='vm.addCurrentFilter()')
+              i.icon-search4
+    .heading-elements
+      a.btn.btn-labeled.btn-labeled-left.bg-blue.heading-btn(data-toggle="modal" data-target="#fmEdit" ng-click="vm.onAction('new')")
+        | Export
+        b
+          i.icon-file-download2
+
+  .ag-material(ag-grid='vm.gridOptions' style="height: 700px")

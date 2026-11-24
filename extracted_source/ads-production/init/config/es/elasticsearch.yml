@@ -1,0 +1,39 @@
+network.host: 0.0.0.0
+network.publish_host: 127.0.0.1
+http.port: 9200-9300
+transport.tcp.port: 9300-9400
+
+# Lock all RAM
+bootstrap.memory_lock: true
+
+# Not allow to delete all indices in one request
+action.destructive_requires_name: true
+
+indices.memory.index_buffer_size: 10%
+
+thread_pool.bulk.queue_size: 3000
+thread_pool.get.queue_size: 3000
+thread_pool.index.queue_size: 3000
+thread_pool.search.queue_size: 3000
+thread_pool.listener.queue_size: 3000
+
+# Only start revcovery process after at lease 2 nodes formed a group
+# gateway.recover_after_nodes: 2
+# Wait 10m before start revcovery process
+# gateway.recover_after_time: 1m  # default 5m
+# If total node is 3, revcovery process can start without wating
+# gateway.expected_nodes: 1
+
+# Avoid split brain
+# discovery.zen.minimum_master_nodes: 2
+# discovery.zen.fd.ping_timeout: 30s # default
+# discovery.zen.ping.unicast.hosts: [ktx, Ads, Ads2]
+
+# reindex.remote.whitelist: ['127.0.0.1:9200']
+
+# Move settings out from v5
+# curl -XPUT 'http://localhost:9200/_all/_settings?preserve_existing=true' -d '{
+#    "index.merge.scheduler.max_thread_count" : "1",
+#    "index.refresh_interval" : "15s",
+#    "index.translog.flush_threshold_size" : "1g"
+# }'

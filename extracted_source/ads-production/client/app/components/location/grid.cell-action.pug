@@ -1,0 +1,15 @@
+.btn-group.btn-group-xs
+  a.btn.btn-success(data-toggle='modal', data-target='#fmCode' ng-click='vm.onAction("getCode", data)')
+    | {{app.isLang === "VN" ? "Lấy code" : "Get Code"}}
+  a.btn.btn-primary(data-toggle='modal', data-target='#fmAddAp' ng-click='vm.onAction("addAp", data)')
+    | {{app.isLang === "VN" ? "Thêm AP" : "Add AP"}}
+  .btn-group.btn-group-xs(ng-if="!vm.trialUser")
+    button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')
+      i.icon-more2
+    ul.dropdown-menu.dropdown-menu-right
+      li
+        a(data-toggle='modal', data-target='#fmEdit' ng-click='vm.onAction("edit", data)')
+          |  {{app.isLang === "VN" ? "Sửa" : "Edit"}}
+      li
+        a.text-danger(ng-click='vm.onAction("delete", data)')
+          |  {{app.isLang === "VN" ? "Xóa" : "Delete"}}

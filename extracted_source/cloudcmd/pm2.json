@@ -1,0 +1,11 @@
+{
+  "apps": [
+    {
+      "name": "cloudcmd",
+      "script": "./dist/server/server.js",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  ]
+}

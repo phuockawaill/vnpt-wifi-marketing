@@ -1,0 +1,44 @@
+{
+  "name": "Campaign",
+  "plural": "Campaigns",
+  "base": "CampaignBase",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "Creator": {},
+    "Owner": {
+      "sourceFields": [
+        "$currentUser",
+        "brandId"
+      ]
+    },
+    "ReadOnly": {
+      "active": true,
+      "status": true,
+      "click": true,
+      "impression": true,
+      "ctr": true,
+      "kpiCompleted": true
+    }
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    }
+  ],
+  "methods": {}
+}

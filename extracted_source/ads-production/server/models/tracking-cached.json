@@ -1,0 +1,153 @@
+{
+  "name": "TrackingCached",
+  "base": "PersistedModel",
+  "strict": false,
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "mac": {
+      "type": "string"
+    },
+    "ap": {
+      "type": "string"
+    },
+    "ip": {
+      "type": "string"
+    },
+    "actionType": {
+      "type": "string"
+    },
+    "sessionId": {
+      "type": "string"
+    },
+    "isNew": {
+      "type": "boolean"
+    },
+    "advertiserId": {
+      "type": "string"
+    },
+    "publisherId": {
+      "type": "string"
+    },
+    "brandId": {
+      "type": "string"
+    },
+    "campaignId": {
+      "type": "string"
+    },
+    "campaignCategoryId": {
+      "type": "string"
+    },
+    "locationId": {
+      "type": "string"
+    },
+    "realLocationId": {
+      "type": "string"
+    },
+    "locationCategoryId": {
+      "type": "string"
+    },
+    "bannerId": {
+      "type": "string"
+    },
+    "cityId": {
+      "type": "string"
+    },
+    "uaString": {
+      "type": "string"
+    },
+    "count": {
+      "type": "number"
+    },
+    "name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "emailVerified": {
+      "type": "boolean"
+    },
+    "gender": {
+      "type": "string"
+    },
+    "age": {
+      "type": "string"
+    },
+    "income": {
+      "type": "string"
+    },
+    "marital": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "phoneVerified": {
+      "type": "boolean"
+    },
+    "phoneCarrier": {
+      "type": "string"
+    },
+    "os": {
+      "type": "string"
+    },
+    "device": {
+      "type": "string"
+    },
+    "browser": {
+      "type": "string"
+    },
+    "browserVersion": {
+      "type": "string"
+    },
+    "platform": {
+      "type": "string"
+    },
+    "osVersion": {
+      "type": "string"
+    },
+    "fb": {
+      "type": "object"
+    },
+    "google": {
+      "type": "object"
+    },
+    "zalo": {
+      "type": "object"
+    },
+    "twitter ": {
+      "type": "object"
+    },
+    "survey": {
+      "type": "object"
+    },
+    "createdAt": {
+      "type": "date"
+    },
+    "updatedAt": {
+      "type": "date"
+    },
+    "website": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "metaKeywords": {
+      "type": "string"
+    },
+    "voucher": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

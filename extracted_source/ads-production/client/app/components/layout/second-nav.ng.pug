@@ -1,0 +1,19 @@
+#navbar-second.navbar.navbar-default(ng-if='app.isAuthenticated()')
+  ul.nav.navbar-nav.no-border.visible-xs-block
+    li
+      a.text-center.collapsed(data-toggle='collapse', data-target='#navbar-second-toggle')
+        i.icon-menu7
+  #navbar-second-toggle.navbar-collapse.collapse
+    ul.nav.navbar-nav
+      li.dropdown(ng-repeat='item in app.menuTree' ui-sref-active="active")
+        a.dropdown-toggle(ui-sref='{{item.url}}' ng-if="!item.children")
+          i.position-left(ng-class='item.icon')
+          span(ng-bind='item.text')
+        a.dropdown-toggle(data-toggle='dropdown' ng-if="item.children")
+          i.position-left(ng-class='item.icon')
+          span(ng-bind='item.text')
+        ul.dropdown-menu.width-200
+          li(ng-repeat='child in item.children', ui-sref-active="active")
+            a(ui-sref='{{child.url}}', title='{{child.text}}')
+              i(ng-class='child.icon')
+              span(ng-bind='child.text')

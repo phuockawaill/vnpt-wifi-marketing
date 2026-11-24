@@ -1,0 +1,70 @@
+{
+    "name": "TemplateBase",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+        "validateUpsert": true
+    },
+    "scope": {},
+    "mixins": {
+        "Creator": {},
+        "Owner": {},
+        "TimeStamp": {
+            "validateUpsert": true,
+            "required": false
+        }
+    },
+    "properties": {
+        "name": {
+            "type": "string",
+            "required": true
+        },
+        "type": {
+            "type": "string",
+            "required": true,
+            "default": "default"
+        },
+        "htmlCode": {
+            "type": "string",
+            "required": true
+        },
+        "options": {
+            "type": "object"
+        },
+        "createdAt": {
+            "type": "date"
+        },
+        "updatedAt": {
+            "type": "date"
+        }
+    },
+    "validations": [],
+    "relations": {},
+    "acls": [
+        {
+            "accessType": "*",
+            "principalType": "ROLE",
+            "principalId": "admin",
+            "permission": "ALLOW"
+        },
+        {
+            "accessType": "READ",
+            "principalType": "ROLE",
+            "principalId": "$unauthenticated",
+            "permission": "DENY"
+        },
+        {
+            "accessType": "READ",
+            "principalType": "ROLE",
+            "principalId": "$authenticated",
+            "permission": "ALLOW"
+        },
+        {
+            "accessType": "*",
+            "principalType": "ROLE",
+            "principalId": "$authenticated",
+            "permission": "ALLOW"
+        }
+    ],
+    "methods": {}
+}

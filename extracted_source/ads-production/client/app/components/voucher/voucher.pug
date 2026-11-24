@@ -1,0 +1,110 @@
+ng-include(src="'voucher/voucher-fm'")
+ng-include(src="'voucher/voucher-detail'")
+ul.nav.mb-3(role="tablist" style="display: flex;")
+  li.nav-item
+    a.btn.btn-labeled.btn-default.heading-btn(ng-class="{'bg-blue': vm.mode === 'statistic'}" ng-click='vm.onChangeView("statistic")') Statistic
+  li.nav-item
+    a.btn.btn-labeled.btn-default.heading-btn(ng-class="{'bg-blue': vm.mode === 'list'}" ng-click='vm.onChangeView("list")') Manage
+.page-container(ng-if="vm.mode === 'list'")
+  .panel.panel-default
+    .panel-heading.clearfix
+      .panel-title.heading-form
+        a.heading-elements-toggle
+          i.icon-more
+        form.form-group.m-b-0(style="width: 350px" name='vm.fmFilter' ng-submit='vm.addCurrentFilter()')
+          .input-group
+            .input-group-btn
+              button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown')
+                i.icon-filter3.position-left
+                span(ng-bind='vm.filter.current.headerName')
+                span.caret
+              ul.dropdown-menu.dropdown-menu-left
+                li(ng-repeat='s in vm.filter.all')
+                  a(ng-click='vm.setCurrentFilter(s)' ng-bind='::s.headerName')
+            input(type='hidden' ng-model='vm.filter.current.field' required)
+            input.form-control(type='text', placeholder='Filter value'
+              ng-model='vm.filter.value' ng-show='!vm.filter.current || vm.filter.current.filter == "text"' required)
+            select.form-control(select2='vm.filter.selectOptions' ng-if='vm.filter.current.filter == "select"'
+              ng-model='vm.filter.value')
+              option(value='') Pick a value
+            input.form-control(date-range-picker date-from-to='vm.filter.value' ng-show='vm.filter.current.filter == "date"')
+            .input-group-btn
+              button.btn.btn-primary.btn-icon(type='submit' ng-disabled='vm.fmFilter.$invalid')
+                i.icon-plus2
+        button.btn.btn-default.heading-btn(type='button' ng-click='vm.onAction("selectAll", true)' style="margin-left: 20px;")
+          i.icon-stack-check.position-left
+          |  Select All
+        button.btn.btn-default.heading-btn(type='button' ng-click='vm.onAction("selectAll", false)' style="margin-left: 20px;")
+          i.icon-stack-cancel.position-left
+          |  Unselect All
+
+      .heading-elements
+        button.btn.btn-default.heading-btn(type='button' ng-click='vm.onAction("refresh")')
+          i.icon-spinner11.position-left
+          |  Refresh
+        a.btn.btn-labeled.btn-labeled-left.bg-green.heading-btn#exportBtn(ng-click="vm.exportVoucher()" disabled)
+          | Export
+          b
+            i.icon-database-export
+        a.btn.btn-labeled.btn-labeled-left.bg-teal.heading-btn#printBtn(ng-click="vm.printVoucher()" disabled)
+          | Print
+          b
+            i.icon-printer
+        a.btn.btn-labeled.btn-labeled-left.bg-blue.heading-btn(data-toggle="modal" data-target="#fmEdit" ng-click="vm.onAction('new')")
+          | Create Voucher
+          b
+            i.icon-plus3
+    .panel-body(ng-if='vm.filters.length')
+      div.pb-10
+        lable.text-primary Tap each item to toogle. Tap x to remove filter item.
+      button.btn.btn-primary.btn-sm.btn-rounded.btn-labeled.btn-labeled-right.mr-10.mb-10(type='button'
+        ng-repeat='f in vm.filters' ng-click='vm.toggleFilter($index)' ng-class='{disabled: f.disabled}')
+        b(ng-click='vm.removeFilter($index)')
+          i.icon-cross
+        | {{ f.headerName + ': ' + f.text }}
+    .ag-material(ag-grid='vm.gridOptions' ng-style='{height: (vm.viewHeight - 250) +"px"}')
+
+.page-container(ng-if="vm.mode === 'statistic'")
+  .panel.panel-flat
+    .panel-heading
+      h5.panel-title
+        i.icon-users.position-left
+    .panel-body
+      .row
+        .col-md-3.text-center
+          h3#hour.h3(style="color: blue; margin-top:0") {{vm.vouchers.length}}
+          h5.panel-title Created
+        .col-md-3.text-center
+          h3#day.display-4(style="color: red; margin-top:0") {{vm.getUsed()}}
+          h5.panel-title Used
+        .col-md-3.text-center
+          h3#totalVisitor.display-4(style="color: #00E676; margin-top:0") {{vm.getUnexpired()}}
+          h5.panel-title Unexpired
+        .col-md-3.text-center
+          h3#totalVisitor.display-4(style="color: grey; margin-top:0") {{vm.getExpired()}}
+          h5.panel-title Expired
+      .row
+        .col-md-6.text-center
+          h3#hour.h3(style="color: blue; margin-top:0") {{vm.getCurrent('hour')}}
+          h5.panel-title Current Hour
+        .col-md-6.text-center
+          h3#hour.h3(style="color: orange; margin-top:0") {{vm.getCurrent('day')}}
+          h5.panel-title Today
+      .row
+        .col-md-12.text-center
+          a(data-toggle='modal' data-target="#fmVoucherDetail" ng-click='vm.voucherDetail()')
+            span.text-primary.pr-5
+            span Click here to see detail
+
+  .panel.panel-flat
+    .row(ng-repeat="(name, data) in vm.voucherNamed")
+      .col-md-6
+        .panel-heading
+          h5.panel-title
+            i.icon-pie-chart.position-left
+            | {{name?name.toUpperCase():"Unnamed"}} Metric
+        .panel-body(highchart='vm.charts.use[name]')
+      .col-md-6
+        .panel-heading
+          h5.panel-title
+        .panel-body(highchart='vm.charts.expire[name]')

@@ -1,0 +1,21 @@
+doctype html
+html(lang='en')
+- var error = locals.error;
+  head
+    meta(charset='utf-8')
+    meta(name='robots', content='noindex,nofollow')
+    meta(name='theme-color', content='rgb(49,123,249)')
+    // mobile first design
+    meta(content='width=device-width,initial-scale=1', name='viewport')
+    link(rel='stylesheet', media='all', href='/style/login.css')
+    title Login
+  body
+    .login-page
+      .form
+        form.login-form(name="formLogin" method='POST' action='/api/users/loginCustom')
+          input(type='text', placeholder='username' name='username')
+          input(type='password', placeholder='password' name='password')
+          button(type='submit') login
+    .error-login(style='display:none')
+      p #{ error }
+    script(src='/js/login.js')

@@ -1,0 +1,39 @@
+ng-include(src='"account/account-fm"')
+
+.page-container
+  .panel.panel-default
+    .panel-heading.clearfix
+      .panel-title.heading-form
+        a.heading-elements-toggle
+          i.icon-more
+        .form-group.has-feedback.has-feedback-left.m-b-0(style="width: 250px")
+          input.form-control(type='text', placeholder='{{app.isLang === "VN" ? "Tìm kiếm..." : "Type to search..."}}' ng-model='vm.gridOptions.quickFilterText')
+          .form-control-feedback
+            i.icon-search4
+      .heading-elements
+        button.btn.btn-default.heading-btn(type='button' ng-click='vm.onAction("refresh")')
+          i.icon-spinner11.position-left
+          |  {{app.isLang === "VN" ? "Làm mới" : "Refresh"}}
+        a#joyride-create-account.btn.btn-labeled.btn-labeled-left.bg-blue.heading-btn(ng-click="vm.initNewObj()")
+          | {{app.isLang === "VN" ? "Thêm tài khoản" : "Create Account"}}
+          b
+            i.icon-plus3
+
+    .ag-material(ag-grid='vm.gridOptions' ng-style='{height: (vm.viewHeight - 210) +"px"}')
+
+form#fmKey.modal.fade(modal='app.modalExpandOptions' tabindex='-1' role='dialog' name='fmKey'
+  ng-submit='app.SubmitActive()')
+  .modal-dialog.modal-sm
+    .modal-content
+      .modal-header.bg-primary
+        button.close(type='button' data-dismiss='modal' aria-label='Close')
+          span(aria-hidden='true') ×
+        h4.modal-title Secret Key - {{vm.objKey.username}}
+      .modal-body
+        .form-group
+          label Client ID:
+            b {{"  "+vm.objKey.clientId}}
+          label Client Key:
+            b {{"  "+vm.objKey.clientkey}}
+
+div(ng-joy-ride="vm.startJoyRideAccount" config="vm.joyrideConfigAccount" on-finish="vm.joyrideFinish('next')"  on-skip="vm.joyrideFinish('skip')")

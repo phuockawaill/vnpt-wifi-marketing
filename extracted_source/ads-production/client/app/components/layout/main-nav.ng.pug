@@ -1,0 +1,60 @@
+.navbar.navbar-inverse
+  .navbar-header(style='height: 46px; padding: 2px 20px;')
+    a(href='index.html')
+      img(style='height:44px;' src='{{app.logoUrl}}')
+    ul.nav.navbar-nav.pull-right.visible-xs-block
+      li
+        a(data-toggle='collapse', data-target='#navbar-mobile')
+          i.icon-tree5
+  #navbar-mobile.navbar-collapse.collapse(ng-if='app.isAuthenticated()')
+    ul.nav.navbar-nav.navbar-right
+      li.dropdown.dropdown-user
+        a.dropdown-toggle(data-toggle='dropdown')
+          span
+            img(ng-src='{{app.isLang === "VN" ? app.vnFlUrl : app.usFlUrl}}', alt="Language" width="16" height="16")
+          i.caret
+        ul.dropdown-menu.dropdown-menu-right(style='z-index: 1041;')
+          li(style="margin: 0 2px; padding: 0px 5px;" ng-class='app.isLang === "VN" ? "active_flag" : ""', ng-click="app.changeLang('VN')")
+            a(href="")
+              img(ng-src='{{app.vnFlUrl}}', alt="VietNam" width="16" height="16" title="Tiếng Việt")
+              span Tiếng Việt
+          li(style="margin: 0 2px; padding: 0px 5px;" ng-class='app.isLang === "EN" ? "active_flag" : ""', ng-click="app.changeLang('EN')")
+            a(href="")
+              img(ng-src='{{app.usFlUrl}}', alt="USA" width="16" height="16" title="English")
+              span English
+      li.dropdown.dropdown-user
+        a.dropdown-toggle(data-toggle='dropdown')
+          span
+            i.fa.fa-book
+          i.caret
+        ul.dropdown-menu.dropdown-menu-right(style='z-index: 1041;')
+          li(style="margin: 0 2px; padding: 0px 5px;")
+            a(href="{{app.onlineDocUrl}}", target="_blank", title="Online Document")
+              i.fa.fa-globe
+              span Online Document
+          li(style="margin: 0 2px; padding: 0px 5px;", ng-if='app.currentUser.profileName==="client" || app.currentUser.profileName==="publisher"')
+            a(href="", title="Guide Setup", ng-click='app.setupGuide()')
+              i.fa.fa-cogs
+              span Guide Setup
+      li.dropdown.dropdown-user(ng-if='app.currentUser.profileName==="client" || app.currentUser.profileName==="publisher"')
+        a.dropdown-toggle(data-toggle='dropdown', title="Quick Setup", ng-click='quick.setupQuick()')
+          span(style='font-size: 18px; padding-left: 0')
+            i.fa.fa-plus-circle
+      li.dropdown.dropdown-user
+        a.dropdown-toggle(data-toggle='dropdown')
+          span(ng-bind='app.currentUser.name')
+          i.caret
+        ul.dropdown-menu.dropdown-menu-right(style='z-index: 1041;')
+          li(ng-if='app.currentUser.profileName==="superadmin"')
+            a(data-toggle='modal' data-target='#fmConfig' ng-click="app.GetConfiguration()")
+              i.icon-cog5
+              |  {{app.isLang === "VN" ? "Cấu hình" : "Configuration"}}
+          li
+            a(data-toggle='modal' data-target='#fmPass')
+              i.icon-key
+              |  {{app.isLang === "VN" ? "Đổi mật khẩu" : "Change password"}}
+          li.divider
+          li
+            a(ng-click='app.logout()')
+              i.icon-switch2
+              |  {{app.isLang === "VN" ? "Đăng xuất" : "Logout"}}

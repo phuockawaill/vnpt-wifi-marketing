@@ -1,0 +1,13 @@
+ng-include(src='"license/license-admin"')
+ng-include(src='"license/license-history"')
+ng-include(src="'license/license-fm'")
+ng-include(src='"license/license-approve"')
+
+//- .page-container(ng-if="vm.currentUser.profileName === 'client'")
+  button.btn.btn-primary(ng-click='vm.toogleExpandLicense()' style="margin-bottom: 5px")  Request license
+  .panel.panel-default(ng-repeat='item in vm.licenses' ng-class="{'bg-warning': item.status===0, 'bg-primary': item.status===1 || item.status===2, 'bg-success': item.status===99, 'bg-grey': item.status===100, 'bg-slate': item.status===101}")
+    .panel-heading.clearfix(style="background: none;")
+      .panel-title.heading-form {{item.status===0?"Processing":item.status===1?"Approved":item.status===2?"Submitted":item.status===99?"Actived":item.status===100?"Expried":"Cancelled"}} | LICENSE {{item.key}} | {{item.numberAp}} Access Points | Created At: {{vm.formatMoment(item.createdAt)}} | Expried At: {{vm.formatMoment(item.end)}}
+    .panel-body
+      div(ng-repeat='his in item.history')
+        |{{his.action}} at {{vm.formatMoment(his.createdAt)}}
