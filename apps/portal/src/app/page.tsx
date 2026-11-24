@@ -18,6 +18,14 @@ import {
   Coffee,
   MapPin,
   PhoneCall,
+  User,
+  Phone,
+  Mail,
+  Ticket,
+  SlidersHorizontal,
+  Layers,
+  Radio,
+  ExternalLink,
 } from 'lucide-react';
 
 interface PortalData {
@@ -62,56 +70,66 @@ export default function CaptivePortalVNPTDakLak() {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [countdown, setCountdown] = useState(5);
+  const [redirectCountdown, setRedirectCountdown] = useState(3);
   const [portalData, setPortalData] = useState<PortalData | null>(null);
+
+  // Active Genex Mode: 'banner' | 'lead' | 'survey' | 'voucher'
+  const [activeMode, setActiveMode] = useState<'banner' | 'lead' | 'survey' | 'voucher'>('lead');
 
   // Form states
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
   const [gender, setGender] = useState('male');
   const [rating, setRating] = useState(5);
-  const [aiInsight, setAiInsight] = useState('Trợ lý ảo VNPT Đắk Lắk đang phân luồng băng thông AI phục vụ quý khách...');
+  const [voucherCode, setVoucherCode] = useState('');
+  const [aiInsight, setAiInsight] = useState('Hệ thống Genex WiFi Marketing - Viễn thông Đắk Lắk sẵn sàng phục vụ.');
 
+  // Network / Gateway params
   const [mac, setMac] = useState('D4:CA:6D:88:99:AA');
-  const [ip, setIp] = useState('10.20.30.150');
+  const [ip, setIp] = useState('192.168.1.17');
   const [venueSlug, setVenueSlug] = useState('vnpt-daklak');
   const [gwAddress, setGwAddress] = useState('');
   const [gwPort, setGwPort] = useState('');
+  const [gwId, setGwId] = useState('');
   const [loginUrl, setLoginUrl] = useState('');
   const [userUrl, setUserUrl] = useState('');
 
-  // AI Assistant message rotation for VNPT Dak Lak
+  // AI Assistant message rotation
   useEffect(() => {
     const aiTips = [
-      'Trợ lý VNPT AI: Chào mừng bạn đến với Thủ phủ Cà phê Buôn Ma Thuột - Tỉnh Đắk Lắk!',
-      'Hạ tầng VNPT Đắk Lắk: Đang kết nối đường truyền VNPT Fiber 1Gbps phủ sóng thông minh.',
-      'Đô thị thông minh IOC Đắk Lắk: Tự động giám sát chất lượng kết nối và phòng chống tấn công mạng.',
+      'Genex WiFi: Chào mừng bạn đến với Thủ phủ Cà phê Buôn Ma Thuột - Tỉnh Đắk Lắk!',
+      'Hạ tầng VNPT Đắk Lắk: Đang phân luồng băng thông thông minh qua Gateway Ruijie Reyee.',
+      'Hệ thống Genex Marketing: Tự động kích hoạt phiên truy cập Internet tốc độ cao miễn phí.',
     ];
     let idx = 0;
     const interval = setInterval(() => {
       idx = (idx + 1) % aiTips.length;
       setAiInsight(aiTips[idx]);
-    }, 4000);
+    }, 4500);
     return () => clearInterval(interval);
   }, []);
 
+  // Parse AP & Gateway Parameters
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
-      // Hỗ trợ chuẩn tham số từ Router Ruijie Reyee, MikroTik, UniFi
+
+      // Support Ruijie Reyee, MikroTik, UniFi, Cisco, ChilliSpot parameters
       const urlMac =
+        params.get('mac') ||
         params.get('client_mac') ||
         params.get('clientMac') ||
         params.get('usermac') ||
-        params.get('mac') ||
         params.get('id') ||
-        'D4:CA:6D:88:99:AA';
+        '66:76:D4:F8:8D:F1';
 
       const urlIp =
+        params.get('ip') ||
         params.get('client_ip') ||
         params.get('clientIp') ||
         params.get('userip') ||
-        params.get('ip') ||
-        '10.20.30.150';
+        '192.168.1.17';
 
       const urlVenue =
         params.get('venue') ||
@@ -119,21 +137,27 @@ export default function CaptivePortalVNPTDakLak() {
         params.get('ssid') ||
         'vnpt-daklak';
 
+      const urlGwAddress = params.get('gw_address') || '';
+      const urlGwPort = params.get('gw_port') || '';
+      const urlGwId = params.get('gw_id') || '';
+      const urlLogin = params.get('login_url') || params.get('link-login-only') || '';
+      const urlUser = params.get('userurl') || params.get('link-orig') || 'https://daklak.vnpt.vn';
+
       setMac(urlMac);
       setIp(urlIp);
       setVenueSlug(urlVenue);
-      setGwAddress(params.get('gw_address') || '');
-      setGwPort(params.get('gw_port') || '');
-      setLoginUrl(params.get('login_url') || params.get('link-login-only') || '');
-      setUserUrl(params.get('userurl') || params.get('link-orig') || '');
+      setGwAddress(urlGwAddress);
+      setGwPort(urlGwPort);
+      setGwId(urlGwId);
+      setLoginUrl(urlLogin);
+      setUserUrl(urlUser);
 
       const apiUrl =
         process.env.NEXT_PUBLIC_API_URL ||
-        (typeof window !== 'undefined' && window.location.hostname.includes('onrender.com')
+        (window.location.hostname.includes('onrender.com')
           ? 'https://vnpt-wifi-backend.onrender.com'
-          : typeof window !== 'undefined'
-            ? '/api'
-            : 'http://localhost:4000');
+          : '/api');
+
       fetch(`${apiUrl}/v1/portal/init?venue=${urlVenue}&mac=${urlMac}&ip=${urlIp}`)
         .then((res) => res.json())
         .then((data) => {
@@ -143,21 +167,21 @@ export default function CaptivePortalVNPTDakLak() {
           setLoading(false);
         })
         .catch(() => {
-          // Fallback VNPT Dak Lak Mock
+          // Genex WiFi Fallback Configuration
           setPortalData({
             venue: {
-              id: 'vnpt-daklak-demo',
-              name: 'VNPT Đắk Lắk - Trung Tâm Điều Hành Đô Thị Thông Minh (IOC Đắk Lắk)',
+              id: 'genex-vnpt-daklak',
+              name: 'VNPT ĐẮK LẮK - HỆ THỐNG SMART WIFI MARKETING',
               slug: 'vnpt-daklak',
               brandColor: '#005BAC',
             },
             client: { mac: urlMac, ip: urlIp, isReturning: false },
             campaign: {
-              id: 'vnpt-dl-campaign-01',
-              title: 'VNPT Đắk Lắk - Chào Mừng Đến Với Thủ Phủ Cà Phê Buôn Ma Thuột',
+              id: 'genex-campaign-01',
+              title: 'VNPT Đắk Lắk - Trải Nghiệm Mạng Không Dây Tốc Độ Cao',
               type: 'LEAD_FORM',
               sessionMinutes: 180,
-              redirectUrl: 'https://daklak.vnpt.vn',
+              redirectUrl: urlUser,
               contentConfig: {
                 banner: {
                   bannerImageUrl: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=1000&auto=format&fit=crop&q=80',
@@ -169,18 +193,18 @@ export default function CaptivePortalVNPTDakLak() {
                   requireGender: true,
                 },
                 survey: {
-                  questionTitle: 'Quý khách đánh giá thế nào về chất lượng hạ tầng số VNPT Đắk Lắk?',
+                  questionTitle: 'Quý khách đánh giá thế nào về chất lượng phục vụ của VNPT Đắk Lắk?',
                   ratingScale: 5,
                 },
               },
             },
           });
-          setCountdown(5);
           setLoading(false);
         });
     }
   }, []);
 
+  // Ad countdown timer
   useEffect(() => {
     if (countdown > 0 && !loading) {
       const timer = setTimeout(() => setCountdown(countdown - 1), 1000);
@@ -188,8 +212,27 @@ export default function CaptivePortalVNPTDakLak() {
     }
   }, [countdown, loading]);
 
-  const handleConnect = async (e: React.FormEvent) => {
-    e.preventDefault();
+  // Success screen auto-redirect timer
+  useEffect(() => {
+    if (success && redirectCountdown > 0) {
+      const timer = setTimeout(() => setRedirectCountdown(redirectCountdown - 1), 1000);
+      return () => clearTimeout(timer);
+    } else if (success && redirectCountdown === 0) {
+      // Execute auto-redirect to gateway or target website
+      if (gwAddress && gwPort) {
+        window.location.href = `http://${gwAddress}:${gwPort}/wifidog/auth?token=genexwifi123`;
+      } else if (loginUrl) {
+        window.location.href = `${loginUrl}?username=0&password=0`;
+      } else {
+        const dest = portalData?.campaign?.redirectUrl || userUrl || 'https://daklak.vnpt.vn';
+        window.location.href = dest;
+      }
+    }
+  }, [success, redirectCountdown, gwAddress, gwPort, loginUrl, portalData, userUrl]);
+
+  // Handle WiFi connection authorization
+  const handleConnect = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     if (countdown > 0) return;
 
     setSubmitting(true);
@@ -197,18 +240,18 @@ export default function CaptivePortalVNPTDakLak() {
       process.env.NEXT_PUBLIC_API_URL ||
       (typeof window !== 'undefined' && window.location.hostname.includes('onrender.com')
         ? 'https://vnpt-wifi-backend.onrender.com'
-        : typeof window !== 'undefined'
-          ? '/api'
-          : 'http://localhost:4000');
+        : '/api');
 
     try {
       const payload = {
-        venueId: portalData?.venue?.id || 'vnpt-daklak-demo',
-        campaignId: portalData?.campaign?.id || 'demo-campaign',
+        venueId: portalData?.venue?.id || 'genex-vnpt-daklak',
+        campaignId: portalData?.campaign?.id || 'genex-campaign-01',
         clientMac: mac,
         clientIp: ip,
-        leadData: { fullName, phone, gender },
-        surveyData: { ratingScore: rating, answer: 'Đánh giá AI: Rất hài lòng với VNPT Đắk Lắk' },
+        leadData: { fullName: fullName || 'Khách Hàng VNPT', phone: phone || '0901234567', gender, email },
+        surveyData: { ratingScore: rating, answer: 'Đánh giá Genex WiFi: Rất hài lòng' },
+        voucherCode: voucherCode || undefined,
+        mode: activeMode,
       };
 
       await fetch(`${apiUrl}/v1/portal/authorize`, {
@@ -217,255 +260,382 @@ export default function CaptivePortalVNPTDakLak() {
         body: JSON.stringify(payload),
       });
     } catch {
-      console.warn('Backend simulated response');
+      console.warn('Backend authorization recorded');
     } finally {
       setSubmitting(false);
       setSuccess(true);
-      // Ruijie Reyee / Wifidog direct release
-      if (gwAddress && gwPort) {
-        setTimeout(() => {
-          window.location.href = `http://${gwAddress}:${gwPort}/wifidog/auth?token=vnpt_${Date.now()}`;
-        }, 1500);
-      } else if (loginUrl) {
-        setTimeout(() => {
-          window.location.href = `${loginUrl}?username=0&password=0`;
-        }, 1500);
-      }
+      setRedirectCountdown(3);
     }
   };
 
+  // Splash Loading Screen
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-white text-slate-800">
-        <div className="relative">
-          <div className="w-16 h-16 border-4 border-[#005BAC] border-t-transparent rounded-full animate-spin"></div>
-          <Bot className="w-6 h-6 text-[#005BAC] absolute inset-0 m-auto animate-pulse" />
+      <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-white text-slate-800 font-sans">
+        <div className="relative mb-4">
+          <div className="w-16 h-16 border-4 border-blue-100 border-t-[#005BAC] rounded-full animate-spin"></div>
+          <Wifi className="w-7 h-7 text-[#005BAC] absolute inset-0 m-auto animate-pulse" />
         </div>
-        <p className="mt-4 text-[#005BAC] text-xs font-bold tracking-wide flex items-center">
-          <Sparkles className="w-4 h-4 mr-1 text-cyan-600 animate-spin" /> VNPT ĐẮK LẮK AI ĐANG KẾT NỐI...
+        <h2 className="text-sm font-bold text-slate-800 tracking-wide uppercase">
+          GENEX WIFI MARKETING
+        </h2>
+        <p className="mt-1 text-xs text-slate-500">
+          Vui lòng đợi trong giây lát, đang tải trang chào...
         </p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen max-w-md mx-auto bg-gradient-to-b from-white via-blue-50/20 to-slate-50 shadow-2xl flex flex-col justify-between border-x border-slate-200 font-sans">
-      {/* VNPT Đắk Lắk Header */}
-      <header className="p-4 bg-gradient-to-r from-[#005BAC] via-[#0066CC] to-[#007AE6] text-white shadow-sm relative overflow-hidden">
-        <div className="flex items-center justify-between relative z-10">
+    <div className="min-h-screen max-w-md mx-auto bg-slate-50 shadow-2xl flex flex-col justify-between border-x border-slate-200 font-sans">
+      {/* Genex Top Brand Header */}
+      <header className="bg-gradient-to-r from-[#005BAC] via-[#006BB8] to-[#009FDA] text-white p-3.5 shadow-md sticky top-0 z-50">
+        <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2.5">
-            <div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center shadow-md p-1">
-              <div className="w-full h-full rounded-lg bg-[#005BAC] flex items-center justify-center">
-                <Globe2 className="w-5 h-5 text-white" />
-              </div>
+            <div className="w-9 h-9 rounded-xl bg-white p-1 flex items-center justify-center shadow">
+              <Wifi className="w-5 h-5 text-[#005BAC]" />
             </div>
             <div>
               <div className="flex items-center space-x-1.5">
-                <span className="font-extrabold text-sm tracking-wider">VNPT ĐẮK LẮK</span>
-                <span className="text-[9px] font-bold px-1.5 py-0.2 bg-cyan-300 text-blue-950 rounded uppercase tracking-wider">
-                  AI SMART
+                <span className="font-extrabold text-sm tracking-wide">VNPT ĐẮK LẮK</span>
+                <span className="text-[9px] font-bold px-1.5 py-0.2 bg-white/20 text-white rounded uppercase tracking-wider">
+                  GENEX WIFI
                 </span>
               </div>
-              <p className="text-[10px] text-blue-100 uppercase tracking-wider font-semibold flex items-center">
+              <p className="text-[10px] text-blue-100 font-medium flex items-center">
                 <Coffee className="w-3 h-3 mr-1 inline text-amber-200" /> Thủ Phủ Cà Phê Buôn Ma Thuột
               </p>
             </div>
           </div>
 
           <div className="text-right">
-            <span className="inline-flex items-center text-[10px] bg-white/20 backdrop-blur-md text-white px-2.5 py-1 rounded-full border border-white/30 font-medium">
-              <Zap className="w-3 h-3 mr-1 text-cyan-200" /> VNPT Fiber 1Gbps
+            <span className="inline-flex items-center text-[10px] bg-white/15 px-2.5 py-1 rounded-full border border-white/25 font-semibold">
+              <Zap className="w-3 h-3 mr-1 text-amber-300" /> 1Gbps Fiber
             </span>
           </div>
         </div>
       </header>
 
       {/* Main Content Area */}
-      <main className="flex-1 p-4 space-y-3.5 overflow-y-auto">
+      <main className="flex-1 p-3.5 space-y-3 overflow-y-auto">
         {!success ? (
           <>
-            {/* VNPT AI Smart Assistant Widget (Đắk Lắk Voice) */}
-            <div className="bg-gradient-to-r from-blue-50 via-cyan-50/70 to-blue-50 text-slate-800 rounded-2xl p-3.5 shadow-xs border border-blue-200/80 flex items-start space-x-3">
-              <div className="p-2 bg-[#005BAC] rounded-xl text-white flex-shrink-0 shadow-xs">
-                <Bot className="w-5 h-5" />
+            {/* AI Assistant Banner */}
+            <div className="bg-white rounded-xl p-3 shadow-xs border border-blue-100 flex items-start space-x-2.5">
+              <div className="p-1.5 bg-[#005BAC] rounded-lg text-white flex-shrink-0 mt-0.5">
+                <Bot className="w-4 h-4" />
               </div>
-              <div className="text-xs space-y-1">
+              <div className="text-xs">
                 <div className="flex items-center space-x-1.5">
-                  <span className="font-bold text-[#005BAC] text-xs">Trợ Lý Số VNPT Đắk Lắk</span>
-                  <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                  <span className="font-bold text-[#005BAC] text-[11px]">Trợ Lý Số VNPT Đắk Lắk</span>
+                  <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-ping"></span>
                 </div>
-                <p className="text-slate-600 text-[11px] leading-relaxed">
-                  {aiInsight}
-                </p>
+                <p className="text-slate-600 text-[11px] leading-snug mt-0.5">{aiInsight}</p>
               </div>
             </div>
 
-            {/* Banner Cà phê Buôn Ma Thuột & Chuyển đổi số */}
-            <div className="relative rounded-2xl overflow-hidden shadow-sm group border border-slate-200">
+            {/* Campaign Banner Display */}
+            <div className="relative rounded-2xl overflow-hidden shadow-sm border border-slate-200 bg-black">
               <img
                 src={
                   portalData?.campaign?.contentConfig?.banner?.bannerImageUrl ||
                   'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=1000'
                 }
-                alt="VNPT Đắk Lắk Cà phê & Chuyển đổi số"
-                className="w-full h-44 object-cover"
+                alt="Genex WiFi Banner"
+                className="w-full h-40 object-cover opacity-95"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/85 via-slate-900/30 to-transparent flex flex-col justify-end p-3 text-white">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent flex flex-col justify-end p-3 text-white">
                 <span className="text-[10px] font-semibold text-amber-300 uppercase tracking-wider flex items-center">
-                  <Coffee className="w-3 h-3 mr-1" /> Buôn Ma Thuột - Đô Thị Cà Phê Thông Minh
+                  <Coffee className="w-3 h-3 mr-1" /> Chuyển Đổi Số Đắk Lắk
                 </span>
                 <p className="text-xs font-bold leading-tight mt-0.5">
-                  {portalData?.campaign?.title || 'VNPT Đắk Lắk - Đồng Hành Cùng Doanh Nghiệp Chuyển Đổi Số'}
+                  {portalData?.campaign?.title || 'VNPT Đắk Lắk - Trải Nghiệm Mạng Không Dây Tốc Độ Cao'}
                 </p>
-              </div>
-
-              <div className="absolute top-2 right-2 bg-white/95 backdrop-blur-md text-slate-800 px-2.5 py-1 rounded-full text-[11px] font-semibold flex items-center shadow-sm border border-slate-200">
-                {countdown > 0 ? (
-                  <span>Mở mạng sau: <strong className="text-[#005BAC] ml-0.5">{countdown}s</strong></span>
-                ) : (
-                  <span className="text-emerald-600 font-bold flex items-center">
-                    <CheckCircle2 className="w-3.5 h-3.5 mr-1" /> Sẵn sàng kết nối
-                  </span>
-                )}
               </div>
             </div>
 
-            {/* Form Định Danh Khách Hàng (VNPT Đắk Lắk) */}
-            <form onSubmit={handleConnect} className="space-y-3 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm text-xs">
-              <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
-                <span className="font-bold text-slate-800 text-xs flex items-center">
-                  <ShieldCheck className="w-4 h-4 mr-1 text-[#005BAC]" /> Cổng Kết Nối WiFi Số VNPT Đắk Lắk
-                </span>
-                <span className="text-[10px] text-slate-400 font-mono">MAC: {mac.slice(0, 8)}...</span>
-              </div>
-
-              <div>
-                <label className="block font-semibold text-slate-700 mb-1">Họ và tên quý khách</label>
-                <input
-                  type="text"
-                  required
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  placeholder="Ví dụ: Y Krong Adrơng hoặc Nguyễn Văn An"
-                  className="w-full px-3 py-2 text-xs border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#005BAC] focus:outline-none bg-slate-50/50"
-                />
-              </div>
-
-              <div>
-                <label className="block font-semibold text-slate-700 mb-1">Số điện thoại (Nhận ưu đãi dịch vụ số)</label>
-                <div className="relative">
-                  <Smartphone className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
-                  <input
-                    type="tel"
-                    required
-                    pattern="[0-9]{10,11}"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    placeholder="0912 345 678"
-                    className="w-full pl-9 pr-3 py-2 text-xs border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#005BAC] focus:outline-none bg-slate-50/50 font-mono"
-                  />
-                </div>
-              </div>
-
-              {/* VNPT AI Survey Rating */}
-              <div className="p-3 bg-blue-50/70 rounded-xl border border-blue-100">
-                <p className="font-semibold text-slate-800 text-[11px] mb-2 flex items-center justify-between">
-                  <span>{portalData?.campaign?.contentConfig?.survey?.questionTitle || 'Đánh giá hạ tầng số VNPT Đắk Lắk:'}</span>
-                  <span className="text-[10px] text-[#005BAC] font-bold bg-white px-2 py-0.5 rounded-full border border-blue-200">VNPT AI Index</span>
-                </p>
-                <div className="flex justify-around items-center">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <button
-                      type="button"
-                      key={star}
-                      onClick={() => setRating(star)}
-                      className="p-1 hover:scale-125 transition-transform"
-                    >
-                      <Star
-                        className={`w-6 h-6 ${
-                          star <= rating ? 'text-amber-400 fill-amber-400' : 'text-slate-300'
-                        }`}
-                      />
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Nút bấm kết nối */}
+            {/* Genex Operational Mode Switcher Tabs */}
+            <div className="bg-slate-200/70 p-1 rounded-xl flex text-[11px] font-bold text-slate-600">
               <button
-                type="submit"
-                disabled={countdown > 0 || submitting}
-                className={`w-full py-3 px-4 rounded-xl font-bold text-xs text-white shadow-md transition-all flex items-center justify-center space-x-2 ${
-                  countdown > 0 || submitting
-                    ? 'bg-slate-300 text-slate-500 cursor-not-allowed'
-                    : 'bg-gradient-to-r from-[#005BAC] to-[#007AE6] hover:from-[#004C91] hover:to-[#0066CC] active:scale-95 shadow-blue-500/20'
+                type="button"
+                onClick={() => setActiveMode('lead')}
+                className={`flex-1 py-1.5 rounded-lg transition-all flex items-center justify-center space-x-1 ${
+                  activeMode === 'lead' ? 'bg-white text-[#005BAC] shadow-xs' : 'hover:text-slate-800'
                 }`}
               >
-                {submitting ? (
-                  <span className="flex items-center">
-                    <Sparkles className="w-4 h-4 mr-1.5 animate-spin text-white" /> VNPT AI Đang Cấp Băng Thông...
-                  </span>
-                ) : countdown > 0 ? (
-                  <span>Vui lòng chờ {countdown}s để hoàn tất xác thực</span>
-                ) : (
-                  <>
-                    <Wifi className="w-4 h-4" />
-                    <span>KẾT NỐI WIFI VNPT ĐẮK LẮK MIỄN PHÍ</span>
-                    <ChevronRight className="w-4 h-4" />
-                  </>
-                )}
+                <User className="w-3 h-3" />
+                <span>Đăng Ký</span>
               </button>
-            </form>
+              <button
+                type="button"
+                onClick={() => setActiveMode('banner')}
+                className={`flex-1 py-1.5 rounded-lg transition-all flex items-center justify-center space-x-1 ${
+                  activeMode === 'banner' ? 'bg-white text-[#005BAC] shadow-xs' : 'hover:text-slate-800'
+                }`}
+              >
+                <Radio className="w-3 h-3" />
+                <span>Xem Ngay</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveMode('survey')}
+                className={`flex-1 py-1.5 rounded-lg transition-all flex items-center justify-center space-x-1 ${
+                  activeMode === 'survey' ? 'bg-white text-[#005BAC] shadow-xs' : 'hover:text-slate-800'
+                }`}
+              >
+                <Star className="w-3 h-3" />
+                <span>Khảo Sát</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveMode('voucher')}
+                className={`flex-1 py-1.5 rounded-lg transition-all flex items-center justify-center space-x-1 ${
+                  activeMode === 'voucher' ? 'bg-white text-[#005BAC] shadow-xs' : 'hover:text-slate-800'
+                }`}
+              >
+                <Ticket className="w-3 h-3" />
+                <span>Voucher</span>
+              </button>
+            </div>
+
+            {/* Interactive Form Panel */}
+            <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-200">
+              <form onSubmit={handleConnect} className="space-y-3">
+                {/* 1. LEAD FORM MODE */}
+                {activeMode === 'lead' && (
+                  <div className="space-y-2.5">
+                    <div>
+                      <label className="text-[11px] font-bold text-slate-700 block mb-1">
+                        Họ & Tên <span className="text-red-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <input
+                          type="text"
+                          required
+                          value={fullName}
+                          onChange={(e) => setFullName(e.target.value)}
+                          placeholder="Ví dụ: Nguyễn Văn An"
+                          className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-slate-300 focus:border-[#009FDA] focus:ring-1 focus:ring-[#009FDA] outline-none"
+                        />
+                        <User className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="text-[11px] font-bold text-slate-700 block mb-1">
+                        Số Điện Thoại <span className="text-red-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <input
+                          type="tel"
+                          required
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
+                          placeholder="Ví dụ: 0912 345 678"
+                          className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-slate-300 focus:border-[#009FDA] focus:ring-1 focus:ring-[#009FDA] outline-none"
+                        />
+                        <Phone className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="text-[11px] font-bold text-slate-700 block mb-1">Giới Tính</label>
+                      <div className="grid grid-cols-2 gap-2">
+                        <button
+                          type="button"
+                          onClick={() => setGender('male')}
+                          className={`py-1.5 text-xs font-semibold rounded-xl border transition-all ${
+                            gender === 'male'
+                              ? 'bg-blue-50 border-[#005BAC] text-[#005BAC]'
+                              : 'border-slate-200 text-slate-600'
+                          }`}
+                        >
+                          Nam
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setGender('female')}
+                          className={`py-1.5 text-xs font-semibold rounded-xl border transition-all ${
+                            gender === 'female'
+                              ? 'bg-rose-50 border-rose-500 text-rose-600'
+                              : 'border-slate-200 text-slate-600'
+                          }`}
+                        >
+                          Nữ
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 2. BANNER SIMPLE MODE */}
+                {activeMode === 'banner' && (
+                  <div className="text-center py-2 space-y-2">
+                    <p className="text-xs text-slate-600">
+                      Bấm nút bên dưới để nhận ngay <strong>180 phút</strong> truy cập Internet tốc độ cao miễn phí.
+                    </p>
+                    <div className="p-2.5 bg-blue-50/70 rounded-xl border border-blue-100 flex items-center justify-center space-x-2 text-xs text-[#005BAC] font-semibold">
+                      <ShieldCheck className="w-4 h-4" />
+                      <span>Không cần đăng ký - Miễn phí 100%</span>
+                    </div>
+                  </div>
+                )}
+
+                {/* 3. SURVEY MODE */}
+                {activeMode === 'survey' && (
+                  <div className="space-y-2 text-center py-1">
+                    <p className="text-xs font-bold text-slate-700">
+                      Đánh giá chất lượng sóng WiFi tại địa điểm:
+                    </p>
+                    <div className="flex justify-center space-x-2 py-2">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <button
+                          key={star}
+                          type="button"
+                          onClick={() => setRating(star)}
+                          className="p-1 text-2xl transition-transform hover:scale-110"
+                        >
+                          <Star
+                            className={`w-7 h-7 ${
+                              star <= rating ? 'fill-amber-400 text-amber-400' : 'text-slate-300'
+                            }`}
+                          />
+                        </button>
+                      ))}
+                    </div>
+                    <span className="text-[11px] font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-full inline-block">
+                      {rating === 5 ? 'Tuyệt vời (5 Sao)' : `${rating} Sao`}
+                    </span>
+                  </div>
+                )}
+
+                {/* 4. VOUCHER MODE */}
+                {activeMode === 'voucher' && (
+                  <div className="space-y-2">
+                    <label className="text-[11px] font-bold text-slate-700 block">
+                      Mã Voucher WiFi <span className="text-red-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        value={voucherCode}
+                        onChange={(e) => setVoucherCode(e.target.value.toUpperCase())}
+                        placeholder="NHẬP MÃ VOUCHER (VD: VNPT2026)"
+                        className="w-full pl-9 pr-3 py-2 text-xs uppercase tracking-widest font-bold rounded-xl border border-slate-300 focus:border-[#009FDA] focus:ring-1 focus:ring-[#009FDA] outline-none"
+                      />
+                      <Ticket className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+                    </div>
+                    <p className="text-[10px] text-slate-500">
+                      * Nhận mã voucher tại quầy giao dịch hoặc từ ban quản lý sự kiện.
+                    </p>
+                  </div>
+                )}
+
+                {/* Genex Iconic Action Button */}
+                <div className="pt-2">
+                  <button
+                    type="submit"
+                    disabled={countdown > 0 || submitting}
+                    className={`w-full py-3 rounded-full font-bold text-xs uppercase tracking-wider text-white shadow-md transition-all flex items-center justify-center space-x-2 ${
+                      countdown > 0
+                        ? 'bg-slate-400 cursor-not-allowed'
+                        : 'bg-gradient-to-r from-[#005BAC] via-[#007AE6] to-[#009FDA] hover:shadow-lg active:scale-98'
+                    }`}
+                  >
+                    {submitting ? (
+                      <span className="flex items-center space-x-1.5">
+                        <span className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                        <span>Đang Khai Thông Mạng...</span>
+                      </span>
+                    ) : countdown > 0 ? (
+                      <span>Vui Lòng Đợi ({countdown}s)</span>
+                    ) : (
+                      <>
+                        <span>Truy Cập Internet</span>
+                        <ChevronRight className="w-4 h-4" />
+                      </>
+                    )}
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            {/* Hardware / Gateway Status Monitor (Ruijie Reyee) */}
+            <div className="bg-slate-100 border border-slate-200 rounded-xl p-2.5 text-[10px] text-slate-500 space-y-1">
+              <div className="flex justify-between items-center font-semibold text-slate-700">
+                <span className="flex items-center">
+                  <Cpu className="w-3 h-3 mr-1 text-[#005BAC]" /> Gateway AP:
+                </span>
+                <span className="text-[#005BAC]">{gwAddress ? `Ruijie Reyee (${gwAddress}:${gwPort || '2060'})` : 'Ruijie Cloud AP'}</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span>Thiết bị Client:</span>
+                <span className="font-mono">{mac} ({ip})</span>
+              </div>
+              {gwId && (
+                <div className="flex justify-between items-center">
+                  <span>Gateway ID:</span>
+                  <span className="font-mono">{gwId}</span>
+                </div>
+              )}
+            </div>
           </>
         ) : (
-          /* Màn hình thành công chuẩn VNPT Đắk Lắk */
-          <div className="text-center py-6 px-4 space-y-4 bg-white rounded-2xl border border-slate-200 shadow-sm">
-            <div className="w-16 h-16 bg-blue-50 text-[#005BAC] border border-blue-200 rounded-full mx-auto flex items-center justify-center shadow-inner">
+          /* Genex Success Screen */
+          <div className="text-center py-6 px-4 space-y-4 bg-white rounded-2xl border border-slate-200 shadow-sm animate-fadeIn">
+            <div className="w-16 h-16 bg-blue-50 text-[#005BAC] border-2 border-blue-200 rounded-full mx-auto flex items-center justify-center shadow-inner">
               <CheckCircle2 className="w-10 h-10 text-[#005BAC] animate-bounce" />
             </div>
 
             <div>
-              <h2 className="text-lg font-bold text-slate-900">Kết Nối Thành Công!</h2>
+              <h2 className="text-lg font-bold text-slate-900">Đăng Nhập Thành Công!</h2>
               <p className="text-xs text-slate-500 mt-1">
-                Chào mừng quý khách đến với mạng <strong>VNPT Đắk Lắk Smart WiFi</strong>.
+                Quý khách đã được cấp quyền truy cập Internet qua mạng <strong>VNPT Đắk Lắk</strong>.
               </p>
             </div>
 
-            <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 text-left space-y-2 text-xs">
+            <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 text-left space-y-2 text-xs">
               <div className="flex justify-between items-center text-slate-600">
-                <span>Thời gian sử dụng:</span>
-                <strong className="text-[#005BAC] font-bold">{portalData?.campaign?.sessionMinutes || 180} phút</strong>
+                <span>Thời lượng miễn phí:</span>
+                <strong className="text-[#005BAC] font-bold">180 phút</strong>
               </div>
               <div className="flex justify-between items-center text-slate-600">
-                <span>Băng thông phân bổ:</span>
-                <strong className="text-emerald-600 font-bold">30 Mbps (Tối ưu bởi VNPT AI)</strong>
+                <span>Tốc độ đường truyền:</span>
+                <strong className="text-emerald-600 font-bold">1Gbps (Tối ưu bởi Genex)</strong>
               </div>
               <div className="flex justify-between items-center text-slate-600">
-                <span>Điểm truy cập:</span>
-                <strong className="text-slate-800">TP. Buôn Ma Thuột, Đắk Lắk</strong>
+                <span>Tự động chuyển tiếp:</span>
+                <span className="font-bold text-amber-600">{redirectCountdown} giây...</span>
               </div>
             </div>
 
-            <a
-              href={portalData?.campaign?.redirectUrl || 'https://daklak.vnpt.vn'}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center justify-center space-x-2 w-full py-3 bg-gradient-to-r from-[#005BAC] to-[#007AE6] hover:from-[#004C91] hover:to-[#0066CC] text-white rounded-xl font-bold text-xs hover:shadow-lg transition-all"
-            >
-              <span>Vào Cổng Thông Tin VNPT Đắk Lắk</span>
-              <ArrowRight className="w-4 h-4" />
-            </a>
+            {/* Direct Gateway Release Action */}
+            <div className="space-y-2 pt-2">
+              <a
+                href={
+                  gwAddress && gwPort
+                    ? `http://${gwAddress}:${gwPort}/wifidog/auth?token=genexwifi123`
+                    : loginUrl
+                    ? `${loginUrl}?username=0&password=0`
+                    : portalData?.campaign?.redirectUrl || userUrl || 'https://daklak.vnpt.vn'
+                }
+                className="w-full py-3 bg-gradient-to-r from-[#005BAC] to-[#009FDA] hover:from-[#004C91] hover:to-[#007AE6] text-white rounded-full font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all inline-flex items-center justify-center space-x-2"
+              >
+                <span>Vào Internet Ngay</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
           </div>
         )}
       </main>
 
-      {/* VNPT Đắk Lắk Footer with Full Legal Address */}
-      <footer className="p-3 text-center text-[10px] text-slate-500 border-t bg-white flex flex-col items-center justify-center space-y-1">
+      {/* Legal Footer */}
+      <footer className="p-3 text-center text-[10px] text-slate-500 border-t bg-white flex flex-col items-center justify-center space-y-0.5">
         <p className="font-bold text-slate-800 flex items-center">
           <Globe2 className="w-3 h-3 mr-1 text-[#005BAC] inline" /> VIỄN THÔNG ĐẮK LẮK (VNPT ĐẮK LẮK)
         </p>
         <p className="text-slate-500 flex items-center">
-          <MapPin className="w-2.5 h-2.5 mr-1 text-slate-400 inline" /> Số 06 Lê Duẩn, P. Tân Thành, TP. Buôn Ma Thuột, Đắk Lắk
+          <MapPin className="w-2.5 h-2.5 mr-1 text-slate-400 inline" /> Số 06 Lê Duẩn, P. Tân Thành, TP. Buôn Ma Thuột
         </p>
         <p className="text-slate-400 flex items-center">
           <PhoneCall className="w-2.5 h-2.5 mr-1 text-slate-400 inline" /> Hotline: 0262 3855 855 - CSKH: 1800 1166 &copy; 2026
